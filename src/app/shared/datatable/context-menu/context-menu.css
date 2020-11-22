@@ -1,0 +1,36 @@
+/**/
+.gm-action-wrap {
+    position: relative;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+}
+
+.gm-action-context-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    border-radius: 5px;
+    min-width: 100px;
+    
+    background-color: #ffffff;
+    box-shadow: 2px 2px 5px #dedede;
+}
+
+.gm-action-context-menu ul{
+    margin: 0;
+    padding: 7.5px 0;
+}
+
+.gm-action-context-menu li {
+    display: inline-block;
+
+    padding: 5px 15px;
+    width: 100%;
+}
+
+.gm-action-context-menu li:hover {
+    background-color: #dedede;
+}

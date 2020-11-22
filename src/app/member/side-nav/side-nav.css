@@ -1,0 +1,55 @@
+/**/
+.app-side-nav {
+    height: 100%;
+    width: 20%;
+
+    border-right: 1px solid #e4e4e4;
+    padding-top: 20px;
+}
+
+.side-nav-header {
+    display: flex;
+    flex-direction: row;
+    
+    border-radius: 0;
+    padding: 7.5px 20px;
+
+    /* background-color: #ddd; */
+    font-weight: bold;
+}
+
+
+.side-sub-nav {
+    width: 100%;
+    border: none;
+    border-radius: 0;
+}
+
+.side-nav-header.collapsed {
+    background-color: #fff;
+}
+
+.side-nav-header, .app-side-nav .card-body .nav-link {
+    padding-left: 50px;
+}
+
+.side-nav-header:hover, .app-side-nav .card-body .nav-link:hover {
+    background-color: #eee;
+}
+
+.app-side-nav .card-body .nav-link:active {
+    background-color: #eee;
+}
+
+.app-side-nav .card-body {
+    width: 100%;
+    padding: 0;
+    /* padding-top: 10px; */
+}
+
+.app-side-nav .card-body .nav-link{
+    padding: 7.5px 0 7.5px 85px;
+    font-size: 0.925em;
+
+    color: rgb(105, 184, 230);
+}
