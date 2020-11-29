@@ -26,14 +26,17 @@ const ContactUpdationForm = props => {
 
     useEffect(() => {
         const { firstname, lastname, email, address, date_of_birth } = contact_data;
-        const { street, state, country } = address;
+        
+        if(address) {
+            const { street, state, country } = address;
+            setState(state);
+            setStreet(street);
+            setCountry(country);
+        }
 
         setFirstname(firstname);
         setLastname(lastname);
         setEmail(email);
-        setState(state);
-        setStreet(street);
-        setCountry(country);
         setDateOfBirth(date_of_birth);
 
     }, [contact_data]);
@@ -121,7 +124,7 @@ const ContactUpdationForm = props => {
                             <select
                                 className="form-control"
                                 id="state"
-                                defaultValue={state}
+                                value={state}
                                 onChange={e => setState(e.target.value)}
                             >
                                 <option value="">Select state</option>
@@ -133,7 +136,7 @@ const ContactUpdationForm = props => {
                             <select
                                 className="form-control"
                                 id="country"
-                                defaultValue={country}
+                                value={country}
                                 onChange={e => setCountry(e.target.value)}
                             >
                                 <option value="">Select country</option>

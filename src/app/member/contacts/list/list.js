@@ -38,20 +38,19 @@ const ListContacts = () => {
 
         dispatch(addManyContactsToStore(payload));
         dispatch(set_process(CONTACT_READ, {}));
-    }, [contact_retrieval]);
+    }, [contacts_in_store, contact_retrieval, dispatch]);
 
     const handleDatatableAction = action => {
         const { name, type, data } = action;
 
-        if (type.toLowerCase() == 'bulk') {
+        if (type.toLowerCase() === 'bulk') {
 
         }
 
-        if (type.toLowerCase() == 'single') {
+        if (type.toLowerCase() === 'single') {
             switch (name.toLowerCase()) {
                 case 'edit':
                     history.push(`/contacts/${data.id}`);
-                    console.log('edit');
                     break;
                 case 'delete':
                     console.log('delete');

@@ -21,21 +21,14 @@ const DataTableItem = props => {
 
     useEffect(() => {
         let formatter = {}, field_keys = {};
-        fields.forEach(field => {
+        let cells = [];
+        fields.forEach((field, index) => {
             field_keys[field.key] = field;
             if (field.formatter) {
                 formatter[field.key] = field.formatter;
             }
-        });
 
-        let cells = [];
-        Object.keys(data).forEach(key => {
-            if (key === 'metadata' || !field_keys[key]) return;
-            if (formatter[key]) {
-                cells.push(<td key={`${index}-${key}`}>{formatter[key](data[key])}</td>);
-                return;
-            }
-            cells.push(<td key={`${index}-${key}`}>{data[key]}</td>);
+            cells.push(<td key={`${index}-${data[field.key]}`}>{data[field.key]}</td>);
         });
 
         setRowData(cells);
