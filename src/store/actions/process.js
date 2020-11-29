@@ -33,3 +33,4 @@ export const READ_CAMPAIGN = 'read one or more campaigns.';
 export const CONTACT_CREATION = 'contact creation.';
 export const CONTACT_READ = 'contact retrieval.';
 export const CONTACT_UPDATION = 'contact updation';
+export const CONTACT_DELETION = 'contact deletion';

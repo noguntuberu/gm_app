@@ -17,7 +17,7 @@ export const createContact = payload => ({
 });
 
 export const deleteContact = payload => ({
-    type: REMOVE_ONE_CONTACT_FROM_STORE,
+    type: DELETE_CONTACT,
     payload,
 });
 
@@ -45,5 +45,15 @@ export const addManyContactsToStore = payload => ({
 
 export const addOneContactToStore = payload => ({
     type: ADD_ONE_CONTACT_TO_STORE,
+    payload,
+});
+
+export const removeManyContactsFromStore = payload => ({
+    type: REMOVE_MANY_CONTACTS_FROM_STORE,
+    payload,
+});
+
+export const removeOneContactFromStore = payload => ({
+    type: REMOVE_ONE_CONTACT_FROM_STORE,
     payload,
 });
