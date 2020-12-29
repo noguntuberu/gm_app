@@ -7,7 +7,7 @@ import './datatable.css';
 
 const DataTable = props => {
     const { action, checkbox, config, onClick } = props;
-    const { css, fields, items, search_text, } = config;
+    const { fields, items, search_text, } = config;
 
     const [number_of_rows_to_display, setNumberOfRowsToDisplay] = useState(10);
     const [page_number, setPageNumber] = useState(0);

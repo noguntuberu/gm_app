@@ -1,10 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faNewspaper, faAddressBook } from '@fortawesome/free-solid-svg-icons';
 
 import './side-nav.css';
 const SideNav = () => {
+    const history = useHistory();
 
     return (
         <nav className="app-side-nav">
@@ -21,8 +23,8 @@ const SideNav = () => {
                     </div>
                     <div id="collapse-campaigns-nav" className="collapse w-100" aria-labelledby="campaigns-nav" data-parent="#side-nav">
                         <div className="card-body nav flex-column">
-                            <a className="nav-link active" href="/campaigns/new">Create Campaign</a>
-                            <a className="nav-link" href="/campaigns">My Campaigns</a>
+                            <a className="nav-link active" href onClick={() => history.push('/campaigns/new')}>Create Campaign</a>
+                            <a className="nav-link" href onClick={() => history.push('/campaigns')}>My Campaigns</a>
                         </div>
                     </div>
                 </div>
@@ -39,9 +41,9 @@ const SideNav = () => {
 
                     <div id="collapse-contacts-nav" className="collapse" aria-labelledby="contacts-nav" data-parent="#side-nav">
                         <div className="card-body nav flex-column">
-                            <a className="nav-link active" href="/contacts/new/single">Create Contact</a>
-                            <a className="nav-link active" href="/contacts/new/import">Import Contact</a>
-                            <a className="nav-link" href="/contacts">My Contacts</a>
+                            <a className="nav-link active" href onClick={() => history.push("/contacts/new/single")}>Create Contact</a>
+                            <a className="nav-link active" href onClick={() => history.push("/contacts/new/single")}>Import Contact</a>
+                            <a className="nav-link" href onClick={() => history.push("/contacts")}>My Contacts</a>
                         </div>
                     </div>
                 </div>
@@ -57,7 +59,7 @@ const SideNav = () => {
                     </div>
                     <div id="collapse-mailing-lists-nav" className="collapse" aria-labelledby="mailing-lists-nav" data-parent="#side-nav">
                         <div className="card-body nav flex-column">
-                            <a className="nav-link" href="/mailing-lists">My Lists</a>
+                            <a className="nav-link" href onClick={() => history.push("/mailing-lists")}>My Lists</a>
                         </div>
                     </div>
                 </div>

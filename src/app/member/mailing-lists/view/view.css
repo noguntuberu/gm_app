@@ -1,0 +1,16 @@
+/**/
+.content-header {
+    /* border-bottom: 1px solid #dedede; */
+    width: auto;
+    float: left;
+}
+
+.content-header-actions {
+    width: auto;
+    float: right;
+}
+
+.list-stats-wrapper {
+    height: 200px;
+    border: 1px solid slateblue;
+}

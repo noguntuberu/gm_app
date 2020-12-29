@@ -40,6 +40,7 @@ const ListContacts = () => {
                 dispatch(addManyContactsToStore(payload));
             }
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const deleteContact = (id) => {

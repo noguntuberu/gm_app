@@ -1,27 +1,50 @@
+import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import GmModal from '../../../shared/modal/modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { URLS, apiGet } from '../../../../utilities/api/api';
-import Datatable from "../../../shared/datatable/datatable";
-import ListCreationForm from './create';
 
+/** */
+import GmModal from '../../../shared/modal/modal';
+import { URLS, apiGet } from '../../../../utilities/api/api';
+import { addManyAudiencesToStore } from '../../../../store/actions/audience';
+
+/** */
+import ListCreationForm from '../create/create';
+import Datatable from "../../../shared/datatable/datatable";
+
+/** */
 const ListMailingLists = () => {
     const dispatch = useDispatch();
+    const history = useHistory()
     const { token } = useSelector(state => state.user_data);
     const mailing_lists_in_store = useSelector(state => state.audiences);
 
-    const [show_create_modal, setShowCreateModal] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [mailing_lists, setMailingLists] = useState([]);
+    const [show_create_modal, setShowCreateModal] = useState(false);
 
     useEffect(() => {
         setMailingLists(Object.values(mailing_lists_in_store));
     }, [mailing_lists_in_store]);
 
+    useEffect(() => {
+        setLoading(true);
+        apiGet(`${URLS.mailing_lists}`, { token }).then(response => {
+            const { error, payload } = response;
+
+            if (error) {
+                alert('could not fetch lists');
+                return;
+            }
+
+            dispatch(addManyAudiencesToStore(payload));
+        }).finally(() => setLoading(false));
+    }, []);
+
 
     const config = {
         actions: {
-            bulk: ['Online', 'Offline'],
-            single: ['View', 'Edit'],
+            // bulk: ['Online', 'Offline'],
+            single: ['View'],
         },
         allow_bulk_action: true,
         css: {},
@@ -31,12 +54,13 @@ const ListMailingLists = () => {
                 key: 'id',
             },
             {
-                title: 'Campaign Name',
+                title: 'Name',
                 key: 'name',
             },
             {
-                title: 'Sender Name',
-                key: 'sender_name',
+                title: 'Number of Contacts',
+                key: 'contacts',
+                formatter: value => value.length,
             },
             {
                 title: 'Date created',
@@ -50,10 +74,12 @@ const ListMailingLists = () => {
     }
 
     const handleDatatableAction = payload => {
-        // const { name, type, data } = payload;
-        // if (type === 'single') {
-            
-        // }
+        const { name, type, data } = payload;
+        if (type === 'single') {
+            if (name === 'View') {
+                history.push(`/mailing-lists/${data.id}`);
+            }
+        }
     }
 
     const handleItemClick = payload => {
@@ -66,7 +92,10 @@ const ListMailingLists = () => {
             <GmModal title="Create Mailing List" show_title={true} show_modal={show_create_modal} onClose={() => setShowCreateModal(false)}>
                 <ListCreationForm />
             </GmModal>
-            <Datatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
+            {!loading ?
+                <Datatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox /> :
+                <></>
+            }
         </div>
     )
 }

@@ -1,15 +1,56 @@
 import React, { useState, } from 'react';
-import GmModal from '../../../shared/modal/modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { apiPost, URLS } from '../../../../utilities/api/api';
+import { addOneAudienceToStore } from '../../../../store/actions/audience';
 
-import './create.css';
+const CreateMailingList = ({ closeModal }) => {
+    const dispatch = useDispatch();
+    const { token, id } = useSelector(state => state.user_data);
 
-const CreateMailingList = () => {
-    const [show_create_modal, setShowCreateModal] = useState(false);
+    const [description, setDescription] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [name, setName] = useState('');
+
+    const submit = () => {
+        const data = {
+            name,
+            description,
+            tenant_id: id,
+        };
+
+        if (!name || !description) {
+            alert('please fill all fields.');
+            return;
+        }
+
+        setLoading(true);
+        apiPost(`${URLS.mailing_lists}`, { data, token, }).then(response => {
+            const { error, payload } = response;
+
+            if (error) {
+                alert('could not create audience.');
+                return;
+            }
+
+            dispatch(addOneAudienceToStore(payload));
+        }).finally(() => setLoading(false));
+    }
+
     return <div>
-        <button className="btn btn-primary btn-sm" onClick={() => setShowCreateModal(true)} >Show Modal</button>
-        <GmModal title="Create Mailing List" show_title={true} show_modal={show_create_modal} onClose={() => setShowCreateModal(false)}>
-            <input type="text" />
-        </GmModal>
+        <div className="form-group">
+            <input className="form-control" type="text" placeholder="Name" onInput={e => setName(e.target.value)} />
+        </div>
+        <div className="form-group">
+            <textarea className="form-control" placeholder="Description" onInput={e => setDescription(e.target.value)}>
+
+            </textarea>
+        </div>
+        <div className="form-group">
+            {!loading ?
+                <button className="btn btn-primary float-right" onClick={submit}>Save</button> :
+                <button className="btn btn-primary float-right" disabled>Saving</button>
+            }
+        </div>
     </div>
 }
 

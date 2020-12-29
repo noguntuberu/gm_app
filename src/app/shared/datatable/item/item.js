@@ -20,15 +20,16 @@ const DataTableItem = props => {
     });
 
     useEffect(() => {
-        let formatter = {}, field_keys = {};
+        let field_keys = {};
         let cells = [];
         fields.forEach((field, index) => {
             field_keys[field.key] = field;
             if (field.formatter) {
-                formatter[field.key] = field.formatter;
+                cells.push(<td onClick={() => item_click_callback(data)} key={`${index}-${data[field.key]}`}>{field.formatter(data[field.key])}</td>);
+                return;
             }
 
-            cells.push(<td key={`${index}-${data[field.key]}`}>{data[field.key]}</td>);
+            cells.push(<td onClick={() => item_click_callback(data)} key={`${index}-${data[field.key]}`}>{data[field.key]}</td>);
         });
 
         setRowData(cells);
@@ -56,7 +57,7 @@ const DataTableItem = props => {
     }
 
     return (
-        <tr onClick={() => item_click_callback(data)}>
+        <tr>
             {checkbox ?
                 <td key={`checkbox-${index}`}>
                     {item_is_selected ?
@@ -82,7 +83,7 @@ const DataTableItem = props => {
             {row_data}
 
             {checkbox ?
-                <td onClick={ e => e.stopPropagation()} key={`action-${index}`}>
+                <td key={`action-${index}`}>
                     <ContextMenu actions={actions} callback={processAction} />
                 </td>
                 :
