@@ -82,7 +82,7 @@ const DataTableItem = props => {
             {row_data}
 
             {checkbox ?
-                <td key={`action-${index}`}>
+                <td onClick={ e => e.stopPropagation()} key={`action-${index}`}>
                     <ContextMenu actions={actions} callback={processAction} />
                 </td>
                 :

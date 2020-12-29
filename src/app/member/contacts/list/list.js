@@ -1,12 +1,10 @@
 import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { apiDelete, apiGet, URLS } from '../../../../utilities/api/api';
 
 import DataTable from '../../../shared/datatable/datatable';
-import { CONTACT_DELETION, CONTACT_READ, set_process } from "../../../../store/actions/process";
 import {
-    deleteContact,
-    readContacts,
     addManyContactsToStore,
     removeOneContactFromStore
 } from '../../../../store/actions/contact';
@@ -14,51 +12,49 @@ import {
 import { table_config } from './helper';
 
 const ListContacts = () => {
-    
+    const contacts_in_store = useSelector(state => state.contacts);
+    const { token } = useSelector(state => state.user_data);
+
     const dispatch = useDispatch();
     const history = useHistory();
-    const contact_deletion = useSelector(state => state.processes[CONTACT_DELETION]);
-    const contact_retrieval = useSelector(state => state.processes[CONTACT_READ]);
-    const contacts_in_store = useSelector(state => state.contacts);
+
     const [items, setItems] = useState([]);
-    
-    useEffect(() => {
-        dispatch(readContacts());
-    }, []);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log('state changed [store]:', contacts_in_store);
-        
         setItems(Object.values(contacts_in_store));
     }, [contacts_in_store]);
 
-    /** retrieval */
     useEffect(() => {
-        if (!contact_retrieval || !Object.keys(contact_retrieval).length) return;
+        setLoading(true);
+        apiGet(URLS.contacts, { token }).then(data => {
+            const { payload, error } = data;
+            setLoading(false);
 
-        const { error, payload, success, } = contact_retrieval;
-        if (!success && error) {
-            if (contacts_in_store) {
+            if (error && contacts_in_store) {
                 setItems(Object.values(contacts_in_store));
             }
-        }
 
-        setItems(payload);
+            if (!error && payload) {
+                setItems(payload);
+                dispatch(addManyContactsToStore(payload));
+            }
+        });
+    }, []);
 
-        dispatch(addManyContactsToStore(payload));
-        dispatch(set_process(CONTACT_READ, {}));
-    }, [contacts_in_store, contact_retrieval, dispatch]);
+    const deleteContact = (id) => {
+        apiDelete(`${URLS.contacts}/${id}`, { token }).then(data => {
+            const { error } = data;
 
-    /** deletion */
-    useEffect(() => {
-        if (!contact_deletion || !Object.keys(contact_deletion).length) return;
-        const { error, id, success } = contact_deletion;
-        if (!success && error) {
-            alert(`deletion failed.`);
-        }
+            if (error) {
+                alert(`could not delete #${id}.`);
+                return;
+            }
 
-        dispatch(removeOneContactFromStore(id));
-    }, [contact_deletion, dispatch]);
+            alert(`deleted #${id} successfully.`);
+            dispatch(removeOneContactFromStore(id));
+        });
+    }
 
     const handleDatatableAction = action => {
         const { name, type, data } = action;
@@ -73,12 +69,11 @@ const ListContacts = () => {
                     history.push(`/contacts/${data.id}`);
                     break;
                 case 'delete':
-                    dispatch(deleteContact(data.id));
+                    deleteContact(data.id);
                     break;
                 default:
             }
         }
-
     }
 
     const handleItemClick = data => {
@@ -86,12 +81,13 @@ const ListContacts = () => {
     }
 
     return (
-        <DataTable
-            config={{ ...table_config, items }}
-            action={handleDatatableAction}
-            onClick={handleItemClick}
-            checkbox
-        />
+        loading ? 'loading data...' :
+            <DataTable
+                config={{ ...table_config, items }}
+                action={handleDatatableAction}
+                onClick={handleItemClick}
+                checkbox
+            />
     )
 }
 

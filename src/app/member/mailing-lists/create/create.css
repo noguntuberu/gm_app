@@ -1,0 +1,8 @@
+/**/
+.create-mailing-list-wrapper * {
+    float: none;
+}
+
+.create-mailing-list-wrapper .modal-content {
+    z-index: 1041;
+}

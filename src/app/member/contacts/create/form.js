@@ -1,12 +1,13 @@
 /** */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { apiPost, URLS } from '../../../../utilities/api/api';
 
-import { addOneContactToStore, createContact } from '../../../../store/actions/contact';
-import { CONTACT_CREATION, set_process } from '../../../../store/actions/process';
+import { addOneContactToStore } from '../../../../store/actions/contact';
 
 const ContactCreationForm = props => {
-    const [form_message, setFormMessage] = useState('');
+    // const [form_message, setFormMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
@@ -18,23 +19,9 @@ const ContactCreationForm = props => {
 
     /** */
     const dispatch = useDispatch();
-    const contact_process = useSelector((state) => state.processes[CONTACT_CREATION]);
-    const tenant_id = useSelector(state => state.user_data.id);
-
-    useEffect(() => {
-        if (!contact_process || !Object.keys(contact_process).length) return;
-
-        const { error, payload, success, } = contact_process;
-        if (!success && error) {
-            // applyFormMessage(`Email or password incorrect.`, 0);
-        }
-
-        if (success) {
-            dispatch(addOneContactToStore(payload));
-        }
-
-        dispatch(set_process(CONTACT_CREATION, {}));
-    }, [dispatch, contact_process]);
+    const user_data = useSelector(state => state.user_data);
+    const { token } = user_data;
+    const tenant_id = user_data.id;
 
     /** */
     const submitForm = () => {
@@ -44,7 +31,19 @@ const ContactCreationForm = props => {
             date_of_birth, tenant_id,
         }
 
-        dispatch(createContact(form_data));
+        setLoading(true);
+        apiPost(URLS.contacts, { data: form_data, token }).then(data => {
+            const { error, payload, } = data;
+            setLoading(false);
+
+            if (error) {
+                alert(`creation failed`);
+                return;
+            }
+
+            alert(`contact created.`);
+            dispatch(addOneContactToStore(payload));
+        });
     }
 
     return (
@@ -134,7 +133,10 @@ const ContactCreationForm = props => {
                 </div>
             </div>
             <div className="pr-3">
-                <button className="btn btn-primary float-right w-25" onClick={e => submitForm()}> Save </button>
+                {!loading ?
+                    <button className="btn btn-primary float-right w-25" onClick={e => submitForm()}> Save </button> :
+                    <button className="btn btn-primary float-right w-25" disabled> Save </button>
+                }
             </div>
         </div>
     )

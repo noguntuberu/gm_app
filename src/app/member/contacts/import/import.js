@@ -1,0 +1,81 @@
+/** */
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { apiPost, URLS, apiGet } from '../../../../utilities/api/api';
+
+const ImportContact = props => {
+    const [file, setFile] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [mailing_lists, setMailingLists] = useState([]);
+    const [selected_list, setSelectedList] = useState(0);
+
+    const user_data = useSelector(state => state.user_data);
+    const { token } = user_data;
+    const tenant_id = user_data.id;
+
+    useEffect(() => {
+        apiGet(URLS.mailing_lists, { token }).then(data => {
+            const { error, payload } = data;
+
+            if (error) {
+                alert('failed to fetch mailing lists.');
+                return;
+            }
+
+            setMailingLists(payload);
+        });
+    }, []);
+
+    const submit = () => {
+        if (!file) {
+            alert('no file selected');
+            return;
+        }
+
+        if (!file.type.includes('csv')) {
+            alert('invalid file type: must be csv');
+            return;
+        }
+
+        const request_data = new FormData();
+        request_data.append('contacts', file);
+        request_data.append('list_id', selected_list);
+        request_data.append('tenant_id', tenant_id);
+
+        setLoading(true);
+        apiPost(`${URLS.contacts}/batch`, {
+            data: request_data, token,
+            headers: {
+                'Content-Type': 'application/form-data'
+            }
+        }).then(data => {
+            console.log(data);
+        }).finally(() => {
+            setLoading(false);
+        });
+    }
+
+    return (
+        <div>
+            <h3>Import Contact</h3>
+            <div className="custom-file">
+                <input type="file" className="custom-file-input" id="contact_file" onChange={e => setFile(e.target.files[0])} />
+                <label className="custom-file-label" htmlFor="contact_file">{file ? file.name : 'Select file'}</label>
+            </div>
+            <div className="mt-3 form-group">
+                <select className="custom-select" onChange={e => setSelectedList(e.target.value)}>
+                    <option value=''>Select Mailing List</option>
+                    {mailing_lists.map(list => <option key={list.id} value={list.id}>{list.name}</option>)}
+                </select>
+            </div>
+            <div className="mt-3">
+                {loading ?
+                    <button className="btn btn-primary" disabled>Uploading...</button> :
+                    <button onClick={submit} className="btn btn-primary">Save</button>
+                }
+            </div>
+        </div>
+    )
+}
+
+export default ImportContact;

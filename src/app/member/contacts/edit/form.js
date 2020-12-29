@@ -2,14 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addOneContactToStore, updateContact } from '../../../../store/actions/contact';
-import { CONTACT_UPDATION, set_process } from '../../../../store/actions/process';
+import { addOneContactToStore, } from '../../../../store/actions/contact';
 
 import { convertDateFromIsoToHTMLFormat } from '../../../shared/utils/date';
+import { apiPut, URLS } from '../../../../utilities/api/api';
 
 const ContactUpdationForm = props => {
     const { contact_data } = props;
-    const [form_message, setFormMessage] = useState('');
+    // const [form_message, setFormMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
@@ -21,13 +22,14 @@ const ContactUpdationForm = props => {
 
     /** */
     const dispatch = useDispatch();
-    const contact_process = useSelector((state) => state.processes[CONTACT_UPDATION]);
-    const tenant_id = useSelector(state => state.user_data.id);
+    const user_data = useSelector(state => state.user_data);
+    const { token } = user_data;
+    const tenant_id = user_data.id;
 
     useEffect(() => {
         const { firstname, lastname, email, address, date_of_birth } = contact_data;
-        
-        if(address) {
+
+        if (address) {
             const { street, state, country } = address;
             setState(state);
             setStreet(street);
@@ -41,21 +43,6 @@ const ContactUpdationForm = props => {
 
     }, [contact_data]);
 
-    useEffect(() => {
-        if (!contact_process || !Object.keys(contact_process).length) return;
-
-        const { error, payload, success, } = contact_process;
-        if (!success && error) {
-            // applyFormMessage(`Email or password incorrect.`, 0);
-        }
-
-        if (success) {
-            dispatch(addOneContactToStore(payload));
-        }
-
-        dispatch(set_process(CONTACT_UPDATION, {}));
-    }, [dispatch, contact_process]);
-
     /** */
     const submitForm = () => {
         const form_data = {
@@ -65,7 +52,19 @@ const ContactUpdationForm = props => {
             date_of_birth, tenant_id,
         }
 
-        dispatch(updateContact(form_data));
+        setLoading(true);
+        apiPut(`${URLS.contacts}/${contact_data.id}`, { data: form_data, token }).then(data => {
+            const { error, payload } = data;
+            setLoading(false);
+
+            if (error) {
+                alert('an error occurred.');
+                return;
+            }
+
+            alert('update successful.');
+            dispatch(addOneContactToStore(payload));
+        });
     }
 
     return (
@@ -158,7 +157,7 @@ const ContactUpdationForm = props => {
                                     onChange={e => setDateOfBirth(e.target.value)}
                                 /> : <input
                                     type="date"
-                                    className="form-control"onChange={e => setDateOfBirth(e.target.value)}
+                                    className="form-control" onChange={e => setDateOfBirth(e.target.value)}
                                 />
                             }
                         </div>
@@ -166,7 +165,10 @@ const ContactUpdationForm = props => {
                 </div>
             </div>
             <div className="pr-3">
-                <button className="btn btn-primary float-right w-25" onClick={e => submitForm()}> Save </button>
+                {loading ?
+                    <button className="btn btn-primary float-right w-25" disabled> Save </button> :
+                    <button className="btn btn-primary float-right w-25" onClick={e => submitForm()}> Save </button>
+                }
             </div>
         </div>
     )

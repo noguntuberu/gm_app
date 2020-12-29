@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CampaignCreationForm from '../../shared/forms/campaign/create';
+import CampaignCreationForm from './form';
 
 const tinymce_config = {
     content_css: 'create.css',
@@ -21,7 +21,7 @@ const tinymce_config = {
     placeholder: 'Create a campaign...',
     plugins: 'autolink autosave code fullpage fullscreen hr image imagetools link lists preview spellchecker wordcount quickbars',
     toolbar: `undo redo | formatselect fontsizeselect bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify numlist bullist  blockquote |
-        quickimage link hr  restoredraft  spellchecker wordcount | preview  code  fullscreen`,
+        quickimage link hr restoredraft  spellchecker wordcount | preview  code  fullscreen`,
     toolbar_mode: 'floating',
     toolbar_sticky: true,
 }

@@ -40,6 +40,7 @@ const SideNav = () => {
                     <div id="collapse-contacts-nav" className="collapse" aria-labelledby="contacts-nav" data-parent="#side-nav">
                         <div className="card-body nav flex-column">
                             <a className="nav-link active" href="/contacts/new/single">Create Contact</a>
+                            <a className="nav-link active" href="/contacts/new/import">Import Contact</a>
                             <a className="nav-link" href="/contacts">My Contacts</a>
                         </div>
                     </div>
@@ -56,7 +57,6 @@ const SideNav = () => {
                     </div>
                     <div id="collapse-mailing-lists-nav" className="collapse" aria-labelledby="mailing-lists-nav" data-parent="#side-nav">
                         <div className="card-body nav flex-column">
-                            <a className="nav-link active" href="/mailing-lists/new">Create List</a>
                             <a className="nav-link" href="/mailing-lists">My Lists</a>
                         </div>
                     </div>
