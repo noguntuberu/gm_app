@@ -1,6 +1,6 @@
 /** */
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { apiPost, URLS, apiGet } from '../../../../utilities/api/api';
 
 const ImportContact = props => {

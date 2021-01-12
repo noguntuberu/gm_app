@@ -42,7 +42,6 @@ const SideNav = () => {
                     <div id="collapse-contacts-nav" className="collapse" aria-labelledby="contacts-nav" data-parent="#side-nav">
                         <div className="card-body nav flex-column">
                             <div className="nav-link active" onClick={() => history.push("/contacts/new/single")}>Create Contact</div>
-                            <div className="nav-link active" onClick={() => history.push("/contacts/new/single")}>Import Contact</div>
                             <div className="nav-link" onClick={() => history.push("/contacts")}>My Contacts</div>
                         </div>
                     </div>

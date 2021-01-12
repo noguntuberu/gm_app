@@ -9,7 +9,6 @@ import ListContact from './list/list';
 const ContactModule = () => {
     return (
         <Switch>
-            <Route path="/contacts/new/import" component={ImportContact} />
             <Route path="/contacts/new" component={CreateContact} />
             <Route path="/contacts/:id" component={EditContact} />
             <Route path="/contacts" component={ListContact} />

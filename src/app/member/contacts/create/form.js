@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { apiPost, URLS } from '../../../../utilities/api/api';
 
 import { addOneContactToStore } from '../../../../store/actions/contact';
+import GmModal from '../../../shared/modal/modal';
+import ImportContact from '../import/import';
 
 const ContactCreationForm = props => {
     // const [form_message, setFormMessage] = useState('');
@@ -16,6 +18,7 @@ const ContactCreationForm = props => {
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
     const [date_of_birth, setDateOfBirth] = useState();;
+    const [show_upload_modal, setShowUploadModal] = useState(false);
 
     /** */
     const dispatch = useDispatch();
@@ -137,7 +140,12 @@ const ContactCreationForm = props => {
                     <button className="btn btn-primary float-right w-25" onClick={e => submitForm()}> Save </button> :
                     <button className="btn btn-primary float-right w-25" disabled> Save </button>
                 }
+                <button className="btn btn-info float-right w-25 mr-2" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
             </div>
+
+            <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>
+                <ImportContact />
+            </GmModal>
         </div>
     )
 }

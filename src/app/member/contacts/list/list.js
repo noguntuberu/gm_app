@@ -1,6 +1,9 @@
 import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import ImportContact from '../import/import';
+import GmModal from '../../../shared/modal/modal';
 import { apiDelete, apiGet, URLS } from '../../../../utilities/api/api';
 
 import DataTable from '../../../shared/datatable/datatable';
@@ -20,6 +23,7 @@ const ListContacts = () => {
 
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [show_upload_modal, setShowUploadModal] = useState(false);
 
     useEffect(() => {
         setItems(Object.values(contacts_in_store));
@@ -40,7 +44,7 @@ const ListContacts = () => {
                 dispatch(addManyContactsToStore(payload));
             }
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const deleteContact = (id) => {
@@ -81,15 +85,20 @@ const ListContacts = () => {
         // console.log(data);
     }
 
-    return (
-        loading ? 'loading data...' :
+    return <div>
+        <button className="btn btn-info float-right w-25" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
+        {loading ? 'loading data...' :
             <DataTable
-                config={{ ...table_config, items }}
-                action={handleDatatableAction}
-                onClick={handleItemClick}
-                checkbox
-            />
-    )
+            config={{ ...table_config, items }}
+            action={handleDatatableAction}
+            onClick={handleItemClick}
+            checkbox
+        />}
+
+        <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>
+            <ImportContact />
+        </GmModal>
+    </div>
 }
 
 export default ListContacts;
