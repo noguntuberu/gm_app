@@ -1,9 +1,57 @@
-import React from 'react';
+import React, { useState, } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { URLS, apiPut } from '../../../../utilities/api/api';
+import { addOneAudienceToStore } from '../../../../store/actions/audience';
 
-const EditMailingList = () => {
-    return (
-        <div> Edit MailingList </div>
-    )
+const AudienceUpdationForm = ({ mailing_list }) => {
+    const dispatch = useDispatch();
+    const { token, id } = useSelector(state => state.user_data);
+
+    const [description, setDescription] = useState(mailing_list.description || '');
+    const [loading, setLoading] = useState(false);
+    const [name, setName] = useState(mailing_list.name || '');
+
+    const submit = () => {
+        const data = {
+            name,
+            description,
+            tenant_id: id,
+        };
+
+        if (!name || !description) {
+            alert('please fill all fields.');
+            return;
+        }
+
+        setLoading(true);
+        apiPut(`${URLS.mailing_lists}/${mailing_list.id}`, { data, token, }).then(response => {
+            const { error } = response;
+
+            if (error) {
+                alert('could not create audience.');
+                return;
+            }
+
+            dispatch(addOneAudienceToStore({ ...data, id: mailing_list.id }));
+        }).finally(() => setLoading(false));
+    }
+
+    return <div>
+        <div className="form-group">
+            <input className="form-control" type="text" placeholder="Name" defaultValue={name} onInput={e => setName(e.target.value)} />
+        </div>
+        <div className="form-group">
+            <textarea className="form-control" placeholder="Description" defaultValue={description} onInput={e => setDescription(e.target.value)}>
+
+            </textarea>
+        </div>
+        <div className="form-group">
+            {!loading ?
+                <button className="btn btn-primary float-right" onClick={submit}>Update</button> :
+                <button className="btn btn-primary float-right" disabled>Updating...</button>
+            }
+        </div>
+    </div>
 }
 
-export default EditMailingList;
+export default AudienceUpdationForm;

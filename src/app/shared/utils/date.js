@@ -12,3 +12,9 @@ export const convertDateFromIsoToHTMLFormat = iso_date => {
     const converted_date = `${year}-${month}-${day}`;
     return converted_date;
 }
+
+export const generateHTMLFormDateTimeDefaults = () => {
+    const date = (new Date()).toISOString();
+    const generated_date = `${convertDateFromIsoToHTMLFormat(date)}T00:00`;
+    return generated_date;
+}

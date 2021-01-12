@@ -22,14 +22,14 @@
 .gm-action-context-menu ul{
     margin: 0;
     padding: 7.5px 0;
-    width: fit-content;
+    width: 100%;
 }
 
 .gm-action-context-menu li {
     display: inline-block;
     
     padding: 5px 15px;
-    width: max-content;
+    width: 100%;
 }
 
 .gm-action-context-menu li:hover {

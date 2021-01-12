@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { apiPost, URLS, apiGet } from '../../../../utilities/api/api';
 
 const ImportContact = props => {
+    const { mailing_list } = props;
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [mailing_lists, setMailingLists] = useState([]);
@@ -39,7 +40,7 @@ const ImportContact = props => {
 
         const request_data = new FormData();
         request_data.append('contacts', file);
-        request_data.append('list_id', selected_list);
+        request_data.append('list_id', mailing_list ? mailing_list.id : selected_list);
         request_data.append('tenant_id', tenant_id);
 
         setLoading(true);
@@ -57,21 +58,25 @@ const ImportContact = props => {
 
     return (
         <div>
-            <h3>Import Contact</h3>
             <div className="custom-file">
                 <input type="file" className="custom-file-input" id="contact_file" onChange={e => setFile(e.target.files[0])} />
                 <label className="custom-file-label" htmlFor="contact_file">{file ? file.name : 'Select file'}</label>
             </div>
             <div className="mt-3 form-group">
-                <select className="custom-select" onChange={e => setSelectedList(e.target.value)}>
-                    <option value=''>Select Mailing List</option>
-                    {mailing_lists.map(list => <option key={list.id} value={list.id}>{list.name}</option>)}
-                </select>
+                {mailing_list ?
+                    <select className="custom-select" disabled>
+                        <option>{mailing_list.name}</option>
+                    </select> :
+                    <select className="custom-select" onChange={e => setSelectedList(e.target.value)}>
+                        <option value=''>Select Mailing List</option>
+                        {mailing_lists.map(list => <option key={list.id} value={list.id}>{list.name}</option>)}
+                    </select>
+                }
             </div>
             <div className="mt-3">
                 {loading ?
-                    <button className="btn btn-primary" disabled>Uploading...</button> :
-                    <button onClick={submit} className="btn btn-primary">Save</button>
+                    <button className="btn btn-primary float-right" disabled>Importing...</button> :
+                    <button onClick={submit} className="btn btn-primary float-right">Import</button>
                 }
             </div>
         </div>

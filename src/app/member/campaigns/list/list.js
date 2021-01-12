@@ -33,8 +33,9 @@ const ListCampaigns = () => {
 
     const config = {
         actions: {
-            bulk: ['Online', 'Offline'],
-            single: ['View', 'Edit'],
+            // bulk: ['Online', 'Offline'],
+            // single: ['View', 'Edit'],
+            single: ['View'],
         },
         allow_bulk_action: true,
         css: {},
@@ -67,17 +68,17 @@ const ListCampaigns = () => {
         if (type === 'single') {
             switch (name) {
                 case 'Edit':
-                    history.push(`/campaigns/edit/${data.id}`);
+                    // history.push(`/campaigns/${data.id}/edit`);
                     break;
                 default:
-                    history.push(`/campaigns/view/${data.id}`);
+                    history.push(`/campaigns/${data.id}/view`);
             }
         }
     }
 
     const handleItemClick = payload => {
         const { id } = payload;
-        history.push(`/campaigns/view/${id}`);
+        history.push(`/campaigns/${id}/view`);
     }
 
     return (

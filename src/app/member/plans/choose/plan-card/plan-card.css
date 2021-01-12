@@ -1,0 +1,25 @@
+/**/
+.plan-card {
+    max-width: 33%;
+    width: auto;
+
+    border: 1px solid#dedede;
+    box-shadow: 2.5px 3.5px 3.5px #dddddd;
+}
+
+.plan-card.selected {
+    border: 1px solid green;
+    box-shadow: 2.5px 15px 15px #dddddd;
+    /* max-width: 35%; */
+}
+
+.plan-action {
+    padding: 10px;
+    
+    background-color: green;
+    color: white;
+    font-size: 1.2em;
+    text-align: center;
+
+    cursor: pointer;
+}

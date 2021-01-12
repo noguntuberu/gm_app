@@ -1,0 +1,49 @@
+/**/
+.address-card {
+    border: 1px solid #dedede;
+    margin-bottom: 15px;
+}
+
+.address-card-title {
+    padding: 15px;
+
+    background-color: #efefef;
+}
+
+.address-card-title > div{
+    width: auto;
+}
+
+.address-card-title-action {
+    float: right;
+}
+
+#billing-address-checkbox {
+    margin-top: 5px;
+}
+
+.address-card-body {    
+    padding: 20px 15px;
+}
+
+
+.address-card .form-row {
+    margin: 0;
+}
+
+.summary-wrapper {
+    padding: 15px;
+    border: 1px solid #dedede;
+}
+
+.summary-proceed-btn {
+    margin-top: 15px;
+    padding: 5px;
+
+    background-color: teal;
+    color: #ffffff;
+    font-size: 1.05em;
+    text-align: center;
+
+    cursor: pointer;
+}

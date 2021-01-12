@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import Select from 'react-select';
 import MultiSelect from 'react-multi-select-component';
 import { apiPost, URLS, apiGet } from '../../../../utilities/api/api';
+import { generateHTMLFormDateTimeDefaults } from '../../../shared/utils/date';
 import { Editor } from '../../../../vendors/@tinymce/tinymce-react/lib/es2015/main/ts/index';
 
 import { addOneCampaignToStore } from '../../../../store/actions/campaign';
@@ -20,9 +21,10 @@ const CampaignCreationForm = props => {
 
     const [campaign_body, setCampaignBody] = useState('');
     const [campaign_name, setCampaignName] = useState('');
-    const [campaign_subject, set_campaignSubject] = useState('');
+    const [campaign_subject, setCampaignSubject] = useState('');
     const [loading, setLoading] = useState(false);
     const [mailing_lists, setMailingLists] = useState([]);
+    const [schedule, setCampaignSchedule ] = useState(generateHTMLFormDateTimeDefaults());
     const [selected_lists, setSelectedLists] = useState([]);
     const [sender_email, setSenderEmail] = useState('');
     const [sender_name, setSenderName] = useState('');
@@ -42,8 +44,8 @@ const CampaignCreationForm = props => {
             mailing_lists: selected_lists.map(list => list.value),
             name: campaign_name,
             schedule: {
-                exists: false,
-                date: 0
+                exists: true,
+                date: Date.parse(schedule),
             },
             sender_email,
             sender_name,
@@ -77,10 +79,10 @@ const CampaignCreationForm = props => {
                 <input className="form-control" id="campaign_title" placeholder="Campaign Name" type="text" defaultValue={campaign_name} onInput={e => setCampaignName(e.target.value)} />
             </div>
             <div className="form-group">
+                <input className="form-control" id="campaign_subject" placeholder="Campaign Subject" type="text" defaultValue={campaign_subject} onInput={e => setCampaignSubject(e.target.value)} />
+            </div>
+            <div className="form-group">
                 <div className="p-0 pr-2 col-6">
-                    <input className="form-control" id="campaign_subject" placeholder="Campaign Subject" type="text" defaultValue={campaign_subject} onInput={e => set_campaignSubject(e.target.value)} />
-                </div>
-                <div className="p-0 pl-2 col-6">
                     {/* <Select
                         options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
                         onChange={setSelectedLists}
@@ -96,6 +98,17 @@ const CampaignCreationForm = props => {
                         value={selected_lists}
                         // isMulti={true}
                         labelledBy='Select Mailing list'
+                    />
+                </div>
+                <div className="p-0 pl-2 col-6">
+                    <input
+                        className="form-control"
+                        id="campaign_subject"
+                        type="datetime-local"
+                        name="campaign-schedule"
+                        value={generateHTMLFormDateTimeDefaults()}
+                        min={generateHTMLFormDateTimeDefaults()}
+                        onChange={e => setCampaignSchedule(e.target.value)}
                     />
                 </div>
             </div>

@@ -23,8 +23,8 @@ const SideNav = () => {
                     </div>
                     <div id="collapse-campaigns-nav" className="collapse w-100" aria-labelledby="campaigns-nav" data-parent="#side-nav">
                         <div className="card-body nav flex-column">
-                            <a className="nav-link active" href onClick={() => history.push('/campaigns/new')}>Create Campaign</a>
-                            <a className="nav-link" href onClick={() => history.push('/campaigns')}>My Campaigns</a>
+                            <div className="nav-link active" onClick={() => history.push('/campaigns/new')}>Create Campaign</div>
+                            <div className="nav-link" onClick={() => history.push('/campaigns')}>My Campaigns</div>
                         </div>
                     </div>
                 </div>
@@ -41,9 +41,9 @@ const SideNav = () => {
 
                     <div id="collapse-contacts-nav" className="collapse" aria-labelledby="contacts-nav" data-parent="#side-nav">
                         <div className="card-body nav flex-column">
-                            <a className="nav-link active" href onClick={() => history.push("/contacts/new/single")}>Create Contact</a>
-                            <a className="nav-link active" href onClick={() => history.push("/contacts/new/single")}>Import Contact</a>
-                            <a className="nav-link" href onClick={() => history.push("/contacts")}>My Contacts</a>
+                            <div className="nav-link active" onClick={() => history.push("/contacts/new/single")}>Create Contact</div>
+                            <div className="nav-link active" onClick={() => history.push("/contacts/new/single")}>Import Contact</div>
+                            <div className="nav-link" onClick={() => history.push("/contacts")}>My Contacts</div>
                         </div>
                     </div>
                 </div>
@@ -59,8 +59,13 @@ const SideNav = () => {
                     </div>
                     <div id="collapse-mailing-lists-nav" className="collapse" aria-labelledby="mailing-lists-nav" data-parent="#side-nav">
                         <div className="card-body nav flex-column">
-                            <a className="nav-link" href onClick={() => history.push("/mailing-lists")}>My Lists</a>
+                            <div className="nav-link" onClick={() => history.push("/mailing-lists")}>My Lists</div>
                         </div>
+                    </div>
+                </div>
+                <div className="card side-sub-nav pl-5 pr-5 mt-4">
+                    <div className="btn btn-block btn-info" onClick={() => history.push('/plans/choose')}>
+                        Upgrade Plan
                     </div>
                 </div>
             </div>

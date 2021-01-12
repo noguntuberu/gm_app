@@ -9,8 +9,8 @@ const CampaignModule = () => {
     return (
         <Switch>
             <Route path="/campaigns/new" component={CreateCampaign} />
-            <Route path="/campaigns/edit/:id" component={EditCampaign} />
-            <Route path="/campaigns/view/:id" component={ViewCampaign} />
+            {/* <Route path="/campaigns/:id/edit" component={EditCampaign} /> */}
+            <Route path="/campaigns/:id/view" component={ViewCampaign} />
             <Route path="/campaigns" component={ListCampaign} />
         </Switch>
     )
