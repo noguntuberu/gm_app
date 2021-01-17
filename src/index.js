@@ -5,14 +5,15 @@ import app_store from './store/_store';
 import App from './app/app';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
+import './assets/css/text.css';
 
 window.app_root = __dirname;
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store= {app_store}>
-      <App />
-    </Provider>
+      <Provider store={app_store}>
+        <App />
+      </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

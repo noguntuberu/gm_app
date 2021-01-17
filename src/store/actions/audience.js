@@ -4,6 +4,7 @@ export const READ_ONE_AUDIENCE = 'read one AUDIENCE.';
 
 export const ADD_MANY_AUDIENCES_TO_STORE = 'add multiple AUDIENCES to atore.';
 export const ADD_ONE_AUDIENCE_TO_STORE = 'add one AUDIENCE to store.';
+export const LOAD_AUDIENCES = 'load up audiences from API';
 
 /** */
 export const readManyAudiences = (payload) => ({
@@ -23,5 +24,10 @@ export const addManyAudiencesToStore = (payload) => ({
 
 export const addOneAudienceToStore = (payload) => ({
     type: ADD_ONE_AUDIENCE_TO_STORE,
+    payload,
+});
+
+export const loadAudienceToStore = (payload) => ({
+    type: LOAD_AUDIENCES,
     payload,
 });

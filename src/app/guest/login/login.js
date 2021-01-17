@@ -8,6 +8,7 @@ import { LOGIN_PROCESS, set_process } from '../../../store/actions/process';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { useHistory } from 'react-router-dom';
 
 const LoginForm = () => {
     const [form_data, setFormData] = useState({});
@@ -15,6 +16,7 @@ const LoginForm = () => {
     const [is_login_loading, setLoginLoading] = useState(false);
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const login_process = useSelector((state) => state.processes[LOGIN_PROCESS]);
 
     useEffect(() => {
@@ -68,18 +70,17 @@ const LoginForm = () => {
                     onInput={event => setFormData({ ...form_data, password: event.target.value })} />
             </div>
             <div className="form-group">
-                <button type="button" className="btn btn-primary form-control"
-                    onClick={() => submitForm()}>
+                <button className="gm-btn gm-btn-primary w-100" onClick={() => submitForm()}>
                     Log In
                     {is_login_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin" /> : <span></span>}
                 </button>
-                <a className="btn border border-primary text-primary w-100 mt-3 text-center" href="/register">Create Account</a>
+                <button className="gm-btn border border-primary gm-text-primary w-100 mt-3 text-center" onClick={() => history.push("/register")}>Create Account</button>
             </div>
             <hr className="mt-4 w-50"></hr>
             <div className="text-center d-flex justify-content-center mb-3">
                 Forgot password?
                     <span className="pl-2">
-                    <b><a href="/password/recovery"> Recover Password </a></b>
+                    <b><span className="gm-text-primary is-clickable" onClick={() => history.push("/password/recovery")}> Recover Password </span></b>
                 </span>
             </div>
         </div>

@@ -1,11 +1,13 @@
 /** */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { apiPost, URLS } from '../../../../utilities/api/api';
 
-import { addOneContactToStore } from '../../../../store/actions/contact';
-import GmModal from '../../../shared/modal/modal';
 import ImportContact from '../import/import';
+import GmModal from '../../../shared/modal/modal';
+import { isEmailValid } from '../../../shared/utils/input';
+import { setPageTitle } from '../../../../store/actions/header';
+import { addOneContactToStore } from '../../../../store/actions/contact';
 
 const ContactCreationForm = props => {
     // const [form_message, setFormMessage] = useState('');
@@ -26,8 +28,22 @@ const ContactCreationForm = props => {
     const { token } = user_data;
     const tenant_id = user_data.id;
 
+    useEffect(() => {
+        dispatch(setPageTitle('New Contact'));
+    }, []);
     /** */
     const submitForm = () => {
+
+        if(!firstname || !email) {
+            alert('Please fill compulsory fields.');
+            return;
+        }
+
+        if(!isEmailValid(email)) {
+            alert(`Invalid email address.`);
+            return;
+        }
+
         const form_data = {
             firstname, lastname, email,
             address: { street, state, country },
@@ -53,10 +69,10 @@ const ContactCreationForm = props => {
         <div>
             <div className="form-row">
                 <div className="form-group col">
-                    <label htmlFor="firstname">First name</label>
+                    <label htmlFor="firstname">First name *</label>
                     <input
                         type="text"
-                        className="form-control"
+                        className="gm-input"
                         id="firstname"
                         onInput={e => setFirstname(e.target.value)}
                     />
@@ -65,7 +81,7 @@ const ContactCreationForm = props => {
                     <label htmlFor="lastname">Last name</label>
                     <input
                         type="text"
-                        className="form-control"
+                        className="gm-input"
                         id="lastname"
                         onInput={e => setLastname(e.target.value)}
                     />
@@ -73,10 +89,10 @@ const ContactCreationForm = props => {
             </div>
             <div className="form-row">
                 <div className="form-group col">
-                    <label htmlFor="email">Email address</label>
+                    <label htmlFor="email">Email address *</label>
                     <input
                         type="email"
-                        className="form-control"
+                        className="gm-input"
                         id="email"
                         onInput={e => setEmail(e.target.value)}
                     />
@@ -86,7 +102,7 @@ const ContactCreationForm = props => {
                 <div className="form-group col">
                     <label htmlFor="street-address">Street address</label>
                     <textarea
-                        className="form-control"
+                        className="gm-input"
                         id="street-address"
                         onInput={e => setStreet(e.target.value)}
                     >
@@ -99,7 +115,7 @@ const ContactCreationForm = props => {
                         <div className="form-group col">
                             <label htmlFor="state">State</label>
                             <select
-                                className="form-control"
+                                className="gm-input"
                                 id="state"
                                 onChange={e => setState(e.target.value)}
                             >
@@ -110,7 +126,7 @@ const ContactCreationForm = props => {
                         <div className="form-group col">
                             <label htmlFor="country">Country</label>
                             <select
-                                className="form-control"
+                                className="gm-input"
                                 id="country"
                                 onChange={e => setCountry(e.target.value)}
                             >
@@ -126,7 +142,7 @@ const ContactCreationForm = props => {
                         <div className="form-group col">
                             <input
                                 type="date"
-                                className="form-control"
+                                className="gm-input"
                                 min="0"
                                 max="31"
                                 onChange={e => setDateOfBirth(e.target.value)}
@@ -135,12 +151,12 @@ const ContactCreationForm = props => {
                     </div>
                 </div>
             </div>
-            <div className="pr-3">
+            <div className="pr-3 mt-4">
                 {!loading ?
-                    <button className="btn btn-primary float-right w-25" onClick={e => submitForm()}> Save </button> :
-                    <button className="btn btn-primary float-right w-25" disabled> Save </button>
+                    <button className="gm-btn gm-btn-primary float-right w-25  shadow" onClick={e => submitForm()}> Save </button> :
+                    <button className="gm-btn gm-btn-primary float-right w-25  shadow" disabled> Save </button>
                 }
-                <button className="btn btn-info float-right w-25 mr-2" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
+                <button className="gm-btn gm-btn-secondary float-right w-25 mr-2  shadow" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
             </div>
 
             <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>

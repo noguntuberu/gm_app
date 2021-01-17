@@ -7,8 +7,8 @@ import ViewMailingList from './view/view';
 const MailingListModule = () => {
     return (
         <Switch>
-            <Route path="/mailing-lists/:id" component={ViewMailingList} />
-            <Route path="/mailing-lists" component={ListMailingList} />
+            <Route path="/audiences/:id" component={ViewMailingList} />
+            <Route path="/audiences" component={ListMailingList} />
         </Switch>
     )
 }

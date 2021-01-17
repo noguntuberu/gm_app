@@ -16,6 +16,7 @@
 }
 
 .gm-datatable-row-selector-wrap > div{
+    width: auto;
     padding: 5px 0;
 }
 
@@ -33,6 +34,10 @@
     color: #333333;
 }
 
+.gm-datatable-search {
+    width: auto ;
+}
+
 .gm-datatable-search > input {
     border-radius: 5px;
     padding: 5px 10px;
@@ -42,9 +47,14 @@
 }
 
 /**/
+.gm-datatable-table table{
+    border: 1px solid rgb(0, 117, 195, 0.5);
+}
+
 .gm-datatable thead {
     border-bottom: 2px solid #ddd;
-    background: #ffffff;
+    background: rgb(0, 117, 195, 0.75);
+    color:#fff;
 }
 
 .gm-datatable thead tr:hover{
@@ -52,7 +62,7 @@
 }
 
 .gm-datatable tbody tr:nth-child(odd) {
-    background-color: #fafafa;
+    background-color: rgb(0, 117, 195, 0.15);
 }
 
 .gm-datatable tr {
@@ -69,7 +79,16 @@
 
 /**/
 .gm-datatable > section.gm-datatable-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
     padding-top: 25px;
+}
+
+.gm-datatable-footer > div {
+    width: auto;
 }
 
 .gm-datatable-pagination {
@@ -80,8 +99,15 @@
 }
 
 .gm-datatable-pagination button {
-    border: none;
+    border: 1px solid rgb(0, 117, 195, 0.5);
+    border-radius: 5px;
+    padding: 0 10px;
 
     background: none;
-    font-size: 1.5rem;
+    color: rgb(0, 117, 195, 0.5);
+    font-size: 1.25rem;
+}
+
+.gm-datatable-pagination button:first-child {
+    margin-right: 10px;
 }

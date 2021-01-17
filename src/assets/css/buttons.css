@@ -1,0 +1,26 @@
+/**/
+.gm-btn {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 25px;
+    text-align: center;
+}
+
+.gm-btn:active {
+    border: none;
+}
+
+.gm-btn-primary {
+    background: rgb(0, 117, 195);
+    color: #ffffff;
+}
+
+.gm-btn-info {
+    background: rgb(2, 162, 184);
+    color: #ffffff;
+}
+
+.gm-btn-secondary {
+    background: rgba(141, 0, 42, 0.698);
+    color: #ffffff;
+}

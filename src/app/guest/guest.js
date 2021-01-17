@@ -1,6 +1,7 @@
 /** */
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import * as site_icon from '../../assets/images/site-name-web.fw.png'; 
 
 /** */
 import AccountActivation from './activation/activation';
@@ -13,11 +14,12 @@ import SignupForm from './signup/signup';
 import './guest.css';
 
 const GuestArea = () => {
+    const history = useHistory();
     return (
         <div className="full-page-wrap d-flex flex-column justify-content-center align-items-center">
 
-            <div className="guest-site-icon mb-3">
-                <a href="/">GoMailer: Guest Area</a>
+            <div className="guest-site-icon is-clickable" onClick={() => history.push('/')}>
+                <img src={site_icon} alt="Site Icon" />
             </div>
             <div className="guest-form-wrap card pl-3 pr-3 pt-2 shadow">
                 <Switch>

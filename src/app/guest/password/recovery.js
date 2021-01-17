@@ -66,7 +66,7 @@ const PasswordRecovery = () => {
                     onInput={event => setFormData({ ...form_data, email: event.target.value })} />
             </div>
             <div className="form-group">
-                <button type="button" className="btn btn-primary form-control"
+                <button className="gm-btn gm-btn-primary w-100"
                     onClick={() => submitForm()}>
                     Recover Password
                     {is_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin"/> : <span></span>}

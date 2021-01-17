@@ -1,10 +1,18 @@
 /**/
 .app-side-nav {
     height: 100%;
-    width: 20%;
+    width: 15%;
 
     border-right: 1px solid #e4e4e4;
     padding-top: 20px;
+
+    background-color: rgba(0, 75, 125, 0.835);
+}
+
+.nav-site-icon {
+    width: 150px;
+    
+    margin-left: 12.5px;
 }
 
 .side-nav-header {
@@ -15,7 +23,6 @@
     padding: 7.5px 20px;
 
     /* background-color: #ddd; */
-    font-weight: bold;
 }
 
 
@@ -26,19 +33,21 @@
 }
 
 .side-nav-header.collapsed {
-    background-color: #fff;
+    color: #fff;
 }
 
 .side-nav-header, .app-side-nav .card-body .nav-link {
-    padding-left: 50px;
+    color: #fff;
+    padding-left: 25px;
 }
 
 .side-nav-header:hover, .app-side-nav .card-body .nav-link:hover {
-    background-color: #eee;
+    color: rgb(216, 216, 216);
+    font-weight: bold;
 }
 
 .app-side-nav .card-body .nav-link:active {
-    background-color: #eee;
+    color: #eee;
 }
 
 .app-side-nav .card-body {
@@ -52,4 +61,26 @@
     font-size: 0.925em;
 
     color: rgb(105, 184, 230);
+}
+
+/**/
+.logout-button-wrapper {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+
+    border-top: 1px solid #ccc;
+    padding: 10px 15px;
+    padding-left: 25px;
+}
+
+.logout-button {
+    border: 2px solid rgb(235, 78, 78);
+    padding: 8px;
+    width: 100%;
+
+    background: #fff;
+    color: rgb(235, 78, 78);
+    font-weight: bold;
+    text-align: center;
 }

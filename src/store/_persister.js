@@ -2,6 +2,10 @@
 
 const store_name = 'go-mailer-store';
 const store_persister = {
+    clearStore: () => {
+        localStorage.removeItem(store_name);
+    },
+
     initializeStore: () => {
         const store = localStorage.getItem(store_name);
         if (store) {

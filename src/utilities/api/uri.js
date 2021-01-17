@@ -11,9 +11,9 @@ const app_config = {
         sales: 'http://localhost:7003',
     },
     production: {
-        users: 'https://users.go-mailer.com',
-        mailing: 'https://mailing.go-mailer.com',
-        sales: 'https://sales.go-mailer.com',
+        users: 'https://go-mailer.com/api/users',
+        mailing: 'https://go-mailer.com/api/mailing',
+        sales: 'https://go-mailer.com/api/sales',
     }
 }
 

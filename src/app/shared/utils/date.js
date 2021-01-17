@@ -15,6 +15,6 @@ export const convertDateFromIsoToHTMLFormat = iso_date => {
 
 export const generateHTMLFormDateTimeDefaults = () => {
     const date = (new Date()).toISOString();
-    const generated_date = `${convertDateFromIsoToHTMLFormat(date)}T00:00`;
+    const generated_date = `${convertDateFromIsoToHTMLFormat(date)}`;
     return generated_date;
 }

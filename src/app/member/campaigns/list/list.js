@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { URLS, apiGet } from '../../../../utilities/api/api';
 
 import Datatable from "../../../shared/datatable/datatable";
-import { addManyCampaignsToStore } from "../../../../store/actions/campaign";
+import { loadCampaignsToStore } from "../../../../store/actions/campaign";
+import { setPageTitle } from '../../../../store/actions/header';
 
 const ListCampaigns = () => {
     const history = useHistory();
@@ -19,6 +20,7 @@ const ListCampaigns = () => {
     }, [campaigns_in_store]);
 
     useEffect(() => {
+        dispatch(setPageTitle('My Campaigns'));
         apiGet(`${URLS.campaigns}`, { token }).then(response => {
             const { error, payload } = response;
 
@@ -27,7 +29,7 @@ const ListCampaigns = () => {
                 return;
             }
 
-            dispatch(addManyCampaignsToStore(payload));
+            dispatch(loadCampaignsToStore(payload));
         });
     }, []);
 

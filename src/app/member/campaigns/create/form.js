@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import MultiSelect from 'react-multi-select-component';
 import { apiPost, URLS, apiGet } from '../../../../utilities/api/api';
 import { generateHTMLFormDateTimeDefaults } from '../../../shared/utils/date';
+import { isEmailValid } from '../../../shared/utils/input';
 import { Editor } from '../../../../vendors/@tinymce/tinymce-react/lib/es2015/main/ts/index';
 
 import { addOneCampaignToStore } from '../../../../store/actions/campaign';
+import { setPageTitle } from '../../../../store/actions/header';
 
 import './form.css';
 
@@ -24,12 +26,13 @@ const CampaignCreationForm = props => {
     const [campaign_subject, setCampaignSubject] = useState('');
     const [loading, setLoading] = useState(false);
     const [mailing_lists, setMailingLists] = useState([]);
-    const [schedule, setCampaignSchedule ] = useState(generateHTMLFormDateTimeDefaults());
+    const [schedule, setCampaignSchedule] = useState(generateHTMLFormDateTimeDefaults());
     const [selected_lists, setSelectedLists] = useState([]);
     const [sender_email, setSenderEmail] = useState('');
     const [sender_name, setSenderName] = useState('');
 
     useEffect(() => {
+        dispatch(setPageTitle('New Campaign'));
         apiGet(`${URLS.mailing_lists}`, { token }).then(response => {
             const { payload } = response;
             if (payload) {
@@ -58,6 +61,11 @@ const CampaignCreationForm = props => {
             return;
         }
 
+        if (!isEmailValid(sender_email)) {
+            alert('Invalid Sender Email');
+            return;
+        }
+
         setLoading(true);
         apiPost(`${URLS.campaigns}`, { data, token }).then(response => {
             const { error, payload } = response;
@@ -76,13 +84,36 @@ const CampaignCreationForm = props => {
     return (
         <div>
             <div className="form-group">
-                <input className="form-control" id="campaign_title" placeholder="Campaign Name" type="text" defaultValue={campaign_name} onInput={e => setCampaignName(e.target.value)} />
+                <label htmlFor="campaign_title">Name</label>
+                <input className="gm-input" id="campaign_title" type="text" defaultValue={campaign_name} onInput={e => setCampaignName(e.target.value)} />
             </div>
             <div className="form-group">
-                <input className="form-control" id="campaign_subject" placeholder="Campaign Subject" type="text" defaultValue={campaign_subject} onInput={e => setCampaignSubject(e.target.value)} />
+                <div className="p-0 pr-2 col-8">
+                    <label htmlFor="campaign_subject">Subject</label>
+                    <input className="gm-input" id="campaign_subject" type="text" defaultValue={campaign_subject} onInput={e => setCampaignSubject(e.target.value)} />
+                </div>
+                <div className="p-0 pl-2 col-4">
+                    <label htmlFor="campaign_schedule">Schedule</label>
+                    <input
+                        className="gm-input"
+                        id="campaign_schedule"
+                        type="date"
+                        name="campaign-schedule"
+                        defaultValue={schedule}
+                        onChange={e => setCampaignSchedule(e.target.value)}
+                    />
+                </div>
             </div>
             <div className="form-group">
-                <div className="p-0 pr-2 col-6">
+                <div className="p-0 pr-2 col-4">
+                    <label htmlFor="sender_name">Sender's name</label>
+                    <input className="gm-input" id="sender_name" type="text" defaultValue={sender_name} onInput={e => setSenderName(e.target.value)} />
+                </div>
+                <div className="p-0 pl-2 pr-2 col-4">
+                    <label htmlFor="sender_email">Sender's email</label>
+                    <input className="gm-input" id="sender_email" type="text" defaultValue={sender_email} onInput={e => setSenderEmail(e.target.value)} />
+                </div>
+                <div className="p-0 pl-2 col-4">
                     {/* <Select
                         options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
                         onChange={setSelectedLists}
@@ -92,35 +123,16 @@ const CampaignCreationForm = props => {
                     // className='mailing-list-selector'
                     /> */}
 
+                    <label htmlFor="campaign_list">Audiences</label>
                     <MultiSelect
                         options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
                         onChange={setSelectedLists}
                         value={selected_lists}
                         // isMulti={true}
-                        labelledBy='Select Mailing list'
+                        labelledBy='Select Audience'
+                        id="campaign list"
                     />
                 </div>
-                <div className="p-0 pl-2 col-6">
-                    <input
-                        className="form-control"
-                        id="campaign_subject"
-                        type="datetime-local"
-                        name="campaign-schedule"
-                        value={generateHTMLFormDateTimeDefaults()}
-                        min={generateHTMLFormDateTimeDefaults()}
-                        onChange={e => setCampaignSchedule(e.target.value)}
-                    />
-                </div>
-            </div>
-            <div className="form-group">
-                <div className="p-0 pr-2 col-6">
-                    <input className="form-control" id="sender_name" placeholder="Sender Name" type="text" defaultValue={sender_name} onInput={e => setSenderName(e.target.value)} />
-                </div>
-                <div className="p-0 pl-2 col-6">
-                    <input className="form-control" id="sender_email" placeholder="Sender email address" type="text" defaultValue={sender_email} onInput={e => setSenderEmail(e.target.value)} />
-                </div>
-            </div>
-            <div className="form-group">
             </div>
             <div className="form-group">
                 <Editor
@@ -133,8 +145,8 @@ const CampaignCreationForm = props => {
             </div>
             <div className="form-group">
                 {loading ?
-                    <button className="col-2 float-right btn btn-primary" disabled>Saving...</button> :
-                    <button className="col-2 float-right btn btn-primary shadow" onClick={() => submitCampaign()} >Save</button>
+                    <button className="col-2 float-right gm-btn gm-btn-primary" disabled>Saving...</button> :
+                    <button className="col-2 float-right gm-btn gm-btn-primary shadow" onClick={() => submitCampaign()} >Save</button>
                 }
             </div>
         </div>

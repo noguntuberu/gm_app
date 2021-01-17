@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 /** */
 import GmModal from '../../../shared/modal/modal';
 import { URLS, apiGet } from '../../../../utilities/api/api';
-import { addManyAudiencesToStore } from '../../../../store/actions/audience';
+import { setPageTitle } from '../../../../store/actions/header';
+import { loadAudienceToStore } from '../../../../store/actions/audience';
 
 /** */
 import ListCreationForm from '../create/create';
@@ -27,6 +28,7 @@ const ListMailingLists = () => {
     }, [mailing_lists_in_store]);
 
     useEffect(() => {
+        dispatch(setPageTitle('My Audiences'));
         setLoading(true);
         apiGet(`${URLS.mailing_lists}`, { token }).then(response => {
             const { error, payload } = response;
@@ -36,7 +38,7 @@ const ListMailingLists = () => {
                 return;
             }
 
-            dispatch(addManyAudiencesToStore(payload));
+            dispatch(loadAudienceToStore(payload));
         }).finally(() => setLoading(false));
     }, []);
 
@@ -77,7 +79,7 @@ const ListMailingLists = () => {
         const { name, type, data } = payload;
         if (type === 'single') {
             if (name === 'View') {
-                history.push(`/mailing-lists/${data.id}`);
+                history.push(`/audiences/${data.id}`);
             }
         }
     }
@@ -88,8 +90,8 @@ const ListMailingLists = () => {
 
     return (
         <div>
-            <button className="btn btn-primary btn-sm" onClick={() => setShowCreateModal(true)} >Create Mailing List</button>
-            <GmModal title="Create Mailing List" show_title={true} show_modal={show_create_modal} onClose={() => setShowCreateModal(false)}>
+            <button className="gm-btn gm-btn-secondary btn-sm  shadow mb-3" onClick={() => setShowCreateModal(true)} >Create Audience</button>
+            <GmModal title="Create Audience" show_title={true} show_modal={show_create_modal} onClose={() => setShowCreateModal(false)}>
                 <ListCreationForm />
             </GmModal>
             {!loading ?

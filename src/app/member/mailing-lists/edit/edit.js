@@ -47,8 +47,8 @@ const AudienceUpdationForm = ({ mailing_list }) => {
         </div>
         <div className="form-group">
             {!loading ?
-                <button className="btn btn-primary float-right" onClick={submit}>Update</button> :
-                <button className="btn btn-primary float-right" disabled>Updating...</button>
+                <button className="gm-btn gm-btn-primary float-right btn-sm  shadow" onClick={submit}>Update</button> :
+                <button className="gm-btn gm-btn-primary float-right btn-sm  shadow" disabled>Updating...</button>
             }
         </div>
     </div>

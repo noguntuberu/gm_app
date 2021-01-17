@@ -17,13 +17,14 @@ const getLoginStatus = createSelector(state => state.user_data, user_data => {
 
 function App() {
   const userIsLoggedIn = useSelector(getLoginStatus);
-  return (
+
+  return <div>
     <BrowserRouter >
       <Switch>
         <Route path='/' component={userIsLoggedIn ? MemberArea : GuestArea} />
       </Switch>
     </BrowserRouter>
-  );
+  </div>
 }
 
 export default App;

@@ -1,0 +1,16 @@
+/**/
+label {
+    font-size: 0.9em;
+    color: #666;
+}
+.gm-input {
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    padding: 10px 0;
+    width: 100%;
+}
+
+select.gm-input {
+    padding: 14px 0;
+    background: transparent;
+}

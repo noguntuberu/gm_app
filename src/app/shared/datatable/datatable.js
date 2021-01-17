@@ -32,7 +32,7 @@ const DataTable = props => {
 
     const formatDataTableFooter = (page_number, number_of_rows_to_display, items) => {
         const start = page_number ? page_number * number_of_rows_to_display + 1 : 1;
-        const end = number_of_rows_to_display * start;
+        const end = (number_of_rows_to_display + start) - 1;
         const content_text_for_empty_data = `No item(s) to display`;
         const content_text_for_nonempty_data = `Showing ${start} to ${end > items.length ? items.length : end} records of ${items.length}`;
 
@@ -188,7 +188,7 @@ const DataTable = props => {
                 </table>
             </section>
             <section className="gm-datatable-footer">
-                {formatDataTableFooter(page_number, number_of_rows_to_display, table_items)}
+                <div>{formatDataTableFooter(page_number, number_of_rows_to_display, table_items)}</div>
                 {formatPagination()}
             </section>
         </div >

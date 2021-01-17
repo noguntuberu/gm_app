@@ -68,15 +68,15 @@ const ImportContact = props => {
                         <option>{mailing_list.name}</option>
                     </select> :
                     <select className="custom-select" onChange={e => setSelectedList(e.target.value)}>
-                        <option value=''>Select Mailing List</option>
+                        <option value=''>Select Audience</option>
                         {mailing_lists.map(list => <option key={list.id} value={list.id}>{list.name}</option>)}
                     </select>
                 }
             </div>
             <div className="mt-3">
                 {loading ?
-                    <button className="btn btn-primary float-right" disabled>Importing...</button> :
-                    <button onClick={submit} className="btn btn-primary float-right">Import</button>
+                    <button className="gm-btn gm-btn-primary float-right  shadow" disabled>Importing...</button> :
+                    <button onClick={submit} className="gm-btn gm-btn-primary float-right  shadow">Import</button>
                 }
             </div>
         </div>

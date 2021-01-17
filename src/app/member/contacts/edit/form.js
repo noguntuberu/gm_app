@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addOneContactToStore, } from '../../../../store/actions/contact';
 
-import { convertDateFromIsoToHTMLFormat } from '../../../shared/utils/date';
 import { apiPut, URLS } from '../../../../utilities/api/api';
+import { setPageTitle } from '../../../../store/actions/header';
+import { convertDateFromIsoToHTMLFormat } from '../../../shared/utils/date';
 
 const ContactUpdationForm = props => {
     const { contact_data } = props;
@@ -27,6 +28,7 @@ const ContactUpdationForm = props => {
     const tenant_id = user_data.id;
 
     useEffect(() => {
+        dispatch(setPageTitle('Edit Contact'));
         const { firstname, lastname, email, address, date_of_birth } = contact_data;
 
         if (address) {
@@ -166,8 +168,8 @@ const ContactUpdationForm = props => {
             </div>
             <div className="pr-3">
                 {loading ?
-                    <button className="btn btn-primary float-right w-25" disabled> Save </button> :
-                    <button className="btn btn-primary float-right w-25" onClick={e => submitForm()}> Save </button>
+                    <button className="gm-btn gm-btn-primary float-right w-25  shadow" disabled> Save </button> :
+                    <button className="gm-btn gm-btn-primary float-right w-25  shadow" onClick={e => submitForm()}> Save </button>
                 }
             </div>
         </div>

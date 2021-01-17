@@ -2,15 +2,16 @@ import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ImportContact from '../import/import';
-import GmModal from '../../../shared/modal/modal';
+// import ImportContact from '../import/import';
+// import GmModal from '../../../shared/modal/modal';
 import { apiDelete, apiGet, URLS } from '../../../../utilities/api/api';
 
 import DataTable from '../../../shared/datatable/datatable';
 import {
-    addManyContactsToStore,
+    loadContactsToStore,
     removeOneContactFromStore
 } from '../../../../store/actions/contact';
+import { setPageTitle } from '../../../../store/actions/header';
 
 import { table_config } from './helper';
 
@@ -23,13 +24,14 @@ const ListContacts = () => {
 
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [show_upload_modal, setShowUploadModal] = useState(false);
+    // const [show_upload_modal, setShowUploadModal] = useState(false);
 
     useEffect(() => {
         setItems(Object.values(contacts_in_store));
     }, [contacts_in_store]);
 
     useEffect(() => {
+        dispatch(setPageTitle('My Contacts'));
         setLoading(true);
         apiGet(URLS.contacts, { token }).then(data => {
             const { payload, error } = data;
@@ -41,7 +43,7 @@ const ListContacts = () => {
 
             if (!error && payload) {
                 setItems(payload);
-                dispatch(addManyContactsToStore(payload));
+                dispatch(loadContactsToStore(payload));
             }
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,7 +88,7 @@ const ListContacts = () => {
     }
 
     return <div>
-        <button className="btn btn-info float-right w-25" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
+        {/* <button className="gm-btn gm-btn-secondary w-25 btn-sm shadow mb-3 float-right" onClick={() => setShowUploadModal(true)}>Import Contacts</button> */}
         {loading ? 'loading data...' :
             <DataTable
             config={{ ...table_config, items }}
@@ -95,9 +97,9 @@ const ListContacts = () => {
             checkbox
         />}
 
-        <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>
+        {/* <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>
             <ImportContact />
-        </GmModal>
+        </GmModal> */}
     </div>
 }
 

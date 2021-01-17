@@ -10,7 +10,8 @@ import { apiGet, URLS, apiPost } from '../../../../utilities/api/api';
 const PlanSelectionComponent = props => {
     // const history = useHistory();
     const query = useQuery();
-    const { selected } = useSelector(state => state.plans);
+    let { selected } = useSelector(state => state.plans);
+    selected = selected || {};
     const { id } = useSelector(state => state.user_data);
     const [plans, setPlans] = useState([]);
 

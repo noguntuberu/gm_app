@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import Select from 'react-select';
 import MultiSelect from 'react-multi-select-component';
-import { apiPost, URLS, apiGet, apiPut } from '../../../../utilities/api/api';
+import { URLS, apiGet, apiPut } from '../../../../utilities/api/api';
 import { Editor } from '../../../../vendors/@tinymce/tinymce-react/lib/es2015/main/ts/index';
 
-import { addOneCampaignToStore } from '../../../../store/actions/campaign';
+import { setPageTitle } from '../../../../store/actions/header';
 
 import './form.css';
 
@@ -31,6 +31,7 @@ const CampaignCreationForm = props => {
     const [sender_name, setSenderName] = useState(campaign.sender_name);
 
     useEffect(() => {
+        dispatch(setPageTitle('Edit Campaign'));
         apiGet(`${URLS.mailing_lists}`, { token }).then(response => {
             const { payload } = response;
             if (payload) {
@@ -99,7 +100,7 @@ const CampaignCreationForm = props => {
                         onChange={setSelectedLists}
                         value={selected_lists}
                         // isMulti={true}
-                        labelledBy='Select Mailing list'
+                        labelledBy='Select Audience'
                     />
                 </div>
             </div>
@@ -124,8 +125,8 @@ const CampaignCreationForm = props => {
             </div>
             <div className="form-group">
                 {loading ?
-                    <button className="col-2 float-right btn btn-primary" disabled>Updating...</button> :
-                    <button className="col-2 float-right btn btn-primary shadow" onClick={() => submitCampaign()} >Update</button>
+                    <button className="col-2 float-right gm-btn gm-btn-primary" disabled>Updating...</button> :
+                    <button className="col-2 float-right gm-btn gm-btn-primary shadow" onClick={() => submitCampaign()} >Update</button>
                 }
             </div>
         </div>

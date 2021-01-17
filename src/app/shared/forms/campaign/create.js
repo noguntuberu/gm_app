@@ -45,7 +45,7 @@ const CampaignCreationForm = props => {
                 />
             </div>
             <div className="form-group">
-                <button className="col-2 float-right btn btn-primary shadow" onClick={() => submitCampaign()} >Save</button>
+                <button className="col-2 float-right gm-btn gm-btn-primary shadow" onClick={() => submitCampaign()} >Save</button>
             </div>
         </div>
     )
