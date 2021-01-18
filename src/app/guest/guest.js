@@ -18,7 +18,7 @@ const GuestArea = () => {
     return (
         <div className="full-page-wrap d-flex flex-column justify-content-center align-items-center">
 
-            <div className="guest-site-icon is-clickable" onClick={() => history.push('/')}>
+            <div className="guest-site-icon" onClick={() => history.push('/')}>
                 <img src={site_icon} alt="Site Icon" />
             </div>
             <div className="guest-form-wrap card pl-3 pr-3 pt-2 shadow">

@@ -1,7 +1,8 @@
 /** */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { apiPost, URLS } from '../../../../utilities/api/api';
+import { apiGet, apiPost, URLS, apiPut } from '../../../../utilities/api/api';
+import MultiSelect from 'react-multi-select-component';
 
 import ImportContact from '../import/import';
 import GmModal from '../../../shared/modal/modal';
@@ -22,6 +23,9 @@ const ContactCreationForm = props => {
     const [date_of_birth, setDateOfBirth] = useState();;
     const [show_upload_modal, setShowUploadModal] = useState(false);
 
+    const [mailing_lists, setMailingLists] = useState([]);
+    const [selected_lists, setSelectedLists] = useState([]);
+
     /** */
     const dispatch = useDispatch();
     const user_data = useSelector(state => state.user_data);
@@ -30,10 +34,16 @@ const ContactCreationForm = props => {
 
     useEffect(() => {
         dispatch(setPageTitle('New Contact'));
+        apiGet(`${URLS.mailing_lists}`, { token }).then(response => {
+            const { payload } = response;
+            if (payload) {
+                setMailingLists(payload);
+            }
+        });
     }, []);
     /** */
     const submitForm = () => {
-
+        console.log(selected_lists);
         if(!firstname || !email) {
             alert('Please fill compulsory fields.');
             return;
@@ -62,6 +72,11 @@ const ContactCreationForm = props => {
 
             alert(`contact created.`);
             dispatch(addOneContactToStore(payload));
+
+            // add contact to list
+            apiPut(`${URLS.mailing_lists}/${selected_lists[0].value}/contacts`, { data: {
+                contacts: [payload.id],
+            }, token })
         });
     }
 
@@ -95,6 +110,17 @@ const ContactCreationForm = props => {
                         className="gm-input"
                         id="email"
                         onInput={e => setEmail(e.target.value)}
+                    />
+                </div>
+                <div className="form-group col">
+                    <label htmlFor="email">Audience</label>
+                    <MultiSelect
+                        options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
+                        onChange={setSelectedLists}
+                        value={selected_lists}
+                        isMulti={false}
+                        labelledBy='Select Audience'
+                        id="audience"
                     />
                 </div>
             </div>

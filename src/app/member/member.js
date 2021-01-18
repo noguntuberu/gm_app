@@ -8,6 +8,7 @@ import ContactModule from './contacts/_index';
 import MailingListModule from './mailing-lists/_index';
 // import PlansModule from './plans/_index';
 import MemberAreaHeader from './header/header';
+import GMDashboard from './dashboard/dashboard';
 
 const MemberArea = () => {
 
@@ -21,7 +22,7 @@ const MemberArea = () => {
                         <Route path="/campaigns" component={CampaignModule} />
                         <Route path="/contacts" component={ContactModule} />
                         <Route path="/audiences" component={MailingListModule} />
-                        {/* <Route path="/plans" component={PlansModule} /> */}
+                        <Route path="/" component={GMDashboard} />
                     </Switch>
                 </section>
             </section>

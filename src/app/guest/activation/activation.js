@@ -1,50 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
-import { activateAccount } from '../../../store/actions/user-data';
-import { ACCOUNT_ACTIVATION, set_process } from '../../../store/actions/process';
+import { apiGet, URLS } from '../../../utilities/api/api';
 
 const AccountActivation = () => {
     const { id } = useParams();
-    const dispatch = useDispatch();
-    const account_activation = useSelector((state) => state.processes[ACCOUNT_ACTIVATION]);
+    const history = useHistory();
 
     const [is_activating, setIsActivating] = useState(true);
     const [activation_status, setActivationStatus] = useState(false);
 
     useEffect(() => {
-        dispatch(activateAccount(id));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        setIsActivating(true);
+        apiGet(`${URLS.guests}/activation/${id}`).then(response => {
+            setIsActivating(false);
+            const { error, } = response;
+            if (error) {
+                setActivationStatus(false);
+                return;
+            }
 
-    useEffect(() => {
-        if (!account_activation || !Object.keys(account_activation).length) return;
-
-        setIsActivating(false);
-        const { error, payload, success, } = account_activation;
-        if (!success && error) {
-            setActivationStatus(false);
-        }
-
-        if (success && payload) {
+            //
             setActivationStatus(true);
-        }
-
-        dispatch(set_process(ACCOUNT_ACTIVATION, {}));
-    }, [account_activation, dispatch]);
+        });
+    }, []);
 
     const displayActivationResult = () => {
         if (activation_status) {
-            return <div>Account Activation Successful</div>;
+            return <div>
+                Account Activation Successful.
+                <span className="gm-text-primary float-none pl-2 is-clickable" onClick={() => history.push('/login')}><b className="float-none">Log In.</b></span>
+            </div>;
         }
 
         return <div>Could not activate account. Please try again later.</div>;
     }
 
     return (
-        <div>
-            { is_activating ? <div> Activating your account. Please wait... </div> : displayActivationResult()}
+        <div className="py-3 text-center">
+            {is_activating ? <div> Activating your account. Please wait... </div> : displayActivationResult()}
         </div>
     );
 }

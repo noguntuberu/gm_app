@@ -2,17 +2,27 @@
 import axios from 'axios';
 import hosts from './uri';
 
-const DEFAULT_ERR = (e) => ({
-    error: e,
+const DEFAULT_ERR = (error) => ({
+    error,
     payload: null,
 })
 
 export const URLS = {
     campaigns: `${hosts.mailing}/campaigns`,
     contacts: `${hosts.users}/contacts`,
+    guests: `${hosts.users}/guests`,
     mailing_lists: `${hosts.users}/mailing-lists`,
     plans: `${hosts.sales}/plans`,
     payments: `${hosts.sales}/payments`,
+}
+
+const extractErrorMessage = e => {
+    let error_message = `An error occurred. Please try again later.`;
+    if (e && e.response && e.response.data) {
+        error_message = e.response.data.error;
+    }
+
+    return error_message;
 }
 
 
@@ -30,8 +40,7 @@ export const apiDelete = async (uri,  options = {}) => {
 
         return request;
     } catch (e) {
-        const error = e.error;
-        return DEFAULT_ERR(error);
+        return DEFAULT_ERR(extractErrorMessage(e));
     }
 }
 
@@ -46,8 +55,7 @@ export const apiGet = async (uri,  options = {}) => {
 
         return request.data;
     } catch (e) {
-        const error = e.response.data ? e.response.data.error : e.message;
-        return DEFAULT_ERR(error);
+        return DEFAULT_ERR(extractErrorMessage(e));
     }
 }
 
@@ -63,8 +71,7 @@ export const apiPost = async (uri,  options = {}) => {
 
         return request.data;
     } catch (e) {
-        const error = e.response.data ? e.response.data.error : e.message;
-        return DEFAULT_ERR(error);
+        return DEFAULT_ERR(extractErrorMessage(e));
     }
 }
 
@@ -79,7 +86,6 @@ export const apiPut = async (uri,  options = {}) => {
 
         return request.data;
     } catch (e) {
-        const error = e.response.data ? e.response.data.error : e.message;
-        return DEFAULT_ERR(error);
+        return DEFAULT_ERR(extractErrorMessage(e));
     }
 }

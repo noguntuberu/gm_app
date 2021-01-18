@@ -6,9 +6,9 @@ const { NODE_ENV } = process.env;
 
 const app_config = {
     development: {
-        users: 'http://localhost:7001',
-        mailing: 'http://localhost:7002',
-        sales: 'http://localhost:7003',
+        users: 'http://localhost:7001/api/users',
+        mailing: 'http://localhost:7002/api/mailing',
+        sales: 'http://localhost:7003/api/sales',
     },
     production: {
         users: 'https://go-mailer.com/api/users',

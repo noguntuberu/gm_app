@@ -1,10 +1,10 @@
 /** */
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, } from 'react-redux';
 
 import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
-import { addDataToStore, login } from '../../../store/actions/user-data';
-import { LOGIN_PROCESS, set_process } from '../../../store/actions/process';
+import { apiPost, URLS } from '../../../utilities/api/api';
+import { addDataToStore } from '../../../store/actions/user-data';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
@@ -17,20 +17,6 @@ const LoginForm = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const login_process = useSelector((state) => state.processes[LOGIN_PROCESS]);
-
-    useEffect(() => {
-        if (!login_process || !Object.keys(login_process).length) return;
-
-        setLoginLoading(false);
-        const { error, payload, success, } = login_process;
-        if (!success && error) {
-            applyFormMessage(`Email or password incorrect.`, 0);
-        }
-
-        dispatch(set_process(LOGIN_PROCESS, {}));
-        dispatch(addDataToStore(payload));
-    }, [dispatch, login_process]);
 
     const applyFormMessage = (text, code = 0) => {
         setFormMessage({ code, text })
@@ -48,12 +34,20 @@ const LoginForm = () => {
         }
 
         setLoginLoading(true);
-        dispatch(login({ ...form_data }));
+        apiPost(`${URLS.guests}/login`, { data: form_data }).then(response => {
+            const { error, payload } = response;
+            if (error) {
+                applyFormMessage(error);
+                return;
+            }
+
+            dispatch(addDataToStore(payload));
+        }).finally(() => setLoginLoading(false));
     }
 
     return (
         <div>
-            <div className="form-group">
+            <div className="w-100 mt-1">
                 {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
                     {form_message.text}
                     <button type="button" className="close" onClick={() => applyFormMessage('', -1)}>
@@ -72,7 +66,7 @@ const LoginForm = () => {
             <div className="form-group">
                 <button className="gm-btn gm-btn-primary w-100" onClick={() => submitForm()}>
                     Log In
-                    {is_login_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin" /> : <span></span>}
+                    {is_login_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <span></span>}
                 </button>
                 <button className="gm-btn border border-primary gm-text-primary w-100 mt-3 text-center" onClick={() => history.push("/register")}>Create Account</button>
             </div>

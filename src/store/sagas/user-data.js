@@ -1,11 +1,10 @@
 /** */
 import { call, put, } from 'redux-saga/effects';
 import { ACCOUNT_ACTIVATION, set_process, set_error, SIGNUP_PROCESS, LOGIN_PROCESS, PWD_RECOVERY_PROCESS, PWD_RESET_PROCESS, } from '../actions/process';
-import { users_host } from './_config';
+import { URLS } from '../../utilities/api/api';
 import Request from './_request';
-import { addDataToStore } from '../actions/user-data';
 
-const guest_uri = `${users_host}/guests`;
+const guest_uri = `${URLS.guests}`;
 
 export function* activateAccount(action) {
     try {

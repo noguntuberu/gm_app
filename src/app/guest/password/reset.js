@@ -1,38 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, } from 'react';
 
 import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
-import { resetPassword } from '../../../store/actions/user-data';
-import { PWD_RESET_PROCESS, set_process } from '../../../store/actions/process';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useParams } from 'react-router-dom';
+import { apiPost, URLS } from '../../../utilities/api/api';
 
 const PasswordReset = () => {
     const { id } = useParams();
     const [form_data, setFormData] = useState({});
     const [form_message, setFormMessage] = useState({ code: -1 });
     const [is_loading, setIsLoading] = useState(false);
-
-    const dispatch = useDispatch();
-    const pwd_reset_process = useSelector((state) => state.processes[PWD_RESET_PROCESS]);
-
-    useEffect(() => {
-        if (!pwd_reset_process || !Object.keys(pwd_reset_process).length) return;
-
-        setIsLoading(false);
-        const { error, payload, success, } = pwd_reset_process;
-        if (!success && error) {
-            applyFormMessage(error, 0);
-        }
-
-        if (success && !error) {
-            applyFormMessage(payload, 1);
-        }
-
-        dispatch(set_process(PWD_RESET_PROCESS, {}));
-    }, [dispatch, pwd_reset_process]);
 
     const applyFormMessage = (text, code = 0) => {
         setFormMessage({ code, text })
@@ -55,12 +34,21 @@ const PasswordReset = () => {
         };
 
         setIsLoading(true);
-        dispatch(resetPassword({ ...data, }));
+        apiPost(`${URLS.guests}/password/reset`, { data }).then( response => {
+            const { error, payload } = response;
+
+            if(error) {
+                applyFormMessage(error);
+                return;
+            }
+
+            applyFormMessage(payload, 1);
+        }).finally(() => setIsLoading(false));
     }
 
     return (
         <div>
-            <div className="form-group">
+            <div className="w-100 mt-1">
                 {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
                     {form_message.text}
                     <button type="button" className="close" onClick={() => applyFormMessage('', -1)}>

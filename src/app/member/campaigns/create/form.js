@@ -12,6 +12,7 @@ import { addOneCampaignToStore } from '../../../../store/actions/campaign';
 import { setPageTitle } from '../../../../store/actions/header';
 
 import './form.css';
+import GmModal from '../../../shared/modal/modal';
 
 const CampaignCreationForm = props => {
     const { config } = props;
@@ -31,6 +32,8 @@ const CampaignCreationForm = props => {
     const [sender_email, setSenderEmail] = useState('');
     const [sender_name, setSenderName] = useState('');
 
+    const [show_wildcard_modal, setShowWildcardModal] = useState(false);
+
     useEffect(() => {
         dispatch(setPageTitle('New Campaign'));
         apiGet(`${URLS.mailing_lists}`, { token }).then(response => {
@@ -40,6 +43,10 @@ const CampaignCreationForm = props => {
             }
         });
     }, []);
+
+    const handleEditorChange = data => {
+        setCampaignBody(data);
+    }
 
     const submitCampaign = () => {
         const data = {
@@ -134,13 +141,16 @@ const CampaignCreationForm = props => {
                     />
                 </div>
             </div>
+            <div className="w-100 p-2">
+                {/* <span className="text-info is-clickable" onClick={() => setShowWildcardModal(true)}>** <b>Click Here </b> to see supported @ wildcards.</span> */}
+            </div>
             <div className="form-group">
                 <Editor
                     body_class="campaign_editor"
                     id="campaign_create"
-                    init={config.default}
+                    init={config}
                     initialValue={campaign_body}
-                    onEditorChange={e => setCampaignBody(e)}
+                    onEditorChange={e => handleEditorChange(e)}
                 />
             </div>
             <div className="form-group">
@@ -149,6 +159,15 @@ const CampaignCreationForm = props => {
                     <button className="col-2 float-right gm-btn gm-btn-primary shadow" onClick={() => submitCampaign()} >Save</button>
                 }
             </div>
+            <GmModal title="Supported wildcards" show_title={true} show_modal={show_wildcard_modal} onClose={() => setShowWildcardModal(false)}>
+                <div className="wildcard-list">
+                    <ol>
+                        <li>@firstname - Contact's first name.</li>
+                        <li>@lastname - Contact's last name.</li>
+                        <li>@date_of_birth - Contact's date_of_birth.</li>
+                    </ol>
+                </div>
+            </GmModal>
         </div>
     )
 }

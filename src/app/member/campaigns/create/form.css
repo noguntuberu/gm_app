@@ -19,3 +19,18 @@
 div.tox-editor-header {
     z-index: 0 !important;
 }
+
+.tox-pop__dialog {
+    display: none !important;
+}
+
+.wildcard-list ol {
+    width: 350px;
+    padding-left: 20px;
+}
+
+.wildcard-list li {
+    width: 100%;
+    padding: 0;
+    margin-left: 0;
+}
