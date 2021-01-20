@@ -1,16 +1,20 @@
 /** */
-const template_strings = [
+const options = [
     {
-        type: 'autocompleteitem',
-        value: 'firstName',
-        text: 'First Name'
-    }
+        value: '@firstname',
+        text: '@firstname'
+    },
+    {
+        value: '@email',
+        text: '@email'
+    },
+    {
+        value: '@lastname',
+        text: '@lastname'
+    },
 ];
 
 export const autoCompleter = (editor) => {
-    const fetch = async pattern => {
-        return template_strings;
-    }
 
     const onAction = (autocompleteApi, rng, value) => {
         editor.selection.setRng(rng);
@@ -22,11 +26,11 @@ export const autoCompleter = (editor) => {
         ch: '@',
         fetch: pattern => {
             return new Promise(function (resolve) {
-                var results = [{
+                const filtered_results = options.filter( option => option.value.includes(pattern.substr(1)));
+                const results = filtered_results.map(result => ({
+                    ...result,
                     type: 'autocompleteitem',
-                    value: 'firstName',
-                    text: 'First Name'
-                }];
+                }));
                 resolve(results);
             });
         },
