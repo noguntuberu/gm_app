@@ -21,7 +21,7 @@ const ListCampaigns = () => {
 
     useEffect(() => {
         dispatch(setPageTitle('My Campaigns'));
-        apiGet(`${URLS.campaigns}`, { token }).then(response => {
+        apiGet(`${URLS.campaigns}`, { token, }).then(response => {
             const { error, payload } = response;
 
             if (error) {
@@ -60,7 +60,7 @@ const ListCampaigns = () => {
                 formatter: value => (new Date(value)).toDateString(),
             },
         ],
-        items: campaigns,
+        items: campaigns.sort((a,b) => b.id - a.id),
         search_key: 'name',
         search_text: '',
     }
