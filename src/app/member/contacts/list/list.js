@@ -91,11 +91,11 @@ const ListContacts = () => {
         {/* <button className="gm-btn gm-btn-secondary w-25 btn-sm shadow mb-3 float-right" onClick={() => setShowUploadModal(true)}>Import Contacts</button> */}
         {loading ? 'loading data...' :
             <DataTable
-            config={{ ...table_config, items }}
-            action={handleDatatableAction}
-            onClick={handleItemClick}
-            checkbox
-        />}
+                config={{ ...table_config, items: items.sort((a, b) => b.id - a.id) }}
+                action={handleDatatableAction}
+                onClick={handleItemClick}
+                checkbox
+            />}
 
         {/* <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>
             <ImportContact />
