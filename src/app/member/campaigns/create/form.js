@@ -142,7 +142,7 @@ const CampaignCreationForm = props => {
                 </div>
             </div>
             <div className="w-100 p-2">
-                {/* <span className="text-info is-clickable" onClick={() => setShowWildcardModal(true)}>** <b>Click Here </b> to see supported @ wildcards.</span> */}
+                <span className="text-info is-clickable" onClick={() => setShowWildcardModal(true)}>** <b>Click Here </b> to see supported @ wildcards.</span>
             </div>
             <div className="form-group">
                 <Editor
