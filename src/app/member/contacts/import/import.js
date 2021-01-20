@@ -1,5 +1,6 @@
 /** */
 import React, { useState, useEffect } from 'react';
+import fileSaver from 'js-file-download';
 import { useSelector } from 'react-redux';
 import { apiPost, URLS, apiGet } from '../../../../utilities/api/api';
 
@@ -26,6 +27,12 @@ const ImportContact = props => {
             setMailingLists(payload);
         });
     }, []);
+
+    const downloadTemplate = () => {
+        apiGet(`${URLS.templates}/contact`, { token}).then( response => {
+            fileSaver(response, 'contacts.csv');
+        })
+    }
 
     const submit = () => {
         if (!file) {
@@ -78,6 +85,7 @@ const ImportContact = props => {
                     <button className="gm-btn gm-btn-primary float-right  shadow" disabled>Importing...</button> :
                     <button onClick={submit} className="gm-btn gm-btn-primary float-right  shadow">Import</button>
                 }
+                <button className="gm-btn gm-btn-secondary shadow float-right mr-3" onClick={() => downloadTemplate()}>Download Template</button>
             </div>
         </div>
     )

@@ -27,10 +27,10 @@ const ViewMailingList = () => {
             <div className="content-header-wrapper">
                 <div className="content-header-actions">
                     <button className="gm-btn gm-btn-info btn-sm  shadow" onClick={() => setShowUpdationModal(true)}>Edit</button>
-                    <button className="gm-btn gm-btn-primary ml-2  btn-sm  shadow" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
+                    <button className="gm-btn gm-btn-primary ml-3  btn-sm  shadow" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
                     {is_dashboard_view ?
-                        <button className="gm-btn gm-btn-secondary btn-sm  ml-2  shadow" onClick={() => setIsDashboardView(false)}>View Contacts</button> :
-                        <button className="gm-btn gm-btn-secondary btn-sm  ml-2  shadow" onClick={() => setIsDashboardView(true)}>View Dashboard</button>
+                        <button className="gm-btn gm-btn-secondary btn-sm  ml-3  shadow" onClick={() => setIsDashboardView(false)}>View Contacts</button> :
+                        <button className="gm-btn gm-btn-secondary btn-sm  ml-3  shadow" onClick={() => setIsDashboardView(true)}>View Dashboard</button>
                     }
                 </div>
             </div>

@@ -182,7 +182,7 @@ const ContactCreationForm = props => {
                     <button className="gm-btn gm-btn-primary float-right w-25  shadow" onClick={e => submitForm()}> Save </button> :
                     <button className="gm-btn gm-btn-primary float-right w-25  shadow" disabled> Save </button>
                 }
-                <button className="gm-btn gm-btn-secondary float-right w-25 mr-2  shadow" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
+                <button className="gm-btn gm-btn-secondary float-right w-25 mr-3  shadow" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
             </div>
 
             <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>

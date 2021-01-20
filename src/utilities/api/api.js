@@ -14,6 +14,7 @@ export const URLS = {
     mailing_lists: `${hosts.users}/mailing-lists`,
     plans: `${hosts.sales}/plans`,
     payments: `${hosts.sales}/payments`,
+    templates: `${hosts.users}/templates`,
 }
 
 const extractErrorMessage = e => {
