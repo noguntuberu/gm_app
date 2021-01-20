@@ -70,7 +70,7 @@ const ListMailingLists = () => {
                 formatter: value => (new Date(value)).toDateString(),
             },
         ],
-        items: mailing_lists,
+        items: mailing_lists.sort((a,b) => b.id - a.id),
         search_key: 'name',
         search_text: '',
     }
