@@ -51,7 +51,7 @@ table, thead, tbody, th, tr, td {
     height: 100%;
     width: 85%;
     
-    padding: 25px 300px 25px 75px;
+    padding: 25px 75px 25px 75px;
 
     overflow-y: scroll;
 }
