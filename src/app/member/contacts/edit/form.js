@@ -2,11 +2,9 @@
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { addOneContactToStore, } from '../../../../store/actions/contact';
-
-import { apiPut, URLS } from '../../../../utilities/api/api';
+import * as ContactService from '../../../../services/contact';
 import { setPageTitle } from '../../../../store/actions/header';
+import { addOneContactToStore, } from '../../../../store/actions/contact';
 import { convertDateFromIsoToHTMLFormat } from '../../../shared/utils/date';
 
 const ContactUpdationForm = props => {
@@ -44,11 +42,11 @@ const ContactUpdationForm = props => {
         setEmail(email);
         setDateOfBirth(date_of_birth);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [contact_data]);
 
     /** */
-    const submitForm = () => {
+    const submitForm = async () => {
         const form_data = {
             ...contact_data,
             firstname, lastname, email,
@@ -57,18 +55,16 @@ const ContactUpdationForm = props => {
         }
 
         setLoading(true);
-        apiPut(`${URLS.contacts}/${contact_data.id}`, { data: form_data, token }).then(data => {
-            const { error, payload } = data;
-            setLoading(false);
+        const { error, payload } = await ContactService.updateById(contact_data.id, { data: form_data, token })
+        setLoading(false);
 
-            if (error) {
-                toast.error(error);
-                return;
-            }
+        if (error) {
+            toast.error(error);
+            return;
+        }
 
-            toast.success('Contact updated.');
-            dispatch(addOneContactToStore(payload));
-        });
+        toast.success('Contact updated.');
+        dispatch(addOneContactToStore(payload));
     }
 
     return (
