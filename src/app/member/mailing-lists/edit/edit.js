@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import React, { useState, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { URLS, apiPut } from '../../../../utilities/api/api';
+import * as AudienceService from '../../../../services/audience';
 import { addOneAudienceToStore } from '../../../../store/actions/audience';
 
 const AudienceUpdationForm = ({ mailing_list }) => {
@@ -12,7 +12,7 @@ const AudienceUpdationForm = ({ mailing_list }) => {
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState(mailing_list.name || '');
 
-    const submit = () => {
+    const submit = async () => {
         const data = {
             name,
             description,
@@ -25,17 +25,15 @@ const AudienceUpdationForm = ({ mailing_list }) => {
         }
 
         setLoading(true);
-        apiPut(`${URLS.mailing_lists}/${mailing_list.id}`, { data, token, }).then(response => {
-            const { error } = response;
+        const { error } = await AudienceService.updateById(mailing_list.id, { data, token, })
+        if (error) {
+            toast.error(error);
+            return;
+        }
 
-            if (error) {
-                toast.error(error);
-                return;
-            }
-
-            toast.success(`Audience updated.`)
-            dispatch(addOneAudienceToStore({ ...data, id: mailing_list.id }));
-        }).finally(() => setLoading(false));
+        setLoading(false)
+        toast.success(`Audience updated.`)
+        dispatch(addOneAudienceToStore({ ...data, id: mailing_list.id }));
     }
 
     return <div>
