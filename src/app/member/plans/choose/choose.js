@@ -1,11 +1,12 @@
 /** */
+import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 // import { useHistory } from 'react-router-dom';
 import { useQuery } from '../../../../utilities/hooks/query';
 import React, { useEffect, useState } from 'react';
-
+import * as PlanService from '../../../../services/plan';
+import * as PaymentService from '../../../../services/payment';
 import PlanCard from './plan-card/plan-card';
-import { apiGet, URLS, apiPost } from '../../../../utilities/api/api';
 
 const PlanSelectionComponent = props => {
     // const history = useHistory();
@@ -19,21 +20,22 @@ const PlanSelectionComponent = props => {
         const status = query.get('status');
         const tx_ref = query.get('txRef');
         if (status && status === "success") {
-            apiPost(`${URLS.payments}/rave/verification`, {
+            PaymentService.verify({
                 data: { plan: selected, tx_ref, tenant_id: id }
             }).then(response => {
                 const { error } = response;
-                if (error) alert(error);
+                if (error) toast.error(`Transaction verification error.`);
                 else alert(`Payment successful`);
             });
         }
 
-        apiGet(`${URLS.plans}`, {}).then(response => {
+        PlanService.read({}).then(response => {
             const { payload } = response;
             if (payload) {
                 setPlans(payload);
             }
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const makePayment = (link) => {
