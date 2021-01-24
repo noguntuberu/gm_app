@@ -2,8 +2,9 @@
 import { toast } from 'react-toastify';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { apiGet, apiPost, URLS, apiPut } from '../../../../utilities/api/api';
 import MultiSelect from 'react-multi-select-component';
+import * as ContactService from '../../../../services/contact';
+import * as AudienceService from '../../../../services/audience';
 
 import ImportContact from '../import/import';
 import GmModal from '../../../shared/modal/modal';
@@ -35,23 +36,23 @@ const ContactCreationForm = props => {
 
     useEffect(() => {
         dispatch(setPageTitle('New Contact'));
-        apiGet(`${URLS.mailing_lists}`, { token }).then(response => {
+        AudienceService.read({ token }).then(response => {
             const { payload } = response;
             if (payload) {
                 setMailingLists(payload);
             }
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
+
     /** */
-    const submitForm = () => {
-        if(!firstname || !email) {
+    const submitForm = async () => {
+        if (!firstname || !email) {
             toast.error('Please fill compulsory fields.');
             return;
         }
 
-        if(!isEmailValid(email)) {
+        if (!isEmailValid(email)) {
             toast.error(`Invalid email address.`);
             return;
         }
@@ -63,23 +64,22 @@ const ContactCreationForm = props => {
         }
 
         setLoading(true);
-        apiPost(URLS.contacts, { data: form_data, token }).then(data => {
-            const { error, payload, } = data;
-            setLoading(false);
+        const { error, payload, } = await ContactService.create({ data: form_data, token });
+        setLoading(false);
+        if (error) {
+            toast.error(error);
+            return;
+        }
 
-            if (error) {
-                toast.error(error);
-                return;
-            }
+        toast.success(`contact created.`);
+        dispatch(addOneContactToStore(payload));
 
-            toast.success(`contact created.`);
-            dispatch(addOneContactToStore(payload));
-
-            // add contact to list
-            if (!selected_lists[0]) return;
-            apiPut(`${URLS.mailing_lists}/${selected_lists[0].value}/contacts`, { data: {
+        // add contact to list
+        if (!selected_lists[0]) return;
+        await AudienceService.addContact(selected_lists[0].value, {
+            data: {
                 contacts: [payload.id],
-            }, token })
+            }, token
         });
     }
 
