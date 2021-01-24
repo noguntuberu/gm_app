@@ -3,7 +3,9 @@ import { toast } from 'react-toastify';
 import React, { useState, useEffect } from 'react';
 import fileSaver from 'js-file-download';
 import { useSelector } from 'react-redux';
-import { apiPost, URLS, apiGet } from '../../../../utilities/api/api';
+import * as ContactService from '../../../../services/contact';
+import * as AudienceService from '../../../../services/audience';
+import * as TemplateService from '../../../../services/template';
 
 const ImportContact = props => {
     const { mailing_list } = props;
@@ -17,19 +19,17 @@ const ImportContact = props => {
     const tenant_id = user_data.id;
 
     useEffect(() => {
-        apiGet(URLS.mailing_lists, { token }).then(data => {
+        AudienceService.read({ token }).then(data => {
             const { error, payload } = data;
-
             if (error) return;
 
             setMailingLists(payload);
         });
     }, [token]);
 
-    const downloadTemplate = () => {
-        apiGet(`${URLS.templates}/contact`, { token}).then( response => {
-            fileSaver(response, 'contacts.csv');
-        })
+    const downloadTemplate = async () => {
+        const response = await TemplateService.download('contact', { token });
+        fileSaver(response, 'contacts.csv');
     }
 
     const submit = () => {
@@ -49,13 +49,13 @@ const ImportContact = props => {
         request_data.append('tenant_id', tenant_id);
 
         setLoading(true);
-        apiPost(`${URLS.contacts}/batch`, {
+        ContactService.upload({
             data: request_data, token,
             headers: {
                 'Content-Type': 'application/form-data'
             }
         }).then(data => {
-            
+
         }).finally(() => {
             setLoading(false);
             toast.success(`Contacts uploaded successfully.`);
