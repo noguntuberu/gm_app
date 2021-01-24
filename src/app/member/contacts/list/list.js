@@ -3,7 +3,7 @@ import { table_config } from './helper';
 import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { apiDelete, apiGet, URLS } from '../../../../utilities/api/api';
+import * as ContactService from '../../../../services/contact';
 import {
     loadContactsToStore,
     removeOneContactFromStore
@@ -32,7 +32,7 @@ const ListContacts = () => {
     useEffect(() => {
         dispatch(setPageTitle('My Contacts'));
         setLoading(true);
-        apiGet(URLS.contacts, { token }).then(data => {
+        ContactService.read({ token }).then(data => {
             const { payload, error } = data;
             setLoading(false);
 
@@ -40,7 +40,7 @@ const ListContacts = () => {
                 setItems(Object.values(contacts_in_store));
             }
 
-            if (!error && payload) {
+            if (!error) {
                 setItems(payload);
                 dispatch(loadContactsToStore(payload));
             }
@@ -48,18 +48,15 @@ const ListContacts = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const deleteContact = (id) => {
-        apiDelete(`${URLS.contacts}/${id}`, { token }).then(data => {
-            const { error } = data;
+    const deleteContact = async (id) => {
+        const { error } = await ContactService.deleteById(id, { token })
+        if (error) {
+            toast.error(`could not delete contact.`);
+            return;
+        }
 
-            if (error) {
-                toast.error(`could not delete #${id}.`);
-                return;
-            }
-
-            toast.success(`deleted #${id} successfully.`);
-            dispatch(removeOneContactFromStore(id));
-        });
+        toast.success(`contact deleted successfully.`);
+        dispatch(removeOneContactFromStore(id));
     }
 
     const handleDatatableAction = action => {
