@@ -19,12 +19,10 @@ const DEFAULT_ERR = (error) => ({
 /** */
 export const apiDelete = async (uri, options = {}) => {
     try {
-        const { data, token, query_string } = options;
-        const request = await fetch(`${uri}?${query_string || ''}`, {
-            method: 'DELETE',
-            body: JSON.stringify(data),
+        const { data, token, } = options;
+        const request = await axios.delete(`${uri}`, {
+            data,
             headers: {
-                'Content-Type': 'application/json',
                 authorization: `Bearer ${token}`
             }
         });

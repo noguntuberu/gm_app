@@ -5,7 +5,8 @@ import app_store from './store/_store';
 import App from './app/app';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
-import './assets/css/text.css';
+import './assets/css/color.css';
+import './assets/css/components.css';
 
 window.app_root = __dirname;
 

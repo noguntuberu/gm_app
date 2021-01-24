@@ -4,8 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Datatable from "../../../shared/datatable/datatable";
 import { setPageTitle } from '../../../../store/actions/header';
+import * as DraftService from '../../../../services/draft';
 import * as CampaignService from '../../../../services/campaign';
-import { loadCampaignsToStore } from "../../../../store/actions/campaign";
+import { loadCampaignsToStore, removeOneCampaignFromStore } from "../../../../store/actions/campaign";
 
 const ListCampaigns = () => {
     const history = useHistory();
@@ -27,13 +28,13 @@ const ListCampaigns = () => {
 
             dispatch(loadCampaignsToStore(payload));
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const config = {
         actions: {
             // bulk: ['Online', 'Offline'],
-            single: ['View', 'Edit'],
+            single: ['View', 'Edit', 'Delete'],
         },
         allow_bulk_action: true,
         css: {},
@@ -51,14 +52,39 @@ const ListCampaigns = () => {
                 key: 'sender_name',
             },
             {
+                title: 'Status',
+                key: 'status',
+                formatter: value => {
+                    switch (value) {
+                        case 'sent':
+                            return <span className="gm-badge gm-bg-success">{value}</span>;
+                        case 'queued':
+                            return <span className="gm-badge gm-bg-warning">{value}</span>;
+                        default:
+                            return <span className="gm-badge gm-bg-secondary">{value}</span>;
+                    }
+                },
+            },
+            {
                 title: 'Date created',
                 key: 'created_on',
                 formatter: value => (new Date(value)).toDateString(),
             },
         ],
-        items: campaigns.sort((a,b) => b.id - a.id),
+        items: campaigns.sort((a, b) => b.id - a.id),
         search_key: 'name',
         search_text: '',
+    }
+
+    const deleteDraft = async (id) => {
+        const { error } = await DraftService.deleteById(id, { token });
+        if (error) {
+            toast.error(`Could not delete draft.`);
+            return
+        }
+
+        toast.success(`Draft deleted successfully.`);
+        dispatch(removeOneCampaignFromStore(id));
     }
 
     const handleDatatableAction = payload => {
@@ -66,12 +92,20 @@ const ListCampaigns = () => {
         if (type === 'single') {
             switch (name) {
                 case 'Edit':
-                    if(data.status !== 'draft') {
+                    if (data.status !== 'draft') {
                         toast.warning('Cannot edit queued campaigns.');
                         break;
                     };
 
                     history.push(`/campaigns/${data.id}/edit`);
+                    break;
+                case 'Delete':
+                    if (data.status !== 'draft') {
+                        toast.warning('Cannot delete queued campaigns.');
+                        break;
+                    };
+
+                    deleteDraft(data.id);
                     break;
                 default:
                     history.push(`/campaigns/${data.id}/view`);
