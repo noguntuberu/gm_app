@@ -1,11 +1,11 @@
+import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { URLS, apiGet } from '../../../../utilities/api/api';
-
 import Datatable from "../../../shared/datatable/datatable";
-import { loadCampaignsToStore } from "../../../../store/actions/campaign";
 import { setPageTitle } from '../../../../store/actions/header';
+import * as CampaignService from '../../../../services/campaign';
+import { loadCampaignsToStore } from "../../../../store/actions/campaign";
 
 const ListCampaigns = () => {
     const history = useHistory();
@@ -21,12 +21,9 @@ const ListCampaigns = () => {
 
     useEffect(() => {
         dispatch(setPageTitle('My Campaigns'));
-        apiGet(`${URLS.campaigns}`, { token, }).then(response => {
+        CampaignService.read({ token, }).then(response => {
             const { error, payload } = response;
-
-            if (error) {
-                return;
-            }
+            if (error) return;
 
             dispatch(loadCampaignsToStore(payload));
         });
@@ -36,8 +33,7 @@ const ListCampaigns = () => {
     const config = {
         actions: {
             // bulk: ['Online', 'Offline'],
-            // single: ['View', 'Edit'],
-            single: ['View'],
+            single: ['View', 'Edit'],
         },
         allow_bulk_action: true,
         css: {},
@@ -70,7 +66,12 @@ const ListCampaigns = () => {
         if (type === 'single') {
             switch (name) {
                 case 'Edit':
-                    // history.push(`/campaigns/${data.id}/edit`);
+                    if(data.status !== 'draft') {
+                        toast.warning('Cannot edit queued campaigns.');
+                        break;
+                    };
+
+                    history.push(`/campaigns/${data.id}/edit`);
                     break;
                 default:
                     history.push(`/campaigns/${data.id}/view`);

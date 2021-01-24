@@ -1,5 +1,6 @@
 /** */
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import GmModal from '../../../shared/modal/modal';
 import React, { useState, useEffect } from 'react';
 import MultiSelect from 'react-multi-select-component';
@@ -18,29 +19,27 @@ import './form.css';
 
 const CampaignCreationForm = props => {
     const { config } = props;
-
+    const { id } = useParams()
     const dispatch = useDispatch();
+    const campaign = useSelector(state => (state.campaigns[id] || {}));
     const user_data = useSelector(state => state.user_data);
     const { token } = user_data;
     const tenant_id = user_data.id;
 
-    const [show_draft_status, setShowDraftStatus] = useState(false);
-    const [draft_message, setDraftMessage] = useState('');
+    const [campaign_id, setCampaignId] = useState(id || 0);
+    const [campaign_body, setCampaignBody] = useState(campaign.body || '');
+    const [campaign_name, setCampaignName] = useState(campaign.name || '');
+    const [campaign_subject, setCampaignSubject] = useState(campaign.subject || '');
+    const [mailing_lists, setMailingLists] = useState(campaign.mailing_lists || []);
+    const [schedule, setCampaignSchedule] = useState((campaign.schedule) || generateHTMLFormDateTimeDefaults());
+    const [selected_lists, setSelectedLists] = useState([]);
+    const [sender_email, setSenderEmail] = useState(campaign.sender_email || '');
+    const [sender_name, setSenderName] = useState(campaign.name || '');
 
     const [loading, setLoading] = useState(false);
-    const [campaign_id, setCampaignId] = useState(0);
-    const [campaign_body, setCampaignBody] = useState('');
-    const [campaign_name, setCampaignName] = useState('');
-    const [campaign_subject, setCampaignSubject] = useState('');
-    const [mailing_lists, setMailingLists] = useState([]);
-    const [schedule, setCampaignSchedule] = useState(generateHTMLFormDateTimeDefaults());
-    const [selected_lists, setSelectedLists] = useState([]);
-    const [sender_email, setSenderEmail] = useState('');
-    const [sender_name, setSenderName] = useState('');
-
-    const [time_since_last_change, setTimeSinceLastChange] = useState(0);
+    const [draft_message, setDraftMessage] = useState('');
     const [last_timeout_handle, setLastTimeoutHandle] = useState();
-
+    const [show_draft_status, setShowDraftStatus] = useState(false);
     const [show_wildcard_modal, setShowWildcardModal] = useState(false);
 
     useEffect(() => {
@@ -115,12 +114,10 @@ const CampaignCreationForm = props => {
 
     const handleEditorChange = data => {
         setCampaignBody(data);
-        setTimeSinceLastChange(Date.now());
         clearInterval(last_timeout_handle);
 
         const timeout_handle = setTimeout(() => {
             handleDraftSave(campaign_id);
-            setTimeSinceLastChange(Date.now());
         }, 750);
 
         setLastTimeoutHandle(timeout_handle);
