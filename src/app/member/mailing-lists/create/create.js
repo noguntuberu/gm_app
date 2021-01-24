@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import React, { useState, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { apiPost, URLS } from '../../../../utilities/api/api';
+import * as AudienceService from '../../../../services/audience';
 import { addOneAudienceToStore } from '../../../../store/actions/audience';
 
 const CreateMailingList = ({ closeModal }) => {
@@ -12,7 +12,7 @@ const CreateMailingList = ({ closeModal }) => {
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState('');
 
-    const submit = () => {
+    const submit = async () => {
         const data = {
             name,
             description,
@@ -25,17 +25,15 @@ const CreateMailingList = ({ closeModal }) => {
         }
 
         setLoading(true);
-        apiPost(`${URLS.mailing_lists}`, { data, token, }).then(response => {
-            const { error, payload } = response;
+        const { error, payload } = await AudienceService.create({ data, token, });
+        if (error) {
+            toast.error(error);
+            return;
+        }
 
-            if (error) {
-                toast.error(error);
-                return;
-            }
-
-            toast.success(`Audience created.`)
-            dispatch(addOneAudienceToStore(payload));
-        }).finally(() => setLoading(false));
+        setLoading(false);
+        toast.success(`Audience created.`)
+        dispatch(addOneAudienceToStore(payload));
     }
 
     return <div>
