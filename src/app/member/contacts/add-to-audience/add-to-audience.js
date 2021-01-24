@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
-import { apiPut, URLS, apiGet } from '../../../../utilities/api/api';
-
+import * as AudienceService from '../../../../services/audience';
 
 const AddContactToAudience = props => {
     const { selected_contacts } = props;
@@ -13,7 +12,7 @@ const AddContactToAudience = props => {
     const [selected_audience, setSelectedAudience] = useState(0);
 
     useEffect(() => {
-        apiGet(URLS.mailing_lists, { token }).then(data => {
+        AudienceService.read({ token }).then(data => {
             const { error, payload } = data;
             if (error) return;
 
@@ -21,27 +20,26 @@ const AddContactToAudience = props => {
         });
     }, [token]);
 
-    const submit = () => {
+    const submit = async () => {
         if (!selected_audience[0]) {
             toast.error('Please select an audience.');
             return;
         }
 
         setLoading(true);
-        apiPut(`${URLS.mailing_lists}/${selected_audience}/contacts`, {
+        const { error } = await AudienceService.addContact(selected_audience, {
             data: {
                 contacts: selected_contacts.map(contact => contact.id),
             }, token
-        }).then(response => {
-            const { error } = response;
-            if(error) {
-                toast.error(error);
-                return;
-            }
-            
-            toast.success(`Contact(s) added to audience.`);
-            document.querySelector('.gm-modal').click();
-        }).finally(() => setLoading(false));
+        })
+        if (error) {
+            toast.error(error);
+            return;
+        }
+
+        setLoading(false);
+        toast.success(`Contact(s) added to audience.`);
+        document.querySelector('.gm-modal').click();
     }
 
     return <div>
