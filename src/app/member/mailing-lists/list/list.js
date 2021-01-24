@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 /** */
 import GmModal from '../../../shared/modal/modal';
-import { URLS, apiGet } from '../../../../utilities/api/api';
+import * as AudienceService from '../../../../services/audience';
 import { setPageTitle } from '../../../../store/actions/header';
 import { loadAudienceToStore } from '../../../../store/actions/audience';
 
@@ -30,9 +30,8 @@ const ListMailingLists = () => {
     useEffect(() => {
         dispatch(setPageTitle('My Audiences'));
         setLoading(true);
-        apiGet(`${URLS.mailing_lists}`, { token }).then(response => {
+        AudienceService.read({ token }).then(response => {
             const { error, payload } = response;
-
             if (error) return;
 
             dispatch(loadAudienceToStore(payload));
