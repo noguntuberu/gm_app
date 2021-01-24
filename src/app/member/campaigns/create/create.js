@@ -23,8 +23,8 @@ const tinymce_config = {
     placeholder: 'Create a campaign...',
     plugins: 'autolink autosave code fullpage fullscreen hr image imagetools link lists preview spellchecker wordcount quickbars',
     setup: autoCompleter,
-    toolbar: `undo redo | formatselect fontsizeselect bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify numlist bullist  blockquote |
-        quickimage link hr restoredraft  spellchecker wordcount | preview  code  fullscreen`,
+    toolbar: ` preview  code  fullscreen | undo redo | formatselect fontsizeselect | bold italic strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | numlist bullist  blockquote |
+        quickimage link hr restoredraft  spellchecker wordcount`,
     toolbar_mode: 'sliding',
     toolbar_sticky: false,
     
