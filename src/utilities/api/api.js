@@ -10,6 +10,7 @@ const DEFAULT_ERR = (error) => ({
 export const URLS = {
     campaigns: `${hosts.mailing}/campaigns`,
     contacts: `${hosts.users}/contacts`,
+    drafts: `${hosts.mailing}/drafts`,
     guests: `${hosts.users}/guests`,
     mailing_lists: `${hosts.users}/mailing-lists`,
     plans: `${hosts.sales}/plans`,

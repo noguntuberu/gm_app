@@ -12,7 +12,8 @@ const ViewCampaign = () => {
     useEffect(() => {
         dispatch(setPageTitle(campaign.name));
         campaign_body.current.innerHTML = campaign.body;
-    }, [campaign]);
+    }, [campaign, dispatch]);
+    
     return <div>
         <div className="card shadow-sm p-2">
             Campaign stats

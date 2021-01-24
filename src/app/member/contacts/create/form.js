@@ -1,4 +1,5 @@
 /** */
+import { toast } from 'react-toastify';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { apiGet, apiPost, URLS, apiPut } from '../../../../utilities/api/api';
@@ -40,17 +41,18 @@ const ContactCreationForm = props => {
                 setMailingLists(payload);
             }
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    
     /** */
     const submitForm = () => {
-        console.log(selected_lists);
         if(!firstname || !email) {
-            alert('Please fill compulsory fields.');
+            toast.error('Please fill compulsory fields.');
             return;
         }
 
         if(!isEmailValid(email)) {
-            alert(`Invalid email address.`);
+            toast.error(`Invalid email address.`);
             return;
         }
 
@@ -66,14 +68,15 @@ const ContactCreationForm = props => {
             setLoading(false);
 
             if (error) {
-                alert(`creation failed`);
+                toast.error(error);
                 return;
             }
 
-            alert(`contact created.`);
+            toast.success(`contact created.`);
             dispatch(addOneContactToStore(payload));
 
             // add contact to list
+            if (!selected_lists[0]) return;
             apiPut(`${URLS.mailing_lists}/${selected_lists[0].value}/contacts`, { data: {
                 contacts: [payload.id],
             }, token })

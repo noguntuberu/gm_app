@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import CreateContact from './create/create';
-import ImportContact from './import/import';
 import EditContact from './edit/edit';
 import ListContact from './list/list';
 

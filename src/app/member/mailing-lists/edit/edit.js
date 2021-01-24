@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import React, { useState, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { URLS, apiPut } from '../../../../utilities/api/api';
@@ -19,7 +20,7 @@ const AudienceUpdationForm = ({ mailing_list }) => {
         };
 
         if (!name || !description) {
-            alert('please fill all fields.');
+            toast.error('please fill all fields.');
             return;
         }
 
@@ -28,10 +29,11 @@ const AudienceUpdationForm = ({ mailing_list }) => {
             const { error } = response;
 
             if (error) {
-                alert('could not create audience.');
+                toast.error(error);
                 return;
             }
 
+            toast.success(`Audience updated.`)
             dispatch(addOneAudienceToStore({ ...data, id: mailing_list.id }));
         }).finally(() => setLoading(false));
     }

@@ -46,7 +46,7 @@ const DataTableHeader = props => {
 
             {checkbox ?
                 <th key='bulk-action'>
-                    <ContextMenu actions={actions} callback={action_callback} />
+                    <ContextMenu actions={actions} callback={action_callback}/>
                 </th>
                 :
                 ''

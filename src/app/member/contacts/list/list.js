@@ -1,19 +1,17 @@
+import { toast } from 'react-toastify';
+import { table_config } from './helper';
 import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-// import ImportContact from '../import/import';
-// import GmModal from '../../../shared/modal/modal';
 import { apiDelete, apiGet, URLS } from '../../../../utilities/api/api';
-
-import DataTable from '../../../shared/datatable/datatable';
 import {
     loadContactsToStore,
     removeOneContactFromStore
 } from '../../../../store/actions/contact';
+import GmModal from '../../../shared/modal/modal';
+import AddContactToAudience from '../add-to-audience/add-to-audience';
 import { setPageTitle } from '../../../../store/actions/header';
-
-import { table_config } from './helper';
+import DataTable from '../../../shared/datatable/datatable';
 
 const ListContacts = () => {
     const contacts_in_store = useSelector(state => state.contacts);
@@ -24,7 +22,8 @@ const ListContacts = () => {
 
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
-    // const [show_upload_modal, setShowUploadModal] = useState(false);
+    const [selected_contacts, setSelectedContacts] = useState([]);
+    const [show_contact_link_modal, setShowContactLinkModal] = useState(false);
 
     useEffect(() => {
         setItems(Object.values(contacts_in_store));
@@ -54,11 +53,11 @@ const ListContacts = () => {
             const { error } = data;
 
             if (error) {
-                alert(`could not delete #${id}.`);
+                toast.error(`could not delete #${id}.`);
                 return;
             }
 
-            alert(`deleted #${id} successfully.`);
+            toast.success(`deleted #${id} successfully.`);
             dispatch(removeOneContactFromStore(id));
         });
     }
@@ -67,11 +66,21 @@ const ListContacts = () => {
         const { name, type, data } = action;
 
         if (type.toLowerCase() === 'bulk') {
-
+            switch (name.toLowerCase()) {
+                case 'add to audience':
+                    setSelectedContacts(data);
+                    setShowContactLinkModal(true);
+                    break;
+                default:
+            }
         }
 
         if (type.toLowerCase() === 'single') {
             switch (name.toLowerCase()) {
+                case 'add to audience':
+                    setSelectedContacts([data]);
+                    setShowContactLinkModal(true);
+                    break;
                 case 'edit':
                     history.push(`/contacts/${data.id}`);
                     break;
@@ -88,18 +97,17 @@ const ListContacts = () => {
     }
 
     return <div>
-        {/* <button className="gm-btn gm-btn-secondary w-25 btn-sm shadow mb-3 float-right" onClick={() => setShowUploadModal(true)}>Import Contacts</button> */}
         {loading ? 'loading data...' :
             <DataTable
                 config={{ ...table_config, items: items.sort((a, b) => b.id - a.id) }}
                 action={handleDatatableAction}
                 onClick={handleItemClick}
                 checkbox
-            />}
-
-        {/* <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>
-            <ImportContact />
-        </GmModal> */}
+            />
+        }
+        <GmModal show_title={true} title="Add Contacts to Audience" show_modal={show_contact_link_modal} onClose={() => setShowContactLinkModal(false)}>
+            <AddContactToAudience selected_contacts={selected_contacts} />
+        </GmModal>
     </div>
 }
 

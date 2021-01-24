@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import React, { useState, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { apiPost, URLS } from '../../../../utilities/api/api';
@@ -19,7 +20,7 @@ const CreateMailingList = ({ closeModal }) => {
         };
 
         if (!name || !description) {
-            alert('please fill all fields.');
+            toast.error('please fill all fields.');
             return;
         }
 
@@ -28,10 +29,11 @@ const CreateMailingList = ({ closeModal }) => {
             const { error, payload } = response;
 
             if (error) {
-                alert('could not create audience.');
+                toast.error(error);
                 return;
             }
 
+            toast.success(`Audience created.`)
             dispatch(addOneAudienceToStore(payload));
         }).finally(() => setLoading(false));
     }

@@ -25,12 +25,12 @@ const ListCampaigns = () => {
             const { error, payload } = response;
 
             if (error) {
-                alert('could not load campaigns');
                 return;
             }
 
             dispatch(loadCampaignsToStore(payload));
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const config = {

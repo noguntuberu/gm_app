@@ -1,0 +1,67 @@
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import React, { useEffect, useState } from 'react';
+import { apiPut, URLS, apiGet } from '../../../../utilities/api/api';
+
+
+const AddContactToAudience = props => {
+    const { selected_contacts } = props;
+    const { token } = useSelector(state => state.user_data);
+
+    const [audiences, setAudiences] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [selected_audience, setSelectedAudience] = useState(0);
+
+    useEffect(() => {
+        apiGet(URLS.mailing_lists, { token }).then(data => {
+            const { error, payload } = data;
+            if (error) return;
+
+            setAudiences(payload);
+        });
+    }, [token]);
+
+    const submit = () => {
+        if (!selected_audience[0]) {
+            toast.error('Please select an audience.');
+            return;
+        }
+
+        setLoading(true);
+        apiPut(`${URLS.mailing_lists}/${selected_audience}/contacts`, {
+            data: {
+                contacts: selected_contacts.map(contact => contact.id),
+            }, token
+        }).then(response => {
+            const { error } = response;
+            if(error) {
+                toast.error(error);
+                return;
+            }
+            
+            toast.success(`Contact(s) added to audience.`);
+            document.querySelector('.gm-modal').click();
+        }).finally(() => setLoading(false));
+    }
+
+    return <div>
+        {/* <div className="my-2">
+            {selected_contacts.map(contact => <span>{contact.firstname} {contact.lastname} &times;</span>)}
+        </div> */}
+        <div className="form-group">
+            <label htmlFor="audience">Audience</label>
+            <select className="custom-select" onChange={e => setSelectedAudience(e.target.value)}>
+                <option value=''>Select Audience</option>
+                {audiences.map(audience => <option key={audience.id} value={audience.id}>{audience.name}</option>)}
+            </select>
+        </div>
+        <div className="form-group">
+            {loading ?
+                <button className="gm-btn gm-btn-info float-right  shadow" disabled>Saving...</button> :
+                <button onClick={submit} className="gm-btn gm-btn-primary float-right  shadow">Save</button>
+            }
+        </div>
+    </div>
+}
+
+export default AddContactToAudience;

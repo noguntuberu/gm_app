@@ -33,14 +33,11 @@ const ListMailingLists = () => {
         apiGet(`${URLS.mailing_lists}`, { token }).then(response => {
             const { error, payload } = response;
 
-            if (error) {
-                alert('could not fetch lists');
-                return;
-            }
+            if (error) return;
 
             dispatch(loadAudienceToStore(payload));
         }).finally(() => setLoading(false));
-    }, []);
+    }, [dispatch, token]);
 
 
     const config = {

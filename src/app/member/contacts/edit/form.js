@@ -1,4 +1,5 @@
 /** */
+import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -43,6 +44,7 @@ const ContactUpdationForm = props => {
         setEmail(email);
         setDateOfBirth(date_of_birth);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [contact_data]);
 
     /** */
@@ -60,11 +62,11 @@ const ContactUpdationForm = props => {
             setLoading(false);
 
             if (error) {
-                alert('an error occurred.');
+                toast.error(error);
                 return;
             }
 
-            alert('update successful.');
+            toast.success('Contact updated.');
             dispatch(addOneContactToStore(payload));
         });
     }

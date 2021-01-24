@@ -1,4 +1,5 @@
 /** */
+import { toast } from 'react-toastify';
 import React, { useState, useEffect } from 'react';
 import fileSaver from 'js-file-download';
 import { useSelector } from 'react-redux';
@@ -19,14 +20,11 @@ const ImportContact = props => {
         apiGet(URLS.mailing_lists, { token }).then(data => {
             const { error, payload } = data;
 
-            if (error) {
-                alert('failed to fetch mailing lists.');
-                return;
-            }
+            if (error) return;
 
             setMailingLists(payload);
         });
-    }, []);
+    }, [token]);
 
     const downloadTemplate = () => {
         apiGet(`${URLS.templates}/contact`, { token}).then( response => {
@@ -36,12 +34,12 @@ const ImportContact = props => {
 
     const submit = () => {
         if (!file) {
-            alert('no file selected');
+            toast.error('no file selected');
             return;
         }
 
         if (!file.type.includes('csv')) {
-            alert('invalid file type: must be csv');
+            toast.error('invalid file type: must be csv');
             return;
         }
 
@@ -57,9 +55,10 @@ const ImportContact = props => {
                 'Content-Type': 'application/form-data'
             }
         }).then(data => {
-            console.log(data);
+            
         }).finally(() => {
             setLoading(false);
+            toast.success(`Contacts uploaded successfully.`);
         });
     }
 

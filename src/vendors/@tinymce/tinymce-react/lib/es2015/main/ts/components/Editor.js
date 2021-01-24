@@ -90,8 +90,8 @@ var Editor = /** @class */ (function (_super) {
         return this.inline ? this.renderInline() : this.renderIframe();
     };
     Editor.prototype.getScriptSrc = function () {
-        var channel = this.props.cloudChannel;
-        var apiKey = this.props.apiKey ? this.props.apiKey : 'no-api-key';
+        // var channel = this.props.cloudChannel;
+        // var apiKey = this.props.apiKey ? this.props.apiKey : 'no-api-key';
         return isNullOrUndefined(this.props.tinymceScriptSrc) ?
             // "https://cdn.tiny.cloud/1/" + apiKey + "/tinymce/" + channel + "/tinymce.min.js" :
             "https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.0/tinymce.min.js" :

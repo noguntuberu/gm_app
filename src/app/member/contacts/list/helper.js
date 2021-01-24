@@ -1,7 +1,7 @@
 export const table_config = {
     actions: {
-        bulk: ['Delete'],
-        single: ['Edit', 'Delete'],
+        bulk: ['Add to audience', 'Delete'],
+        single: ['Add to audience','Edit', 'Delete'],
     },
     allow_bulk_action: true,
     css: {},

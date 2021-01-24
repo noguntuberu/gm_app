@@ -1,6 +1,7 @@
 /** */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 // import Select from 'react-select';
 import MultiSelect from 'react-multi-select-component';
 import { URLS, apiGet, apiPut } from '../../../../utilities/api/api';
@@ -40,6 +41,7 @@ const CampaignCreationForm = props => {
                 setSelectedLists(lists.map(list => ({ label: list.name, value: list.id })));
             }
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const submitCampaign = () => {
@@ -58,7 +60,7 @@ const CampaignCreationForm = props => {
         }
 
         if (!campaign_body || !campaign_name || !campaign_subject || !sender_email || !sender_name) {
-            alert('please fill all fields');
+            toast.error('please fill all fields');
             return;
         }
 
@@ -67,10 +69,11 @@ const CampaignCreationForm = props => {
             const { error, } = response;
 
             if (error) {
-                alert(error);
+                toast.error(error);
                 return;
             }
 
+            toast.success(`Campaign edited successfully.`)
         }).finally(() => {
             setLoading(false);
         });

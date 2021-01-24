@@ -23,7 +23,7 @@ const AccountActivation = () => {
             //
             setActivationStatus(true);
         });
-    }, []);
+    }, [id]);
 
     const displayActivationResult = () => {
         if (activation_status) {

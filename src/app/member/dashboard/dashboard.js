@@ -7,6 +7,7 @@ const GMDashboard = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(setPageTitle('Dashboard'));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return <div>
 

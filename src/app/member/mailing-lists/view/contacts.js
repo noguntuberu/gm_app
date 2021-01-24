@@ -1,5 +1,5 @@
+import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { apiDelete, apiGet, URLS } from '../../../../utilities/api/api';
 
@@ -71,10 +71,11 @@ const AudienceContacts = ({ contact_ids, list_id }) => {
             const { error } = data;
 
             if (error) {
-                alert(`could not delete contacts.`);
+                toast.error(error);
                 return;
             }
 
+            toast.success(`Contact removed.`)
             setContacts(contact_ids.filter(id => !ids.includes(id)));
         });
     }

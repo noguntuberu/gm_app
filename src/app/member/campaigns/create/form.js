@@ -1,18 +1,20 @@
 /** */
+import { toast } from 'react-toastify';
+import GmModal from '../../../shared/modal/modal';
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// import Select from 'react-select';
 import MultiSelect from 'react-multi-select-component';
-import { apiPost, URLS, apiGet } from '../../../../utilities/api/api';
-import { generateHTMLFormDateTimeDefaults } from '../../../shared/utils/date';
+import { useDispatch, useSelector } from 'react-redux';
 import { isEmailValid } from '../../../shared/utils/input';
+import { setPageTitle } from '../../../../store/actions/header';
+import { addOneCampaignToStore } from '../../../../store/actions/campaign';
+import { generateHTMLFormDateTimeDefaults } from '../../../shared/utils/date';
 import { Editor } from '../../../../vendors/@tinymce/tinymce-react/lib/es2015/main/ts/index';
 
-import { addOneCampaignToStore } from '../../../../store/actions/campaign';
-import { setPageTitle } from '../../../../store/actions/header';
+import * as DraftService from '../../../../services/draft';
+import * as AudienceService from '../../../../services/audience';
+import * as CampaignService from '../../../../services/campaign';
 
 import './form.css';
-import GmModal from '../../../shared/modal/modal';
 
 const CampaignCreationForm = props => {
     const { config } = props;
@@ -22,34 +24,55 @@ const CampaignCreationForm = props => {
     const { token } = user_data;
     const tenant_id = user_data.id;
 
+    const [show_draft_status, setShowDraftStatus] = useState(false);
+    const [draft_message, setDraftMessage] = useState('');
+
+    const [loading, setLoading] = useState(false);
+    const [campaign_id, setCampaignId] = useState(0);
     const [campaign_body, setCampaignBody] = useState('');
     const [campaign_name, setCampaignName] = useState('');
     const [campaign_subject, setCampaignSubject] = useState('');
-    const [loading, setLoading] = useState(false);
     const [mailing_lists, setMailingLists] = useState([]);
     const [schedule, setCampaignSchedule] = useState(generateHTMLFormDateTimeDefaults());
     const [selected_lists, setSelectedLists] = useState([]);
     const [sender_email, setSenderEmail] = useState('');
     const [sender_name, setSenderName] = useState('');
 
+    const [time_since_last_change, setTimeSinceLastChange] = useState(0);
+    const [last_timeout_handle, setLastTimeoutHandle] = useState();
+
     const [show_wildcard_modal, setShowWildcardModal] = useState(false);
 
     useEffect(() => {
         dispatch(setPageTitle('New Campaign'));
-        apiGet(`${URLS.mailing_lists}`, { token }).then(response => {
+        AudienceService.read({ token }).then(response => {
             const { payload } = response;
             if (payload) {
                 setMailingLists(payload);
             }
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleEditorChange = data => {
-        setCampaignBody(data);
+    const handleCampaignCreation = async (data) => {
+        let response;
+        if (campaign_id) {
+            response = await DraftService.updateById(campaign_id, { data: { ...data, status: 'queued' }, token });
+        } else {
+            response = await CampaignService.create({ data, token });
+        }
+        const { error, payload } = response;
+        if (error) {
+            toast.error(error);
+            return;
+        }
+
+        dispatch(addOneCampaignToStore(payload));
+        toast.success(`Campaign created successfully.`);
     }
 
-    const submitCampaign = () => {
-        const data = {
+    const formatDataForDatabase = () => {
+        return {
             body: campaign_body,
             mailing_lists: selected_lists.map(list => list.value),
             name: campaign_name,
@@ -62,30 +85,63 @@ const CampaignCreationForm = props => {
             subject: campaign_subject,
             tenant_id,
         }
+    }
+
+    const handleDraftSave = async (id = 0) => {
+        let response;
+        let data = {
+            ...formatDataForDatabase(),
+            status: 'draft',
+        }
+
+        setShowDraftStatus(true);
+        setDraftMessage(`Saving draft...`);
+        if (id) {
+            response = await DraftService.updateById(id, { data, token });
+        } else {
+            response = await DraftService.create({ data, token });
+        }
+
+        const { error, payload } = response;
+        if (error) {
+            setDraftMessage(`Failed to save draft.`);
+        } else {
+            setCampaignId(payload.id);
+            setDraftMessage('Draft saved.');
+        };
+
+        setTimeout(() => setShowDraftStatus(false), 2000);
+    }
+
+    const handleEditorChange = data => {
+        setCampaignBody(data);
+        setTimeSinceLastChange(Date.now());
+        clearInterval(last_timeout_handle);
+
+        const timeout_handle = setTimeout(() => {
+            handleDraftSave(campaign_id);
+            setTimeSinceLastChange(Date.now());
+        }, 750);
+
+        setLastTimeoutHandle(timeout_handle);
+    }
+
+    const sendCampaign = async () => {
+        const data = formatDataForDatabase();
 
         if (!campaign_body || !campaign_name || !campaign_subject || !sender_email || !sender_name) {
-            alert('please fill all fields');
+            toast.error('please fill all fields');
             return;
         }
 
         if (!isEmailValid(sender_email)) {
-            alert('Invalid Sender Email');
+            toast.error('Invalid Sender Email');
             return;
         }
 
         setLoading(true);
-        apiPost(`${URLS.campaigns}`, { data, token }).then(response => {
-            const { error, payload } = response;
-
-            if (error) {
-                alert(error);
-                return;
-            }
-
-            dispatch(addOneCampaignToStore(payload));
-        }).finally(() => {
-            setLoading(false);
-        });
+        handleCampaignCreation(data);
+        setLoading(false);
     }
 
     return (
@@ -121,15 +177,6 @@ const CampaignCreationForm = props => {
                     <input className="gm-input" id="sender_email" type="text" defaultValue={sender_email} onInput={e => setSenderEmail(e.target.value)} />
                 </div>
                 <div className="p-0 pl-2 col-4">
-                    {/* <Select
-                        options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
-                        onChange={setSelectedLists}
-                        value={selected_lists}
-                        isMulti={true}
-                        placeholder='Select Mailing list'
-                    // className='mailing-list-selector'
-                    /> */}
-
                     <label htmlFor="campaign_list">Audiences</label>
                     <MultiSelect
                         options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
@@ -143,6 +190,7 @@ const CampaignCreationForm = props => {
             </div>
             <div className="w-100 p-2">
                 <span className="text-info is-clickable" onClick={() => setShowWildcardModal(true)}>** <b>Click Here </b> to see supported @ wildcards.</span>
+                {show_draft_status ? <span className="gm-text-grey float-right"><i>{draft_message}</i></span> : <></>}
             </div>
             <div className="form-group">
                 <Editor
@@ -156,7 +204,7 @@ const CampaignCreationForm = props => {
             <div className="form-group">
                 {loading ?
                     <button className="col-2 float-right gm-btn gm-btn-primary" disabled>Saving...</button> :
-                    <button className="col-2 float-right gm-btn gm-btn-primary shadow" onClick={() => submitCampaign()} >Save</button>
+                    <button className="col-2 float-right gm-btn gm-btn-primary shadow" onClick={() => sendCampaign()} >Send</button>
                 }
             </div>
             <GmModal title="Supported wildcards" show_title={true} show_modal={show_wildcard_modal} onClose={() => setShowWildcardModal(false)}>
@@ -168,7 +216,7 @@ const CampaignCreationForm = props => {
                     </ol>
                 </div>
             </GmModal>
-        </div>
+        </div >
     )
 }
 

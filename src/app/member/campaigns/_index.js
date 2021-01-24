@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import CreateCampaign from './create/create';
-import EditCampaign from './edit/edit';
+// import EditCampaign from './edit/edit';
 import ListCampaign from './list/list';
 import ViewCampaign from './view/view';
 const CampaignModule = () => {

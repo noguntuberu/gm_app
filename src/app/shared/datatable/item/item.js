@@ -8,16 +8,14 @@ const DataTableItem = props => {
         fields, index, item_click_callback, selection_callback,
     } = props;
 
-    const { metadata } = data;
-
     const [row_data, setRowData] = useState([]);
-    const [item_is_selected, setItemIsSelected] = useState();
+    const [item_is_selected, setItemIsSelected] = useState(false);
 
     useEffect(() => {
         if (data.metadata) {
             setItemIsSelected(data.metadata.checked);
         }
-    });
+    }, [data.metadata]);
 
     useEffect(() => {
         let field_keys = {};
@@ -33,10 +31,9 @@ const DataTableItem = props => {
         });
 
         setRowData(cells);
-    }, [data, fields, index]);
+    }, [data, fields, index, item_click_callback]);
 
     const processAction = action => {
-        setItemIsSelected(true);
         selection_callback({
             data,
             index,

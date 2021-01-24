@@ -1,10 +1,9 @@
 /** */
-import React, { useEffect, useState, createRef } from 'react';
+import React, { useEffect, createRef } from 'react';
 
 import './modal.css';
 
 const GmModal = ({ children, title, show_title, show_modal, onClose }) => {
-
     /** REFS */
     const modal_veil = createRef();
     const modal_body = createRef();
@@ -14,6 +13,7 @@ const GmModal = ({ children, title, show_title, show_modal, onClose }) => {
         if (show_modal) {
             fadeIn();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [show_modal]);
 
     const fadeIn = () => {

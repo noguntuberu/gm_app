@@ -20,7 +20,7 @@ const ViewMailingList = () => {
 
     useEffect(() => {
         dispatch(setPageTitle(mailing_list.name));
-    }, []);
+    }, [dispatch, mailing_list.name]);
 
     return <div>
         <div>
