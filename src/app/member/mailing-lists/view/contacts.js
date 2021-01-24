@@ -1,7 +1,8 @@
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
-import { apiDelete, apiGet, URLS } from '../../../../utilities/api/api';
+import * as AudienceService from '../../../../services/audience';
+import * as ContactService from '../../../../services/contact';
 
 import DataTable from '../../../shared/datatable/datatable';
 
@@ -51,33 +52,30 @@ const AudienceContacts = ({ contact_ids, list_id }) => {
 
     useEffect(() => {
         setLoading(true);
-        apiGet(`${URLS.contacts}`, { token, query_string: `id=${contacts.join()}` }).then(data => {
+        ContactService.read({ token, query_string: `id=${contacts.join()}` }).then(data => {
             const { payload, error } = data;
             setLoading(false);
 
-            if (!error && payload) {
+            if (!error) {
                 setItems(payload);
             }
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [contacts]);
 
-    const deleteContacts = (ids) => {
+    const deleteContacts = async (ids) => {
         const data = {
             contacts: [...ids],
         }
 
-        apiDelete(`${URLS.mailing_lists}/${list_id}/contacts`, { data, token }).then(data => {
-            const { error } = data;
+        const { error } = await AudienceService.deleteContact(list_id, { data, token })
+        if (error) {
+            toast.error(error);
+            return;
+        }
 
-            if (error) {
-                toast.error(error);
-                return;
-            }
-
-            toast.success(`Contact removed.`)
-            setContacts(contact_ids.filter(id => !ids.includes(id)));
-        });
+        toast.success(`Contact removed.`)
+        setContacts(contact_ids.filter(id => !ids.includes(id)));
     }
 
     const handleDatatableAction = action => {
