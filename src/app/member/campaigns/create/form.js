@@ -14,6 +14,7 @@ import { Editor } from '../../../../vendors/@tinymce/tinymce-react/lib/es2015/ma
 import * as DraftService from '../../../../services/draft';
 import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
+import * as FileService from '../../../../services/file';
 
 import './form.css';
 
@@ -21,7 +22,7 @@ const CampaignCreationForm = props => {
     const { config } = props;
     const { id } = useParams()
     const dispatch = useDispatch();
-    const campaign = useSelector(state => (state.campaigns[id] || {}));
+    let campaign = useSelector(state => (state.campaigns[id] || {}));
     const user_data = useSelector(state => state.user_data);
     const { token } = user_data;
     const tenant_id = user_data.id;
@@ -35,6 +36,9 @@ const CampaignCreationForm = props => {
     const [selected_lists, setSelectedLists] = useState([]);
     const [sender_email, setSenderEmail] = useState(campaign.sender_email || '');
     const [sender_name, setSenderName] = useState(campaign.name || '');
+
+    // const [extracting, setExtracting] = useState(false);
+    const [html_file,] = useState(null);
 
     const [loading, setLoading] = useState(false);
     const [draft_message, setDraftMessage] = useState('');
@@ -123,6 +127,45 @@ const CampaignCreationForm = props => {
         setLastTimeoutHandle(timeout_handle);
     }
 
+    const importHTML = async (file) => {
+        if (!file) {
+            toast.error('no file selected');
+            return;
+        }
+
+        if (!file.type.includes('html')) {
+            toast.error('invalid file type: must be html');
+            return;
+        }
+
+        const request_data = new FormData();
+        request_data.append('html_doc', file);
+
+        setLoading(true);
+        const { error, payload } = await FileService.extractHtmlContent({
+            data: request_data, token,
+            headers: {
+                'Content-Type': 'application/form-data'
+            }
+        });
+
+        setLoading(false);
+        if (error) {
+            toast.error(error);
+            return;
+        }
+
+        navigator.permissions.query({ name: "clipboard-write" }).then(result => {
+            if (result.state === "granted" || result.state === "prompt") {
+                navigator.clipboard.writeText(payload).then(function () {
+                    toast.success('file content copied.');
+                }, function () {
+                    toast.error('could not copy contents');
+                });
+            }
+        });
+    }
+
     const sendCampaign = async () => {
         const data = formatDataForDatabase();
 
@@ -137,7 +180,8 @@ const CampaignCreationForm = props => {
         }
 
         setLoading(true);
-        handleCampaignCreation(data);
+        await handleCampaignCreation(data);
+        campaign = {};
         setLoading(false);
     }
 
@@ -199,6 +243,10 @@ const CampaignCreationForm = props => {
                 />
             </div>
             <div className="form-group">
+                <div className="custom-file col-3">
+                    <input type="file" className="custom-file-input is-clickable" id="contact_file" onChange={e => importHTML(e.target.files[0])} />
+                    <label className="custom-file-label" htmlFor="contact_file">{html_file ? html_file.name : 'Copy html from file'}</label>
+                </div>
                 {loading ?
                     <button className="col-2 float-right gm-btn gm-btn-primary" disabled>Saving...</button> :
                     <button className="col-2 float-right gm-btn gm-btn-primary shadow" onClick={() => sendCampaign()} >Send</button>

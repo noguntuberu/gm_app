@@ -25,6 +25,15 @@ const SideNav = () => {
             </header>
             <div className="accordion h-100" id="side-nav">
                 <div className="side-sub-nav">
+                    <div className="side-nav-header btn btn-block text-left"
+                        id="campaigns-nav" onClick={() => history.push('/dashboard')}>
+                        <FontAwesomeIcon icon={faNewspaper} className="mt-1 mr-3" />
+                        <span className="">
+                            Dashboard
+                        </span>
+                    </div>
+                </div>
+                <div className="side-sub-nav">
                     <div className="side-nav-header btn btn-block text-left collapsed"
                         data-toggle="collapse" data-target="#collapse-campaigns-nav"
                         aria-expanded="false" aria-controls="collapse-campaigns-nav"
