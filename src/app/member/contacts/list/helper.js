@@ -25,7 +25,7 @@ export const table_config = {
         {
             title: 'Date of birth',
             key: 'date_of_birth',
-            formatter: value => { return (new Date(value)).toDateString() },
+            formatter: value => { return value ? (new Date(value)).toDateString() : '' },
         },
     ],
     items: [],

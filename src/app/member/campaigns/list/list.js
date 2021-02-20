@@ -6,7 +6,7 @@ import Datatable from "../../../shared/datatable/datatable";
 import { setPageTitle } from '../../../../store/actions/header';
 import * as DraftService from '../../../../services/draft';
 import * as CampaignService from '../../../../services/campaign';
-import { loadCampaignsToStore, removeOneCampaignFromStore } from "../../../../store/actions/campaign";
+import { removeOneCampaignFromStore } from "../../../../store/actions/campaign";
 
 const ListCampaigns = () => {
     const history = useHistory();
@@ -26,7 +26,8 @@ const ListCampaigns = () => {
             const { error, payload } = response;
             if (error) return;
 
-            dispatch(loadCampaignsToStore(payload));
+            // dispatch(loadCampaignsToStore(payload));
+            setCampaigns(payload);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

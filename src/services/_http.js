@@ -78,3 +78,18 @@ export const apiPut = async (uri, options = {}) => {
         return DEFAULT_ERR(e);
     }
 }
+
+export const TinyMCEUpload = async (uri, success, failure, progress, options = {}) => {
+    const { data, token } = options;
+
+    axios.post(uri, data, {
+        headers: {
+            authorization: `Bearer ${token}`,
+        },
+        responseType: 'stream',
+    }).then(response => {
+        success(response.data.location);
+    }).catch(e => {
+        failure(`[Uplod Error]`, { remove: true })
+    })
+};
