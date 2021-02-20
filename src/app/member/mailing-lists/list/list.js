@@ -66,7 +66,7 @@ const ListMailingLists = () => {
                 formatter: value => (new Date(value)).toDateString(),
             },
         ],
-        items: mailing_lists.sort((a,b) => b.id - a.id),
+        items: mailing_lists.sort((a, b) => b.id - a.id),
         search_key: 'name',
         search_text: '',
     }
@@ -81,7 +81,8 @@ const ListMailingLists = () => {
     }
 
     const handleItemClick = payload => {
-        // const { id } = payload;
+        const { id } = payload;
+        history.push(`/audiences/${id}`);
     }
 
     return (

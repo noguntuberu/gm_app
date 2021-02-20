@@ -4,23 +4,51 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './view.css';
 import AudienceContacts from './contacts';
+import Dashboard from './dashboard/dashboard';
 import AudienceUpdationForm from '../edit/edit';
 import GmModal from '../../../shared/modal/modal';
 import ImportContacts from '../../contacts/import/import';
 import { setPageTitle } from '../../../../store/actions/header';
+import * as AudienceService from '../../../../services/audience';
+import * as CampaignService from '../../../../services/campaign';
 
 const ViewMailingList = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const mailing_list = (useSelector(state => state.audiences))[id];
+    const { token } = useSelector(state => state.user_data);
 
     const [is_dashboard_view, setIsDashboardView] = useState(true);
+    const [list_campaigns, setListCampaigns] = useState([]);
+    const [mailing_list, setMailingList] = useState({});
     const [show_updation_modal, setShowUpdationModal] = useState(false);
     const [show_upload_modal, setShowUploadModal] = useState(false);
 
     useEffect(() => {
-        dispatch(setPageTitle(mailing_list.name));
-    }, [dispatch, mailing_list.name]);
+        AudienceService.readById(id, { token }).then(response => {
+            const { error, payload } = response;
+            if (error) {
+                alert('could not fetch list data');
+                return
+            }
+
+            setMailingList(payload);
+            dispatch(setPageTitle(payload.name));
+        }).catch(error => {
+            alert(`Error: ${error.message}`);
+        });
+
+        CampaignService.read({ query_string: `mailing_lists=${id}:`, token }).then(response => {
+            const { error, payload } = response;
+            if (error) {
+                alert('could not fetch list campaigns');
+                return
+            }
+
+            setListCampaigns(payload);
+        }).catch(error => {
+            alert(`Error: could not fetch list campaigns`);
+        });
+    }, [dispatch]);
 
     return <div>
         <div>
@@ -37,7 +65,7 @@ const ViewMailingList = () => {
         </div>
         {is_dashboard_view ?
             <div className="audience-dashboard">
-
+                <Dashboard contacts={mailing_list.contacts} campaigns={list_campaigns} />
             </div> :
             <div className="mt-3">
                 <AudienceContacts contact_ids={mailing_list.contacts} list_id={id} />
