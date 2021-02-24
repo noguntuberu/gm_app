@@ -55,3 +55,9 @@ table, thead, tbody, th, tr, td {
 
     overflow-y: scroll;
 }
+
+.graph-wrapper * {
+    box-shadow: ;
+    width: auto;
+    float: none;
+}

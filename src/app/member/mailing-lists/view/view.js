@@ -68,7 +68,7 @@ const ViewMailingList = () => {
                 <Dashboard contacts={mailing_list.contacts} campaigns={list_campaigns} />
             </div> :
             <div className="mt-3">
-                <AudienceContacts contact_ids={mailing_list.contacts} list_id={id} />
+                <AudienceContacts audience_contacts={mailing_list.contacts} list_id={id} />
             </div>
         }
 
