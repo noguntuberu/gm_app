@@ -23,6 +23,7 @@ const AudienceGraph = props => {
         }
     }, [contacts, period]);
 
+    console.log(graph_data);
     return <ResponsiveContainer width='100%' height={470}>
         <BarChart data={graph_data}>
             <CartesianGrid strokeDasharray='2 2' />

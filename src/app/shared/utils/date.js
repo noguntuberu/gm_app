@@ -49,7 +49,6 @@ const generateDaysConfigurationForGraph = (base_timestamp, spread = 7) => {
         };
         curr_timestamp -= NUM_OF_MILLISECONDS_IN_ONE_DAY;
     }
-
     return config;
 }
 
@@ -60,7 +59,7 @@ const generateDaysConfigurationForGraph = (base_timestamp, spread = 7) => {
  */
 const getDayTimestampForRawTimestamp = raw_timestamp => {
     const date = new Date(raw_timestamp);
-    const day = `${padDateValue(date.getMonth() + 1)}-${padDateValue(date.getDate())}-${date.getFullYear()}`;
+    const day = `${padDateValue(date.getMonth() + 1)}/${padDateValue(date.getDate())}/${date.getFullYear()}`;
     return Date.parse(day);
 }
 

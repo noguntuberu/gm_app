@@ -17,8 +17,6 @@ const GMDashboard = () => {
     let [number_of_contacts, setNumberOfContacts] = useState(0);
     let [number_of_unsubscribers, setNumberOfUnsubscribers] = useState(0);
 
-    let [audiences, setAudiences] = useState([]);
-    let [contacts, setContacts] = useState([]);
     let [audience_contacts, setAudienceContacts] = useState([]);
 
     useEffect(() => {
@@ -55,7 +53,6 @@ const GMDashboard = () => {
                 return;
             }
 
-            setContacts(payload);
             setNumberOfContacts(payload.length);
         }).catch(e => console.log(e)).finally(() => { });
 
@@ -86,7 +83,7 @@ const GMDashboard = () => {
                 <StatCard title='Total Audiences' count={number_of_audiences} border_color='info' />
             </div>
             <div className="col-3 px-0">
-                <StatCard title='Unsubscribed Contacts' count={number_of_unsubscribers} border_color='secondary' />
+                <StatCard title='Unsubscribers' count={number_of_unsubscribers} border_color='secondary' />
             </div>
         </div>
         <div className="shadow-sm border row ml-0 mt-4 p-3 graph-wrapper">

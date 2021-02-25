@@ -49,7 +49,7 @@ const AudienceDashboard = props => {
                 <StatCard title='Total Contacts' count={stats.total} border_color='info' />
             </div>
             <div className="col-4 px-0">
-                <StatCard title='Unsubscribed Contacts' count={stats.unsubscribed} border_color='secondary' />
+                <StatCard title='Unsubscribers' count={stats.unsubscribed} border_color='secondary' />
             </div>
         </div>
         <div className="shadow-sm border row ml-0 mt-4 p-3 graph-wrapper">
