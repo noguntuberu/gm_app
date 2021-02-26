@@ -46,7 +46,7 @@ const LoginForm = () => {
     }
 
     return (
-        <div>
+        <div className="gm-column-flex-centered">
             <div className="w-100 mt-1">
                 {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
                     {form_message.text}
@@ -64,14 +64,14 @@ const LoginForm = () => {
                     onInput={event => setFormData({ ...form_data, password: event.target.value })} />
             </div>
             <div className="form-group">
-                <button className="gm-btn gm-btn-primary w-100" onClick={() => submitForm()}>
+                <button className="btn-sm gm-btn gm-btn-primary w-100" onClick={() => submitForm()}>
                     Log In
                     {is_login_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <span></span>}
                 </button>
-                <button className="gm-btn border border-primary gm-text-primary w-100 mt-3 text-center" onClick={() => history.push("/register")}>Create Account</button>
+                <button className="gm-btn gm-btn-info w-100 mt-3 text-center" onClick={() => history.push("/register")}>Create Account</button>
             </div>
-            <hr className="mt-4 w-50"></hr>
-            <div className="text-center d-flex justify-content-center mb-3">
+            <hr className="form-divider"></hr>
+            <div className="text-center d-flex justify-content-center mb-3 form-extra-text">
                 Forgot password?
                     <span className="pl-2">
                     <b><span className="gm-text-primary is-clickable" onClick={() => history.push("/password/recovery")}> Recover Password </span></b>

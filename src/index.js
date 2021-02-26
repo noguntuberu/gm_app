@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 import './assets/css/color.css';
 import './assets/css/components.css';
+import './assets/css/layout.css';
 
 window.app_root = __dirname;
 

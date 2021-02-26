@@ -55,11 +55,11 @@ const SignupForm = () => {
                 </div> : <div></div>}
             </div>
             <div className="form-group">
-                <div className="col-6 p-0 pr-1">
+                <div className="twin-input">
                     <input type="text" className="form-control" placeholder="First name"
                         onInput={event => setFormData({ ...form_data, firstname: event.target.value })} />
                 </div>
-                <div className="col-6 p-0 pl-1">
+                <div className="twin-input">
                     <input type="text" className="form-control" placeholder="Last name"
                         onInput={event => setFormData({ ...form_data, lastname: event.target.value })} />
                 </div>
@@ -69,11 +69,11 @@ const SignupForm = () => {
                     onInput={event => setFormData({ ...form_data, email: event.target.value })} />
             </div>
             <div className="form-group">
-                <div className="col-6 p-0 pr-1">
+                <div className="twin-input">
                     <input type="password" className="form-control" placeholder="Password"
                         onInput={event => setFormData({ ...form_data, password: event.target.value })} />
                 </div>
-                <div className="col-6 p-0 pl-1">
+                <div className="twin-input">
                     <input type="password" className="form-control" placeholder="Confirm password"
                         onInput={event => setFormData({ ...form_data, confirm_password: event.target.value })} />
                 </div>
@@ -83,7 +83,7 @@ const SignupForm = () => {
                     onClick={() => submitForm()}>
                     Create Account {show_spinner ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <></>}
                 </button>
-                <button className="gm-btn border border-primary gm-text-primary w-100 mt-3" onClick={() => history.push("/login")}>Log In</button>
+                <button className="gm-btn gm-btn-info w-100 mt-3" onClick={() => history.push("/login")}>Log In</button>
             </div>
         </div>
     )

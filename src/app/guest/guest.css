@@ -1,10 +1,28 @@
 /**/
 .guest-site-icon {
-    width: 400px;
-
-    margin-bottom: 50px;
+    width: 150px;
+    margin-bottom: 10px;
 }
 
 .guest-form-wrap {
-    width: 500px;
+    width: 100%;
+    padding: 20px;
+}
+
+.form-divider {
+    width: 40%;
+    margin: 5px auto 20px auto;
+}
+
+.form-extra-text {
+    font-size: 0.95rem;
+}
+
+.twin-input {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.twin-input:nth-child(odd) {
+    margin-top: 0;
 }

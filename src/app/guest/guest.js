@@ -21,7 +21,7 @@ const GuestArea = () => {
             <div className="guest-site-icon" onClick={() => history.push('/')}>
                 <img src={site_icon} alt="Site Icon" />
             </div>
-            <div className="guest-form-wrap card pl-3 pr-3 pt-2 shadow">
+            <div className="guest-form-wrap">
                 <Switch>
                     <Route path='/login' component={LoginForm} />
                     <Route path='/activation/:id' component={AccountActivation} />
