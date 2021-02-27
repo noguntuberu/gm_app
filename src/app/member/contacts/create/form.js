@@ -84,9 +84,9 @@ const ContactCreationForm = props => {
     }
 
     return (
-        <div>
+        <div className="mt-3">
             <div className="form-row">
-                <div className="form-group col">
+                <div className="form-group col-12">
                     <label htmlFor="firstname">First name *</label>
                     <input
                         type="text"
@@ -95,7 +95,7 @@ const ContactCreationForm = props => {
                         onInput={e => setFirstname(e.target.value)}
                     />
                 </div>
-                <div className="form-group col">
+                <div className="form-group col-12">
                     <label htmlFor="lastname">Last name</label>
                     <input
                         type="text"
@@ -106,7 +106,7 @@ const ContactCreationForm = props => {
                 </div>
             </div>
             <div className="form-row">
-                <div className="form-group col">
+                <div className="form-group col-12">
                     <label htmlFor="email">Email address *</label>
                     <input
                         type="email"
@@ -115,7 +115,7 @@ const ContactCreationForm = props => {
                         onInput={e => setEmail(e.target.value)}
                     />
                 </div>
-                <div className="form-group col">
+                <div className="form-group col-12">
                     <label htmlFor="email">Audience</label>
                     <MultiSelect
                         options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
@@ -139,7 +139,7 @@ const ContactCreationForm = props => {
                 </div>
             </div>
             <div className="form-row">
-                <div className="form-group col">
+                <div className="form-group col-12">
                     <div className="form-row">
                         <div className="form-group col">
                             <label htmlFor="state">State</label>
@@ -182,10 +182,10 @@ const ContactCreationForm = props => {
             </div>
             <div className="pr-3 mt-4">
                 {!loading ?
-                    <button className="gm-btn gm-btn-primary float-right w-25  shadow" onClick={e => submitForm()}> Save </button> :
-                    <button className="gm-btn gm-btn-primary float-right w-25  shadow" disabled> Save </button>
+                    <button className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" onClick={e => submitForm()}> Save </button> :
+                    <button className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" disabled> Save </button>
                 }
-                <button className="gm-btn gm-btn-secondary float-right w-25 mr-3  shadow" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
+                {/* <button className="gm-btn gm-btn-secondary float-right w-25 mr-3  shadow" onClick={() => setShowUploadModal(true)}>Import Contacts</button> */}
             </div>
 
             <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>

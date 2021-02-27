@@ -44,6 +44,7 @@ table, thead, tbody, th, tr, td {
     width: 100%;
     
     padding: 0px 20px;
+    padding-bottom: 30px;
     overflow-y: scroll;
 }
 
@@ -70,7 +71,7 @@ table, thead, tbody, th, tr, td {
 }
 
 .graph-wrapper {
-    padding: 5px;
+    padding: 10px;
 }
 
 .graph-wrapper * {

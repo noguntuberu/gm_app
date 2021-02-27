@@ -7,7 +7,7 @@ const MemberAreaHeader = props => {
     const { page_title } = useSelector(state => state.header);
 
     return <header className="member-area-header">
-        <div className="w-50">
+        <div className="">
             <div className="page-title">{page_title}</div>
             <div className="page-title-underline"></div>
         </div>

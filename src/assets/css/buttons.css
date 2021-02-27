@@ -25,3 +25,9 @@
     background: rgba(141, 0, 42, 0.698);
     color: #ffffff;
 }
+
+/**/
+.flexible-save-btn {
+    width: 100%;
+    text-transform: uppercase;
+}

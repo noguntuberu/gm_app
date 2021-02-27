@@ -185,55 +185,57 @@ const CampaignCreationForm = props => {
         setLoading(false);
     }
 
-    return (
-        <div>
-            <div className="form-group">
+    return <div className="mt-2">
+        <div className="form-row">
+            <div className="form-group col-12">
                 <label htmlFor="campaign_title">Name</label>
                 <input className="gm-input" id="campaign_title" type="text" defaultValue={campaign_name} onInput={e => setCampaignName(e.target.value)} />
             </div>
-            <div className="form-group">
-                <div className="p-0 pr-2 col-8">
-                    <label htmlFor="campaign_subject">Subject</label>
-                    <input className="gm-input" id="campaign_subject" type="text" defaultValue={campaign_subject} onInput={e => setCampaignSubject(e.target.value)} />
-                </div>
-                <div className="p-0 pl-2 col-4">
-                    <label htmlFor="campaign_schedule">Schedule</label>
-                    <input
-                        className="gm-input"
-                        id="campaign_schedule"
-                        type="date"
-                        name="campaign-schedule"
-                        defaultValue={schedule}
-                        onChange={e => setCampaignSchedule(e.target.value)}
-                    />
-                </div>
+            <div className="form-group col-12">
+                <label htmlFor="campaign_subject">Subject</label>
+                <input className="gm-input" id="campaign_subject" type="text" defaultValue={campaign_subject} onInput={e => setCampaignSubject(e.target.value)} />
             </div>
-            <div className="form-group">
-                <div className="p-0 pr-2 col-4">
-                    <label htmlFor="sender_name">Sender's name</label>
-                    <input className="gm-input" id="sender_name" type="text" defaultValue={sender_name} onInput={e => setSenderName(e.target.value)} />
-                </div>
-                <div className="p-0 pl-2 pr-2 col-4">
-                    <label htmlFor="sender_email">Sender's email</label>
-                    <input className="gm-input" id="sender_email" type="text" defaultValue={sender_email} onInput={e => setSenderEmail(e.target.value)} />
-                </div>
-                <div className="p-0 pl-2 col-4">
-                    <label htmlFor="campaign_list">Audiences</label>
-                    <MultiSelect
-                        options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
-                        onChange={setSelectedLists}
-                        value={selected_lists}
-                        // isMulti={true}
-                        labelledBy='Select Audience'
-                        id="campaign list"
-                    />
-                </div>
+        </div>
+        <div className="form-row">
+            <div className="form-group col-12">
+                <label htmlFor="sender_name">Sender's name</label>
+                <input className="gm-input" id="sender_name" type="text" defaultValue={sender_name} onInput={e => setSenderName(e.target.value)} />
             </div>
-            <div className="w-100 p-2">
-                <span className="text-info is-clickable" onClick={() => setShowWildcardModal(true)}>** <b>Click Here </b> to see supported @ wildcards.</span>
-                {show_draft_status ? <span className="gm-text-grey float-right"><i>{draft_message}</i></span> : <></>}
+            <div className="form-group col-12">
+                <label htmlFor="sender_email">Sender's email</label>
+                <input className="gm-input" id="sender_email" type="text" defaultValue={sender_email} onInput={e => setSenderEmail(e.target.value)} />
             </div>
-            <div className="form-group">
+        </div>
+        <div className="form-row">
+            <div className="form-group col-12">
+                <label htmlFor="campaign_schedule">Schedule</label>
+                <input
+                    className="gm-input"
+                    id="campaign_schedule"
+                    type="date"
+                    name="campaign-schedule"
+                    defaultValue={schedule}
+                    onChange={e => setCampaignSchedule(e.target.value)}
+                />
+            </div>
+            <div className="form-group col-12">
+                <label htmlFor="campaign_list">Audiences</label>
+                <MultiSelect
+                    options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
+                    onChange={setSelectedLists}
+                    value={selected_lists}
+                    // isMulti={true}
+                    labelledBy='Select Audience'
+                    id="campaign list"
+                />
+            </div>
+        </div>
+        <div className="w-100 p-2">
+            <span className="text-info is-clickable" onClick={() => setShowWildcardModal(true)}>** <b>Click Here </b> to see supported @ wildcards.</span>
+            {show_draft_status ? <span className="gm-text-grey float-right"><i>{draft_message}</i></span> : <></>}
+        </div>
+        <div className="form-row">
+            <div className="form-group col-12">
                 <Editor
                     body_class="campaign_editor"
                     id="campaign_create"
@@ -242,27 +244,27 @@ const CampaignCreationForm = props => {
                     onEditorChange={e => handleEditorChange(e)}
                 />
             </div>
-            <div className="form-group">
-                <div className="custom-file col-3">
+        </div>
+        <div className="form-group">
+            {/* <div className="custom-file col-3">
                     <input type="file" className="custom-file-input is-clickable" id="contact_file" onChange={e => importHTML(e.target.files[0])} />
                     <label className="custom-file-label" htmlFor="contact_file">{html_file ? html_file.name : 'Copy html from file'}</label>
-                </div>
-                {loading ?
-                    <button className="col-2 float-right gm-btn gm-btn-primary" disabled>Saving...</button> :
-                    <button className="col-2 float-right gm-btn gm-btn-primary shadow" onClick={() => sendCampaign()} >Send</button>
-                }
+                </div> */}
+            {loading ?
+                <button className="flexible-save-btn gm-btn gm-btn-primary" disabled>Creating...</button> :
+                <button className="flexible-save-btn gm-btn gm-btn-primary shadow" onClick={() => sendCampaign()} >Create</button>
+            }
+        </div>
+        <GmModal title="Supported wildcards" show_title={true} show_modal={show_wildcard_modal} onClose={() => setShowWildcardModal(false)}>
+            <div className="wildcard-list">
+                <ol>
+                    <li>@firstname - Contact's first name.</li>
+                    <li>@lastname - Contact's last name.</li>
+                    <li>@date_of_birth - Contact's date_of_birth.</li>
+                </ol>
             </div>
-            <GmModal title="Supported wildcards" show_title={true} show_modal={show_wildcard_modal} onClose={() => setShowWildcardModal(false)}>
-                <div className="wildcard-list">
-                    <ol>
-                        <li>@firstname - Contact's first name.</li>
-                        <li>@lastname - Contact's last name.</li>
-                        <li>@date_of_birth - Contact's date_of_birth.</li>
-                    </ol>
-                </div>
-            </GmModal>
-        </div >
-    )
+        </GmModal>
+    </div >
 }
 
 export default CampaignCreationForm;

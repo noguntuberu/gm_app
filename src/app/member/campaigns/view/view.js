@@ -32,21 +32,23 @@ const ViewCampaign = () => {
     }, [dispatch, id, token]);
 
     return <div className="campaign-view-wrapper">
-        <div className="row ml-0 px-0">
-            <div className="col-3 pl-0">
-                <StatCard title='Total Sends' count={campaign_stat.failed_sends + campaign_stat.successful_sends} border_color='primary' />
+        <div className="stat-card-pair-wrapper">
+            <div className="col-6">
+                <StatCard title='Sends' count={campaign_stat.failed_sends + campaign_stat.successful_sends} border_color='primary' />
             </div>
-            <div className="col-3 pl-0">
-                <StatCard title='Successful Sends' count={campaign_stat.successful_sends} border_color='success' />
-            </div>
-            <div className="col-3 pl-0">
-                <StatCard title='Failed Sends' count={campaign_stat.failed_sends} border_color='secondary' />
-            </div>
-            <div className="col-3 px-0">
-                <StatCard title='Total Opened' count={campaign_stat.total_opened} border_color='info' />
+            <div className="col-6">
+                <StatCard title='Sent' count={campaign_stat.successful_sends} border_color='success' />
             </div>
         </div>
-        <div className="card shadow-sm mt-3">
+        <div className="stat-card-pair-wrapper">
+            <div className="col-6">
+                <StatCard title='Failed' count={campaign_stat.failed_sends} border_color='secondary' />
+            </div>
+            <div className="col-6">
+                <StatCard title='Opened' count={campaign_stat.total_opened} border_color='info' />
+            </div>
+        </div>
+        <div className="card shadow-sm mt-2">
             <iframe title="Campaign Preview" height="550" srcDoc={campaign.body}></iframe>
         </div>
     </div>
