@@ -1,66 +1,56 @@
 /**/
+.side-nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: rgba(0, 0, 0, 0.35);
+
+    z-index: 1;
+}
+
 .app-side-nav {
     height: 100%;
-    width: 15%;
+    width: 75%;
 
-    border-right: 1px solid #e4e4e4;
-    padding-top: 20px;
+    background-color: rgb(255,255,255);
+}
 
-    background-color: rgba(0, 75, 125, 0.835);
+.app-side-nav header {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(0, 169, 241, 0.212);
 }
 
 .nav-site-icon {
-    width: 150px;
+    width: 22.5px;
+    height: 22.5px;
     
+    background-color: #00A9F1;
     margin-left: 12.5px;
 }
 
-.side-nav-header {
-    display: flex;
-    flex-direction: row;
-    
-    border-radius: 0;
-    padding: 7.5px 20px;
-
-    /* background-color: #ddd; */
+.nav-site-name {
+    width: 100px;
+    margin-left: 12.5px;
 }
 
-
-.side-sub-nav {
+.app-side-nav section {
     width: 100%;
-    border: none;
-    border-radius: 0;
+    padding: 12.5px 0;
 }
 
-.side-nav-header.collapsed {
-    color: #fff;
-}
-
-.side-nav-header, .app-side-nav .card-body .nav-link {
-    color: #fff;
-    padding-left: 25px;
-}
-
-.side-nav-header:hover, .app-side-nav .card-body .nav-link:hover {
-    color: rgb(216, 216, 216);
-    font-weight: bold;
-}
-
-.app-side-nav .card-body .nav-link:active {
-    color: #eee;
-}
-
-.app-side-nav .card-body {
-    width: 100%;
-    padding: 0;
-    /* padding-top: 10px; */
-}
-
-.app-side-nav .card-body .nav-link{
-    padding: 7.5px 0 7.5px 55px;
-    font-size: 0.925em;
-
-    color: rgb(105, 184, 230);
+.nav-divider {
+    float: right;
+    width: 90%;
+    border-top: 1px solid #eeeeee;
+    margin: 5px 0;
 }
 
 /**/

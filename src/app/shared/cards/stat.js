@@ -1,5 +1,6 @@
 /** */
 import React from 'react';
+import './stat.css';
 
 const StatCard = props => {
     const { title, count, border_color } = props;
@@ -17,11 +18,11 @@ const StatCard = props => {
         return integer_value;
     }
     return <div className={`shadow-sm py-2 px-3 mx-0 gm-stat-card gm-card-border-${border_color}`}>
-        <div className="">
+        <div className="stat-card-title">
             {`${title}`}
         </div>
-        <div className="mt-2">
-        <h2>{processCount(count) || 0}</h2>
+        <div className="mt-1 stat-card-value">
+            {processCount(count) || 0}
         </div>
     </div>
 }

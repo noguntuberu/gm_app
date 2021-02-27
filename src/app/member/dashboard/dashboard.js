@@ -72,21 +72,25 @@ const GMDashboard = () => {
 
 
     return <div>
-        <div className="row ml-0 mt-4 px-0">
-            <div className="col-3 pl-0">
-                <StatCard title='Total Campaigns' count={number_of_campaigns} border_color='primary' />
+        <div className="mt-3">
+            <div className="stat-card-pair-wrapper">
+                <div className="col-6">
+                    <StatCard title='Campaigns' count={number_of_campaigns} border_color='primary' />
+                </div>
+                <div className="col-6">
+                    <StatCard title='Contacts' count={number_of_contacts} border_color='info' />
+                </div>
             </div>
-            <div className="col-3 pl-0">
-                <StatCard title='Total Contacts' count={number_of_contacts} border_color='info' />
-            </div>
-            <div className="col-3 pl-0">
-                <StatCard title='Total Audiences' count={number_of_audiences} border_color='info' />
-            </div>
-            <div className="col-3 px-0">
-                <StatCard title='Unsubscribers' count={number_of_unsubscribers} border_color='secondary' />
+            <div className="stat-card-pair-wrapper">
+                <div className="col-6">
+                    <StatCard title='Audiences' count={number_of_audiences} border_color='info' />
+                </div>
+                <div className="col-6">
+                    <StatCard title='Unsubscribers' count={number_of_unsubscribers} border_color='secondary' />
+                </div>
             </div>
         </div>
-        <div className="shadow-sm border row ml-0 mt-4 p-3 graph-wrapper">
+        <div className="shadow-sm border graph-wrapper">
             <AudienceGraph contacts={audience_contacts} />
         </div>
     </div>

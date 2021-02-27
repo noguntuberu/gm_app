@@ -1,0 +1,18 @@
+/**/
+.side-nav-item {
+    display: flex;
+    flex-direction: row;
+    padding: 12.5px 25px;
+}
+
+.nav-icon {
+    width: 25px;
+    height: 20px;
+
+    margin-right: 25px;
+    background-color: #00A9F1;
+}
+
+.nav-title {
+    font-size: 0.95em;
+}
