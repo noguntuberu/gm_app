@@ -1,7 +1,7 @@
 /** */
 import React, { useState, useEffect } from 'react';
 import StatCard from '../../../../shared/cards/stat';
-import Graph from './graph';
+import AudienceGraph from './graph';
 
 const AudienceDashboard = props => {
     let { campaigns, contacts } = props;
@@ -41,19 +41,21 @@ const AudienceDashboard = props => {
     }, [audience_contacts, campaigns, contacts]);
 
     return <div>
-        <div className="row ml-0 mt-4 px-0">
-            <div className="col-4 pl-0">
-                <StatCard title='Total Campaigns' count={stats.campaigns} border_color='primary' />
+        <div className="stat-card-pair-wrapper">
+            <div className="col-6">
+                <StatCard title='Campaigns' count={stats.campaigns} border_color='primary' />
             </div>
-            <div className="col-4 pl-0">
-                <StatCard title='Total Contacts' count={stats.total} border_color='info' />
+            <div className="col-6">
+                <StatCard title='Contacts' count={stats.total} border_color='info' />
             </div>
-            <div className="col-4 px-0">
+        </div>
+        <div className="stat-card-pair-wrapper">
+            <div className="col-12 px-0">
                 <StatCard title='Unsubscribers' count={stats.unsubscribed} border_color='secondary' />
             </div>
         </div>
-        <div className="shadow-sm border row ml-0 mt-4 p-3 graph-wrapper">
-            <Graph contacts={[...audience_contacts, ...unsubscribed_contacts]} />
+        <div className="shadow-sm border row ml-0 mt-2 p-3 graph-wrapper">
+            <AudienceGraph contacts={[...audience_contacts, ...unsubscribed_contacts]} />
         </div>
     </div>
 }

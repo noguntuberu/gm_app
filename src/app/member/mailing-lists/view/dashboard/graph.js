@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import {
     BarChart, Bar, CartesianGrid, Legend,
-    LineChart, Line,
+    LineChart, Line, CartesianAxis, ReferenceLine,
     ResponsiveContainer, Tooltip, XAxis, YAxis
 } from 'recharts';
 import { processDataByWeek } from '../../../../shared/utils/graph';
@@ -36,7 +36,8 @@ const AudienceGraph = props => {
             is_mobile_view ?
                 <ResponsiveContainer width='100%' minHeight={250}>
                     <LineChart data={graph_data} margin={{ left: -40 }}>
-                        {/* <Legend align="center" verticalAlign="bottom" height={50}/> */}
+                        <ReferenceLine />
+                        <CartesianAxis viewBox={{ width: '100%', height: 250}} />
                         <CartesianGrid strokeDasharray='3 1 3' />
                         <Line
                             type="monotone"
@@ -51,7 +52,7 @@ const AudienceGraph = props => {
                             fill="rgb(117, 177, 117)"
                         />
                         <Tooltip />
-                        <XAxis dataKey='date' reversed={true} padding={{ left: 0}} />
+                        <XAxis dataKey='date' reversed={true} padding={{ left: 0 }} />
                         <YAxis allowDecimals={false} padding={{ top: 0 }} />
 
                     </LineChart>

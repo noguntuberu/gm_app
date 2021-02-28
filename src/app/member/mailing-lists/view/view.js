@@ -51,7 +51,7 @@ const ViewMailingList = () => {
     }, [dispatch]);
 
     return <div>
-        <div>
+        {/* <div>
             <div className="content-header-wrapper">
                 <div className="content-header-actions">
                     <button className="gm-btn gm-btn-info btn-sm  shadow" onClick={() => setShowUpdationModal(true)}>Edit</button>
@@ -62,7 +62,7 @@ const ViewMailingList = () => {
                     }
                 </div>
             </div>
-        </div>
+        </div> */}
         {is_dashboard_view ?
             <div className="audience-dashboard">
                 <Dashboard contacts={mailing_list.contacts} campaigns={list_campaigns} />
@@ -71,6 +71,15 @@ const ViewMailingList = () => {
                 <AudienceContacts audience_contacts={mailing_list.contacts} list_id={id} />
             </div>
         }
+
+        <div className="floating-btn-wrapper">
+            <div className="icon-tray">
+                <div className="floating-action-btn gm-btn-secondary" id="view-contacts"></div>
+                <div className="floating-action-btn gm-btn-info" id="view-dashboard"></div>
+                <div className="floating-action-btn gm-btn-primary" id="import-contacts"></div>
+            </div>
+            <div className="floating-btn"></div>
+        </div>
 
         <GmModal title="Edit Audience" show_title={true} show_modal={show_updation_modal} onClose={() => setShowUpdationModal(false)}>
             <AudienceUpdationForm mailing_list={mailing_list} />

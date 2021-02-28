@@ -27,10 +27,9 @@ export const processDataByWeek = (data) => {
         let day_string = extractDayStringForGraph(date);
 
         if (!days_config[day_string]) {
-            days_config[day_string] = {
-                [config_key] : 0
-            };
+            return;
         }
+
         days_config[day_string][config_key] += 1;
     });
 

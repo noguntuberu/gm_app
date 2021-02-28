@@ -4,13 +4,30 @@ header.member-area-header {
     padding: 10px 0;
 }
 
+.header-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+    margin-bottom: 2.5px;
+}
+
+.hamburger-icon {
+    width: 13.5px;
+    float: left;
+
+    margin-right: 10px;
+}
+
 .page-title {
-    font-size: 1.25em;
-    margin-bottom: 5px;
+    width: fit-content;
+    margin-top: 3px;
+    font-size: 1.35em;
     color: rgb(0, 75, 125);
 }
 
 .page-title-underline {
-    border-top: 3px solid rgb(133, 0, 29);
-    width: 15%;
+    border-top: 2px solid rgb(133, 0, 29);
+    width: 25%;
 }
