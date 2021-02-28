@@ -10,7 +10,7 @@ import { loadAudienceToStore } from '../../../../store/actions/audience';
 
 /** */
 import ListCreationForm from '../create/create';
-import Datatable from "../../../shared/datatable/datatable";
+import WebDatatable from "../../../shared/datatable/web/datatable";
 
 /** */
 const ListMailingLists = () => {
@@ -92,7 +92,7 @@ const ListMailingLists = () => {
                 <ListCreationForm />
             </GmModal>
             {!loading ?
-                <Datatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox /> :
+                <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox /> :
                 <></>
             }
         </div>

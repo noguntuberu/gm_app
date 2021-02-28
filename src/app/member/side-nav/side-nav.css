@@ -9,7 +9,7 @@
 
     background-color: rgba(0, 0, 0, 0.35);
 
-    z-index: 1;
+    z-index: 99;
 }
 
 .app-side-nav {
@@ -38,6 +38,8 @@
 .nav-site-name {
     width: 100px;
     margin-left: 12.5px;
+    font-size: 1.35em;
+    color: #444444;
 }
 
 .app-side-nav section {

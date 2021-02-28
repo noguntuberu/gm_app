@@ -14,7 +14,7 @@ import { Editor } from '../../../../vendors/@tinymce/tinymce-react/lib/es2015/ma
 import * as DraftService from '../../../../services/draft';
 import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
-import * as FileService from '../../../../services/file';
+// import * as FileService from '../../../../services/file';
 
 import './form.css';
 
@@ -38,7 +38,7 @@ const CampaignCreationForm = props => {
     const [sender_name, setSenderName] = useState(campaign.name || '');
 
     // const [extracting, setExtracting] = useState(false);
-    const [html_file,] = useState(null);
+    // const [html_file,] = useState(null);
 
     const [loading, setLoading] = useState(false);
     const [draft_message, setDraftMessage] = useState('');
@@ -127,44 +127,44 @@ const CampaignCreationForm = props => {
         setLastTimeoutHandle(timeout_handle);
     }
 
-    const importHTML = async (file) => {
-        if (!file) {
-            toast.error('no file selected');
-            return;
-        }
+    // const importHTML = async (file) => {
+    //     if (!file) {
+    //         toast.error('no file selected');
+    //         return;
+    //     }
 
-        if (!file.type.includes('html')) {
-            toast.error('invalid file type: must be html');
-            return;
-        }
+    //     if (!file.type.includes('html')) {
+    //         toast.error('invalid file type: must be html');
+    //         return;
+    //     }
 
-        const request_data = new FormData();
-        request_data.append('html_doc', file);
+    //     const request_data = new FormData();
+    //     request_data.append('html_doc', file);
 
-        setLoading(true);
-        const { error, payload } = await FileService.extractHtmlContent({
-            data: request_data, token,
-            headers: {
-                'Content-Type': 'application/form-data'
-            }
-        });
+    //     setLoading(true);
+    //     const { error, payload } = await FileService.extractHtmlContent({
+    //         data: request_data, token,
+    //         headers: {
+    //             'Content-Type': 'application/form-data'
+    //         }
+    //     });
 
-        setLoading(false);
-        if (error) {
-            toast.error(error);
-            return;
-        }
+    //     setLoading(false);
+    //     if (error) {
+    //         toast.error(error);
+    //         return;
+    //     }
 
-        navigator.permissions.query({ name: "clipboard-write" }).then(result => {
-            if (result.state === "granted" || result.state === "prompt") {
-                navigator.clipboard.writeText(payload).then(function () {
-                    toast.success('file content copied.');
-                }, function () {
-                    toast.error('could not copy contents');
-                });
-            }
-        });
-    }
+    //     navigator.permissions.query({ name: "clipboard-write" }).then(result => {
+    //         if (result.state === "granted" || result.state === "prompt") {
+    //             navigator.clipboard.writeText(payload).then(function () {
+    //                 toast.success('file content copied.');
+    //             }, function () {
+    //                 toast.error('could not copy contents');
+    //             });
+    //         }
+    //     });
+    // }
 
     const sendCampaign = async () => {
         const data = formatDataForDatabase();

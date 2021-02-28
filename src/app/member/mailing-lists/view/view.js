@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,16 +12,24 @@ import { setPageTitle } from '../../../../store/actions/header';
 import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
 
-const ViewMailingList = () => {
-    const { id } = useParams();
-    const dispatch = useDispatch();
-    const { token } = useSelector(state => state.user_data);
+import * as icon_datatable from '../../../../assets/icons/gm-datatable.png';
+import * as icon_dashboard from '../../../../assets/icons/gm-dashboard.png';
+import * as icon_edit from '../../../../assets/icons/gm-edit.png';
+import * as icon_import_contacts from '../../../../assets/icons/gm-upload.png';
 
-    const [is_dashboard_view, setIsDashboardView] = useState(true);
-    const [list_campaigns, setListCampaigns] = useState([]);
-    const [mailing_list, setMailingList] = useState({});
-    const [show_updation_modal, setShowUpdationModal] = useState(false);
-    const [show_upload_modal, setShowUploadModal] = useState(false);
+
+const ViewMailingList = () => {
+    let { id } = useParams();
+    let dispatch = useDispatch();
+    let { token } = useSelector(state => state.user_data);
+    let icons_tray = useRef();
+
+    let [is_dashboard_view, setIsDashboardView] = useState(true);
+
+    let [list_campaigns, setListCampaigns] = useState([]);
+    let [mailing_list, setMailingList] = useState({});
+    let [show_updation_modal, setShowUpdationModal] = useState(false);
+    let [show_upload_modal, setShowUploadModal] = useState(false);
 
     useEffect(() => {
         AudienceService.readById(id, { token }).then(response => {
@@ -48,7 +56,8 @@ const ViewMailingList = () => {
         }).catch(error => {
             alert(`Error: could not fetch list campaigns`);
         });
-    }, [dispatch]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id]);
 
     return <div>
         {/* <div>
@@ -73,12 +82,23 @@ const ViewMailingList = () => {
         }
 
         <div className="floating-btn-wrapper">
-            <div className="icon-tray">
-                <div className="floating-action-btn gm-btn-secondary" id="view-contacts"></div>
-                <div className="floating-action-btn gm-btn-info" id="view-dashboard"></div>
-                <div className="floating-action-btn gm-btn-primary" id="import-contacts"></div>
+            <div className="icon-tray" ref={icons_tray}>
+                {
+                    is_dashboard_view ?
+                        <div className="floating-action-btn">
+                            <img alt="View Audience's Contact" src={icon_datatable} onClick={() => setIsDashboardView(false)} />
+                        </div> :
+                        <div className="floating-action-btn" onClick={() => setIsDashboardView(true)}>
+                            <img alt="View Audience's Dashboard" src={icon_dashboard} />
+                        </div>
+                }
+                <div className="floating-action-btn">
+                    <img alt="Edit Audience" src={icon_edit} onClick={() => setShowUpdationModal(true)} />
+                </div>
+                <div className="floating-action-btn">
+                    <img alt="Import Contacts" src={icon_import_contacts} onClick={() => setShowUploadModal(true)} />
+                </div>
             </div>
-            <div className="floating-btn"></div>
         </div>
 
         <GmModal title="Edit Audience" show_title={true} show_modal={show_updation_modal} onClose={() => setShowUpdationModal(false)}>

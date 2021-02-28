@@ -165,7 +165,7 @@ const ContactCreationForm = props => {
                         </div>
                     </div>
                 </div>
-                <div className="form-group col pr-0">
+                <div className="form-group col-12 pr-0">
                     <label htmlFor="date-of-birth">Date of birth</label>
                     <div className="form-row">
                         <div className="form-group col">

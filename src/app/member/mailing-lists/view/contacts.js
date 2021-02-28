@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import * as AudienceService from '../../../../services/audience';
 import * as ContactService from '../../../../services/contact';
 
-import DataTable from '../../../shared/datatable/datatable';
+import WebDataTable from '../../../shared/datatable/web/datatable';
 
 const AudienceContacts = ({ audience_contacts, list_id }) => {
     const { token } = useSelector(state => state.user_data);
@@ -137,7 +137,7 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
 
     return (
         loading ? 'loading data...' :
-            <DataTable
+            <WebDataTable
                 config={{ ...table_config, items }}
                 action={handleDatatableAction}
                 onClick={handleItemClick}

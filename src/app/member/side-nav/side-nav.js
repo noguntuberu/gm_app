@@ -7,7 +7,7 @@ import * as icon_campaign from '../../../assets/icons/gm-campaign.png';
 import * as icon_new_campaign from '../../../assets/icons/gm-new-cmpaign.png';
 import * as icon_contacts from '../../../assets/icons/gm-user.png';
 import * as icon_new_contact from '../../../assets/icons/gm-new-user.png';
-import * as icon_import_contacts from '../../../assets/icons/gm-new-user.png';
+import * as icon_import_contacts from '../../../assets/icons/gm-upload.png';
 import * as icon_audiences from '../../../assets/icons/gm-audience.png';
 import * as icon_new_audience from '../../../assets/icons/gm-create-audience.png';
 
@@ -20,6 +20,7 @@ const SideNav = props => {
         if (open_tray) {
             openMenuTray();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open_tray]);
 
     let closeMenuTray = () => {

@@ -1,5 +1,5 @@
 /** */
-import React, { useState, useEffect } from 'react';
+import React, { useState, } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import SideNav from './side-nav/side-nav';
@@ -12,13 +12,13 @@ import GMDashboard from './dashboard/dashboard';
 
 const MemberArea = () => {
     let [open_menu_tray, setOpenMenuTray] = useState(false);
-    
+
     return (
         <div>
             <section className="app-body">
-                <SideNav open_tray={open_menu_tray} onTrayClose={() => setOpenMenuTray(false)}/>
+                <SideNav open_tray={open_menu_tray} onTrayClose={() => setOpenMenuTray(false)} />
+                <MemberAreaHeader onHamburgerClick={() => setOpenMenuTray(true)} />
                 <section className="app-content">
-                    <MemberAreaHeader onHamburgerClick={() => setOpenMenuTray(true)}/>
                     <Switch>
                         <Route path="/campaigns" component={CampaignModule} />
                         <Route path="/contacts" component={ContactModule} />

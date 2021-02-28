@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Datatable from "../../../shared/datatable/datatable";
+import WebDatatable from "../../../shared/datatable/web/datatable";
 import { setPageTitle } from '../../../../store/actions/header';
 import * as DraftService from '../../../../services/draft';
 import * as CampaignService from '../../../../services/campaign';
@@ -47,10 +47,12 @@ const ListCampaigns = () => {
             {
                 title: 'Campaign Name',
                 key: 'name',
+                isTitle: true,
             },
             {
                 title: 'Sender Name',
                 key: 'sender_name',
+                isTagline: true,
             },
             {
                 title: 'Status',
@@ -65,11 +67,13 @@ const ListCampaigns = () => {
                             return <span className="gm-badge gm-bg-secondary">{value}</span>;
                     }
                 },
+                isBadge: true,
             },
             {
                 title: 'Date created',
                 key: 'created_on',
                 formatter: value => (new Date(value)).toDateString(),
+                isMetadata: true,
             },
         ],
         items: campaigns.sort((a, b) => b.id - a.id),
@@ -121,7 +125,7 @@ const ListCampaigns = () => {
 
     return (
         <div>
-            <Datatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
+            <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
         </div>
     )
 }

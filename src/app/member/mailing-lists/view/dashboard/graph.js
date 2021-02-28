@@ -52,7 +52,7 @@ const AudienceGraph = props => {
                             fill="rgb(117, 177, 117)"
                         />
                         <Tooltip />
-                        <XAxis dataKey='date' reversed={true} padding={{ left: 0 }} />
+                        <XAxis dataKey='date' angle={-30} reversed={true} padding={{ left: 0 }} />
                         <YAxis allowDecimals={false} padding={{ top: 0 }} />
 
                     </LineChart>

@@ -11,7 +11,7 @@ import {
 import GmModal from '../../../shared/modal/modal';
 import AddContactToAudience from '../add-to-audience/add-to-audience';
 import { setPageTitle } from '../../../../store/actions/header';
-import DataTable from '../../../shared/datatable/datatable';
+import WebDataTable from '../../../shared/datatable/web/datatable';
 
 const ListContacts = () => {
     const contacts_in_store = useSelector(state => state.contacts);
@@ -95,7 +95,7 @@ const ListContacts = () => {
 
     return <div>
         {loading ? 'loading data...' :
-            <DataTable
+            <WebDataTable
                 config={{ ...table_config, items: items.sort((a, b) => b.id - a.id) }}
                 action={handleDatatableAction}
                 onClick={handleItemClick}

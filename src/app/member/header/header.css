@@ -1,7 +1,15 @@
 /**/
 header.member-area-header {
     width: 100%;
-    padding: 10px 0;
+    height: auto;
+    padding: 10px 20px;
+
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    background-color: #ffffff;
+    z-index: 2;
 }
 
 .header-body {

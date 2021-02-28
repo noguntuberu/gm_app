@@ -1,5 +1,5 @@
 /** */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import './header.css';
 import * as hamburger_menu from '../../../assets/icons/gm-hamburger-blue.png';
@@ -8,7 +8,7 @@ const MemberAreaHeader = props => {
     let { onHamburgerClick } = props;
     let { page_title } = useSelector(state => state.header);
 
-    return <header className="member-area-header">
+    return <header className="shadow-sm member-area-header">
         <div className="">
             <div className="header-body">
                 <div className="hamburger-icon" onClick={onHamburgerClick}><img alt="hamburger icon" src={hamburger_menu} /></div>
