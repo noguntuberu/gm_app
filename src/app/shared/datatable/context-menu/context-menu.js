@@ -42,7 +42,7 @@ const ContextMenu = props => {
                     <div ref={context_menu} className="gm-action-wrap">
                         <div className="gm-action-context-menu">
                             <ul>
-                                {(actions).map((action, index) => <li key={index} onClick={e => selectAction(action, e)}>{action}</li>)}
+                                {(actions || []).map((action, index) => <li key={index} onClick={e => selectAction(action, e)}>{action}</li>)}
                             </ul>
                         </div>
                     </div>

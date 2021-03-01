@@ -5,6 +5,7 @@ import audiences from './reducers/audience';
 import campaigns from './reducers/campaign';
 import contacts from './reducers/contact';
 import header from './reducers/header';
+import metadata from './reducers/metadata';
 import plans from './reducers/plan';
 import processes from './reducers/process';
 import user_data from './reducers/user-data';
@@ -15,6 +16,7 @@ const appReducer = combineReducers({
     campaigns,
     contacts,
     header,
+    metadata,
     plans,
     processes,
     user_data,

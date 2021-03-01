@@ -1,0 +1,28 @@
+.gm-datatable-search, .gm-datatable-search input {
+    width: 100%;
+}
+
+.gm-datatable-item-list-wrapper {
+    height: 95vh;
+    /* padding-bottom: 30px; */
+    overflow-y: scroll;
+}
+
+.gm-datatable-actions {
+    width: fit-content;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 5px 30px 2.5px 30px;
+}
+
+.gm-datatable-actions-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gm-datatable-actions-wrapper .close-action {
+    font-size: 1.25em;
+}

@@ -1,0 +1,49 @@
+.gm-datatable-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    border-bottom: 1px solid #dddddd;
+    padding: 10px 0 ;
+}
+
+.gm-datatable-item:first-child {
+    padding-top: 0;
+}
+
+.gm-datatable-item > div {
+    width: 87.5%;
+}
+
+.gm-datatable-item > div:first-child {
+    width: 15px;
+    height: 15px;
+
+    float: left;
+}
+
+.gm-datatable-item input[type='checkbox'] {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.gm-datatable-item-title {
+    font-size: 1.15em;
+    font-weight: bold;
+}
+
+.gm-datatable-item-tagline {
+    font-size: 0.95em;
+}
+
+.gm-datatable-item-metadata {
+    font-size: 0.9em;
+    color: #777777;
+}
+
+.gm-datatable-item-badge {
+    float: right;
+}

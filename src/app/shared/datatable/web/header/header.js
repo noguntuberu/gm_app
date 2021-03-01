@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ContextMenu from '../context-menu/context-menu';
+import ContextMenu from '../../context-menu/context-menu';
 
 const DataTableHeader = props => {
     const { checkbox, checked, actions, action_callback, data, selection_callback, sort_callback } = props;

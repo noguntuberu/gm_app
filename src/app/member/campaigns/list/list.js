@@ -3,30 +3,27 @@ import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import WebDatatable from "../../../shared/datatable/web/datatable";
+import MobileDatatable from "../../../shared/datatable/mobile/datatable";
 import { setPageTitle } from '../../../../store/actions/header';
 import * as DraftService from '../../../../services/draft';
 import * as CampaignService from '../../../../services/campaign';
 import { removeOneCampaignFromStore } from "../../../../store/actions/campaign";
 
 const ListCampaigns = () => {
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const { token } = useSelector(state => state.user_data);
-    const campaigns_in_store = useSelector(state => state.campaigns);
+    let history = useHistory();
+    let dispatch = useDispatch();
+    let { token } = useSelector(state => state.user_data);
+    let { is_mobile_view } = useSelector(state => state.metadata);
 
-    const [campaigns, setCampaigns] = useState([]);
-
-    useEffect(() => {
-        setCampaigns(Object.values(campaigns_in_store));
-    }, [campaigns_in_store]);
+    let [campaigns, setCampaigns] = useState([]);
+    let [is_search_mode, setSearchMode] = useState(false);
 
     useEffect(() => {
         dispatch(setPageTitle('My Campaigns'));
-        CampaignService.read({ token, }).then(response => {
+        CampaignService.read({ token, query_string: 'page=0&population=50' }).then(response => {
             const { error, payload } = response;
             if (error) return;
 
-            // dispatch(loadCampaignsToStore(payload));
             setCampaigns(payload);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,6 +73,7 @@ const ListCampaigns = () => {
                 isMetadata: true,
             },
         ],
+        is_search_mode: is_search_mode,
         items: campaigns.sort((a, b) => b.id - a.id),
         search_key: 'name',
         search_text: '',
@@ -123,9 +121,42 @@ const ListCampaigns = () => {
         history.push(`/campaigns/${id}/view`);
     }
 
+    const handleDataRequest = async (page) => {
+        const response = await CampaignService.read({
+            token,
+            query_string: `page=${page}&population=50`
+        })
+        const { error, payload } = response;
+        if (error) return;
+
+        setCampaigns(payload);
+    }
+
+    const handleSearchRequest = async (keys, keyword, page) => {
+        const response = await CampaignService.search(keys, keyword, {
+            token,
+            query_string: `page=${page}&population=50`,
+        });
+        const { error, payload } = response;
+        if (error) return;
+
+        setCampaigns(payload);
+    }
+
     return (
         <div>
-            <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
+            {
+                is_mobile_view ?
+                    <MobileDatatable
+                        config={config}
+                        action={handleDatatableAction}
+                        onClick={handleItemClick}
+                        onListModeChange={setSearchMode}
+                        onDataRequest={handleDataRequest}
+                        onSearchRequest={handleSearchRequest}
+                    /> :
+                    <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
+            }
         </div>
     )
 }
