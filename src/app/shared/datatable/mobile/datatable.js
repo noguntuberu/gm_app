@@ -13,6 +13,7 @@ const DataTable = props => {
 
     let [page_number, setPageNumber] = useState(0);
     let [is_page_end, setIsPageEnd] = useState(false);
+    let [is_bulk_selection, setIsBulkSelection] = useState(false);
 
     let [selected_items, setSelectedItems] = useState({});
     let [table_items, setTableItems] = useState([]);
@@ -73,6 +74,7 @@ const DataTable = props => {
 
     const closeActionMode = () => {
         setSelectedItems({});
+        setIsBulkSelection(false);
     }
 
     const buildSearchKeys = () => {
@@ -141,11 +143,23 @@ const DataTable = props => {
         });
     }
 
+    const toggleBulkSelection = () => {
+        if (is_bulk_selection) {
+            closeActionMode();
+            return;
+        }
+
+        setIsBulkSelection(true);
+    }
+
     return <div className="gm-datatable">
         <section className="gm-datatable-header">
             {
                 Object.keys(selected_items).length ?
                     <div className="gm-datatable-actions-wrapper">
+                        <span className="">
+                            <input type="checkbox" onChange={toggleBulkSelection} />
+                        </span>
                         <div className="gm-datatable-actions">
                             {
                                 Object.keys(selected_items).length > 1 ?
@@ -170,6 +184,7 @@ const DataTable = props => {
                             index={index}
                             item_click_callback={handleItemClick}
                             key={index}
+                            bulk_selection={is_bulk_selection}
                             selection_callback={handleSelection}
                             unselection_callback={handleUnselection}
                             deselect={!Boolean(Object.keys(selected_items).length)}
@@ -183,6 +198,7 @@ const DataTable = props => {
                             index={index}
                             item_click_callback={handleItemClick}
                             key={index}
+                            bulk_selection={is_bulk_selection}
                             selection_callback={handleSelection}
                             unselection_callback={handleUnselection}
                             deselect={!Boolean(Object.keys(selected_items).length)}

@@ -3,7 +3,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import './item.css';
 
 const DatatableItem = props => {
-    let { data, deselect, fields, index, item_click_callback, selection_callback, unselection_callback } = props;
+    let {
+        data, deselect, fields, index, bulk_selection,
+        item_click_callback, selection_callback, unselection_callback
+    } = props;
     let checkbox_ref = useRef();
 
     let [item_badge, setItemBadge] = useState(null);
@@ -18,11 +21,17 @@ const DatatableItem = props => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+
     useEffect(() => {
-        if(deselect && is_selected) {
-            checkbox_ref.current.click();
+        let checkbox = checkbox_ref.current;
+        if (deselect && is_selected) {
+            checkbox.click();
         }
-    }, [deselect, is_selected]);
+
+        if(bulk_selection && !is_selected) {
+            checkbox.click()
+        }
+    }, [deselect, is_selected, bulk_selection]);
 
     const buildItemTitle = (value) => {
         setItemTitle(`${item_title} ${value}`);

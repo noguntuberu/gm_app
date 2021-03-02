@@ -26,7 +26,7 @@ const ListContacts = () => {
     useEffect(() => {
         dispatch(setPageTitle('My Contacts'));
         setLoading(true);
-        ContactService.read({ 
+        ContactService.read({
             token,
             query_string: `page=0&population=50`
         }).then(data => {
@@ -81,7 +81,7 @@ const ListContacts = () => {
     }
 
     const handleItemClick = data => {
-        // console.log(data);
+        history.push(`/contacts/${data.id}`);
     }
 
     const handleDataRequest = async (page) => {

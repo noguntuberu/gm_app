@@ -59,7 +59,7 @@ const ViewMailingList = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
-    return <div>
+    return <div className="content-wrapper">
         {/* <div>
             <div className="content-header-wrapper">
                 <div className="content-header-actions">
@@ -73,7 +73,7 @@ const ViewMailingList = () => {
             </div>
         </div> */}
         {is_dashboard_view ?
-            <div className="audience-dashboard">
+            <div className="audience-dashboard mt-3">
                 <Dashboard contacts={mailing_list.contacts} campaigns={list_campaigns} />
             </div> :
             <div className="mt-3">

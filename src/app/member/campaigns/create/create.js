@@ -2,12 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import CampaignCreationForm from './form';
-import {autoCompleter } from './auto-complete';
+import { autoCompleter } from './auto-complete';
 import * as FileService from '../../../../services/file';
 
 const CreateCampaign = () => {
     const { token } = useSelector(state => state.user_data);
-    
+
     const uploadImage = (blobInfo, success, failure, progress) => {
         const data = new FormData();
         data.append('image', blobInfo.blob());
@@ -23,7 +23,7 @@ const CreateCampaign = () => {
         browser_spellcheck: true,
         default_link_target: "_blank",
         file_picker_callback: () => {
-    
+
         },
         file_picker_types: 'file',
         fullpage_default_doctype: "<!DOCTYPE html>",
@@ -40,10 +40,12 @@ const CreateCampaign = () => {
             quickimage link hr restoredraft  spellchecker wordcount`,
         toolbar_mode: 'sliding',
         toolbar_sticky: false,
-        
+
     }
 
-    return <CampaignCreationForm config = {tinymce_config} />
+    return <div className="content-wrapper mt-3">
+        <CampaignCreationForm config={tinymce_config} />
+    </div>
 }
 
 export default CreateCampaign;

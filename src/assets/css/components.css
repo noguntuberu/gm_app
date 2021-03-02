@@ -1,7 +1,8 @@
 /** */
 .gm-badge {
-    border-radius: 5px;
-    padding: 2.5px 10px;
+    border-radius: 2.5px;
+    padding: 0.5px 10px 2px 10px;
+    font-size: 0.85em;
 }
 
 .gm-stat-card {

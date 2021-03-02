@@ -28,7 +28,9 @@ const EditCampaign = () => {
         toolbar_sticky: true,
     }
 
-    return <CampaignEditForm campaign_id={id} config={tinymce_config} />
+    return <div className="content-wrapper mt-3">
+        <CampaignEditForm campaign_id={id} config={tinymce_config} />
+    </div>
 }
 
 export default EditCampaign;
