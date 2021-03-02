@@ -1,6 +1,6 @@
 /** */
 import { urls } from './_url';
-import { apiGet, apiPost, } from './_http';
+import { apiGet, } from './_http';
 
 /** */
 const base_url = `${urls.mailing}/stats`;

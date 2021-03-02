@@ -60,7 +60,7 @@ const DatatableItem = props => {
         <div>
             <input ref={checkbox_ref} type='checkbox' value={is_selected} onChange={handleItemSelection} />
         </div>
-        <div onClick={item_click_callback}>
+        <div onClick={() => item_click_callback(data)}>
             <div className="gm-datatable-item-title">{item_title}</div>
             <div className="gm-datatable-item-tagline">{item_tagline}</div>
             <div className="gm-datatable-item-meta-wrapper">

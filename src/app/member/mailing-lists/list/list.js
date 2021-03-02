@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import GmModal from '../../../shared/modal/modal';
 import * as AudienceService from '../../../../services/audience';
 import { setPageTitle } from '../../../../store/actions/header';
-import { loadAudienceToStore } from '../../../../store/actions/audience';
 
 /** */
 import ListCreationForm from '../create/create';
+import MobileDatatable from "../../../shared/datatable/mobile/datatable";
 import WebDatatable from "../../../shared/datatable/web/datatable";
 
 /** */
@@ -17,24 +17,21 @@ const ListMailingLists = () => {
     const dispatch = useDispatch();
     const history = useHistory()
     const { token } = useSelector(state => state.user_data);
-    const mailing_lists_in_store = useSelector(state => state.audiences);
+    let { is_mobile_view } = useSelector(state => state.metadata);
 
     const [loading, setLoading] = useState(false);
     const [mailing_lists, setMailingLists] = useState([]);
     const [show_create_modal, setShowCreateModal] = useState(false);
-
-    useEffect(() => {
-        setMailingLists(Object.values(mailing_lists_in_store));
-    }, [mailing_lists_in_store]);
+    let [is_search_mode, setSearchMode] = useState(false);
 
     useEffect(() => {
         dispatch(setPageTitle('My Audiences'));
         setLoading(true);
-        AudienceService.read({ token }).then(response => {
+        AudienceService.read({ token, query_string: 'page=0&population=50' }).then(response => {
             const { error, payload } = response;
             if (error) return;
 
-            dispatch(loadAudienceToStore(payload));
+            setMailingLists(payload);
         }).finally(() => setLoading(false));
     }, [dispatch, token]);
 
@@ -54,18 +51,22 @@ const ListMailingLists = () => {
             {
                 title: 'Name',
                 key: 'name',
+                isTitle: true,
             },
             {
                 title: 'Number of Contacts',
                 key: 'contacts',
-                formatter: value => value.length,
+                formatter: value => is_mobile_view ? `${value.length} contacts` : value.length,
+                isTagline: true,
             },
             {
                 title: 'Date created',
                 key: 'created_on',
                 formatter: value => (new Date(value)).toDateString(),
+                isMetadata: true,
             },
         ],
+        is_search_mode: is_search_mode,
         items: mailing_lists.sort((a, b) => b.id - a.id),
         search_key: 'name',
         search_text: '',
@@ -85,14 +86,48 @@ const ListMailingLists = () => {
         history.push(`/audiences/${id}`);
     }
 
+    const handleDataRequest = async (page) => {
+        const response = await AudienceService.read({
+            token,
+            query_string: `page=${page}&population=50`
+        })
+        const { error, payload } = response;
+        if (error) return;
+
+        setMailingLists(payload);
+    }
+
+    const handleSearchRequest = async (keys, keyword, page) => {
+        const response = await AudienceService.search(keys, keyword, {
+            token,
+            query_string: `page=${page}&population=50`,
+        });
+        const { error, payload } = response;
+        if (error) return;
+
+        setMailingLists(payload);
+    }
+
     return (
         <div>
-            <button className="gm-btn gm-btn-secondary btn-sm  shadow mb-3" onClick={() => setShowCreateModal(true)} >Create Audience</button>
+            {/* <button className="gm-btn gm-btn-secondary btn-sm  shadow mb-3" onClick={() => setShowCreateModal(true)} >Create Audience</button> */}
             <GmModal title="Create Audience" show_title={true} show_modal={show_create_modal} onClose={() => setShowCreateModal(false)}>
                 <ListCreationForm />
             </GmModal>
             {!loading ?
-                <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox /> :
+                <>{
+                    is_mobile_view ?
+                        <MobileDatatable
+                            config={config}
+                            action={handleDatatableAction}
+                            onClick={handleItemClick}
+                            onListModeChange={setSearchMode}
+                            onDataRequest={handleDataRequest}
+                            onSearchRequest={handleSearchRequest}
+                        /> :
+                        <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
+                }</>
+                :
                 <></>
             }
         </div>

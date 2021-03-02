@@ -7,7 +7,6 @@ import MobileDatatable from "../../../shared/datatable/mobile/datatable";
 import { setPageTitle } from '../../../../store/actions/header';
 import * as DraftService from '../../../../services/draft';
 import * as CampaignService from '../../../../services/campaign';
-import { removeOneCampaignFromStore } from "../../../../store/actions/campaign";
 
 const ListCampaigns = () => {
     let history = useHistory();
@@ -87,7 +86,6 @@ const ListCampaigns = () => {
         }
 
         toast.success(`Draft deleted successfully.`);
-        dispatch(removeOneCampaignFromStore(id));
     }
 
     const handleDatatableAction = payload => {
@@ -140,7 +138,7 @@ const ListCampaigns = () => {
         const { error, payload } = response;
         if (error) return;
 
-        setCampaigns(payload);
+        setCampaigns(payload); 
     }
 
     return (

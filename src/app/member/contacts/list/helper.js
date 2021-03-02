@@ -13,19 +13,23 @@ export const table_config = {
         {
             title: 'First name',
             key: 'firstname',
+            isTitle: true,
         },
         {
             title: 'Last name',
             key: 'lastname',
+            isTitle: true,
         },
         {
             title: 'Email',
             key: 'email',
+            isTagline: true,
         },
         {
             title: 'Date of birth',
             key: 'date_of_birth',
             formatter: value => { return value ? (new Date(value)).toDateString() : '' },
+            isMetadata: true,
         },
     ],
     items: [],

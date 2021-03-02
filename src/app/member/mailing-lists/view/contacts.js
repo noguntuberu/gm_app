@@ -4,18 +4,20 @@ import React, { useState, useEffect } from 'react';
 import * as AudienceService from '../../../../services/audience';
 import * as ContactService from '../../../../services/contact';
 
+import MobileDatatable from "../../../shared/datatable/mobile/datatable";
 import WebDataTable from '../../../shared/datatable/web/datatable';
 
 const AudienceContacts = ({ audience_contacts, list_id }) => {
     const { token } = useSelector(state => state.user_data);
+    let { is_mobile_view } = useSelector(state => state.metadata);
 
-    // const history = useHistory();
 
     const [contacts, setContacts] = useState(audience_contacts);
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    let [is_search_mode, setSearchMode] = useState(false);
 
-    const table_config = {
+    const config = {
         actions: {
             bulk: ['Remove'],
             single: ['Remove'],
@@ -30,58 +32,66 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
             {
                 title: 'First name',
                 key: 'firstname',
+                isTitle: true,
             },
             {
                 title: 'Last name',
                 key: 'lastname',
+                isTitle: true,
             },
             {
                 title: 'Email',
                 key: 'email',
+                isTagline: true,
             },
             {
                 title: 'Date Added',
                 key: 'time_added',
                 formatter: value => { return (new Date(value)).toDateString() },
+                isMetadata: true,
             },
         ],
-        items: [],
+        is_search_mode: is_search_mode,
+        items: items,
         // search_key: 'name',
-        search_text: '',
+        search_text: 'Search contact',
     };
 
     useEffect(() => {
-        if(!contacts) return;
+        if (!contacts) return;
         setLoading(true);
 
         let contact_ids_to_fetch = [];
-        contacts.forEach( contact => {
-            if(!contact.is_active) return;
+        contacts.forEach(contact => {
+            if (!contact.is_active) return;
             contact_ids_to_fetch.push(contact.id);
         });
 
-        ContactService.read({ token, query_string: `id=${contact_ids_to_fetch.join()}` }).then(data => {
+        ContactService.read({
+            token,
+            query_string: `id=${contact_ids_to_fetch.join()}&page=0&population=50`
+        }).then(data => {
             const { payload, error } = data;
             setLoading(false);
 
             let contact_map = contacts.reduce((sack, contact) => {
                 return {
                     ...sack,
-                    [contact.id] : contact
+                    [contact.id]: contact
                 }
             }, {});
 
             let payload_map = payload.reduce((sack, element) => {
                 return {
                     ...sack,
-                    [element.id] : element
+                    [element.id]: element
                 }
             }, {});
 
             let merged_contacts = [];
             Object.keys(contact_map).forEach(id => {
-            if(!contact_map[id].is_active) return;
-            merged_contacts.push({
+                if (!contact_map[id].is_active) return;
+                merged_contacts.push({
                     ...contact_map[id],
                     ...(payload_map[id] || {})
                 });
@@ -135,14 +145,47 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
         // console.log(data);
     }
 
+    const handleDataRequest = async (page) => {
+        const response = await ContactService.read({
+            token,
+            query_string: `page=${page}&population=50`
+        })
+        const { error, payload } = response;
+        if (error) return;
+
+        setItems(payload);
+    }
+
+    const handleSearchRequest = async (keys, keyword, page) => {
+        const response = await ContactService.search(keys, keyword, {
+            token,
+            query_string: `page=${page}&population=50`,
+        });
+        const { error, payload } = response;
+        if (error) return;
+
+        setItems(payload);
+    }
+
     return (
         loading ? 'loading data...' :
-            <WebDataTable
-                config={{ ...table_config, items }}
-                action={handleDatatableAction}
-                onClick={handleItemClick}
-                checkbox
-            />
+            <>{
+                is_mobile_view ?
+                <MobileDatatable
+                    config={config}
+                    action={handleDatatableAction}
+                    onClick={handleItemClick}
+                    onListModeChange={setSearchMode}
+                    onDataRequest={handleDataRequest}
+                    onSearchRequest={handleSearchRequest}
+                /> :
+                <WebDataTable
+                    config={config}
+                    action={handleDatatableAction}
+                    onClick={handleItemClick}
+                    checkbox
+                />
+            }</>
     )
 }
 

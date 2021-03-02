@@ -29,6 +29,10 @@ export const readById = async (id, options = {}) => {
     return await apiGet(`${base_url}/${id}`, { ...options });
 }
 
+export const search = async (keys, keyword, options = {}) => {
+    return await apiGet(`${base_url}/search/${keys}/${keyword}`, { ...options });
+}
+
 export const updateById = async (id, options) => {
     return await apiPut(`${base_url}/${id}`, { ...options });
 }
