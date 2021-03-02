@@ -6,8 +6,6 @@ import MultiSelect from 'react-multi-select-component';
 import * as ContactService from '../../../../services/contact';
 import * as AudienceService from '../../../../services/audience';
 
-import ImportContact from '../import/import';
-import GmModal from '../../../shared/modal/modal';
 import { isEmailValid } from '../../../shared/utils/input';
 import { setPageTitle } from '../../../../store/actions/header';
 import { addOneContactToStore } from '../../../../store/actions/contact';
@@ -22,8 +20,7 @@ const ContactCreationForm = props => {
     const [street, setStreet] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
-    const [date_of_birth, setDateOfBirth] = useState();;
-    const [show_upload_modal, setShowUploadModal] = useState(false);
+    const [date_of_birth, setDateOfBirth] = useState();
 
     const [mailing_lists, setMailingLists] = useState([]);
     const [selected_lists, setSelectedLists] = useState([]);
@@ -185,12 +182,7 @@ const ContactCreationForm = props => {
                     <button className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" onClick={e => submitForm()}> Save </button> :
                     <button className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" disabled> Save </button>
                 }
-                {/* <button className="gm-btn gm-btn-secondary float-right w-25 mr-3  shadow" onClick={() => setShowUploadModal(true)}>Import Contacts</button> */}
             </div>
-
-            <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>
-                <ImportContact />
-            </GmModal>
         </div>
     )
 }

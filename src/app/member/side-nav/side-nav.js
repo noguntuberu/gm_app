@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SideNavItem from './item/item';
 import './side-nav.css';
 import * as icon_site from '../../../assets/icons/gm-logo-navy-wine.png';
@@ -11,16 +11,25 @@ import * as icon_import_contacts from '../../../assets/icons/gm-upload.png';
 import * as icon_audiences from '../../../assets/icons/gm-audience.png';
 import * as icon_new_audience from '../../../assets/icons/gm-create-audience.png';
 
+
+import GmModal from '../../shared/modal/modal';
+import ImportContact from '../../member/contacts/import/import';
+import ListCreationForm from '../../member/mailing-lists/create/create';
+
+
 const SideNav = props => {
     let { open_tray, onTrayClose } = props;
     let veil = useRef();
+
+    const [show_upload_modal, setShowUploadModal] = useState(false);
+    const [show_create_modal, setShowCreateModal] = useState(false);
 
     useEffect(() => {
         console.log({ open_tray })
         if (open_tray) {
             openMenuTray();
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open_tray]);
 
     let closeMenuTray = () => {
@@ -40,7 +49,7 @@ const SideNav = props => {
     }
 
     let fadeInTrayBackground = () => {
-        let tray = veil.current, opacity = 0; 
+        let tray = veil.current, opacity = 0;
         let fadeInAnimation = setInterval(() => {
             if (opacity > 0.3) {
                 tray.style.background = 'rgba(0, 0, 0, 0.35)';
@@ -56,7 +65,7 @@ const SideNav = props => {
 
 
     let fadeOutTrayBackground = () => {
-        let tray = veil.current, opacity = 0.35; 
+        let tray = veil.current, opacity = 0.35;
         let fadeOutAnimation = setInterval(() => {
             if (opacity < 0) {
                 tray.style.background = 'rgba(0, 0, 0, 0)';
@@ -88,7 +97,7 @@ const SideNav = props => {
 
     return (
         <nav className="side-nav-wrapper" ref={veil} onClick={() => closeMenuTray()}>
-            <div className="app-side-nav" onClick={ e => e.stopPropagation()}>
+            <div className="app-side-nav" onClick={e => e.stopPropagation()}>
                 <header>
                     <div className="nav-site-icon">
                         <img alt="Site Icon" src={icon_site} />
@@ -105,10 +114,10 @@ const SideNav = props => {
                     <div className="nav-divider"></div>
                     <SideNavItem title="All contacts" icon={icon_contacts} path="/contacts" onItemClick={closeMenuTray} />
                     <SideNavItem title="Create contact" icon={icon_new_contact} path="/contacts/new/single" onItemClick={closeMenuTray} />
-                    <SideNavItem title="Import contacts" icon={icon_import_contacts} path="" onItemClick={closeMenuTray} />
+                    <SideNavItem title="Import contacts" icon={icon_import_contacts} onClick={() => setShowUploadModal(true)} onItemClick={closeMenuTray} />
                     <div className="nav-divider"></div>
                     <SideNavItem title="All audiences" icon={icon_audiences} path="/audiences" onItemClick={closeMenuTray} />
-                    <SideNavItem title="Create audience" icon={icon_new_audience} path="" onItemClick={closeMenuTray} />
+                    <SideNavItem title="Create audience" icon={icon_new_audience} onClick={() => setShowCreateModal(true)} onItemClick={closeMenuTray} />
 
                     {/* <div className="side-sub-nav pl-5 pr-5 mt-4">
                     <div className="gm-btn btn-block gm-btn-secondary" onClick={() => history.push('/plans/choose')}>
@@ -117,6 +126,14 @@ const SideNav = props => {
                 </div> */}
                 </section>
             </div >
+            <div>
+                <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>
+                    <ImportContact />
+                </GmModal>
+                <GmModal title="Create Audience" show_title={true} show_modal={show_create_modal} onClose={() => setShowCreateModal(false)}>
+                    <ListCreationForm />
+                </GmModal>
+            </div>
         </nav >
     )
 }

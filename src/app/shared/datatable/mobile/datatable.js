@@ -100,7 +100,7 @@ const DataTable = props => {
 
         //
         if (content_height > scroll_top) return;
-        
+
         setIsPageEnd(true);
     }
 
@@ -157,15 +157,17 @@ const DataTable = props => {
             {
                 Object.keys(selected_items).length ?
                     <div className="gm-datatable-actions-wrapper">
-                        <span className="">
-                            <input type="checkbox" onChange={toggleBulkSelection} />
-                        </span>
-                        <div className="gm-datatable-actions">
-                            {
-                                Object.keys(selected_items).length > 1 ?
-                                    <ContextMenu actions={config.actions.bulk} callback={processAction} /> :
-                                    <ContextMenu actions={config.actions.single} callback={processAction} />
-                            }
+                        <div>
+                            <span className="gm-datatable-bulk-checkbox">
+                                <input type="checkbox" onChange={toggleBulkSelection} />
+                            </span>
+                            <div className="gm-datatable-actions">
+                                {
+                                    Object.keys(selected_items).length > 1 ?
+                                        <ContextMenu actions={config.actions.bulk} callback={processAction} /> :
+                                        <ContextMenu actions={config.actions.single} callback={processAction} />
+                                }
+                            </div>
                         </div>
                         <span className="close-action" onClick={closeActionMode}>x</span>
                     </div> :

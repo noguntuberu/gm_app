@@ -3,12 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** */
-import GmModal from '../../../shared/modal/modal';
 import * as AudienceService from '../../../../services/audience';
 import { setPageTitle } from '../../../../store/actions/header';
 
 /** */
-import ListCreationForm from '../create/create';
 import MobileDatatable from "../../../shared/datatable/mobile/datatable";
 import WebDatatable from "../../../shared/datatable/web/datatable";
 
@@ -21,7 +19,6 @@ const ListMailingLists = () => {
 
     const [loading, setLoading] = useState(false);
     const [mailing_lists, setMailingLists] = useState([]);
-    const [show_create_modal, setShowCreateModal] = useState(false);
     let [is_search_mode, setSearchMode] = useState(false);
 
     useEffect(() => {
@@ -110,10 +107,6 @@ const ListMailingLists = () => {
 
     return (
         <div>
-            {/* <button className="gm-btn gm-btn-secondary btn-sm  shadow mb-3" onClick={() => setShowCreateModal(true)} >Create Audience</button> */}
-            <GmModal title="Create Audience" show_title={true} show_modal={show_create_modal} onClose={() => setShowCreateModal(false)}>
-                <ListCreationForm />
-            </GmModal>
             {!loading ?
                 <>{
                     is_mobile_view ?

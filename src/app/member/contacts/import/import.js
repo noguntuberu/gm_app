@@ -81,10 +81,10 @@ const ImportContact = props => {
             </div>
             <div className="mt-3">
                 {loading ?
-                    <button className="gm-btn gm-btn-primary float-right  shadow" disabled>Importing...</button> :
-                    <button onClick={submit} className="gm-btn gm-btn-primary float-right  shadow">Import</button>
+                    <button className=" gm-btn gm-btn-primary float-right  shadow" disabled>Importing...</button> :
+                    <button onClick={submit} className="gm-btn gm-btn-primary float-right  shadow-sm">Import</button>
                 }
-                <button className="gm-btn gm-btn-secondary shadow float-right mr-3" onClick={() => downloadTemplate()}>Download Template</button>
+                <span className="float-right mr-3 text-primary py-2" onClick={() => downloadTemplate()}>Download Template</span>
             </div>
         </div>
     )
