@@ -11,6 +11,7 @@ import ImportContacts from '../../contacts/import/import';
 import { setPageTitle } from '../../../../store/actions/header';
 import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
+import * as ContactService from '../../../../services/contact';
 
 import * as icon_datatable from '../../../../assets/icons/gm-datatable.png';
 import * as icon_dashboard from '../../../../assets/icons/gm-dashboard.png';
@@ -27,20 +28,38 @@ const ViewMailingList = () => {
     let [is_dashboard_view, setIsDashboardView] = useState(true);
 
     let [list_campaigns, setListCampaigns] = useState([]);
+    let [list_contacts, setListContacts] = useState([]);
     let [mailing_list, setMailingList] = useState({});
     let [show_updation_modal, setShowUpdationModal] = useState(false);
     let [show_upload_modal, setShowUploadModal] = useState(false);
 
     useEffect(() => {
-        AudienceService.readById(id, { token }).then(response => {
-            const { error, payload } = response;
-            if (error) {
-                alert('could not fetch list data');
-                return
-            }
+        AudienceService.readById(id, { token }).then(async response => {
+            const { payload: audience } = response;
 
-            setMailingList(payload);
-            dispatch(setPageTitle(payload.name));
+            setMailingList(audience);
+            dispatch(setPageTitle(audience.name));
+
+            let contact_ids = [], contact_map = {};
+            audience.contacts.forEach(contact => {
+                contact_ids.push(contact.id);
+                contact_map[contact.id] = contact;
+            });
+            
+            let {
+                error,
+                payload: audience_contacts
+            } = await ContactService.read({ token, query_string: `id: ${contact_ids}` });
+
+            if (error) return;
+
+            let filtered_contacts = [];
+            audience_contacts.forEach(contact => {
+                if (!contact_map[contact.id]) return;
+                filtered_contacts.push(contact_map[contact.id]);
+            })
+
+            setListContacts(filtered_contacts);
         }).catch(error => {
             alert(`Error: ${error.message}`);
         });
@@ -74,10 +93,10 @@ const ViewMailingList = () => {
         </div> */}
         {is_dashboard_view ?
             <div className="content-wrapper audience-dashboard mt-3">
-                <Dashboard contacts={mailing_list.contacts} campaigns={list_campaigns} />
+                <Dashboard contacts={list_contacts} campaigns={list_campaigns} />
             </div> :
             <div className="">
-                <AudienceContacts audience_contacts={mailing_list.contacts} list_id={id} />
+                <AudienceContacts audience_contacts={list_contacts} list_id={id} />
             </div>
         }
 

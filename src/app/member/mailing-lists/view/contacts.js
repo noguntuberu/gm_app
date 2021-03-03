@@ -47,7 +47,7 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
             {
                 title: 'Date Added',
                 key: 'time_added',
-                formatter: value => { return (new Date(value)).toDateString() },
+                formatter: value => value? (new Date(value)).toDateString() : '',
                 isMetadata: true,
             },
         ],

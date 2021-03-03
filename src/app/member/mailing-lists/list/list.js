@@ -59,7 +59,7 @@ const ListMailingLists = () => {
             {
                 title: 'Date created',
                 key: 'created_on',
-                formatter: value => (new Date(value)).toDateString(),
+                formatter: value => value ? (new Date(value)).toDateString() : '',
                 isMetadata: true,
             },
         ],

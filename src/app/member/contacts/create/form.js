@@ -6,6 +6,7 @@ import MultiSelect from 'react-multi-select-component';
 import * as ContactService from '../../../../services/contact';
 import * as AudienceService from '../../../../services/audience';
 
+import { countries } from '../../../data/countries';
 import { isEmailValid } from '../../../shared/utils/input';
 import { setPageTitle } from '../../../../store/actions/header';
 import { addOneContactToStore } from '../../../../store/actions/contact';
@@ -139,17 +140,6 @@ const ContactCreationForm = props => {
                 <div className="form-group col-12">
                     <div className="form-row">
                         <div className="form-group col">
-                            <label htmlFor="state">State</label>
-                            <select
-                                className="gm-input"
-                                id="state"
-                                onChange={e => setState(e.target.value)}
-                            >
-                                <option value="">Select state</option>
-                                <option value="lagos">Lagos</option>
-                            </select>
-                        </div>
-                        <div className="form-group col">
                             <label htmlFor="country">Country</label>
                             <select
                                 className="gm-input"
@@ -157,8 +147,18 @@ const ContactCreationForm = props => {
                                 onChange={e => setCountry(e.target.value)}
                             >
                                 <option value="">Select country</option>
-                                <option value="ng">Nigeria</option>
+                                {countries.map((country, index) => <option key={country.code} value={country.code}>
+                                    {country.name}
+                                </option>)}
                             </select>
+                        </div>
+                        <div className="form-group col">
+                            <label htmlFor="state">State</label>
+                            <input
+                                className="gm-input"
+                                id="state"
+                                onInput={e => setState(e.target.value)}
+                            />
                         </div>
                     </div>
                 </div>
