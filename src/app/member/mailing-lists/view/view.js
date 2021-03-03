@@ -49,7 +49,7 @@ const ViewMailingList = () => {
             let {
                 error,
                 payload: audience_contacts
-            } = await ContactService.read({ token, query_string: `id: ${contact_ids}` });
+            } = await ContactService.read({ token, query_string: `id=${contact_ids}` });
 
             if (error) return;
 
@@ -64,7 +64,7 @@ const ViewMailingList = () => {
             alert(`Error: ${error.message}`);
         });
 
-        CampaignService.read({ query_string: `mailing_lists=${id}:`, token }).then(response => {
+        CampaignService.read({ query_string: `mailing_lists=${id}`, token }).then(response => {
             const { error, payload } = response;
             if (error) {
                 alert('could not fetch list campaigns');

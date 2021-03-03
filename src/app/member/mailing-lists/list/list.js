@@ -51,9 +51,9 @@ const ListMailingLists = () => {
                 isTitle: true,
             },
             {
-                title: 'Number of Contacts',
-                key: 'contacts',
-                formatter: value => is_mobile_view ? `${value.length} contacts` : value.length,
+                title: 'Description',
+                key: 'description',
+                formatter: value => is_mobile_view ? `${value.substr(0, 35)}...` : value,
                 isTagline: true,
             },
             {

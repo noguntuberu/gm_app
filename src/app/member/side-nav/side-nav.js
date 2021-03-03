@@ -25,7 +25,6 @@ const SideNav = props => {
     const [show_create_modal, setShowCreateModal] = useState(false);
 
     useEffect(() => {
-        console.log({ open_tray })
         if (open_tray) {
             openMenuTray();
         }

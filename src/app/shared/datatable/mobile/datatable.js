@@ -150,26 +150,40 @@ const DataTable = props => {
         }
 
         setIsBulkSelection(true);
+        setTimeout(() => {
+            let source = is_search_mode ? search_results : table_items;
+            let selections = source.reduce((sack, result) => {
+                if (!result.is_active) return sack;
+                return {
+                    ...sack,
+                    [result.id]: result
+                }
+            }, {});
+            setSelectedItems(selections);
+        }, 250);
     }
 
     return <div className="gm-datatable">
         <section className="gm-datatable-header">
             {
                 Object.keys(selected_items).length ?
-                    <div className="gm-datatable-actions-wrapper">
-                        <div>
-                            <span className="gm-datatable-bulk-checkbox">
-                                <input type="checkbox" onChange={toggleBulkSelection} />
-                            </span>
-                            <div className="gm-datatable-actions">
-                                {
-                                    Object.keys(selected_items).length > 1 ?
-                                        <ContextMenu actions={config.actions.bulk} callback={processAction} /> :
-                                        <ContextMenu actions={config.actions.single} callback={processAction} />
-                                }
+                    <div>
+                        <div className="gm-datatable-actions-wrapper">
+                            <div>
+                                <span className="gm-datatable-bulk-checkbox">
+                                    <input type="checkbox" onChange={toggleBulkSelection} />
+                                </span>
+                                <div className="gm-datatable-actions">
+                                    {
+                                        Object.keys(selected_items).length > 1 ?
+                                            <ContextMenu actions={config.actions.bulk} callback={processAction} /> :
+                                            <ContextMenu actions={config.actions.single} callback={processAction} />
+                                    }
+                                </div>
+                                <span className="gm-datatable-metadata">{Object.keys(selected_items).length} item(s)</span>
                             </div>
+                            <span className="close-action" onClick={closeActionMode}>x</span>
                         </div>
-                        <span className="close-action" onClick={closeActionMode}>x</span>
                     </div> :
                     <div className="gm-datatable-search">
                         <input type="text" placeholder={search_text || 'Search'} onInput={e => handleSearch(e.target.value)} />
@@ -185,7 +199,7 @@ const DataTable = props => {
                             fields={fields}
                             index={index}
                             item_click_callback={handleItemClick}
-                            key={index}
+                            key={item.id}
                             bulk_selection={is_bulk_selection}
                             selection_callback={handleSelection}
                             unselection_callback={handleUnselection}
@@ -199,7 +213,7 @@ const DataTable = props => {
                             fields={fields}
                             index={index}
                             item_click_callback={handleItemClick}
-                            key={index}
+                            key={item.id}
                             bulk_selection={is_bulk_selection}
                             selection_callback={handleSelection}
                             unselection_callback={handleUnselection}

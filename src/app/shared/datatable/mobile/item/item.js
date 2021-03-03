@@ -33,28 +33,20 @@ const DatatableItem = props => {
         }
     }, [deselect, is_selected, bulk_selection]);
 
-    const buildItemTitle = (value) => {
-        setItemTitle(`${item_title} ${value}`);
-    }
-
-    const buildItemTagline = (value) => {
-        setTagline(`${item_tagline} ${value}`);
-    }
-
-    const buildItemMetadata = (value) => {
-        setMetadata(`${item_metadata} ${value}`);
-    }
-
     const buildItem = () => {
+        let title = ``;
         fields.forEach((field) => {
             let { formatter, key } = field;
             let value = data[key];
             if (formatter) value = formatter(value);
 
             //
-            if (field.isTitle) buildItemTitle(value);
-            if (field.isTagline) buildItemTagline(value);
-            if (field.isMetadata) buildItemMetadata(value);
+            if (field.isTitle) {
+                title = `${title} ${value}`
+                setItemTitle(title)
+            };
+            if (field.isTagline) setTagline(value);
+            if (field.isMetadata) setMetadata(value);
             if (field.isBadge) setItemBadge(value);
         });
     }
