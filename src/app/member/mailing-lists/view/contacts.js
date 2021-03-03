@@ -13,6 +13,7 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
 
 
     const [contacts, setContacts] = useState(audience_contacts);
+    const [default_items, setDefaultItems] = useState([]);
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     let [is_search_mode, setSearchMode] = useState(false);
@@ -98,6 +99,7 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
             });
 
             if (!error) {
+                setDefaultItems(merged_contacts);
                 setItems(merged_contacts);
             }
         });
@@ -146,25 +148,25 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
     }
 
     const handleDataRequest = async (page) => {
-        const response = await ContactService.read({
-            token,
-            query_string: `page=${page}&population=50`
-        })
-        const { error, payload } = response;
-        if (error) return;
-
-        setItems(payload);
+        setItems(default_items);
     }
 
     const handleSearchRequest = async (keys, keyword, page) => {
-        const response = await ContactService.search(keys, keyword, {
-            token,
-            query_string: `page=${page}&population=50`,
-        });
-        const { error, payload } = response;
-        if (error) return;
+        let results = {};
+        items.forEach( item => {
+            let split_keys = keys.split(',');
+            split_keys.forEach(key => {
+                if(!item[key]) return;
 
-        setItems(payload);
+                let haystack = item[key].toLowerCase();
+                let needle = keyword.toLowerCase();
+                if (haystack.includes(needle)) {
+                    results[item.id] = item;
+                }
+            });
+        });
+
+        setItems(Object.values(results));
     }
 
     return (

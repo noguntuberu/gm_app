@@ -1,6 +1,6 @@
 export const table_config = {
     actions: {
-        bulk: ['Add to audience', 'Delete'],
+        bulk: ['Add to audience'],
         single: ['Add to audience','Edit', 'Delete'],
     },
     allow_bulk_action: true,
