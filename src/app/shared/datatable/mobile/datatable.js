@@ -135,7 +135,9 @@ const DataTable = props => {
     }
 
     const processAction = (name, item_index) => {
-        const is_single = item_index !== undefined ? item_index >= 0 : Object.keys(selected_items).length >= 1;
+        if (!Object.keys(selected_items).length) return;
+        
+        const is_single = Object.keys(selected_items).length === 1;
         action({
             name,
             type: is_single ? 'single' : 'bulk',

@@ -6,18 +6,13 @@ import {
     ResponsiveContainer, Tooltip, XAxis, YAxis
 } from 'recharts';
 import { processDataByWeek } from '../../../../shared/utils/graph';
+import { useSelector } from 'react-redux';
 
 const AudienceGraph = props => {
-    const { contacts } = props;
+    const { contacts } = props; 
     const [graph_data, setGraphData] = useState([]);
     const [period, setPeriod] = useState('week');
-    const [is_mobile_view, setIsMobileView] = useState(true);
-
-    useEffect(() => {
-        if (window.screen.width < 480) {
-            setIsMobileView(true);
-        }
-    }, []);
+    const { is_mobile_view } = useSelector(state => state.metadata);
 
     useEffect(() => {
         if (!contacts) return;
@@ -37,7 +32,7 @@ const AudienceGraph = props => {
                 <ResponsiveContainer width='100%' minHeight={250}>
                     <LineChart data={graph_data} margin={{ left: -40 }}>
                         <ReferenceLine />
-                        <CartesianAxis viewBox={{ width: '100%', height: 250}} />
+                        <CartesianAxis viewBox={{ width: '100%', height: 250 }} />
                         <CartesianGrid strokeDasharray='3 1 3' />
                         <Line
                             type="monotone"

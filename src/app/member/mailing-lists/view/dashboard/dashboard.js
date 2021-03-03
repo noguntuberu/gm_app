@@ -8,7 +8,7 @@ const AudienceDashboard = props => {
     let [stats, setStats] = useState({});
     let [audience_contacts, setAudienceContacts] = useState([]);
     let [unsubscribed_contacts, setUnsubscribedContacts] = useState([]);
-
+    
     useEffect(() => {
         if (!contacts || (campaigns && campaigns.length < 0)) return;
         if (!audience_contacts) return;
@@ -27,7 +27,7 @@ const AudienceDashboard = props => {
 
         let unsubscribed = [];
         contacts.forEach(contact => {
-            if (contact.is_unsubscribed) {
+            if (contact.is_unsubscribed) { 
                 stat.unsubscribed += 1;
                 unsubscribed.push(contact);
                 return;
@@ -54,7 +54,7 @@ const AudienceDashboard = props => {
                 <StatCard title='Unsubscribers' count={stats.unsubscribed} border_color='secondary' />
             </div>
         </div>
-        <div className="shadow-sm border row ml-0 mt-2 p-3 graph-wrapper">
+        <div className="shadow-sm border graph-wrapper">
             <AudienceGraph contacts={[...audience_contacts, ...unsubscribed_contacts]} />
         </div>
     </div>

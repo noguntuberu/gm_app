@@ -68,7 +68,7 @@ const GMDashboard = () => {
         }, 0);
 
         setNumberOfUnsubscribers(unsubscriber_count);
-    }, [audience_contacts]);
+    }, [audience_contacts]); 
 
 
     return <div className="content-wrapper">
