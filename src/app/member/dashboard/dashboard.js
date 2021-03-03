@@ -14,10 +14,10 @@ const GMDashboard = () => {
 
     let [number_of_audiences, setNumberOfAudiences] = useState(0);
     let [number_of_campaigns, setNumberOfCampaigns] = useState(0);
-    let [number_of_contacts, setNumberOfContacts] = useState(0);
     let [number_of_unsubscribers, setNumberOfUnsubscribers] = useState(0);
 
     let [audience_contacts, setAudienceContacts] = useState([]);
+    let [contacts, setContacts] = useState([]);
 
     useEffect(() => {
         dispatch(setPageTitle('Dashboard'));
@@ -53,7 +53,7 @@ const GMDashboard = () => {
                 return;
             }
 
-            setNumberOfContacts(payload.length);
+            setContacts(payload);
         }).catch(e => console.log(e)).finally(() => { });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,15 +75,15 @@ const GMDashboard = () => {
         <div className="mt-3">
             <div className="stat-card-pair-wrapper">
                 <div className="col-6">
-                    <StatCard title='Campaigns' count={number_of_campaigns} border_color='primary' />
+                    <StatCard title='Campaigns' count={number_of_campaigns} border_color='primary' path="/campaigns" />
                 </div>
                 <div className="col-6">
-                    <StatCard title='Contacts' count={number_of_contacts} border_color='info' />
+                    <StatCard title='Contacts' count={contacts.length} border_color='info' path="/contacts"/>
                 </div>
             </div>
             <div className="stat-card-pair-wrapper">
                 <div className="col-6">
-                    <StatCard title='Audiences' count={number_of_audiences} border_color='info' />
+                    <StatCard title='Audiences' count={number_of_audiences} border_color='info' path="/audiences"/>
                 </div>
                 <div className="col-6">
                     <StatCard title='Unsubscribers' count={number_of_unsubscribers} border_color='secondary' />
