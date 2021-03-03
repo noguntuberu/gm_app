@@ -143,6 +143,8 @@ const DataTable = props => {
             type: is_single ? 'single' : 'bulk',
             data: is_single ? Object.values(selected_items)[0] : Object.values(selected_items),
         });
+        
+        closeActionMode();
     }
 
     const toggleBulkSelection = () => {
