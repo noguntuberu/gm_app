@@ -14,7 +14,7 @@ const MemberAreaHeader = props => {
                 <div className="hamburger-icon" onClick={onHamburgerClick}><img alt="hamburger icon" src={hamburger_menu} /></div>
                 <div className="page-title">{page_title}</div>
             </div>
-            <div className="page-title-underline"></div>
+            {/* <div className="page-title-underline"></div> */}
         </div>
     </header>
 }

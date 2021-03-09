@@ -18,7 +18,7 @@ header.member-area-header {
     align-items: center;
 
     width: 100%;
-    margin-bottom: 2.5px;
+    /* margin-bottom: 2.5px; */
 }
 
 .hamburger-icon {
@@ -38,4 +38,14 @@ header.member-area-header {
 .page-title-underline {
     border-top: 2px solid rgb(133, 0, 29);
     width: 25%;
+}
+
+@media screen and (min-width:481px){
+    header.member-area-header {
+        padding: 15px 50px;
+    }
+
+    .page-title {
+        font-size: 1.45em;
+    }
 }

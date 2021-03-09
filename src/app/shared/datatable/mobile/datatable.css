@@ -78,3 +78,14 @@
     padding: 5px 0 0 15px;
     color: #666666;
 }
+
+
+@media screen and (min-width:481px) {
+    .gm-datatable-header {
+        position: unset;
+        background: unset;
+    }
+    .gm-datatable-table {
+        margin: 0;
+    }
+}

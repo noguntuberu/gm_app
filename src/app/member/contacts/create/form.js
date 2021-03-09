@@ -84,7 +84,7 @@ const ContactCreationForm = props => {
     return (
         <div className="mt-3">
             <div className="form-row">
-                <div className="form-group col-12">
+                <div className="form-group col-12 col-md-6">
                     <label htmlFor="firstname">First name *</label>
                     <input
                         type="text"
@@ -93,7 +93,7 @@ const ContactCreationForm = props => {
                         onInput={e => setFirstname(e.target.value)}
                     />
                 </div>
-                <div className="form-group col-12">
+                <div className="form-group col-12 col-md-6">
                     <label htmlFor="lastname">Last name</label>
                     <input
                         type="text"
@@ -104,16 +104,16 @@ const ContactCreationForm = props => {
                 </div>
             </div>
             <div className="form-row">
-                <div className="form-group col-12">
+                <div className="form-group col-12 col-md-6">
                     <label htmlFor="email">Email address *</label>
                     <input
                         type="email"
-                        className="gm-input"
+                        className="mt-md-1 gm-input"
                         id="email"
                         onInput={e => setEmail(e.target.value)}
                     />
                 </div>
-                <div className="form-group col-12">
+                <div className="form-group col-12 col-md-6">
                     <label htmlFor="email">Audience</label>
                     <MultiSelect
                         options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
@@ -139,10 +139,10 @@ const ContactCreationForm = props => {
             <div className="form-row">
                 <div className="form-group col-12">
                     <div className="form-row">
-                        <div className="form-group col">
+                        <div className="form-group col-12 col-md-6">
                             <label htmlFor="country">Country</label>
                             <select
-                                className="gm-input"
+                                className="mt-md-1 gm-input"
                                 id="country"
                                 onChange={e => setCountry(e.target.value)}
                             >
@@ -152,10 +152,10 @@ const ContactCreationForm = props => {
                                 </option>)}
                             </select>
                         </div>
-                        <div className="form-group col">
+                        <div className="form-group col-12 col-md-6">
                             <label htmlFor="state">State</label>
                             <input
-                                className="gm-input"
+                                className="mt-md-3 gm-input"
                                 id="state"
                                 onInput={e => setState(e.target.value)}
                             />

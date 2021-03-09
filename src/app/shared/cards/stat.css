@@ -6,3 +6,14 @@
     font-size: 1.25em;
     font-weight: 500;
 }
+
+@media screen and (min-width:481px) {
+    .stat-card-title {
+        font-size: 1.05em;
+    }
+
+    .stat-card-value {
+        font-size: 1.75em;
+        font-weight: 700;
+    }
+}

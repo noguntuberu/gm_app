@@ -82,3 +82,13 @@ table, thead, tbody, th, tr, td {
     width: auto;
     float: unset;
 }
+
+@media screen and (min-width:481px) {
+    .content-wrapper {
+        padding: 0 50px;
+    }
+
+    .graph-wrapper {
+        padding: 20px;
+    }
+}

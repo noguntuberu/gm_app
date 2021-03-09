@@ -111,3 +111,9 @@
 .gm-datatable-pagination button:first-child {
     margin-right: 10px;
 }
+
+@media screen and (min-width:481px) {
+    .gm-datatable {
+        padding: 20px 50px;
+    }
+}

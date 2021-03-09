@@ -43,3 +43,9 @@
     font-size: 25px;
     color: #666666;
 }
+
+@media screen and (min-width:481px){
+    .gm-modal {
+        padding: 0 50px;
+    }
+}

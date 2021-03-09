@@ -187,30 +187,30 @@ const CampaignCreationForm = props => {
 
     return <div className="mt-2">
         <div className="form-row">
-            <div className="form-group col-12">
+            <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="campaign_title">Name</label>
                 <input className="gm-input" id="campaign_title" type="text" defaultValue={campaign_name} onInput={e => setCampaignName(e.target.value)} />
             </div>
-            <div className="form-group col-12">
+            <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="campaign_subject">Subject</label>
                 <input className="gm-input" id="campaign_subject" type="text" defaultValue={campaign_subject} onInput={e => setCampaignSubject(e.target.value)} />
             </div>
         </div>
         <div className="form-row">
-            <div className="form-group col-12">
+            <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="sender_name">Sender's name</label>
                 <input className="gm-input" id="sender_name" type="text" defaultValue={sender_name} onInput={e => setSenderName(e.target.value)} />
             </div>
-            <div className="form-group col-12">
+            <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="sender_email">Sender's email</label>
                 <input className="gm-input" id="sender_email" type="text" defaultValue={sender_email} onInput={e => setSenderEmail(e.target.value)} />
             </div>
         </div>
         <div className="form-row">
-            <div className="form-group col-12">
+            <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="campaign_schedule">Schedule</label>
                 <input
-                    className="gm-input"
+                    className="pt-md-2 gm-input"
                     id="campaign_schedule"
                     type="date"
                     name="campaign-schedule"
@@ -218,7 +218,7 @@ const CampaignCreationForm = props => {
                     onChange={e => setCampaignSchedule(e.target.value)}
                 />
             </div>
-            <div className="form-group col-12">
+            <div className="form-group col-sm-12  col-md-6">
                 <label htmlFor="campaign_list">Audiences</label>
                 <MultiSelect
                     options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}

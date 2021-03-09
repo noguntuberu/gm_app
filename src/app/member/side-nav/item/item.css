@@ -19,3 +19,9 @@
 .nav-title {
     font-size: 0.95em;
 }
+
+@media screen and (min-width:481px){
+    .side-nav-item {
+        padding: 12.5px 40px;
+    }
+}
