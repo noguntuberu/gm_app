@@ -114,6 +114,18 @@
 
 @media screen and (min-width:481px) {
     .gm-datatable {
-        padding: 20px 50px;
+        padding: 20px 150px 20px 50px;
+    }
+
+    .gm-datatable > section.gm-datatable-header {
+        padding: 10px 0 !important;
+    }
+
+    .gm-datatable-search{
+        width: 450px !important;
+    }
+
+    .gm-datatable-search > input{
+        background-color: #fff !important;
     }
 }

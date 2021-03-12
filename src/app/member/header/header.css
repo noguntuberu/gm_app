@@ -1,7 +1,6 @@
 /**/
 header.member-area-header {
     width: 100%;
-    height: 8.5vh;
     padding: 10px 20px;
 
     position: sticky;
@@ -43,16 +42,20 @@ header.member-area-header {
 
 @media screen and (min-width:481px){
     header.member-area-header {
-        padding: 15px 50px;
+        padding: 15px 25px;
     }
 
     .page-title {
-        font-size: 1.45em;
+        font-size: 1.25em;
     }
 }
 
 @media screen and (min-width:1025px){
     .hamburger-icon {
         display: none;
+    }
+
+    header.member-area-header {
+        padding-left: 50px;
     }
 }

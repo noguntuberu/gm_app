@@ -6,7 +6,7 @@
 }
 
 .side-nav-item:hover, .side-nav-item:active {
-    background-color: #dddddd;
+    background-color: #cccccc;
 }
 
 .nav-icon {
@@ -26,13 +26,21 @@
     }
 }
 
-@media screen and (min-width: 1025px){
+@media screen and (min-width: 1024px){
     .nav-title {
         font-size: 1.05em;
     }
     
     .side-nav-item:hover, .side-nav-item:active {
-        background-color: #b2cdd8;
+        background-color: #d8d8d860;
         font-weight: bold;
+    }
+}
+
+@media screen and (min-width: 1278px) {
+    .side-nav-item {
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+        padding-left: 20px;
     }
 }

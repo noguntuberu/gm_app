@@ -88,10 +88,10 @@ table, thead, tbody, th, tr, td {
     .app-content {
         height: 100vh;
         overflow-y: scroll;
-        background-color: #efefef;
+        background-color: #f9f9f9;
     }
     .content-wrapper {
-        padding: 0 50px;
+        padding: 0 30px;
     }
 
     .graph-wrapper {
@@ -106,10 +106,13 @@ table, thead, tbody, th, tr, td {
     }
 
     .content-wrapper {
-        padding-right: 250px;
+        padding-right: 150px;
+        padding-left: 50px;
     }
 
     .graph-wrapper {
         padding: 30px;
+        border-radius: 7.5px;
+        background-color: #ffffff;
     }
 }

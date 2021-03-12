@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import './item.css';
 
 const SideNavItem = props => {
-    let { icon, title, path, onClick, onItemClick } = props
+    let { icons, title, path, onClick, onItemClick } = props
     let history = useHistory();
 
     let handleItemClick = () => {
@@ -17,7 +17,7 @@ const SideNavItem = props => {
 
     return <div className="side-nav-item" onClick={handleItemClick}>
         <div className="nav-icon">
-            <img alt={`${title} icon`} src={icon} />
+            <img alt={`${title} icon`} src={icons[0]} />
         </div>
         <div className="nav-title">{title}</div>
     </div>
