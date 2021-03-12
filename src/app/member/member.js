@@ -33,8 +33,8 @@ const MemberArea = () => {
         <div>
             <section className="app-body">
                 <SideNav open_tray={open_menu_tray} onTrayClose={() => setOpenMenuTray(false)} />
-                <MemberAreaHeader onHamburgerClick={() => setOpenMenuTray(true)} />
                 <section className="app-content">
+                    <MemberAreaHeader onHamburgerClick={() => setOpenMenuTray(true)} />
                     <Switch>
                         <Route path="/campaigns" component={CampaignModule} />
                         <Route path="/contacts" component={ContactModule} />

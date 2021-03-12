@@ -1,16 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import SideNavItem from './item/item';
 import './side-nav.css';
-import * as icon_site from '../../../assets/icons/gm-logo-navy-wine.png';
-import * as icon_dashboard from '../../../assets/icons/gm-dashboard.png';
-import * as icon_campaign from '../../../assets/icons/gm-campaign.png';
-import * as icon_new_campaign from '../../../assets/icons/gm-new-cmpaign.png';
-import * as icon_contacts from '../../../assets/icons/gm-user.png';
-import * as icon_new_contact from '../../../assets/icons/gm-new-user.png';
-import * as icon_import_contacts from '../../../assets/icons/gm-upload.png';
-import * as icon_audiences from '../../../assets/icons/gm-audience.png';
-import * as icon_new_audience from '../../../assets/icons/gm-create-audience.png';
 
+import * as icon_site from '../../../assets/icons/site-icon-colored.png';
+import * as icon_dashboard from '../../../assets/icons/graph-dark.png';
+import * as icon_campaign from '../../../assets/icons/campaign-dark.png';
+import * as icon_new_campaign from '../../../assets/icons/new-campaign-dark.png';
+import * as icon_contacts from '../../../assets/icons/contact-dark.png';
+import * as icon_new_contact from '../../../assets/icons/new-contact-dark.png';
+import * as icon_import_contacts from '../../../assets/icons/upload-dark.png';
+import * as icon_audiences from '../../../assets/icons/audience-dark.png';
+import * as icon_new_audience from '../../../assets/icons/new-audience-dark.png';
+
+
+import * as icon_dashboard_active from '../../../assets/icons/graph-active.png';
+import * as icon_campaign_active from '../../../assets/icons/campaign-active.png';
+import * as icon_new_campaign_active from '../../../assets/icons/new-campaign-active.png';
+import * as icon_contacts_active from '../../../assets/icons/contact-active.png';
+import * as icon_new_contact_active from '../../../assets/icons/new-contact-active.png';
+import * as icon_import_contacts_active from '../../../assets/icons/upload-active.png';
+import * as icon_audiences_active from '../../../assets/icons/audience-active.png';
+import * as icon_new_audience_active from '../../../assets/icons/new-audience-active.png';
 
 import GmModal from '../../shared/modal/modal';
 import ImportContact from '../../member/contacts/import/import';
@@ -20,6 +31,7 @@ import ListCreationForm from '../../member/mailing-lists/create/create';
 const SideNav = props => {
     let { open_tray, onTrayClose } = props;
     let veil = useRef();
+    let { is_mobile_view } = useSelector(state => state.metadata);
 
     const [show_upload_modal, setShowUploadModal] = useState(false);
     const [show_create_modal, setShowCreateModal] = useState(false);
@@ -45,6 +57,10 @@ const SideNav = props => {
             tray_left += 10;
             tray.style.left = `-${tray_left}%`;
         }, 20);
+    }
+
+    let determineIcon = (dark, light) => {
+        return is_mobile_view ? dark : light;
     }
 
     let fadeInTrayBackground = () => {
@@ -99,24 +115,56 @@ const SideNav = props => {
             <div className="app-side-nav" onClick={e => e.stopPropagation()}>
                 <header>
                     <div className="nav-site-icon">
-                        <img alt="Site Icon" src={icon_site} />
+                            <img alt="Site Icon" src={icon_site} />
                     </div>
                     <div className="nav-site-name">
                         Go-Mailer
                     </div>
                 </header>
                 <section>
-                    <SideNavItem title="Dashboard" icon={icon_dashboard} path="/dashboard" onItemClick={closeMenuTray} />
+                    <SideNavItem title="Dashboard"
+                        icons={[icon_dashboard, icon_dashboard_active]}
+                        path="/dashboard"
+                        onItemClick={closeMenuTray}
+                    />
                     <div className="nav-divider"></div>
-                    <SideNavItem title="All campaigns" icon={icon_campaign} path="/campaigns" onItemClick={closeMenuTray} />
-                    <SideNavItem title="Create campaign" icon={icon_new_campaign} path="/campaigns/new" onItemClick={closeMenuTray} />
+                    <SideNavItem title="All campaigns"
+                        icons={[icon_campaign, icon_campaign_active]}
+                        path="/campaigns"
+                        onItemClick={closeMenuTray}
+                    />
+                    <SideNavItem title="Create campaign"
+                        icons={[icon_new_campaign, icon_new_campaign_active]}
+                        path="/campaigns/new"
+                        onItemClick={closeMenuTray}
+                    />
                     <div className="nav-divider"></div>
-                    <SideNavItem title="All contacts" icon={icon_contacts} path="/contacts" onItemClick={closeMenuTray} />
-                    <SideNavItem title="Create contact" icon={icon_new_contact} path="/contacts/new/single" onItemClick={closeMenuTray} />
-                    <SideNavItem title="Import contacts" icon={icon_import_contacts} onClick={() => setShowUploadModal(true)} onItemClick={closeMenuTray} />
+                    <SideNavItem title="All contacts"
+                        icons={[icon_contacts, icon_contacts_active]}
+                        path="/contacts"
+                        onItemClick={closeMenuTray}
+                    />
+                    <SideNavItem title="Create contact"
+                        icons={[icon_new_contact, icon_new_contact_active]}
+                        path="/contacts/new/single"
+                        onItemClick={closeMenuTray}
+                    />
+                    <SideNavItem title="Import contacts"
+                        icons={[icon_import_contacts, icon_import_contacts_active]}
+                        onClick={() => setShowUploadModal(true)}
+                        onItemClick={closeMenuTray}
+                    />
                     <div className="nav-divider"></div>
-                    <SideNavItem title="All audiences" icon={icon_audiences} path="/audiences" onItemClick={closeMenuTray} />
-                    <SideNavItem title="Create audience" icon={icon_new_audience} onClick={() => setShowCreateModal(true)} onItemClick={closeMenuTray} />
+                    <SideNavItem title="All audiences"
+                        icons={[icon_audiences, icon_audiences_active]}
+                        path="/audiences"
+                        onItemClick={closeMenuTray}
+                    />
+                    <SideNavItem title="Create audience"
+                        icons={[icon_new_audience, icon_new_audience_active]}
+                        onClick={() => setShowCreateModal(true)}
+                        onItemClick={closeMenuTray}
+                    />
 
                     {/* <div className="side-sub-nav pl-5 pr-5 mt-4">
                     <div className="gm-btn btn-block gm-btn-secondary" onClick={() => history.push('/plans/choose')}>

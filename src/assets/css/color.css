@@ -9,7 +9,7 @@
 }
 
 .gm-bg-primary {
-    background-color: rgb(0, 117, 195);
+    background-color: rgb(0, 151, 197);
     color: #ffffff;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .gm-border-primary {
-    border-color: rgb(0, 117, 195) !important;
+    border-color: rgb(0, 151, 197) !important;
 }
 
 .gm-border-secondary {
@@ -63,7 +63,7 @@
 }
 
 .gm-card-border-primary {
-    border-left-color: rgb(0, 117, 195) !important;
+    border-left-color: rgb(0, 151, 197) !important;
 }
 
 .gm-card-border-secondary {

@@ -16,7 +16,8 @@
     height: 100%;
     width: 75%;
 
-    background-color: rgb(255,255,255);
+    background-color: rgb(0, 151, 197);
+    color: #fff
 }
 
 .app-side-nav header {
@@ -24,9 +25,8 @@
     flex-direction: row;
 
     width: 100%;
-    padding: 15px 10px;
-    box-shadow: 0px 0.5px 5px #999999;
-    /* border-bottom: 1px solid rgba(0, 169, 241, 0.212); */
+    padding: 15px 10px;        
+    box-shadow: -2.0px 0.5px 5px #ffffffc4;
 }
 
 .nav-site-icon {
@@ -40,7 +40,7 @@
     width: 100px;
     margin-left: 12.5px;
     font-size: 1.35em;
-    color: #444444;
+    color: #FFFFFF;
 }
 
 .app-side-nav section {
@@ -51,7 +51,7 @@
 .nav-divider {
     float: right;
     width: 90%;
-    border-top: 1px solid #eeeeee;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
     margin: 5px 0;
 }
 
@@ -84,5 +84,52 @@
 
     .app-side-nav header {
         padding: 15px 25px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .app-side-nav {
+        width: 100%;
+    }
+
+    .side-nav-wrapper {
+        position: unset;
+     
+        float: left;
+        width: 25%;
+    }
+
+    .app-side-nav header {
+        box-shadow: 0px 0.5px 5px #ffffff;
+        padding: 15px 25px;
+    }
+
+    .nav-site-icon {
+        width: 28.5px;
+    }
+
+    .nav-site-name {
+        width: 70%;
+        margin-left: 15px;
+        font-size: 1.65em;
+    }
+
+    .nav-divider {
+        width: 87%;
+        margin: 5px 0;
+    }
+}
+
+@media screen and (min-width: 1278px) {
+    .side-nav-wrapper {
+        width: 20%;
+    }
+    
+    .app-side-nav header, .app-side-nav section {
+        padding-left: 40px;
+    }
+
+    .app-side-nav header {
+        padding: 15px 60px;
     }
 }

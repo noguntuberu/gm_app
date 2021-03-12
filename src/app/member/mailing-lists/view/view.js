@@ -13,10 +13,10 @@ import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
 import * as ContactService from '../../../../services/contact';
 
-import * as icon_datatable from '../../../../assets/icons/gm-datatable.png';
-import * as icon_dashboard from '../../../../assets/icons/gm-dashboard.png';
-import * as icon_edit from '../../../../assets/icons/gm-edit.png';
-import * as icon_import_contacts from '../../../../assets/icons/gm-upload.png';
+import * as icon_datatable from '../../../../assets/icons/table-dark.png';
+import * as icon_dashboard from '../../../../assets/icons/graph-dark.png';
+import * as icon_edit from '../../../../assets/icons/edit-dark.png';
+import * as icon_import_contacts from '../../../../assets/icons/upload-dark.png';
 
 
 const ViewMailingList = () => {

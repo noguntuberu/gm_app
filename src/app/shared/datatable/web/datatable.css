@@ -48,12 +48,12 @@
 
 /**/
 .gm-datatable-table table{
-    border: 1px solid rgb(0, 117, 195, 0.5);
+    border: 1px solid rgb(0, 151, 197, 0.5);
 }
 
 .gm-datatable thead {
     border-bottom: 2px solid #ddd;
-    background: rgb(0, 117, 195, 0.75);
+    background: rgb(0, 151, 197, 0.95);
     color:#fff;
 }
 

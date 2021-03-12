@@ -33,7 +33,7 @@ const ViewCampaign = () => {
 
     return <div className="content-wrapper mt-3">
         <div className="campaign-view-wrapper">
-            <div className="stat-card-pair-wrapper">
+            <div className="stat-card-pair-wrapper col-lg-6 p-lg-0 pr-lg-2">
                 <div className="col-6">
                     <StatCard title='Sends' count={campaign_stat.failed_sends + campaign_stat.successful_sends} border_color='primary' />
                 </div>
@@ -41,7 +41,7 @@ const ViewCampaign = () => {
                     <StatCard title='Sent' count={campaign_stat.successful_sends} border_color='success' />
                 </div>
             </div>
-            <div className="stat-card-pair-wrapper">
+            <div className="stat-card-pair-wrapper col-lg-6 p-lg-0">
                 <div className="col-6">
                     <StatCard title='Failed' count={campaign_stat.failed_sends} border_color='secondary' />
                 </div>

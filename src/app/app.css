@@ -75,6 +75,7 @@ table, thead, tbody, th, tr, td {
 }
 
 .graph-wrapper {
+    margin-top: 10px;
     padding: 10px;
 }
 
@@ -84,11 +85,31 @@ table, thead, tbody, th, tr, td {
 }
 
 @media screen and (min-width:481px) {
+    .app-content {
+        height: 100vh;
+        overflow-y: scroll;
+        background-color: #efefef;
+    }
     .content-wrapper {
         padding: 0 50px;
     }
 
     .graph-wrapper {
         padding: 20px;
+    }
+}
+
+@media screen and (min-width: 1278px) {
+    .app-content {
+        float: left;
+        width: 80%;
+    }
+
+    .content-wrapper {
+        padding-right: 250px;
+    }
+
+    .graph-wrapper {
+        padding: 30px;
     }
 }

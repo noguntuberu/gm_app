@@ -59,3 +59,16 @@
 
     border-radius: 50%;
 }
+
+@media screen and (min-width:481px) {
+    .icon-tray {
+        right: 50px;
+    }
+}
+
+@media screen and (min-width: 1278px) {
+    .icon-tray {
+        right: 250px;
+        width: 110px;
+    }
+}

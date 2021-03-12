@@ -26,3 +26,15 @@
 .twin-input:nth-child(odd) {
     margin-top: 0;
 }
+
+@media screen and (min-width:481px){
+    .guest-form-wrap {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width:481px){
+    .guest-form-wrap {
+        width: 40%;
+    }
+}
