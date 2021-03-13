@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ContextMenu from '../../context-menu/context-menu';
 
 const DataTableItem = props => {
     const {
-        actions, action_callback,
-        checkbox, data,
-        fields, index, item_click_callback, selection_callback,
+        actions, action_callback, deselect,
+        checkbox, data, bulk_selection,
+        fields, index, item_click_callback, 
+        selection_callback, unselection_callback,
     } = props;
+    let checkbox_ref = useRef();
 
     const [row_data, setRowData] = useState([]);
-    const [item_is_selected, setItemIsSelected] = useState(false);
-
-    useEffect(() => {
-        if (data.metadata) {
-            setItemIsSelected(data.metadata.checked);
-        }
-    }, [data.metadata]);
+    let [is_selected, setIsSelected] = useState(false);
 
     useEffect(() => {
         let field_keys = {};
@@ -33,6 +29,17 @@ const DataTableItem = props => {
         setRowData(cells);
     }, [data, fields, index, item_click_callback]);
 
+    useEffect(() => {
+        let checkbox = checkbox_ref.current;
+        if (deselect && is_selected) {
+            checkbox.click();
+        }
+
+        if (bulk_selection && !is_selected) {
+            checkbox.click()
+        }
+    }, [deselect, is_selected, bulk_selection]);
+
     const processAction = action => {
         selection_callback({
             data,
@@ -43,36 +50,17 @@ const DataTableItem = props => {
         action_callback(action, index);
     }
 
-    const toggleSelection = () => {
-        setItemIsSelected(!item_is_selected);
-        selection_callback({
-            data,
-            index,
-            action_type: 'single',
-            selected: !item_is_selected,
-        });
+    const handleItemSelection = () => {
+        if (!is_selected) selection_callback(data);
+        else unselection_callback(data.id);
+        setIsSelected(!is_selected);
     }
 
     return (
         <tr>
             {checkbox ?
                 <td key={`checkbox-${index}`}>
-                    {item_is_selected ?
-                        <input
-                            type='checkbox'
-                            value={item_is_selected}
-                            onChange={e => toggleSelection()}
-                            onClick={e => e.stopPropagation()}
-                            checked
-                        />
-                        :
-                        <input
-                            type='checkbox'
-                            value={item_is_selected}
-                            onChange={e => toggleSelection()}
-                            onClick={e => e.stopPropagation()}
-                        />
-                    }
+                    <input ref={checkbox_ref} type='checkbox' value={is_selected} onChange={handleItemSelection} />
                 </td>
                 :
                 ''

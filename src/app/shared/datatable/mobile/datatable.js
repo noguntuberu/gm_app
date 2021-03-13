@@ -105,7 +105,7 @@ const DataTable = props => {
             offset_height = target.offsetHeight,
             content_height = scroll_height - offset_height;
 
-        //
+        // 
         if (content_height > scroll_top) return;
 
         setIsPageEnd(true);
@@ -147,7 +147,7 @@ const DataTable = props => {
         setPageNumber((page_number + 1));
     }
 
-    const processAction = (name, item_index) => {
+    const processAction = (name) => {
         if (!Object.keys(selected_items).length) return;
 
         const is_single = Object.keys(selected_items).length === 1;

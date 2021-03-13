@@ -14,6 +14,7 @@ const DataTable = props => {
     const [page_number, setPageNumber] = useState(0);
 
     const [is_all_selected, setIsAllSelected] = useState(false);
+    let [is_bulk_selection, setIsBulkSelection] = useState(false);
     const [selected_items, setSelectedItems] = useState({});
 
     const [all_items, setAllItems] = useState(items);
@@ -37,6 +38,12 @@ const DataTable = props => {
         setTableItems(processed_items.slice());
     }, [items]);
 
+    /** */
+    const closeActionMode = () => {
+        setSelectedItems({});
+        setIsBulkSelection(false);
+    }
+
     const formatDataTableFooter = (page_number, number_of_rows_to_display, items) => {
         const start = page_number ? page_number * number_of_rows_to_display + 1 : 1;
         const end = (number_of_rows_to_display + start) - 1;
@@ -46,23 +53,14 @@ const DataTable = props => {
         return items.length ? content_text_for_nonempty_data : content_text_for_empty_data;
     }
 
-    const handleAllSelection = (is_selected = false) => {
-        let end = (page_number * number_of_rows_to_display) + number_of_rows_to_display
-        let items = handleNumberOfItemsToDisplay();
-        if (is_selected) {
-            setSelectedItems(items.reduce((result, item, index) => ({
-                ...result,
-                [index]: item,
-            }), {}));
-
-            items.forEach(item => item.metadata.checked = true);
-        } else {
-            setSelectedItems({});
-            items.forEach(item => item.metadata.checked = false);
-        }
-
-        setIsAllSelected(is_selected);
-        setTableItems([...items, ...table_items.slice(end)]);
+    const formatPagination = () => {
+        const high = Math.ceil(table_items.length / number_of_rows_to_display);
+        return (
+            <div className="gm-datatable-pagination">
+                {page_number > 0 ? <button onClick={() => handlePageChange(-1)}> {'<'} </button> : <button disabled > {'<'} </button>}
+                {page_number < high - 1 ? <button onClick={() => handlePageChange(1)}> {'>'} </button> : <button disabled > {'>'} </button>}
+            </div>
+        );
     }
 
     const handleItemClick = item_data => {
@@ -86,25 +84,15 @@ const DataTable = props => {
         setTableItems(results);
     }
 
-    const handleSingleSelection = (selection_data) => {
-        const { data, index, selected } = selection_data
-        let selections = selected_items;
-        let items = table_items;
-
-        if (!selected) {
-            delete selections[index];
-            items[index].metadata.checked = false;
-            setIsAllSelected(false);
-        } else {
-            selections[index] = data;
-            items[index].metadata.checked = true;
-            if (Object.keys(selections).length === number_of_rows_to_display) {
-                setIsAllSelected(true);
-            }
-        }
-
+    const handleSelection = (selected_item) => {
+        let selections = { ...selected_items, [selected_item.id]: selected_item };
         setSelectedItems(selections);
-        setTableItems(items);
+    }
+
+    const handleUnselection = (id) => {
+        let selections = { ...selected_items };
+        delete selections[id];
+        setSelectedItems(selections);
     }
 
     const handleSort = (field, is_ascending) => {
@@ -124,23 +112,35 @@ const DataTable = props => {
         setTableItems([...sorted_items]);
     }
 
-    const processAction = (name, item_index) => {
-        const is_single = item_index >= 0;
+    const processAction = (name) => {
+        if (!Object.keys(selected_items).length) return;
+
+        const is_single = Object.keys(selected_items).length === 1;
         action({
             name,
             type: is_single ? 'single' : 'bulk',
-            data: is_single ? selected_items[item_index] : Object.values(selected_items),
+            data: is_single ? Object.values(selected_items)[0] : Object.values(selected_items),
         });
     }
 
-    const formatPagination = () => {
-        const high = Math.ceil(table_items.length / number_of_rows_to_display);
-        return (
-            <div className="gm-datatable-pagination">
-                {page_number > 0 ? <button onClick={() => handlePageChange(-1)}> {'<'} </button> : <button disabled > {'<'} </button>}
-                {page_number < high -1 ? <button onClick={() => handlePageChange(1)}> {'>'} </button> : <button disabled > {'>'} </button>}
-            </div>
-        );
+    const toggleBulkSelection = async () => {
+        if (is_bulk_selection) {
+            closeActionMode();
+            return;
+        }
+
+        setIsBulkSelection(true);
+        await new Promise((r, e) => setTimeout(r, 500));
+        
+        let source = items_to_display;
+        let selections = source.reduce((sack, result) => {
+            if (!result.is_active) return sack;
+            return {
+                ...sack,
+                [result.id]: result
+            }
+        }, {});
+        setSelectedItems(selections);
     }
 
     return (
@@ -179,10 +179,9 @@ const DataTable = props => {
                                     actions={config.actions.bulk}
                                     action_callback={processAction}
                                     checkbox={checkbox}
-                                    checked={is_all_selected}
                                     data={fields}
-                                    selection_callback={handleAllSelection}
                                     sort_callback={handleSort}
+                                    onChange={toggleBulkSelection}
                                 />
                             </thead>
                             <tbody>
@@ -195,7 +194,10 @@ const DataTable = props => {
                                     index={index}
                                     item_click_callback={handleItemClick}
                                     key={index}
-                                    selection_callback={handleSingleSelection}
+                                    bulk_selection={is_bulk_selection}
+                                    selection_callback={handleSelection}
+                                    unselection_callback={handleUnselection}
+                                    deselect={!Boolean(Object.keys(selected_items).length)}
                                 />)}
                             </tbody>
                         </table>

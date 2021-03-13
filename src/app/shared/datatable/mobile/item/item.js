@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './item.css';
 
 const DatatableItem = props => {
-    let {
+    let { 
         data, deselect, fields, index, bulk_selection,
         item_click_callback, selection_callback, unselection_callback
     } = props;
