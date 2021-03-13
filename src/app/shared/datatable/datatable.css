@@ -116,53 +116,42 @@
     padding-top: 10px;
 }
 
-/* 
+/**/
 @media screen and (min-width:481px) {
     .gm-datatable {
-        padding: 20px 150px 20px 50px;
-    }
-    .gm-datatable-header {
         position: unset;
-        background: unset;
-    }
-    .gm-datatable-table {
-        margin: 0;
-    }
-    .gm-datatable > section.gm-datatable-header {
-        padding: 10px 0 !important;
-    }
 
-    .gm-datatable-search{
-        width: 450px !important;
+        padding: 20px;
     }
-
-    .gm-datatable-search > input{
-        background-color: #fff !important;
-    }
-}
-
-@media screen and (min-width: 1024px) {
     
     .gm-datatable > section {
-        display: block;
-        float: left;
-
         padding: 10px;
         width: 100%;
     }
 
-    
-    .gm-datatable > section.gm-datatable-header {
+    .gm-datatable-header {
+        position: unset;
+        
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-content: space-between;
+
+        background: unset;
+
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .gm-datatable-table {
+        margin: 0;
     }
 
     .gm-datatable-row-selector-wrap > div{
-        width: auto;
+        width: fit-content;
         padding: 5px 0;
     }
+
 
     .gm-datatable-row-selector-wrap > div.gm-datatable-row-selector {
         margin: 0 10px;
@@ -178,19 +167,15 @@
         color: #333333;
     }
 
-    .gm-datatable-search {
-        width: auto ;
+    .gm-datatable-search{
+        width: 300px;
     }
 
-    .gm-datatable-search > input {
-        border-radius: 5px;
-        padding: 5px 10px;
-
-        border:1px solid #bcbcbc;
-        color: #333333;
+    .gm-datatable-search > input{
+        background-color: #fff;
     }
 
-    
+    /**/
     .gm-datatable-table table{
         border: 1px solid rgb(0, 151, 197, 0.5);
     }
@@ -200,7 +185,7 @@
         background: rgb(0, 151, 197, 0.95);
         color:#fff;
     }
-
+    
     .gm-datatable thead tr:hover{
         background: none;
     }
@@ -221,7 +206,6 @@
         padding: 15px 7.5px;
     }
 
-    
     .gm-datatable > section.gm-datatable-footer {
         display: flex;
         flex-direction: row;
@@ -255,4 +239,7 @@
     .gm-datatable-pagination button:first-child {
         margin-right: 10px;
     }
-} */
+}
+
+@media screen and (min-width: 1024px) {
+}

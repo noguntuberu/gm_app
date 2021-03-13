@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import DataTableHeader from './header/header';
 import DataTableItem from './item/item';
+import Spinner from '../../spinners/spinner-50/spinner-50';
 
 import '../datatable.css';
 
@@ -17,6 +18,11 @@ const DataTable = props => {
 
     const [all_items, setAllItems] = useState(items);
     const [table_items, setTableItems] = useState(items);
+    const [items_to_display, setItemsToDisplay] = useState([]);
+
+    useEffect(() => {
+        handleNumberOfItemsToDisplay();
+    }, [page_number, table_items]);
 
     useEffect(() => {
         let processed_items = items.map(item => ({
@@ -26,6 +32,7 @@ const DataTable = props => {
                 checked: false,
             },
         }));
+
         setAllItems(processed_items);
         setTableItems(processed_items.slice());
     }, [items]);
@@ -65,7 +72,8 @@ const DataTable = props => {
     const handleNumberOfItemsToDisplay = () => {
         const start = page_number * number_of_rows_to_display;
         const end = start + number_of_rows_to_display;
-        return [...table_items].slice(start, end);
+
+        setItemsToDisplay([...table_items].slice(start, end));
     }
 
     const handlePageChange = (value) => {
@@ -121,76 +129,83 @@ const DataTable = props => {
         action({
             name,
             type: is_single ? 'single' : 'bulk',
-            data: is_single ? selected_items[item_index]: Object.values(selected_items),
+            data: is_single ? selected_items[item_index] : Object.values(selected_items),
         });
     }
 
     const formatPagination = () => {
-        const high = Math.floor(table_items.length / number_of_rows_to_display);
+        const high = Math.ceil(table_items.length / number_of_rows_to_display);
         return (
             <div className="gm-datatable-pagination">
                 {page_number > 0 ? <button onClick={() => handlePageChange(-1)}> {'<'} </button> : <button disabled > {'<'} </button>}
-                {page_number < high ? <button onClick={() => handlePageChange(1)}> {'>'} </button> : <button disabled > {'>'} </button>}
+                {page_number < high -1 ? <button onClick={() => handlePageChange(1)}> {'>'} </button> : <button disabled > {'>'} </button>}
             </div>
         );
     }
 
     return (
         <div className="gm-datatable">
-            <section className="gm-datatable-header">
-                <div className="gm-datatable-row-selector-wrap">
-                    <div>
-                        Show
+            {!items_to_display.length ?
+                <div className="gm-datatable-loader">
+                    <Spinner />
+                </div> :
+                <>
+                    <section className="gm-datatable-header">
+                        <div className="gm-datatable-row-selector-wrap">
+                            <div>
+                                Show
                     </div>
-                    <div className="gm-datatable-row-selector">
-                        <select onChange={e => setNumberOfRowsToDisplay(Number(e.target.value))}>
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                            <option value="200">200</option>
-                        </select>
+                            <div className="gm-datatable-row-selector">
+                                <select onChange={e => setNumberOfRowsToDisplay(Number(e.target.value))}>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                </select>
+                            </div>
+                            <div>
+                                items per page.
                     </div>
-                    <div>
-                        items per page.
-                    </div>
-                </div>
-                <div className="gm-datatable-search">
-                    <input type="text" placeholder={search_text || 'Search'} onInput={e => handleSearch(e.target.value)} />
-                </div>
-            </section>
-            <section className="gm-datatable-table">
-                <table>
-                    <thead>
-                        <DataTableHeader
-                            actions={config.actions.bulk}
-                            action_callback={processAction}
-                            checkbox={checkbox}
-                            checked={is_all_selected}
-                            data={fields}
-                            selection_callback={handleAllSelection}
-                            sort_callback={handleSort}
-                        />
-                    </thead>
-                    <tbody>
-                        {handleNumberOfItemsToDisplay().map((item, index) => <DataTableItem
-                            actions={config.actions.single}
-                            action_callback={processAction}
-                            checkbox={checkbox}
-                            data={item}
-                            fields={fields}
-                            index={index}
-                            item_click_callback={handleItemClick}
-                            key={index}
-                            selection_callback={handleSingleSelection}
-                        />)}
-                    </tbody>
-                </table>
-            </section>
-            <section className="gm-datatable-footer">
-                <div>{formatDataTableFooter(page_number, number_of_rows_to_display, table_items)}</div>
-                {formatPagination()}
-            </section>
+                        </div>
+                        <div className="gm-datatable-search">
+                            <input type="text" placeholder={search_text || 'Search'} onInput={e => handleSearch(e.target.value)} />
+                        </div>
+                    </section>
+                    <section className="gm-datatable-table">
+                        <table>
+                            <thead>
+                                <DataTableHeader
+                                    actions={config.actions.bulk}
+                                    action_callback={processAction}
+                                    checkbox={checkbox}
+                                    checked={is_all_selected}
+                                    data={fields}
+                                    selection_callback={handleAllSelection}
+                                    sort_callback={handleSort}
+                                />
+                            </thead>
+                            <tbody>
+                                {items_to_display.map((item, index) => <DataTableItem
+                                    actions={config.actions.single}
+                                    action_callback={processAction}
+                                    checkbox={checkbox}
+                                    data={item}
+                                    fields={fields}
+                                    index={index}
+                                    item_click_callback={handleItemClick}
+                                    key={index}
+                                    selection_callback={handleSingleSelection}
+                                />)}
+                            </tbody>
+                        </table>
+                    </section>
+                    <section className="gm-datatable-footer">
+                        <div>{formatDataTableFooter(page_number, number_of_rows_to_display, table_items)}</div>
+                        {formatPagination()}
+                    </section>
+                </>
+            }
         </div >
     )
 }
