@@ -36,7 +36,7 @@ const ContextMenu = props => {
     }
     return (
         <div>
-            <div onClick={e => toggleShowMenu(e)}> Action</div>
+            <div className="context-menu-label" onClick={e => toggleShowMenu(e)}> <span>Action</span></div>
             { actions ? <div>
                 {show_menu ?
                     <div ref={context_menu} className="gm-action-wrap">

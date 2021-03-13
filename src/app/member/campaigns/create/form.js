@@ -16,6 +16,8 @@ import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
 // import * as FileService from '../../../../services/file';
 
+import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
+
 import './form.css';
 
 const CampaignCreationForm = props => {
@@ -35,7 +37,7 @@ const CampaignCreationForm = props => {
     const [schedule, setCampaignSchedule] = useState((campaign.schedule) || generateHTMLFormDateTimeDefaults());
     const [selected_lists, setSelectedLists] = useState([]);
     const [sender_email, setSenderEmail] = useState(campaign.sender_email || '');
-    const [sender_name, setSenderName] = useState(campaign.name || '');
+    const [sender_name, setSenderName] = useState(campaign.sender_name || '');
 
     // const [extracting, setExtracting] = useState(false);
     // const [html_file,] = useState(null);
@@ -251,8 +253,8 @@ const CampaignCreationForm = props => {
                     <label className="custom-file-label" htmlFor="contact_file">{html_file ? html_file.name : 'Copy html from file'}</label>
                 </div> */}
             {loading ?
-                <button className="flexible-save-btn gm-btn gm-btn-primary" disabled>Creating...</button> :
-                <button className="flexible-save-btn gm-btn gm-btn-primary shadow" onClick={() => sendCampaign()} >Create</button>
+                <div className="flexible-save-btn gm-btn gm-btn-primary">Creating <span className="gm-btn-spinner"><Spinner /></span></div> :
+                <div className="flexible-save-btn gm-btn gm-btn-primary shadow" onClick={() => sendCampaign()} >Create</div>
             }
         </div>
         <GmModal title="Supported wildcards" show_title={true} show_modal={show_wildcard_modal} onClose={() => setShowWildcardModal(false)}>

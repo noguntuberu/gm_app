@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MultiSelect from 'react-multi-select-component';
 import * as ContactService from '../../../../services/contact';
 import * as AudienceService from '../../../../services/audience';
+import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 import { countries } from '../../../data/countries';
 import { isEmailValid } from '../../../shared/utils/input';
@@ -179,8 +180,8 @@ const ContactCreationForm = props => {
             </div>
             <div className="pr-3 mt-4">
                 {!loading ?
-                    <button className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" onClick={e => submitForm()}> Save </button> :
-                    <button className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" disabled> Save </button>
+                    <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" onClick={e => submitForm()}> Save </div> :
+                    <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div>
                 }
             </div>
         </div>

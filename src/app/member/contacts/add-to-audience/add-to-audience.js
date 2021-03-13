@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import * as AudienceService from '../../../../services/audience';
+import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 const AddContactToAudience = props => {
     const { selected_contacts } = props;
@@ -55,8 +56,8 @@ const AddContactToAudience = props => {
         </div>
         <div className="form-group">
             {loading ?
-                <button className="gm-btn gm-btn-info float-right  shadow" disabled>Saving...</button> :
-                <button onClick={submit} className="gm-btn gm-btn-primary float-right  shadow">Save</button>
+                <div className="gm-btn gm-btn-info float-right  shadow">Saving<span className="gm-btn-spinner"><Spinner /></span></div> :
+                <div onClick={submit} className="gm-btn gm-btn-primary float-right  shadow">Save</div>
             }
         </div>
     </div>

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import * as ContactService from '../../../../services/contact';
 import * as AudienceService from '../../../../services/audience';
 import * as TemplateService from '../../../../services/template';
+import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 const ImportContact = props => {
     const { mailing_list } = props;
@@ -81,8 +82,8 @@ const ImportContact = props => {
             </div>
             <div className="mt-3">
                 {loading ?
-                    <button className=" gm-btn gm-btn-primary float-right  shadow" disabled>Importing...</button> :
-                    <button onClick={submit} className="gm-btn gm-btn-primary float-right  shadow-sm">Import</button>
+                    <div className=" gm-btn gm-btn-primary float-right  shadow">Importing <span className="gm-btn-spinner"><Spinner /></span></div> :
+                    <div onClick={submit} className="gm-btn gm-btn-primary float-right  shadow-sm">Import</div>
                 }
                 <span className="float-right mr-3 text-primary py-2" onClick={() => downloadTemplate()}>Download Template</span>
             </div>

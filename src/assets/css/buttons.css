@@ -1,10 +1,23 @@
+
+button:disabled {
+    color: #aaaaaa;
+    border-color: #aaaaaa;
+}
+
 /**/
 .gm-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
     border: none;
     border-radius: 5px;
     padding: 0 25px;
-    height: 35px;
+    height: 45px;
     text-align: center;
+
+    cursor: pointer;
 }
 
 .gm-btn:active {
@@ -24,6 +37,11 @@
 .gm-btn-secondary {
     background: rgba(141, 0, 42, 0.698);
     color: #ffffff;
+}
+
+.gm-btn-spinner {
+    float: right;
+    margin-left: 10px;
 }
 
 /**/

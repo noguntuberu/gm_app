@@ -48,7 +48,7 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
             {
                 title: 'Date Added',
                 key: 'time_added',
-                formatter: value => value? (new Date(value)).toDateString() : '',
+                formatter: value => value ? (new Date(value)).toDateString() : '',
                 isMetadata: true,
             },
         ],
@@ -153,10 +153,10 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
 
     const handleSearchRequest = async (keys, keyword, page) => {
         let results = {};
-        items.forEach( item => {
+        items.forEach(item => {
             let split_keys = keys.split(',');
             split_keys.forEach(key => {
-                if(!item[key]) return;
+                if (!item[key]) return;
 
                 let haystack = item[key].toLowerCase();
                 let needle = keyword.toLowerCase();
@@ -169,26 +169,23 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
         setItems(Object.values(results));
     }
 
-    return (
-        loading ? 'loading data...' :
-            <>{
-                is_mobile_view ?
+    return <div>
+        is_mobile_view ?
                 <MobileDatatable
-                    config={config}
-                    action={handleDatatableAction}
-                    onClick={handleItemClick}
-                    onListModeChange={setSearchMode}
-                    onDataRequest={handleDataRequest}
-                    onSearchRequest={handleSearchRequest}
-                /> :
+            config={config}
+            action={handleDatatableAction}
+            onClick={handleItemClick}
+            onListModeChange={setSearchMode}
+            onDataRequest={handleDataRequest}
+            onSearchRequest={handleSearchRequest}
+        /> :
                 <WebDataTable
-                    config={config}
-                    action={handleDatatableAction}
-                    onClick={handleItemClick}
-                    checkbox
-                />
-            }</>
-    )
+            config={config}
+            action={handleDatatableAction}
+            onClick={handleItemClick}
+            checkbox
+        />
+    </div>
 }
 
 export default AudienceContacts;

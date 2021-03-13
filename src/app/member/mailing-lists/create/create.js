@@ -3,6 +3,7 @@ import React, { useState, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AudienceService from '../../../../services/audience';
 import { addOneAudienceToStore } from '../../../../store/actions/audience';
+import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 const CreateMailingList = ({ closeModal }) => {
     const dispatch = useDispatch();
@@ -47,10 +48,10 @@ const CreateMailingList = ({ closeModal }) => {
         </div>
         <div className="form-group">
             {!loading ?
-                <button className="gm-btn gm-btn-primary float-right btn-sm  shadow" onClick={submit}>Save</button> :
-                <button className="gm-btn gm-btn-primary float-right btn-sm  shadow" disabled>Saving</button>
+                <div className="gm-btn gm-btn-primary float-right btn-sm  shadow" onClick={submit}>Save</div> :
+                <div className="gm-btn gm-btn-primary float-right btn-sm  shadow">Saving<span className="gm-btn-spinner"><Spinner /></span></div>
             }
-        </div>
+        </div> 
     </div>
 }
 

@@ -6,6 +6,7 @@ import * as ContactService from '../../../../services/contact';
 import { setPageTitle } from '../../../../store/actions/header';
 import { addOneContactToStore, } from '../../../../store/actions/contact';
 import { convertDateFromIsoToHTMLFormat } from '../../../shared/utils/date';
+import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 const ContactUpdationForm = props => {
     const { contact_data } = props;
@@ -166,8 +167,8 @@ const ContactUpdationForm = props => {
             </div>
             <div className="pr-3">
                 {loading ?
-                    <button className="gm-btn gm-btn-primary float-right w-25  shadow" disabled> Save </button> :
-                    <button className="gm-btn gm-btn-primary float-right w-25  shadow" onClick={e => submitForm()}> Save </button>
+                    <div className="gm-btn gm-btn-primary float-right w-25  shadow"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div> :
+                    <div className="gm-btn gm-btn-primary float-right w-25  shadow" onClick={e => submitForm()}> Save </div>
                 }
             </div>
         </div>

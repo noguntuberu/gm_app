@@ -3,6 +3,7 @@ import React, { useState, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AudienceService from '../../../../services/audience';
 import { addOneAudienceToStore } from '../../../../store/actions/audience';
+import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 const AudienceUpdationForm = ({ mailing_list }) => {
     const dispatch = useDispatch();
@@ -47,8 +48,8 @@ const AudienceUpdationForm = ({ mailing_list }) => {
         </div>
         <div className="form-group">
             {!loading ?
-                <button className="gm-btn gm-btn-primary float-right btn-sm  shadow" onClick={submit}>Update</button> :
-                <button className="gm-btn gm-btn-primary float-right btn-sm  shadow" disabled>Updating...</button>
+                <div className="gm-btn gm-btn-primary float-right btn-sm  shadow" onClick={submit}>Update</div> :
+                <div className="gm-btn gm-btn-primary float-right btn-sm  shadow">Updating<span className="gm-btn-spinner"><Spinner /></span></div>
             }
         </div>
     </div>

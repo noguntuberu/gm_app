@@ -8,6 +8,7 @@ import { URLS, apiGet, apiPut } from '../../../../utilities/api/api';
 import { Editor } from '../../../../vendors/@tinymce/tinymce-react/lib/es2015/main/ts/index';
 
 import { setPageTitle } from '../../../../store/actions/header';
+import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 import './form.css';
 
@@ -128,8 +129,8 @@ const CampaignCreationForm = props => {
             </div>
             <div className="form-group">
                 {loading ?
-                    <button className="col-2 float-right gm-btn gm-btn-primary" disabled>Updating...</button> :
-                    <button className="col-2 float-right gm-btn gm-btn-primary shadow" onClick={() => submitCampaign()} >Update</button>
+                    <divv className="col-2 float-right gm-btn gm-btn-primary" >Updating <span className="gm-btn-spinner"><Spinner /></span></divv> :
+                    <divv className="col-2 float-right gm-btn gm-btn-primary shadow" onClick={() => submitCampaign()} >Update</divv>
                 }
             </div>
         </div>
