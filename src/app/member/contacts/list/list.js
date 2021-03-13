@@ -49,7 +49,6 @@ const ListContacts = () => {
 
     const handleDatatableAction = action => {
         const { name, type, data } = action;
-        console.log(action);
         if (type.toLowerCase() === 'bulk') {
             switch (name.toLowerCase()) {
                 case 'add to audience':

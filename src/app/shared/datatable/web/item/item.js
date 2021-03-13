@@ -41,12 +41,7 @@ const DataTableItem = props => {
     }, [deselect, is_selected, bulk_selection]);
 
     const processAction = action => {
-        selection_callback({
-            data,
-            index,
-            action_type: 'single',
-            selected: true,
-        });
+        selection_callback(data);
         action_callback(action, index);
     }
 

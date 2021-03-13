@@ -1,12 +1,10 @@
 import { toast } from 'react-toastify';
 import React, { useState, } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as AudienceService from '../../../../services/audience';
-import { addOneAudienceToStore } from '../../../../store/actions/audience';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 const AudienceUpdationForm = ({ mailing_list }) => {
-    const dispatch = useDispatch();
     const { token, id } = useSelector(state => state.user_data);
 
     const [description, setDescription] = useState(mailing_list.description || '');
@@ -34,7 +32,6 @@ const AudienceUpdationForm = ({ mailing_list }) => {
 
         setLoading(false)
         toast.success(`Audience updated.`)
-        dispatch(addOneAudienceToStore({ ...data, id: mailing_list.id }));
     }
 
     return <div>

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as ContactService from '../../../../services/contact';
 import { setPageTitle } from '../../../../store/actions/header';
-import { addOneContactToStore, } from '../../../../store/actions/contact';
 import { convertDateFromIsoToHTMLFormat } from '../../../shared/utils/date';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
@@ -56,7 +55,7 @@ const ContactUpdationForm = props => {
         }
 
         setLoading(true);
-        const { error, payload } = await ContactService.updateById(contact_data.id, { data: form_data, token })
+        const { error } = await ContactService.updateById(contact_data.id, { data: form_data, token })
         setLoading(false);
 
         if (error) {
@@ -65,7 +64,6 @@ const ContactUpdationForm = props => {
         }
 
         toast.success('Contact updated.');
-        dispatch(addOneContactToStore(payload));
     }
 
     return (

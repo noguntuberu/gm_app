@@ -7,7 +7,6 @@ import MultiSelect from 'react-multi-select-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmailValid } from '../../../shared/utils/input';
 import { setPageTitle } from '../../../../store/actions/header';
-import { addOneCampaignToStore } from '../../../../store/actions/campaign';
 import { generateHTMLFormDateTimeDefaults } from '../../../shared/utils/date';
 import { Editor } from '../../../../vendors/@tinymce/tinymce-react/lib/es2015/main/ts/index';
 
@@ -24,20 +23,20 @@ const CampaignCreationForm = props => {
     const { config } = props;
     const { id } = useParams()
     const dispatch = useDispatch();
-    let campaign = useSelector(state => (state.campaigns[id] || {}));
     const user_data = useSelector(state => state.user_data);
     const { token } = user_data;
     const tenant_id = user_data.id;
 
+    const [campaign, setCampaign] = useState({});
     const [campaign_id, setCampaignId] = useState(id || 0);
-    const [campaign_body, setCampaignBody] = useState(campaign.body || '');
-    const [campaign_name, setCampaignName] = useState(campaign.name || '');
-    const [campaign_subject, setCampaignSubject] = useState(campaign.subject || '');
-    const [mailing_lists, setMailingLists] = useState(campaign.mailing_lists || []);
-    const [schedule, setCampaignSchedule] = useState((campaign.schedule) || generateHTMLFormDateTimeDefaults());
+    const [campaign_body, setCampaignBody] = useState();
+    const [campaign_name, setCampaignName] = useState();
+    const [campaign_subject, setCampaignSubject] = useState();
+    const [mailing_lists, setMailingLists] = useState([]);
+    const [schedule, setCampaignSchedule] = useState(generateHTMLFormDateTimeDefaults());
     const [selected_lists, setSelectedLists] = useState([]);
-    const [sender_email, setSenderEmail] = useState(campaign.sender_email || '');
-    const [sender_name, setSenderName] = useState(campaign.sender_name || '');
+    const [sender_email, setSenderEmail] = useState();
+    const [sender_name, setSenderName] = useState();
 
     // const [extracting, setExtracting] = useState(false);
     // const [html_file,] = useState(null);
@@ -49,7 +48,16 @@ const CampaignCreationForm = props => {
     const [show_wildcard_modal, setShowWildcardModal] = useState(false);
 
     useEffect(() => {
-        dispatch(setPageTitle('New Campaign'));
+        dispatch(setPageTitle(id ? 'Edit Campaign' : 'New Campaign'));
+        CampaignService.readById(id, { token }).then( response => {
+            const { error, payload } = response;
+            if (error) return;
+
+            setCampaign(payload);
+            setSelectedLists(payload.lists);
+            setCampaignSchedule(new Date(payload.schedule.date))
+        });
+
         AudienceService.read({ token }).then(response => {
             const { payload } = response;
             if (payload) {
@@ -66,13 +74,12 @@ const CampaignCreationForm = props => {
         } else {
             response = await CampaignService.create({ data, token });
         }
-        const { error, payload } = response;
+        const { error} = response;
         if (error) {
             toast.error(error);
             return;
         }
 
-        dispatch(addOneCampaignToStore(payload));
         toast.success(`Campaign created successfully.`);
     }
 
@@ -183,7 +190,7 @@ const CampaignCreationForm = props => {
 
         setLoading(true);
         await handleCampaignCreation(data);
-        campaign = {};
+        setCampaign({});
         setLoading(false);
     }
 
@@ -191,21 +198,21 @@ const CampaignCreationForm = props => {
         <div className="form-row">
             <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="campaign_title">Name</label>
-                <input className="gm-input" id="campaign_title" type="text" defaultValue={campaign_name} onInput={e => setCampaignName(e.target.value)} />
+                <input className="gm-input" id="campaign_title" type="text" defaultValue={campaign.name} onInput={e => setCampaignName(e.target.value)} />
             </div>
             <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="campaign_subject">Subject</label>
-                <input className="gm-input" id="campaign_subject" type="text" defaultValue={campaign_subject} onInput={e => setCampaignSubject(e.target.value)} />
+                <input className="gm-input" id="campaign_subject" type="text" defaultValue={campaign.subject} onInput={e => setCampaignSubject(e.target.value)} />
             </div>
         </div>
         <div className="form-row">
             <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="sender_name">Sender's name</label>
-                <input className="gm-input" id="sender_name" type="text" defaultValue={sender_name} onInput={e => setSenderName(e.target.value)} />
+                <input className="gm-input" id="sender_name" type="text" defaultValue={campaign.sender_name} onInput={e => setSenderName(e.target.value)} />
             </div>
             <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="sender_email">Sender's email</label>
-                <input className="gm-input" id="sender_email" type="text" defaultValue={sender_email} onInput={e => setSenderEmail(e.target.value)} />
+                <input className="gm-input" id="sender_email" type="text" defaultValue={campaign.sender_email} onInput={e => setSenderEmail(e.target.value)} />
             </div>
         </div>
         <div className="form-row">
@@ -242,7 +249,7 @@ const CampaignCreationForm = props => {
                     body_class="campaign_editor"
                     id="campaign_create"
                     init={config}
-                    initialValue={campaign_body}
+                    initialValue={campaign.body}
                     onEditorChange={e => handleEditorChange(e)}
                 />
             </div>

@@ -12,7 +12,7 @@ import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 import './form.css';
 
-const CampaignCreationForm = props => {
+const CampaignUpdationForm = props => {
     const { config, campaign_id } = props;
 
     const dispatch = useDispatch();
@@ -137,4 +137,4 @@ const CampaignCreationForm = props => {
     )
 }
 
-export default CampaignCreationForm;
+export default CampaignUpdationForm;

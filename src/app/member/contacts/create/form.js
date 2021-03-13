@@ -10,7 +10,6 @@ import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 import { countries } from '../../../data/countries';
 import { isEmailValid } from '../../../shared/utils/input';
 import { setPageTitle } from '../../../../store/actions/header';
-import { addOneContactToStore } from '../../../../store/actions/contact';
 
 const ContactCreationForm = props => {
     // const [form_message, setFormMessage] = useState('');
@@ -71,7 +70,6 @@ const ContactCreationForm = props => {
         }
 
         toast.success(`contact created.`);
-        dispatch(addOneContactToStore(payload));
 
         // add contact to list
         if (!selected_lists[0]) return;
