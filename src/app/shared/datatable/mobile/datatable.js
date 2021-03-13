@@ -2,21 +2,26 @@ import React, { useState, useEffect, useRef } from 'react';
 import DataTableItem from './item/item';
 import ContextMenu from '../context-menu/context-menu';
 
-import './datatable.css';
+import '../datatable.css';
+import SpinnerFifty from '../../spinners/spinner-50/spinner-50';
+import SpinnerTwentyFive from '../../spinners/spinner-25/spinner-25';
 
 const DataTable = props => {
     let { action, config, onClick, onDataRequest, onListModeChange, onSearchRequest } = props;
     let { fields, items, search_text, is_search_mode } = config;
 
-    let item_list_wrapper = useRef();
-    let search_list_wrapper = useRef();
+    let list_wrapper = useRef();
 
     let [page_number, setPageNumber] = useState(0);
     let [is_page_end, setIsPageEnd] = useState(false);
     let [is_bulk_selection, setIsBulkSelection] = useState(false);
 
+    let [is_loading, setIsLoading] = useState(false);
+    let [is_loading_more, setIsLoadingMore] = useState(false);
+
     let [selected_items, setSelectedItems] = useState({});
     let [table_items, setTableItems] = useState([]);
+    let [items_to_display, setItemsToDisplay] = useState([]);
 
     let [search_keys, setSearchKeys] = useState('');
     let [search_keyword, setSearchKeyword] = useState('');
@@ -25,16 +30,14 @@ const DataTable = props => {
     useEffect(() => {
         buildSearchKeys();
         setPageNumber(0);
-        if (!is_search_mode && item_list_wrapper.current) {
-            let normal_list = item_list_wrapper.current;
-            normal_list.addEventListener('scroll', () => handleListScrollEnd(normal_list));
-        }
-
-        if (is_search_mode && search_list_wrapper.current) {
-            let search_list = search_list_wrapper.current;
-            search_list.addEventListener('scroll', () => handleListScrollEnd(search_list));
-        }
+        let normal_list = list_wrapper.current;
+        normal_list.addEventListener('scroll', () => handleListScrollEnd(normal_list));
         // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
+        setItemsToDisplay([]);
+        setIsLoading(true);
     }, [is_search_mode]);
 
     useEffect(() => {
@@ -58,6 +61,8 @@ const DataTable = props => {
             [item.id]: item,
         }), {});;
 
+        if (is_loading_more) setIsLoadingMore(!is_loading_more);
+
         //
         if (is_search_mode) {
             results = [...search_results, ...processed_items].reduce((sack, item) => ({
@@ -65,10 +70,12 @@ const DataTable = props => {
                 [item.id]: item,
             }), {});
             setSearchResults(Object.values(results));
-            return;
+        } else {
+            setTableItems(Object.values(results));
         }
 
-        setTableItems(Object.values(results));
+        setItemsToDisplay(Object.values(results));
+        if (is_loading) setIsLoading(!is_loading);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [items]);
 
@@ -102,14 +109,20 @@ const DataTable = props => {
         if (content_height > scroll_top) return;
 
         setIsPageEnd(true);
+        setIsLoadingMore(true);
     }
 
-    const handleSearch = (keyword) => {
+    const handleSearch = async (keyword) => {
         onListModeChange(Boolean(keyword));
         setSearchKeyword(keyword);
         setSearchResults([]);
-
-        setTimeout(() => onSearchRequest(search_keys, search_keyword, 0), 500);
+        
+        setItemsToDisplay([]);
+        setIsLoading(true);
+        
+        // throttle
+        await new Promise((resolve, reject) => setTimeout(() => resolve(), 500) );
+        onSearchRequest(search_keys, keyword, 0);
     }
 
     const handleSelection = (selected_item) => {
@@ -136,14 +149,14 @@ const DataTable = props => {
 
     const processAction = (name, item_index) => {
         if (!Object.keys(selected_items).length) return;
-        
+
         const is_single = Object.keys(selected_items).length === 1;
         action({
             name,
             type: is_single ? 'single' : 'bulk',
             data: is_single ? Object.values(selected_items)[0] : Object.values(selected_items),
         });
-        
+
         closeActionMode();
     }
 
@@ -185,6 +198,7 @@ const DataTable = props => {
                                     }
                                 </div>
                                 <span className="gm-datatable-metadata">{Object.keys(selected_items).length} item(s)</span>
+
                             </div>
                             <span className="close-action" onClick={closeActionMode}>x</span>
                         </div>
@@ -195,38 +209,33 @@ const DataTable = props => {
             }
         </section>
         <section className="gm-datatable-table">
-            {
-                is_search_mode ?
-                    <div ref={search_list_wrapper} className="gm-datatable-item-list-wrapper">
-                        {search_results.map((item, index) => <DataTableItem
-                            data={item}
-                            fields={fields}
-                            index={index}
-                            item_click_callback={handleItemClick}
-                            key={item.id}
-                            bulk_selection={is_bulk_selection}
-                            selection_callback={handleSelection}
-                            unselection_callback={handleUnselection}
-                            deselect={!Boolean(Object.keys(selected_items).length)}
-                        />
-                        )}
-                    </div> :
-                    <div ref={item_list_wrapper} className="gm-datatable-item-list-wrapper">
-                        {table_items.map((item, index) => <DataTableItem
-                            data={item}
-                            fields={fields}
-                            index={index}
-                            item_click_callback={handleItemClick}
-                            key={item.id}
-                            bulk_selection={is_bulk_selection}
-                            selection_callback={handleSelection}
-                            unselection_callback={handleUnselection}
-                            deselect={!Boolean(Object.keys(selected_items).length)}
-                        />
-                        )}
+            {is_loading ?
+                <div className="gm-datatable-loader">
+                    <SpinnerFifty />
+                </div> :
+                <div ref={list_wrapper} className="gm-datatable-item-list-wrapper">
+                    {items_to_display.map((item, index) => <DataTableItem
+                        data={item}
+                        fields={fields}
+                        index={index}
+                        item_click_callback={handleItemClick}
+                        key={item.id}
+                        bulk_selection={is_bulk_selection}
+                        selection_callback={handleSelection}
+                        unselection_callback={handleUnselection}
+                        deselect={!Boolean(Object.keys(selected_items).length)}
+                    />)}
+                    <div className="mobi-no-items">
+                        { !items_to_display.length ? 'No items found' : ''}
                     </div>
+                    <div className="gm-datatable-foot-loader">{
+                        is_loading_more ?
+                            <SpinnerTwentyFive /> :
+                            <></>
+                    }</div>
+                </div>
             }
         </section>
-    </div>
+    </div >
 }
 export default DataTable;

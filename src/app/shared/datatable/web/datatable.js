@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import DataTableHeader from './header/header';
 import DataTableItem from './item/item';
 
-import './datatable.css';
+import '../datatable.css';
 
 const DataTable = props => {
     const { action, checkbox, config, onClick } = props;

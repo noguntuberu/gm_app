@@ -8,6 +8,7 @@ import { setPageTitle } from '../../../../store/actions/header';
 import * as DraftService from '../../../../services/draft';
 import * as CampaignService from '../../../../services/campaign';
 
+
 const ListCampaigns = () => {
     let history = useHistory();
     let dispatch = useDispatch();
@@ -124,6 +125,7 @@ const ListCampaigns = () => {
             token,
             query_string: `page=${page}&population=50`
         })
+
         const { error, payload } = response;
         if (error) return;
 
@@ -135,28 +137,25 @@ const ListCampaigns = () => {
             token,
             query_string: `page=${page}&population=50`,
         });
+
         const { error, payload } = response;
         if (error) return;
 
-        setCampaigns(payload); 
+        setCampaigns(payload);
     }
 
-    return (
-        <div>
-            {
-                is_mobile_view ?
-                    <MobileDatatable
-                        config={config}
-                        action={handleDatatableAction}
-                        onClick={handleItemClick}
-                        onListModeChange={setSearchMode}
-                        onDataRequest={handleDataRequest}
-                        onSearchRequest={handleSearchRequest}
-                    /> :
-                    <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
-            }
-        </div>
-    )
+    return <div> {
+        is_mobile_view ?
+            <MobileDatatable
+                config={config}
+                action={handleDatatableAction}
+                onClick={handleItemClick}
+                onListModeChange={setSearchMode}
+                onDataRequest={handleDataRequest}
+                onSearchRequest={handleSearchRequest}
+            /> :
+            <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
+    }</div>
 }
 
 export default ListCampaigns;

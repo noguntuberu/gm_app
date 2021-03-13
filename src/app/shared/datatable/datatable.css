@@ -1,0 +1,258 @@
+.gm-datatable {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+}
+
+.gm-datatable-header, .gm-datatable-table {
+    padding: 10px 0;
+    width: 100%;
+}
+
+.gm-datatable-header {
+    position: sticky;
+    float: left;
+
+    padding: 60px 15px 10px 15px;
+
+    background-color: #eaeaea;
+}
+
+.gm-datatable-search, .gm-datatable-search input {
+    width: 100%;
+}
+
+.gm-datatable-search input {
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    padding: 5px ;
+    background: none;
+}
+
+.gm-datatable-search input:focus {
+    /* background: #ffffff; */
+    color: #666666;
+}
+
+/**/
+.gm-datatable-loader {
+    width: 100%;
+    height: 70vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gm-datatable-item-list-wrapper { 
+    width: 100%;
+    height: 85vh;
+
+    padding: 0 20px 45px 20px;
+    overflow-y: scroll;
+}
+
+.gm-datatable-bulk-checkbox {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    background-color: #ffffff;
+}
+
+.gm-datatable-bulk-checkbox input[type='checkbox'] {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.gm-datatable-actions {
+    width: fit-content;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 5px 30px 2.5px 30px;
+}
+
+.gm-datatable-actions-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gm-datatable-actions-wrapper > div:first-child {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gm-datatable-actions-wrapper .close-action {
+    font-size: 1.25em;
+}
+
+.gm-datatable-metadata {
+    padding: 5px 0 0 15px;
+    color: #666666;
+}
+
+.mobi-no-items {
+    text-align: center;
+    color: #666666;
+}
+
+.gm-datatable-foot-loader {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 10px;
+}
+
+/* 
+@media screen and (min-width:481px) {
+    .gm-datatable {
+        padding: 20px 150px 20px 50px;
+    }
+    .gm-datatable-header {
+        position: unset;
+        background: unset;
+    }
+    .gm-datatable-table {
+        margin: 0;
+    }
+    .gm-datatable > section.gm-datatable-header {
+        padding: 10px 0 !important;
+    }
+
+    .gm-datatable-search{
+        width: 450px !important;
+    }
+
+    .gm-datatable-search > input{
+        background-color: #fff !important;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    
+    .gm-datatable > section {
+        display: block;
+        float: left;
+
+        padding: 10px;
+        width: 100%;
+    }
+
+    
+    .gm-datatable > section.gm-datatable-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: space-between;
+    }
+
+    .gm-datatable-row-selector-wrap > div{
+        width: auto;
+        padding: 5px 0;
+    }
+
+    .gm-datatable-row-selector-wrap > div.gm-datatable-row-selector {
+        margin: 0 10px;
+        padding: 0;
+    }
+
+    .gm-datatable-row-selector select {
+        border: 1px solid #bcbcbc;
+        border-radius: 5px;
+        padding: 5px;
+
+        background: none;
+        color: #333333;
+    }
+
+    .gm-datatable-search {
+        width: auto ;
+    }
+
+    .gm-datatable-search > input {
+        border-radius: 5px;
+        padding: 5px 10px;
+
+        border:1px solid #bcbcbc;
+        color: #333333;
+    }
+
+    
+    .gm-datatable-table table{
+        border: 1px solid rgb(0, 151, 197, 0.5);
+    }
+
+    .gm-datatable thead {
+        border-bottom: 2px solid #ddd;
+        background: rgb(0, 151, 197, 0.95);
+        color:#fff;
+    }
+
+    .gm-datatable thead tr:hover{
+        background: none;
+    }
+
+    .gm-datatable tbody tr:nth-child(odd) {
+        background-color: rgb(0, 117, 195, 0.15);
+    }
+
+    .gm-datatable tr {
+        border-bottom: 1px solid #ececec;
+    }
+
+    .gm-datatable tr:hover, .gm-datatable tbody tr:nth-child(odd):hover {
+        background-color: #eaeaea;
+    }
+
+    .gm-datatable th, .gm-datatable td {
+        padding: 15px 7.5px;
+    }
+
+    
+    .gm-datatable > section.gm-datatable-footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        width: 100%;
+        padding-top: 25px;
+    }
+
+    .gm-datatable-footer > div {
+        width: auto;
+    }
+
+    .gm-datatable-pagination {
+        float: right;
+
+        display: flex;
+        flex-direction: row;
+    }
+
+    .gm-datatable-pagination button {
+        border: 1px solid rgb(0, 117, 195, 0.5);
+        border-radius: 5px;
+        padding: 0 10px;
+
+        background: none;
+        color: rgb(0, 117, 195, 0.5);
+        font-size: 1.25rem;
+    }
+
+    .gm-datatable-pagination button:first-child {
+        margin-right: 10px;
+    }
+} */

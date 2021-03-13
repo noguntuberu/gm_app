@@ -1,0 +1,61 @@
+.gm-spinner-25 {
+    width: 25px;
+    height: 25px;
+}
+
+@keyframes ldio-1bxre1v847 {
+  0% { transform: rotate(0) }
+  100% { transform: rotate(360deg) }
+}
+.ldio-1bxre1v847 div { box-sizing: border-box!important }
+.ldio-1bxre1v847 > div {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  top: 14px;
+  left: 14px;
+  border-radius: 50%;
+  border: 8px solid #000;
+  border-color: rgba(0, 84, 161, 0.7516129032258064) transparent rgba(0, 84, 161, 0.7516129032258064) transparent;
+  animation: ldio-1bxre1v847 0.6711409395973155s linear infinite;
+}
+.ldio-1bxre1v847 > div:nth-child(2) { border-color: transparent }
+.ldio-1bxre1v847 > div:nth-child(2) div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.ldio-1bxre1v847 > div:nth-child(2) div:before, .ldio-1bxre1v847 > div:nth-child(2) div:after { 
+  content: "";
+  display: block;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: -8px;
+  left: 24px;
+  background: rgba(0, 84, 161, 0.7516129032258064);
+  border-radius: 50%;
+  box-shadow: 0 64px 0 0 rgba(0, 84, 161, 0.7516129032258064);
+}
+.ldio-1bxre1v847 > div:nth-child(2) div:after { 
+  left: -8px;
+  top: 24px;
+  box-shadow: 64px 0 0 0 rgba(0, 84, 161, 0.7516129032258064);
+}
+.loadingio-spinner-dual-ring-xgh9cnx5hni {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  overflow: hidden;
+  background: rgba(NaN, NaN, NaN, 0);
+}
+.ldio-1bxre1v847 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(0.25);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-1bxre1v847 div { box-sizing: content-box; }
