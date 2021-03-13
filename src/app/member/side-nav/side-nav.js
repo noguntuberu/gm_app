@@ -59,10 +59,6 @@ const SideNav = props => {
         }, 20);
     }
 
-    let determineIcon = (dark, light) => {
-        return is_mobile_view ? dark : light;
-    }
-
     let fadeInTrayBackground = () => {
         let tray = veil.current, opacity = 0;
         let fadeInAnimation = setInterval(() => {

@@ -13,7 +13,6 @@ const DataTable = props => {
     const [number_of_rows_to_display, setNumberOfRowsToDisplay] = useState(10);
     const [page_number, setPageNumber] = useState(0);
 
-    const [is_all_selected, setIsAllSelected] = useState(false);
     let [is_bulk_selection, setIsBulkSelection] = useState(false);
     const [selected_items, setSelectedItems] = useState({});
 
@@ -23,6 +22,7 @@ const DataTable = props => {
 
     useEffect(() => {
         handleNumberOfItemsToDisplay();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page_number, table_items]);
 
     useEffect(() => {

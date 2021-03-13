@@ -18,20 +18,17 @@ const ListContacts = () => {
     const history = useHistory();
 
     const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [selected_contacts, setSelectedContacts] = useState([]);
     const [show_contact_link_modal, setShowContactLinkModal] = useState(false);
     let [is_search_mode, setSearchMode] = useState(false);
 
     useEffect(() => {
         dispatch(setPageTitle('My Contacts'));
-        setLoading(true);
         ContactService.read({
             token,
             query_string: `page=0&population=50`
         }).then(data => {
             const { payload, error } = data;
-            setLoading(false);
 
             if (!error) {
                 setItems(payload);

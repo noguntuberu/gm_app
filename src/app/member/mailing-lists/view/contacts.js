@@ -15,7 +15,6 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
     const [contacts, setContacts] = useState(audience_contacts);
     const [default_items, setDefaultItems] = useState([]);
     const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(true);
     let [is_search_mode, setSearchMode] = useState(false);
 
     const config = {
@@ -60,7 +59,6 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
 
     useEffect(() => {
         if (!contacts) return;
-        setLoading(true);
 
         let contact_ids_to_fetch = [];
         contacts.forEach(contact => {
@@ -73,7 +71,6 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
             query_string: `id=${contact_ids_to_fetch.join()}&page=0&population=50`
         }).then(data => {
             const { payload, error } = data;
-            setLoading(false);
 
             let contact_map = contacts.reduce((sack, contact) => {
                 return {
@@ -169,22 +166,23 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
         setItems(Object.values(results));
     }
 
-    return <div>
+    return <div>{
         is_mobile_view ?
-                <MobileDatatable
-            config={config}
-            action={handleDatatableAction}
-            onClick={handleItemClick}
-            onListModeChange={setSearchMode}
-            onDataRequest={handleDataRequest}
-            onSearchRequest={handleSearchRequest}
-        /> :
-                <WebDataTable
-            config={config}
-            action={handleDatatableAction}
-            onClick={handleItemClick}
-            checkbox
-        />
+            <MobileDatatable
+                config={config}
+                action={handleDatatableAction}
+                onClick={handleItemClick}
+                onListModeChange={setSearchMode}
+                onDataRequest={handleDataRequest}
+                onSearchRequest={handleSearchRequest}
+            /> :
+            <WebDataTable
+                config={config}
+                action={handleDatatableAction}
+                onClick={handleItemClick}
+                checkbox
+            />
+    }
     </div>
 }
 
