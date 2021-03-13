@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import SideNavItem from './item/item';
 import './side-nav.css';
 
@@ -31,7 +30,6 @@ import ListCreationForm from '../../member/mailing-lists/create/create';
 const SideNav = props => {
     let { open_tray, onTrayClose } = props;
     let veil = useRef();
-    let { is_mobile_view } = useSelector(state => state.metadata);
 
     const [show_upload_modal, setShowUploadModal] = useState(false);
     const [show_create_modal, setShowCreateModal] = useState(false);
