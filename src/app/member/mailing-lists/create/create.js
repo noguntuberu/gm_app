@@ -48,8 +48,8 @@ const CreateMailingList = ({ closeModal }) => {
         </div>
         <div className="form-group">
             {!loading ?
-                <div className="gm-btn gm-btn-primary float-right btn-sm  shadow" onClick={submit}>Save</div> :
-                <div className="gm-btn gm-btn-primary float-right btn-sm  shadow">Saving<span className="gm-btn-spinner"><Spinner /></span></div>
+                <div className="flexible-save-btn gm-btn gm-btn-primary float-right btn-sm  shadow" onClick={submit}>Save</div> :
+                <div className="flexible-save-btn gm-btn gm-btn-primary float-right btn-sm  shadow">Saving<span className="gm-btn-spinner"><Spinner /></span></div>
             }
         </div> 
     </div>

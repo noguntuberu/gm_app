@@ -82,8 +82,8 @@ const ImportContact = props => {
             </div>
             <div className="mt-3">
                 {loading ?
-                    <div className=" gm-btn gm-btn-primary float-right  shadow">Importing <span className="gm-btn-spinner"><Spinner /></span></div> :
-                    <div onClick={submit} className="gm-btn gm-btn-primary float-right  shadow-sm">Import</div>
+                    <div className="flexible-save-btn gm-btn gm-btn-primary float-right  shadow">Importing <span className="gm-btn-spinner"><Spinner /></span></div> :
+                    <div onClick={submit} className="flexible-save-btn gm-btn gm-btn-primary float-right  shadow-sm">Import</div>
                 }
                 <span className="float-right mr-3 text-primary py-2" onClick={() => downloadTemplate()}>Download Template</span>
             </div>

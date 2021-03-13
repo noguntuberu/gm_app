@@ -56,8 +56,8 @@ const AddContactToAudience = props => {
         </div>
         <div className="form-group">
             {loading ?
-                <div className="gm-btn gm-btn-info float-right  shadow">Saving<span className="gm-btn-spinner"><Spinner /></span></div> :
-                <div onClick={submit} className="gm-btn gm-btn-primary float-right  shadow">Save</div>
+                <div className="flexible-save-btn gm-btn gm-btn-info float-right  shadow">Saving<span className="gm-btn-spinner"><Spinner /></span></div> :
+                <div onClick={submit} className="flexible-save-btn gm-btn gm-btn-primary float-right  shadow">Save</div>
             }
         </div>
     </div>

@@ -1,26 +1,37 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './item.css';
 
 const SideNavItem = props => {
     let { icons, title, path, onClick, onItemClick } = props
-    let history = useHistory();
 
     let handleItemClick = () => {
-        if(onClick) {
+        if (onClick) {
             onClick();
         }
-        
+
         onItemClick();
-        history.push(path);
     }
 
-    return <div className="side-nav-item" onClick={handleItemClick}>
-        <div className="nav-icon">
-            <img alt={`${title} icon`} src={icons[0]} />
-        </div>
-        <div className="nav-title">{title}</div>
-    </div>
+    return <>{
+        !path ?
+            <div className="side-nav-item" onClick={handleItemClick}>
+                <div>
+                    <div className="nav-icon">
+                        <img alt={`${title} icon`} src={icons[0]} />
+                    </div>
+                    <div className="nav-title">{title}</div>
+                </div>
+            </div> :
+            <NavLink to={path} exact={true} className="side-nav-item" onClick={handleItemClick}>
+                <div>
+                    <div className="nav-icon">
+                        <img alt={`${title} icon`} src={icons[0]} />
+                    </div>
+                    <div className="nav-title">{title}</div>
+                </div>
+            </NavLink>
+    }</>
 }
 
 export default SideNavItem;
