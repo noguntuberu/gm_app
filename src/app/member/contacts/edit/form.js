@@ -6,12 +6,13 @@ import * as ContactService from '../../../../services/contact';
 import { setPageTitle } from '../../../../store/actions/header';
 import { convertDateFromIsoToHTMLFormat } from '../../../shared/utils/date';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
+import { useParams } from 'react-router-dom';
 
 const ContactUpdationForm = props => {
-    const { contact_data } = props;
-    // const [form_message, setFormMessage] = useState('');
+    const { id } = useParams()
     const [loading, setLoading] = useState(false);
 
+    const [contact_data, setContactData] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -28,22 +29,27 @@ const ContactUpdationForm = props => {
 
     useEffect(() => {
         dispatch(setPageTitle('Edit Contact'));
-        const { firstname, lastname, email, address, date_of_birth } = contact_data;
+        ContactService.readById(id, { token }).then(response => {
+            let { error, payload } = response;
+            if (error) return;
 
-        if (address) {
-            const { street, state, country } = address;
-            setState(state);
-            setStreet(street);
-            setCountry(country);
-        }
-
-        setFirstname(firstname);
-        setLastname(lastname);
-        setEmail(email);
-        setDateOfBirth(date_of_birth);
-
+            const { firstname, lastname, email, address, date_of_birth } = payload;
+            if (address) {
+                const { street, state, country } = address;
+                setState(state);
+                setStreet(street);
+                setCountry(country);
+            }
+            
+            setFirstname(firstname);
+            setLastname(lastname);
+            setEmail(email);
+            setDateOfBirth(date_of_birth);
+            
+            setContactData(payload);
+        });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [contact_data]);
+    }, []);
 
     /** */
     const submitForm = async () => {

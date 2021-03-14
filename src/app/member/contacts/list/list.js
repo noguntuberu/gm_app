@@ -26,7 +26,7 @@ const ListContacts = () => {
         dispatch(setPageTitle('My Contacts'));
         ContactService.read({
             token,
-            query_string: `page=0&population=50`
+            query_string: `sort_by=-created_on&page=0&population=50`
         }).then(data => {
             const { payload, error } = data;
 
@@ -83,7 +83,7 @@ const ListContacts = () => {
     const handleDataRequest = async (page) => {
         const response = await ContactService.read({
             token,
-            query_string: `page=${page}&population=50`
+            query_string: `sort_by=-created_on&page=${page}&population=50`
         })
         const { error, payload } = response;
         if (error) return;
@@ -94,7 +94,7 @@ const ListContacts = () => {
     const handleSearchRequest = async (keys, keyword, page) => {
         const response = await ContactService.search(keys, keyword, {
             token,
-            query_string: `page=${page}&population=50`,
+            query_string: `sort_by=-created_on&page=${page}&population=50`,
         });
         const { error, payload } = response;
         if (error) return;
