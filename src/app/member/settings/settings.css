@@ -1,0 +1,22 @@
+.settings-wrapper > header {
+    width: 100%;
+    border-bottom: 1px solid #dddddd;
+    padding: 5px 0;
+}
+
+.settings-wrapper > header ul {
+    width: 100%;
+
+    padding: 0;
+    margin: 0;
+}
+
+.settings-wrapper li {
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px 20px;
+}
+
+.settings-wrapper > section {
+    padding: 20px;
+}

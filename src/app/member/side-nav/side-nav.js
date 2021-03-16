@@ -11,6 +11,7 @@ import * as icon_new_contact from '../../../assets/icons/new-contact-dark.png';
 import * as icon_import_contacts from '../../../assets/icons/upload-dark.png';
 import * as icon_audiences from '../../../assets/icons/audience-dark.png';
 import * as icon_new_audience from '../../../assets/icons/new-audience-dark.png';
+import * as icon_settings from '../../../assets/icons/settings-dark.png';
 
 
 import * as icon_dashboard_active from '../../../assets/icons/graph-active.png';
@@ -21,6 +22,7 @@ import * as icon_new_contact_active from '../../../assets/icons/new-contact-acti
 import * as icon_import_contacts_active from '../../../assets/icons/upload-active.png';
 import * as icon_audiences_active from '../../../assets/icons/audience-active.png';
 import * as icon_new_audience_active from '../../../assets/icons/new-audience-active.png';
+import * as icon_settings_active from '../../../assets/icons/settings-active.png';
 
 import GmModal from '../../shared/modal/modal';
 import ImportContact from '../../member/contacts/import/import';
@@ -159,7 +161,12 @@ const SideNav = props => {
                         onClick={() => setShowCreateModal(true)}
                         onItemClick={closeMenuTray}
                     />
-
+                    <div className="nav-divider"></div>
+                    <SideNavItem title="Settings"
+                        icons={[icon_settings, icon_settings_active]}
+                        path="/settings"
+                        onItemClick={closeMenuTray}
+                    />
                     {/* <div className="side-sub-nav pl-5 pr-5 mt-4">
                     <div className="gm-btn btn-block gm-btn-secondary" onClick={() => history.push('/plans/choose')}>
                     Upgrade Plan

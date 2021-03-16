@@ -1,0 +1,33 @@
+.api-key-wrapper {
+    border: 2px solid #666666;
+    border-radius: 5px;
+    /* margin-top: 20px; */
+}
+
+.api-key-wrapper > div {
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.05em;
+    color: #666666;
+}
+
+.api-key-wrapper > div:first-child {
+    background-color: #ffffff;
+    margin-top: -10px;
+    margin-left: 15px;
+    padding: 0 10px;
+
+    width: fit-content;
+}
+
+section.api-guide {
+    border-top: 1px solid #dddddd;
+    margin-top: 20px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+section.api-guide header {
+    font-size: 1.05em;
+    font-weight: bold;
+}
