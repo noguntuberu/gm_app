@@ -6,18 +6,18 @@ const { NODE_ENV } = process.env;
 
 const app_config = {
     development: {
-        files: 'http://localhost:7004/api/files',
+        files: 'http://localhost:7004',
         keys: 'http://localhost:7006',
-        mailing: 'http://localhost:7002/api/mailing',
-        sales: 'http://localhost:7003/api/sales',
-        users: 'http://localhost:7001/api/users',
+        mailing: 'http://localhost:7002',
+        sales: 'http://localhost:7003',
+        users: 'http://localhost:7001',
     },
     production: {
-        files: 'https://go-mailer.com/api/files',
-        keys: 'https://keys.go-mailer.com/',
-        mailing: 'https://go-mailer.com/api/mailing',
-        sales: 'https://go-mailer.com/api/sales',
-        users: 'https://go-mailer.com/api/users',
+        files: 'https://files.go-mailer.com',
+        keys: 'https://keys.go-mailer.com',
+        mailing: 'https://mailing.go-mailer.com',
+        sales: 'https://sales.go-mailer.com',
+        users: 'https://users.go-mailer.com',
     }
 }
 
