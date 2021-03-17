@@ -1,0 +1,22 @@
+.setting-wrapper > header {
+    display: flex;
+    flex-direction: row;
+    
+    width: 100%;
+    border-bottom: 1px solid #dddddd;
+    padding: 5px 20px;
+
+    overflow-x: scroll;
+}
+
+.setting-wrapper span {
+    float: none;
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px 20px;
+}
+
+.setting-wrapper > section {
+    padding: 20px;
+    width: 100%;
+}

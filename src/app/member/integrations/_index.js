@@ -3,7 +3,7 @@ import { useDispatch, } from 'react-redux';
 import { setPageTitle } from '../../../store/actions/header';
 import { NavLink, Switch, Route } from 'react-router-dom';
 
-import './setting.css';
+import './integrations.css';
 import APIIntegration from './api/api';
 
 const SettingsModule = props => {
@@ -11,18 +11,20 @@ const SettingsModule = props => {
     let dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(setPageTitle('Settings'));
+        dispatch(setPageTitle('Integrations'));
     }, []);
 
     return <div>
-        <div className="setting-wrapper">
+        <div className="integrations-wrapper">
             <header>
-                <NavLink to="/settings/api"><span>API</span></NavLink>
-                {/* <NavLink to="/settings/api"><span>Basic</span></NavLink> */}
+                <NavLink to="/integrations/api"><span>API</span></NavLink>
+                {/* <NavLink to="/integrations/api"><span>Email</span></NavLink> */}
+                {/* <NavLink to="/integrations/api"><span>Facebook</span></NavLink> */}
+                {/* <NavLink to="/integrations/api"><span>Twitter</span></NavLink> */}
             </header>
-            <section className="setting-content-wrapper">
+            <section className="integrations-content-wrapper">
                 <Switch>
-                    <Route path="/settings/api" component={APIIntegration} />
+                    <Route path="/integrations/api" component={APIIntegration} />
                     <Route path="/" component={APIIntegration} />
                 </Switch>
             </section>

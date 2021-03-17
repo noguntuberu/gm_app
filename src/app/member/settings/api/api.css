@@ -19,15 +19,3 @@
 
     width: fit-content;
 }
-
-section.api-guide {
-    border-top: 1px solid #dddddd;
-    margin-top: 20px;
-    padding-top: 20px;
-    width: 100%;
-}
-
-section.api-guide header {
-    font-size: 1.05em;
-    font-weight: bold;
-}

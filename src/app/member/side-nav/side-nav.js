@@ -12,6 +12,7 @@ import * as icon_import_contacts from '../../../assets/icons/upload-dark.png';
 import * as icon_audiences from '../../../assets/icons/audience-dark.png';
 import * as icon_new_audience from '../../../assets/icons/new-audience-dark.png';
 import * as icon_settings from '../../../assets/icons/settings-dark.png';
+import * as icon_integration from '../../../assets/icons/integration-dark.png';
 
 
 import * as icon_dashboard_active from '../../../assets/icons/graph-active.png';
@@ -23,6 +24,7 @@ import * as icon_import_contacts_active from '../../../assets/icons/upload-activ
 import * as icon_audiences_active from '../../../assets/icons/audience-active.png';
 import * as icon_new_audience_active from '../../../assets/icons/new-audience-active.png';
 import * as icon_settings_active from '../../../assets/icons/settings-active.png';
+import * as icon_integration_active from '../../../assets/icons/integration-dark.png';
 
 import GmModal from '../../shared/modal/modal';
 import ImportContact from '../../member/contacts/import/import';
@@ -162,6 +164,11 @@ const SideNav = props => {
                         onItemClick={closeMenuTray}
                     />
                     <div className="nav-divider"></div>
+                    <SideNavItem title="Integrations"
+                        icons={[icon_integration, icon_integration_active]}
+                        path="/integrations"
+                        onItemClick={closeMenuTray}
+                    />
                     <SideNavItem title="Settings"
                         icons={[icon_settings, icon_settings_active]}
                         path="/settings"

@@ -4,10 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 import * as KeyService from '../../../../services/key';
 
-import APIGuide from './guide';
 import './api.css';
 
-const APISetting = props => {
+const APISetting = () => {
     let { id, firstname } = useSelector(state => state.user_data);
     let [loading, setLoading] = useState(false);
     let [api_key, setAPIKey] = useState('');
@@ -57,9 +56,6 @@ const APISetting = props => {
                     <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow"> Regenerating <span className="gm-btn-spinner"><Spinner /></span> </div>
                 }
             </div>
-        </section>
-        <section className="api-guide">
-            <APIGuide />
         </section>
     </div>
 }
