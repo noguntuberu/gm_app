@@ -7,12 +7,11 @@ import './integrations.css';
 import APIIntegration from './api/api';
 
 const SettingsModule = props => {
-
     let dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(setPageTitle('Integrations'));
-    }, []);
+    }, [dispatch]);
 
     return <div>
         <div className="integrations-wrapper">

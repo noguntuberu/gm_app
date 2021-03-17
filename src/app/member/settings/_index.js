@@ -6,13 +6,13 @@ import { NavLink, Switch, Route } from 'react-router-dom';
 import './setting.css';
 import APIIntegration from './api/api';
 
-const SettingsModule = props => {
+const SettingsModule = () => {
 
     let dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(setPageTitle('Settings'));
-    }, []);
+    }, [dispatch]);
 
     return <div>
         <div className="setting-wrapper">

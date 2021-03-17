@@ -20,7 +20,7 @@ const APISetting = () => {
 
             setAPIKey(payload.key);
         }).catch(e => e);
-    }, []);
+    }, [id]);
 
     let submitForm = () => {
         let data = {
