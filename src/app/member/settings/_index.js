@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, } from 'react-redux';
 import { setPageTitle } from '../../../store/actions/header';
-import { NavLink, Switch, Route, useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import APIIntegration from './api/api';
 
