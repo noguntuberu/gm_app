@@ -84,6 +84,27 @@ table, thead, tbody, th, tr, td {
     float: unset;
 }
 
+/**/
+.settings-wrapper > header {
+    display: flex;
+    flex-direction: row;
+    
+    width: 100%;
+    padding: 10px 20px;
+
+    overflow-x: scroll;
+}
+
+.settings-wrapper > header select {
+    float: right;
+    padding: 5px 15px;
+}
+
+.settings-wrapper > section {
+    padding: 20px;
+    width: 100%;
+}
+
 @media screen and (min-width:481px) {
     .app-content {
         height: 100vh;

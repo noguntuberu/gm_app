@@ -22,6 +22,15 @@ const APISetting = () => {
         }).catch(e => e);
     }, [id]);
 
+    let copyAPIKey = () => {
+        navigator.permissions.query({ name: 'clipboard-write' }).then(result => {
+            if (result.state === "granted" || result.state === "prompt") {
+                navigator.clipboard.writeText(api_key)
+                    .then(() => toast.info('Copied.')).catch(e => e);
+            }
+        });
+    }
+
     let submitForm = () => {
         let data = {
             id,
@@ -29,8 +38,8 @@ const APISetting = () => {
         };
 
         setLoading(true);
-        KeyService.create({ data}).then( response =>{
-            let { error, payload} = response;
+        KeyService.create({ data }).then(response => {
+            let { error, payload } = response;
             if (error) {
                 toast.error(error);
                 return;
@@ -38,14 +47,14 @@ const APISetting = () => {
 
             setAPIKey(payload.key);
             toast.success(`API Key generated successfully.`);
-        }).catch( e=> e).finally(() => setLoading(false));
+        }).catch(e => e).finally(() => setLoading(false));
     }
 
     return <div>
         <section>
             <div className="api-key-wrapper">
                 <div>api key</div>
-                <div>{api_key.substr(0, 25)}...</div>
+                <div onClick={copyAPIKey}>{api_key.substr(0, 25)}...</div>
             </div>
             <div>
                 <small className="pt-2 text-secondary">**click on key to copy.</small>
