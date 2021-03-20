@@ -17,7 +17,7 @@ const APIGuide = props => {
                     <ul>
                         <li>
                             <div className="parameter-title">email: string</div>
-                            <div className="parameter-description"> <span>required</span> contact's email address</div>
+                            <div className="parameter-description"> <span className="mr-2">required</span> contact's email address</div>
                         </li>
                         <li>
                             <div className="parameter-title">firstname: string </div>

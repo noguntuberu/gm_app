@@ -22,7 +22,7 @@ const WebsiteIntegration = () => {
 
             setAudiences(payload);
         }).catch(e => e);
-    }, []);
+    }, [token]);
 
     let copySnippet = (snippet) => {
         navigator.permissions.query({ name: 'clipboard-write' }).then(result => {
@@ -35,6 +35,7 @@ const WebsiteIntegration = () => {
     let generateCode = () => {
         let audience_ids = selected_audiences.map(audience => audience.value).join();
         let snippet = `fetch(https://users.go-mailer.com/api/contacts/${api_key}/${audience_ids}`
+        // eslint-disable-next-line no-template-curly-in-string
         snippet += "?email=${email.value})";
         setSnippet(snippet);
     }

@@ -35,6 +35,7 @@ section.api-guide code {
     /* display: block; */
     text-decoration: none;
     margin-bottom: 7.5px;
+    width: 100%;
 }
 
 .parameter-title {

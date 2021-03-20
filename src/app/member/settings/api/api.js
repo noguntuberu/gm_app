@@ -24,7 +24,7 @@ const APISetting = () => {
             setAPIKey(payload.key);
             dispatch(addMetadata({ api_key: payload.key }));
         }).catch(e => e);
-    }, [id]);
+    }, [id, dispatch]);
 
     let copyAPIKey = () => {
         navigator.permissions.query({ name: 'clipboard-write' }).then(result => {
@@ -56,21 +56,19 @@ const APISetting = () => {
     }
 
     return <div>
-        <section>
-            <div className="api-key-wrapper">
-                <div>api key</div>
-                <div onClick={copyAPIKey}>{api_key.substr(0, 25)}...</div>
-            </div>
-            <div>
-                <small className="pt-2 text-secondary">**click on key to copy.</small>
-            </div>
-            <div className="pt-3">
-                {!loading ?
-                    <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" onClick={e => submitForm()}> Regenerate Key </div> :
-                    <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow"> Regenerating <span className="gm-btn-spinner"><Spinner /></span> </div>
-                }
-            </div>
-        </section>
+        <div className="api-key-wrapper">
+            <div>api key</div>
+            <div onClick={copyAPIKey}>{api_key.substr(0, 25)}...</div>
+        </div>
+        <div>
+            <small className="pt-2 text-secondary">**click on key to copy.</small>
+        </div>
+        <div className="pt-3">
+            {!loading ?
+                <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" onClick={e => submitForm()}> Regenerate </div> :
+                <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow"> Regenerating <span className="gm-btn-spinner"><Spinner /></span> </div>
+            }
+        </div>
     </div>
 }
 
