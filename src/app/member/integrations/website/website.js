@@ -25,12 +25,9 @@ const WebsiteIntegration = () => {
     }, [token]);
 
     let copySnippet = (snippet) => {
-        navigator.permissions.query({ name: 'clipboard-write' }).then(result => {
-            // if (result.state === "granted" || result.state === "prompt") {
-                navigator.clipboard.writeText(snippet)
-                    .then(() => toast.info('Copied.')).catch(e => e);
-            // }
-        });
+        navigator.clipboard.writeText(snippet)
+            .then(() => toast.info('Copied.'))
+            .catch(e => e);
     }
     let generateCode = () => {
         let audience_ids = selected_audiences.map(audience => audience.value).join();
