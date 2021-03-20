@@ -1,13 +1,16 @@
 import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 import * as KeyService from '../../../../services/key';
+import { addMetadata } from '../../../../store/actions/metadata';
 
 import './api.css';
 
 const APISetting = () => {
+    let dispatch = useDispatch();
     let { id, firstname } = useSelector(state => state.user_data);
+
     let [loading, setLoading] = useState(false);
     let [api_key, setAPIKey] = useState('');
 
@@ -19,6 +22,7 @@ const APISetting = () => {
             }
 
             setAPIKey(payload.key);
+            dispatch(addMetadata({ api_key: payload.key }));
         }).catch(e => e);
     }, [id]);
 
@@ -46,6 +50,7 @@ const APISetting = () => {
             }
 
             setAPIKey(payload.key);
+            dispatch(addMetadata({ api_key: payload.key }));
             toast.success(`API Key generated successfully.`);
         }).catch(e => e).finally(() => setLoading(false));
     }
