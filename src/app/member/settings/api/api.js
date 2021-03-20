@@ -28,10 +28,10 @@ const APISetting = () => {
 
     let copyAPIKey = () => {
         navigator.permissions.query({ name: 'clipboard-write' }).then(result => {
-            if (result.state === "granted" || result.state === "prompt") {
+            // if (result.state === "granted" || result.state === "prompt") {
                 navigator.clipboard.writeText(api_key)
                     .then(() => toast.info('Copied.')).catch(e => e);
-            }
+            // }
         });
     }
 
