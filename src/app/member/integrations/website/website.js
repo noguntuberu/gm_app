@@ -52,8 +52,8 @@ const WebsiteIntegration = () => {
         <div className="pt-3">
             <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" onClick={e => generateCode()}> Generate Snippet </div>
         </div>
-        <div className="code-wrapper">
-            {snippet ?
+        {snippet ?
+            <div className="code-wrapper">
                 <code onClick={e => copySnippet(e.target.innerHTML)}>
                     {`
                     window.addEventListener('load', function() {
@@ -67,8 +67,10 @@ const WebsiteIntegration = () => {
                     });
                     `}
                 </code>
-                : ''}
-        </div>
+            </div>
+            :
+            <></>
+        }
         <div>
             <small className="pt-2 text-info">**click on snippet to copy.</small>
         </div>
