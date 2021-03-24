@@ -2,7 +2,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './header.css';
-import * as hamburger_menu from '../../../assets/icons/hamburger-dark.png';
+import * as hamburger_menu from '../../../assets/icons/hamburger.png';
 
 const MemberAreaHeader = props => {
     let { onHamburgerClick } = props;

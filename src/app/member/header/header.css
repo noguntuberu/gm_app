@@ -1,14 +1,14 @@
 /**/
 header.member-area-header {
     width: 100%;
+    height: 50px;
     padding: 10px 20px;
 
     position: sticky;
     top: 0;
     left: 0;
 
-    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
-    background-color: #ffffff;
+    background-color: #23608C;
     z-index: 2;
 }
 
@@ -18,7 +18,6 @@ header.member-area-header {
     align-items: center;
 
     width: 100%;
-    /* margin-bottom: 2.5px; */
 }
 
 .hamburger-icon {
@@ -31,8 +30,8 @@ header.member-area-header {
 .page-title {
     width: fit-content;
     margin-top: 3px;
-    font-size: 1.25em;
-    color: rgba(32, 104, 171);
+    font-size: 18px;
+    color: #f7f7f7;
 }
 
 .page-title-underline {
