@@ -35,18 +35,18 @@ const ViewCampaign = () => {
         <div className="campaign-view-wrapper">
             <div className="stat-card-pair-wrapper col-lg-6 p-0 p-lg-0 pr-lg-2">
                 <div className="col-6">
-                    <StatCard title='Sends' count={campaign_stat.failed_sends + campaign_stat.successful_sends} border_color='primary' />
+                    <StatCard title='Sends' count={campaign_stat.failed_sends + campaign_stat.successful_sends} base_color={205} />
                 </div>
                 <div className="col-6">
-                    <StatCard title='Sent' count={campaign_stat.successful_sends} border_color='success' />
+                    <StatCard title='Sent' count={campaign_stat.successful_sends} base_color={130} />
                 </div>
             </div>
             <div className="stat-card-pair-wrapper p-0 col-lg-6 p-lg-0">
                 <div className="col-6">
-                    <StatCard title='Failed' count={campaign_stat.failed_sends} border_color='secondary' />
+                    <StatCard title='Failed' count={campaign_stat.failed_sends} base_color={342} />
                 </div>
                 <div className="col-6">
-                    <StatCard title='Opened' count={campaign_stat.total_opened} border_color='info' />
+                    <StatCard title='Opened' count={campaign_stat.total_opened} base_color={268} />
                 </div>
             </div>
             <div className="card shadow-sm mt-2">
