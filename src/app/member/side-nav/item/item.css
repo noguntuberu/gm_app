@@ -5,33 +5,27 @@
 }
 .side-nav-item > div {
     float: right;
-    width: 95%;
+    width: 100%;
 
     display: flex;
     flex-direction: row;
 
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
+    padding: 10px 20px 10px 25px;
 
-    padding: 12.5px 25px 12.5px 12.5px;
-
-    color: #444444;
+    color: #23608C;
 }
 
-.side-nav-item:hover > div{
-    background-color: #e5e5e5;
+.side-nav-item:hover > div, .side-nav-item.active > div {
+    font-weight: bold;
+    background-color: #E8F5FF;
     cursor: pointer;
-}
-
-.side-nav-item.active > div {
-    background-color: #dfdfdf;
 }
 
 .nav-icon {
     width: 25px;
     height: 20px;
 
-    margin-right: 25px;
+    margin-right: 20px;
 }
 
 .nav-title {

@@ -1,11 +1,33 @@
 /** */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './stat.css';
 
 const StatCard = props => {
-    let { title, count, border_color, path } = props;
+    let { title, count, base_color, path } = props;
     let history = useHistory();
+
+    let [style, setStyle] = useState({});
+    useEffect(() => {
+        if (!base_color) return;
+        setStyle({
+            card: {
+                border: `1px solid hsl(${base_color}, 100%, 92%)`,
+                borderLeft: `4px solid hsl(${base_color}, 58%, 47%)`,
+                borderRadius: '5px',
+                padding: '10px'
+            },
+            title: {
+                fontWeight: 'bold',
+                color: `hsl(${base_color}, 89%, 15%)`,
+            },
+            value: {
+                fontWeight: 'bold',
+                fontSize: '20px',
+                color: `hsl(${base_color}, 61%, 29%)`,
+            }
+        })
+    }, [base_color]);
 
     const navigate = () => {
         history.push(path);
@@ -24,11 +46,11 @@ const StatCard = props => {
         return integer_value;
     }
 
-    return <div className={`shadow-sm py-2 px-3 mx-0 gm-stat-card gm-card-border-${border_color}`} onClick={navigate}>
-        <div className="stat-card-title">
+    return <div style={style.card} onClick={navigate}>
+        <div style={style.title}>
             {`${title}`}
         </div>
-        <div className="mt-1 stat-card-value">
+        <div style={style.value}>
             {processCount(count) || 0}
         </div>
     </div>

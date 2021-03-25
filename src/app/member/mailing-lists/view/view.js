@@ -13,10 +13,10 @@ import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
 import * as ContactService from '../../../../services/contact';
 
-import * as icon_datatable from '../../../../assets/icons/table-dark.png';
-import * as icon_dashboard from '../../../../assets/icons/graph-dark.png';
-import * as icon_edit from '../../../../assets/icons/edit-dark.png';
-import * as icon_import_contacts from '../../../../assets/icons/upload-dark.png';
+import icon_datatable from '../../../../assets/icons/table-dark.svg';
+import icon_dashboard from '../../../../assets/icons/graph.svg';
+import icon_edit from '../../../../assets/icons/edit-dark.svg';
+import icon_import_contacts from '../../../../assets/icons/upload-dark.svg';
 
 
 const ViewMailingList = () => {
@@ -104,18 +104,18 @@ const ViewMailingList = () => {
             <div className="icon-tray" ref={icons_tray}>
                 {
                     is_dashboard_view ?
-                        <div className="floating-action-btn">
-                            <img alt="View Audience's Contact" src={icon_datatable} onClick={() => setIsDashboardView(false)} />
+                        <div className="floating-action-btn" onClick={() => setIsDashboardView(false)}>
+                            {icon_datatable}
                         </div> :
                         <div className="floating-action-btn" onClick={() => setIsDashboardView(true)}>
-                            <img alt="View Audience's Dashboard" src={icon_dashboard} />
+                            {icon_dashboard}
                         </div>
                 }
-                <div className="floating-action-btn">
-                    <img alt="Edit Audience" src={icon_edit} onClick={() => setShowUpdationModal(true)} />
+                <div className="floating-action-btn" onClick={() => setShowUpdationModal(true)}>
+                    {icon_edit}
                 </div>
-                <div className="floating-action-btn">
-                    <img alt="Import Contacts" src={icon_import_contacts} onClick={() => setShowUploadModal(true)} />
+                <div className="floating-action-btn" onClick={() => setShowUploadModal(true)}>
+                    {icon_import_contacts}
                 </div>
             </div>
         </div>

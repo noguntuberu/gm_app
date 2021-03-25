@@ -16,17 +16,17 @@
     height: 100%;
     width: 75%;
 
-    background-color: rgb(255, 255, 255);
-    color: #444444
+    background-color: #ffffff;
 }
 
 .app-side-nav header {
     display: flex;
     flex-direction: row;
 
+    height: 50px;
     width: 100%;
 
-    border-bottom: 1px solid rgba(200, 200, 200, 0.39);
+    border-bottom: 1px solid #E8F5FF;
     padding: 15px 10px 10px 10px;        
 }
 
@@ -39,22 +39,22 @@
 
 .nav-site-name {
     width: 100px;
-    margin-left: 20px;
+    margin-left: 15px;
     margin-top: 0.5px;
 
-    color: #555555;
-    font-size: 1.15em;
+    color: #19415E;
+    font-size: 18px;
 }
 
 .app-side-nav section {
     width: 100%;
-    padding: 12.5px 0;
+    padding: 5px 0;
 }
 
 .nav-divider {
     float: right;
     width: 90%;
-    border-top: 1px solid rgba(143, 142, 142, 0.25);
+    border-top: 1px solid #E8F5FF;
     margin: 5px 0;
 }
 
