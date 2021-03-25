@@ -34,25 +34,25 @@ const AudienceGraph = props => {
     return <div>
         {
             is_mobile_view ?
-                <ResponsiveContainer width='100%' minHeight={250}>
-                    <LineChart data={graph_data} margin={{ left: -40 }}>
+                <ResponsiveContainer width='100%' minHeight={275}>
+                    <LineChart data={graph_data} margin={{ left: -45 }}>
                         <ReferenceLine />
                         <CartesianAxis viewBox={{ width: '100%', height: 250 }} />
-                        <CartesianGrid strokeDasharray='3 1 3' />
+                        <CartesianGrid strokeDasharray='4 1 4' />
                         <Line
                             type="monotone"
                             dataKey='unsubscribers'
                             name='unsubscribers'
-                            fill="rgba(141, 0, 42, 0.65)"
+                            fill="hsl(342, 58%, 47%)"
                         />
                         <Line
                             type="monotone"
                             dataKey='subscribers'
                             name='new subscribers'
-                            fill="rgb(117, 177, 117)"
+                            fill="hsl(130, 58%, 47%)"
                         />
                         <Tooltip />
-                        <XAxis dataKey='date' angle={-30} reversed={true} padding={{ left: 0 }} />
+                        <XAxis dataKey='date' reversed={true} padding={{ left: 0 }} />
                         <YAxis allowDecimals={false} padding={{ top: 5 }} />
 
                     </LineChart>
