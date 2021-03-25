@@ -56,11 +56,13 @@ const WebsiteIntegration = () => {
             <div className="code-wrapper">
                 <code onClick={e => copySnippet(e.target.innerHTML)}>
                     {`
-                    window.addEventListener('load', function() {
-                        let email = document.querySelector('input[type*="email"]') || document.querySelector('input[placeholder*="email"]');
-                        let btn = document.querySelector('button[type*="submit"]') || document.querySelector('input[type*="submit"]');
-                        btn.addEventListener('click', function () {
-                            `}
+                        <script type="text/javascript">
+                            window.addEventListener('load', function() {
+                            let email = document.querySelector('input[type*="email"]') || document.querySelector('input[placeholder*="email"]');
+                            let btn = document.querySelector('button[type*="submit"]') || document.querySelector('input[type*="submit"]');
+                            btn.addEventListener('click', function () {
+                        </script>
+                    `}
                     {snippet}
                     {`
                         });
