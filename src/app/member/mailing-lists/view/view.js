@@ -14,7 +14,7 @@ import * as CampaignService from '../../../../services/campaign';
 import * as ContactService from '../../../../services/contact';
 
 import icon_datatable from '../../../../assets/icons/table.svg';
-import icon_dashboard from '../../../../assets/icons/graph.svg';
+import icon_dashboard from '../../../../assets/icons/graph-white.svg';
 import icon_edit from '../../../../assets/icons/edit.svg';
 import icon_import_contacts from '../../../../assets/icons/upload.svg';
 
