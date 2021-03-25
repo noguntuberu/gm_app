@@ -17,7 +17,7 @@
 
     padding: 60px 15px 10px 15px;
 
-    background-color: #eaeaea;
+    background-color: #F4F8FB;
 }
 
 .gm-datatable-search, .gm-datatable-search input {
@@ -26,14 +26,15 @@
 
 .gm-datatable-search input {
     border: none;
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid #99CCF1;
     padding: 5px ;
     background: none;
+    color: #19415E;
 }
 
 .gm-datatable-search input:focus {
     /* background: #ffffff; */
-    color: #666666;
+    color: #19415E;
 }
 
 /**/

@@ -5,7 +5,7 @@
     justify-content: space-between;
 
     width: 100%;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #D7EEFF;
     padding: 10px 0 ;
 }
 
@@ -28,20 +28,23 @@
     width: 100%;
     height: 100%;
     padding: 0;
+    border-color: #99CCF1;
 }
 
 .gm-datatable-item-title {
-    font-size: 1.15em;
+    font-size: 15.45px;
     font-weight: bold;
+    color: #19415E;
 }
 
 .gm-datatable-item-tagline {
-    font-size: 0.95em;
+    font-size: 13px;
+    color: #19415E;
 }
 
 .gm-datatable-item-metadata {
-    font-size: 0.9em;
-    color: #777777;
+    font-size: 13px;
+    color: #666666;
 }
 
 .gm-datatable-item-badge {

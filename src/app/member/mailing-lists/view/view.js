@@ -13,10 +13,10 @@ import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
 import * as ContactService from '../../../../services/contact';
 
-import icon_datatable from '../../../../assets/icons/table-dark.svg';
+import icon_datatable from '../../../../assets/icons/table.svg';
 import icon_dashboard from '../../../../assets/icons/graph.svg';
-import icon_edit from '../../../../assets/icons/edit-dark.svg';
-import icon_import_contacts from '../../../../assets/icons/upload-dark.svg';
+import icon_edit from '../../../../assets/icons/edit.svg';
+import icon_import_contacts from '../../../../assets/icons/upload.svg';
 
 
 const ViewMailingList = () => {
@@ -105,17 +105,17 @@ const ViewMailingList = () => {
                 {
                     is_dashboard_view ?
                         <div className="floating-action-btn" onClick={() => setIsDashboardView(false)}>
-                            {icon_datatable}
+                            <img alt="Show audience's contact" src={icon_datatable} />
                         </div> :
                         <div className="floating-action-btn" onClick={() => setIsDashboardView(true)}>
-                            {icon_dashboard}
+                            <img alt="Show audience's dashboard" src={icon_dashboard} />
                         </div>
                 }
                 <div className="floating-action-btn" onClick={() => setShowUpdationModal(true)}>
-                    {icon_edit}
+                    <img alt="Show audience update form" src={icon_edit} />
                 </div>
                 <div className="floating-action-btn" onClick={() => setShowUploadModal(true)}>
-                    {icon_import_contacts}
+                    <img alt="show contact upload modal" src={icon_import_contacts} />
                 </div>
             </div>
         </div>
