@@ -25,14 +25,15 @@ export const processDataByWeek = (data) => {
         }
         let date = datum[field];
         let day_string = extractDayStringForGraph(date);
-
+        
         if (!days_config[day_string]) {
             return;
         }
-
+        
         days_config[day_string][config_key] += 1;
     });
-
+    
+    console.log(data)
     console.log(days_config);
     return Object.values(days_config);
 }
