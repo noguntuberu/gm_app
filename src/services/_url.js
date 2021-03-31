@@ -18,7 +18,7 @@ const app_config = {
         mailing: 'https://mailing.go-mailer.com',
         sales: 'https://sales.go-mailer.com',
         users: 'https://users.go-mailer.com',
-    }
+    },
 }
 
 export const urls = { ...app_config[NODE_ENV]};
