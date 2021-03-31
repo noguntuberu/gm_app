@@ -12,6 +12,7 @@ body {
 
 select:focus, input:focus, textarea:focus, button:focus {
   outline: none;
+  border-bottom: 1px solid #C1E3FB;
 }
 
 code {

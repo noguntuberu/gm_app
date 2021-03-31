@@ -14,7 +14,7 @@ button:disabled {
     border: none;
     border-radius: 5px;
     padding: 0 25px;
-    height: 45px;
+    height: 40px;
     text-align: center;
 
     cursor: pointer;
@@ -25,7 +25,7 @@ button:disabled {
 }
 
 .gm-btn-primary {
-    background: rgb(0, 151, 197);
+    background: #3283BD;
     color: #ffffff;
 }
 

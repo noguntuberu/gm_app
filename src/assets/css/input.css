@@ -3,28 +3,36 @@ input {
     background-color: #ffffff;
 }
 
+input[type="date"] {
+    width: 100%;
+}
+
 .form-row {
     margin: 0;
 }
 
 label {
     font-size: 0.9em;
-    color: #666;
+    color: #23608C;
 }
+
 .gm-input {
     border: none;
-    border-bottom: 1px solid #cccccc;
-    padding: 5px 0 7.5px 0;
+    border-bottom: 1px solid #E5E5E5;
+    margin-bottom: 5px;
+    padding: 0;
     width: 100%;
+
+    color: #19415E;
 }
 
 select.gm-input {
-    padding: 14px 0;
+    padding: 10px 0 10px 0;
     background: transparent;
 }
 
 /* 3rd party */
-.go2646822163, .gm-input[type=date]{
-    border-radius: 5px !important;
-    margin: 0 !important;
+.go2646822163, .gm-input[type="date"]{
+    border-radius: 5px;
+    margin: 0;
 }

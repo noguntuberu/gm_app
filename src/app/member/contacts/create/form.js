@@ -136,53 +136,45 @@ const ContactCreationForm = props => {
                 </div>
             </div>
             <div className="form-row">
-                <div className="form-group col-12">
-                    <div className="form-row">
-                        <div className="form-group col-12 col-md-6">
-                            <label htmlFor="country">Country</label>
-                            <select
-                                className="mt-md-1 gm-input"
-                                id="country"
-                                onChange={e => setCountry(e.target.value)}
-                            >
-                                <option value="">Select country</option>
-                                {countries.map((country, index) => <option key={country.code} value={country.code}>
-                                    {country.name}
-                                </option>)}
-                            </select>
-                        </div>
-                        <div className="form-group col-12 col-md-6">
-                            <label htmlFor="state">State</label>
-                            <input
-                                className="mt-md-3 gm-input"
-                                id="state"
-                                onInput={e => setState(e.target.value)}
-                            />
-                        </div>
-                    </div>
+                <div className="form-group col-12 col-md-6">
+                    <label htmlFor="country">Country</label>
+                    <select
+                        className="mt-md-1 gm-input"
+                        id="country"
+                        onChange={e => setCountry(e.target.value)}
+                    >
+                        <option value="">Select country</option>
+                        {countries.map((country, index) => <option key={country.code} value={country.code}>
+                            {country.name}
+                        </option>)}
+                    </select>
+                </div>
+                <div className="form-group col-12 col-md-6">
+                    <label htmlFor="state">State</label>
+                    <input
+                        className="mt-md-3 gm-input"
+                        id="state"
+                        onInput={e => setState(e.target.value)}
+                    />
                 </div>
                 <div className="form-group col-12 pr-0">
                     <label htmlFor="date-of-birth">Date of birth</label>
-                    <div className="form-row">
-                        <div className="form-group col">
-                            <input
-                                type="date"
-                                className="gm-input"
-                                min="0"
-                                max="31"
-                                onChange={e => setDateOfBirth(e.target.value)}
-                            />
-                        </div>
-                    </div>
+                    <input
+                        type="date"
+                        className="gm-input"
+                        min="0"
+                        max="31"
+                        onChange={e => setDateOfBirth(e.target.value)}
+                    />
                 </div>
             </div>
-            <div className="pr-3 mt-4">
+            <div className="mt-3 mb-3">
                 {!loading ?
-                    <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" onClick={e => submitForm()}> Save </div> :
-                    <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div>
+                    <div className="gm-btn gm-btn-primary flexible-save-btn shadow" onClick={e => submitForm()}> Save </div> :
+                    <div className="gm-btn gm-btn-primary flexible-save-btn shadow"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div>
                 }
             </div>
-        </div>
+        </div >
     )
 }
 
