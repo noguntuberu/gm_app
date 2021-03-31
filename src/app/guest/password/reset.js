@@ -5,7 +5,7 @@ import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useParams } from 'react-router-dom';
-import { apiPost, URLS } from '../../../utilities/api/api';
+import * as GuestService from '../../../services/guest';
 
 const PasswordReset = () => {
     const { id } = useParams();
@@ -34,7 +34,7 @@ const PasswordReset = () => {
         };
 
         setIsLoading(true);
-        apiPost(`${URLS.guests}/password/reset`, { data }).then( response => {
+        GuestService.resetPassword({ data }).then( response => {
             const { error, payload } = response;
 
             if(error) {

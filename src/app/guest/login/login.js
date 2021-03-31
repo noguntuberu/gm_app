@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { useDispatch, } from 'react-redux';
 
-import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
-import { apiPost, URLS } from '../../../utilities/api/api';
+import * as GuestService from '../../../services/guest';
 import { addDataToStore } from '../../../store/actions/user-data';
+import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
@@ -34,7 +34,7 @@ const LoginForm = () => {
         }
 
         setLoginLoading(true);
-        apiPost(`${URLS.guests}/login`, { data: form_data }).then(response => {
+        GuestService.login({ data: form_data }).then(response => {
             const { error, payload } = response;
             if (error) {
                 applyFormMessage(error);

@@ -1,11 +1,12 @@
 /** */
 import React, { useState, } from 'react';
 import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
-import { apiPost, URLS } from '../../../utilities/api/api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from 'react-router-dom';
+
+import * as GuestService from '../../../services/guest';
 
 const SignupForm = () => {
     const history = useHistory();
@@ -33,7 +34,7 @@ const SignupForm = () => {
         delete data_to_submit.confirm_password;
 
         setSpinner(true);
-        apiPost(`${URLS.guests}/register`, { data: data_to_submit, }).then(response => {
+        GuestService.signup({ data: data_to_submit, }).then(response => {
             const { error, payload } = response;
             if (error) {
                 applyFormMessage(error);

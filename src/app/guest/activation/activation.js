@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { apiGet, URLS } from '../../../utilities/api/api';
+import * as GuestService from '../../../services/guest';
 
 const AccountActivation = () => {
     const { id } = useParams();
@@ -12,7 +12,7 @@ const AccountActivation = () => {
 
     useEffect(() => {
         setIsActivating(true);
-        apiGet(`${URLS.guests}/activation/${id}`).then(response => {
+        GuestService.activate(id).then(response => {
             setIsActivating(false);
             const { error, } = response;
             if (error) {

@@ -4,7 +4,7 @@ import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { apiPost, URLS } from '../../../utilities/api/api';
+import * as GuestService from '../../../services/guest';
 
 const PasswordRecovery = () => {
     const [form_data, setFormData] = useState({});
@@ -27,7 +27,7 @@ const PasswordRecovery = () => {
         }
 
         setIsLoading(true);
-        apiPost(`${URLS.guests}/password/recover`, { data: form_data }).then( response => {
+        GuestService.recoverPassword({ data: form_data }).then( response => {
             const {error, payload} = response;
 
             if(error) {
