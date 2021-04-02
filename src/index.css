@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Bentham,cheherazade:wght@700&display=swap');
-@import url('./assets/css/input.css');
-@import url('./assets/css/buttons.css');
+@import url('https://fonts.googleapis.com/css2?family=Bentham&display=swap');
+@import url('./assets/css/index.css');
 
 body {
   margin: 0;
   font-family: 'Bentham', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 0.9em;
+  font-size: 14px;
 }
 
 select:focus, input:focus, textarea:focus, button:focus {
@@ -16,8 +15,25 @@ select:focus, input:focus, textarea:focus, button:focus {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+div, section, input, textarea, select, form {
+  box-sizing: border-box;
+  float: left;
+}
+
+div {
+  width: 100%;
+}
+
+img {
+  width: 100%;
+}
+
+/* setting float on tables cause them to display in a row */
+table {
+  width: 100%;
 }
 
 .is-clickable {
@@ -30,4 +46,12 @@ code {
 
 .mobi-hide {
   display: none !;
+}
+
+/** LAYOUT **/
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

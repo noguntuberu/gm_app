@@ -34,10 +34,10 @@ const PasswordReset = () => {
         };
 
         setIsLoading(true);
-        GuestService.resetPassword({ data }).then( response => {
+        GuestService.resetPassword({ data }).then(response => {
             const { error, payload } = response;
 
-            if(error) {
+            if (error) {
                 applyFormMessage(error);
                 return;
             }
@@ -56,20 +56,24 @@ const PasswordReset = () => {
                     </button>
                 </div> : <div></div>}
             </div>
-            <div className="form-group">
-                <input type="password" className="form-control" placeholder="Enter new password"
-                    onInput={event => setFormData({ ...form_data, password: event.target.value })} />
+            <div className="form-row">
+                <div className="gm-input-group">
+                    <input type="password" className="gm-input" placeholder="Enter new password"
+                        onInput={event => setFormData({ ...form_data, password: event.target.value })} />
+                </div>
+                <div className="gm-input-group">
+                    <input type="password" className="gm-input" placeholder="Confirm new password"
+                        onInput={event => setFormData({ ...form_data, confirm_password: event.target.value })} />
+                </div>
             </div>
-            <div className="form-group">
-                <input type="password" className="form-control" placeholder="Confirm new password"
-                    onInput={event => setFormData({ ...form_data, confirm_password: event.target.value })} />
-            </div>
-            <div className="form-group">
-                <button type="button" className="gm-btn gm-btn-primary form-control"
-                    onClick={() => submitForm()}>
-                    Reset Password
+            <div className="form-row mt-2">
+                <div className="gm-input-group">
+                    <button type="button" className="gm-btn gm-btn-blue"
+                        onClick={() => submitForm()}>
+                        Reset Password
                     {is_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin" /> : <span></span>}
-                </button>
+                    </button>
+                </div>
             </div>
         </div>
     )

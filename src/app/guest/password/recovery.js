@@ -27,10 +27,10 @@ const PasswordRecovery = () => {
         }
 
         setIsLoading(true);
-        GuestService.recoverPassword({ data: form_data }).then( response => {
-            const {error, payload} = response;
+        GuestService.recoverPassword({ data: form_data }).then(response => {
+            const { error, payload } = response;
 
-            if(error) {
+            if (error) {
                 applyFormMessage(error);
                 return;
             }
@@ -49,16 +49,20 @@ const PasswordRecovery = () => {
                     </button>
                 </div> : <div></div>}
             </div>
-            <div className="form-group">
-                <input type="email" className="form-control" placeholder="Email Address"
-                    onInput={event => setFormData({ ...form_data, email: event.target.value })} />
+            <div className="form-row">
+                <div className="gm-input-group">
+                    <input type="email" className="gm-input" placeholder="Email Address"
+                        onInput={event => setFormData({ ...form_data, email: event.target.value })} />
+                </div>
             </div>
-            <div className="form-group">
-                <button className="gm-btn gm-btn-primary w-100"
-                    onClick={() => submitForm()}>
-                    Recover Password
+            <div className="form-row mt-2">
+                <div className="gm-input-group">
+                    <button className="gm-btn gm-btn-blue"
+                        onClick={() => submitForm()}>
+                        Recover Password
                     {is_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <span></span>}
-                </button>
+                    </button>
+                </div>
             </div>
         </div>
     )

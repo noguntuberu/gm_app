@@ -44,48 +44,64 @@ const SignupForm = () => {
             applyFormMessage(payload, 1);
         }).finally(() => setSpinner(false));
     };
-
+ 
     return (
         <div>
-            <div className="w-100 mt-1">
-                {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
-                    {form_message.text}
-                    <button type="button" className="close" onClick={() => applyFormMessage('', -1)}>
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div> : <div></div>}
+            <div className="info-card">
+
             </div>
-            <div className="form-group">
-                <div className="twin-input">
-                    <input type="text" className="form-control" placeholder="First name"
-                        onInput={event => setFormData({ ...form_data, firstname: event.target.value })} />
+            <div className="form-wrapper">
+                <div className="w-100 mt-1">
+                    {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
+                        {form_message.text}
+                        <button type="button" className="close" onClick={() => applyFormMessage('', -1)}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> : <div></div>}
                 </div>
-                <div className="twin-input">
-                    <input type="text" className="form-control" placeholder="Last name"
-                        onInput={event => setFormData({ ...form_data, lastname: event.target.value })} />
+                <div className="form-switch-wrapper text-blue-4">
+                    <div onClick={() => history.push("/login")}>Already a member? <b>Log In</b></div>
                 </div>
-            </div>
-            <div className="form-group">
-                <input type="email" className="form-control" placeholder="Email Address"
-                    onInput={event => setFormData({ ...form_data, email: event.target.value })} />
-            </div>
-            <div className="form-group">
-                <div className="twin-input">
-                    <input type="password" className="form-control" placeholder="Password"
-                        onInput={event => setFormData({ ...form_data, password: event.target.value })} />
+                <div className="form-row">
+                    <div className="gm-input-group">
+                        <input type="text" className="gm-input" placeholder="First name"
+                            onInput={event => setFormData({ ...form_data, firstname: event.target.value })} />
+                    </div>
+                    <div className="gm-input-group">
+                        <input type="text" className="gm-input" placeholder="Last name"
+                            onInput={event => setFormData({ ...form_data, lastname: event.target.value })} />
+                    </div>
                 </div>
-                <div className="twin-input">
-                    <input type="password" className="form-control" placeholder="Confirm password"
-                        onInput={event => setFormData({ ...form_data, confirm_password: event.target.value })} />
+                <div className="form-row">
+                    <div className="gm-input-group">
+                        <input type="email" className="gm-input" placeholder="Email Address"
+                            onInput={event => setFormData({ ...form_data, email: event.target.value })} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group">
-                <button type="button" className="gm-btn gm-btn-primary w-100"
-                    onClick={() => submitForm()}>
-                    Create Account {show_spinner ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <></>}
-                </button>
-                <button className="gm-btn gm-btn-info w-100 mt-3" onClick={() => history.push("/login")}>Log In</button>
-            </div>
+                <div className="form-row">
+                    <div className="gm-input-group">
+                        <input type="password" className="gm-input" placeholder="Password"
+                            onInput={event => setFormData({ ...form_data, password: event.target.value })} />
+                    </div>
+                    <div className="gm-input-group">
+                        <input type="password" className="gm-input" placeholder="Confirm password"
+                            onInput={event => setFormData({ ...form_data, confirm_password: event.target.value })} />
+                    </div>
+                </div>
+                <div className="form-row mt-2">
+                    <div className="gm-input-group">
+                        <button type="button" className="gm-btn gm-btn-blue"
+                            onClick={() => submitForm()}>
+                            Create Account {show_spinner ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <></>}
+                        </button>
+                    </div>
+                </div>
+                <div className="form-row mt-3">
+                    <div className="gm-input-group text-center px-2 word-wrap">
+                        <span class="text-blue-5" >By continuing, you agree to our <b>terms</b> and <b>policies</b>.</span>
+                    </div>
+                </div>
+            </div >
         </div>
     )
 }

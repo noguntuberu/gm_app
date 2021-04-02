@@ -1,31 +1,11 @@
-body * {
-    box-sizing: border-box;
-    float: left;
-}
+.app-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
 
-div {
-    width: 100%;
-}
-
-img {
-    width: 100%;
-    /* height: 1; */
-}
-
-/* setting float on tables cause them to display in a row */
-table {
-    width: 100%;
-}
-
-table, thead, tbody, th, tr, td {
-    float: none;
-}
-
-.full-page-wrap {
     width: 100%;
     height: 100vh;
 }
-
 
 .app-header {
     height: 8vh;

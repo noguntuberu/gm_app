@@ -37,7 +37,7 @@ const AccountActivation = () => {
     }
 
     return (
-        <div className="py-3 text-center">
+        <div className="py-3 text-center text-blue-4">
             {is_activating ? <div> Activating your account. Please wait... </div> : displayActivationResult()}
         </div>
     );

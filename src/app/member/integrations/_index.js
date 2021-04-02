@@ -17,6 +17,9 @@ const SettingsModule = props => {
     return <div>
         <div className="settings-wrapper">
             <header>
+                <div>
+                    
+                </div>
                 <select onChange={e => history.push(e.target.value)} >
                     <option value="/integrations/api">API</option>
                     <option value="/integrations/web">Website</option>

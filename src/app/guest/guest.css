@@ -1,7 +1,7 @@
 /**/
-.guest-site-icon {
-    width: 150px;
-    margin-bottom: 10px;
+.mobi-site-name {
+    width: 135px;
+    margin-bottom: 5px;
 }
 
 .guest-form-wrap {
@@ -9,13 +9,24 @@
     padding: 20px;
 }
 
-.form-divider {
-    width: 40%;
-    margin: 5px auto 20px auto;
+.info-card {
+    display: none;
 }
 
-.form-extra-text {
-    font-size: 0.95rem;
+
+.form-wrapper {
+    width: 100%;
+}
+
+.form-switch-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    
+    border-top: 1px solid #D7EEFF;
+
+    line-height: 50px;
+    text-align: center;
 }
 
 .twin-input {

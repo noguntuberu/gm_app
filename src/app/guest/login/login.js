@@ -47,6 +47,9 @@ const LoginForm = () => {
 
     return (
         <div className="gm-column-flex-centered">
+            <div className="form-switch-wrapper text-blue-4">
+                <div onClick={() => history.push("/register")}>Not yet a member? <b>Create Account</b></div>
+            </div>
             <div className="w-100 mt-1">
                 {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
                     {form_message.text}
@@ -55,28 +58,38 @@ const LoginForm = () => {
                     </button>
                 </div> : <div></div>}
             </div>
-            <div className="form-group">
-                <input type="email" className="form-control" placeholder="Email Address"
-                    onInput={event => setFormData({ ...form_data, email: event.target.value })} />
+            <div className="form-row">
+                <div className="gm-input-group">
+                    <input type="email" className="gm-input" placeholder="Email Address"
+                        onInput={event => setFormData({ ...form_data, email: event.target.value })} />
+                </div>
+                <div className="gm-input-group">
+                    <input type="password" className="gm-input" placeholder="Password"
+                        onInput={event => setFormData({ ...form_data, password: event.target.value })} />
+                </div>
             </div>
-            <div className="form-group">
-                <input type="password" className="form-control" placeholder="Password"
-                    onInput={event => setFormData({ ...form_data, password: event.target.value })} />
+            <div className="form-row">
+                <div className="col-6">
+
+                </div>
+                <div className="col-6 text-right">
+                <span className="text-blue-4 is-clickable" onClick={() => history.push("/password/recovery")}> Recover Password ?</span>
+                </div>
             </div>
-            <div className="form-group">
-                <button className="btn-sm gm-btn gm-btn-primary w-100" onClick={() => submitForm()}>
-                    Log In
+            <div className="form-row mt-2">
+                <div className="gm-input-group">
+                    <button className="gm-btn gm-btn-blue" onClick={() => submitForm()}>
+                        Log In
                     {is_login_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <span></span>}
-                </button>
-                <button className="gm-btn gm-btn-info w-100 mt-3 text-center" onClick={() => history.push("/register")}>Create Account</button>
+                    </button>
+                </div>
             </div>
-            <hr className="form-divider"></hr>
-            <div className="text-center d-flex justify-content-center mb-3 form-extra-text">
+            {/* <div className="text-center d-flex justify-content-center mb-3 form-extra-text">
                 Forgot password?
                     <span className="pl-2">
-                    <b><span className="gm-text-primary is-clickable" onClick={() => history.push("/password/recovery")}> Recover Password </span></b>
+                    <b></b>
                 </span>
-            </div>
+            </div> */}
         </div>
     )
 };

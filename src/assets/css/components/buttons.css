@@ -1,0 +1,75 @@
+
+button:disabled {
+    color: #aaaaaa;
+    border-color: #aaaaaa;
+}
+
+/**/
+.gm-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 5px;
+    padding: 0 25px;
+
+    height: 40px;
+    width: 100%;
+    
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    
+    cursor: pointer;
+}
+
+.gm-btn:active {
+    outline: none;
+}
+
+.gm-btn-blue {
+    background-color: #3283BD;
+    color: #ffffff;
+}
+
+.gm-btn-wine {
+    background-color: #BD325B;
+    color: #ffffff;
+}
+
+.gm-btn-green {
+    background-color: #32BD49;
+    color: #ffffff;
+}
+
+.gm-btn-purple {
+    background-color: #7332BD;
+    color: #7332BD;
+}
+
+.gm-btn-blue:disabled {
+    background-color: #99CCF1;
+    color: #666666;
+}
+
+.gm-btn-wine:disabled {
+    background-color: #F199B3;
+    color: #666666;
+}
+
+.gm-btn-green:disabled {
+    background-color: #D7FFDD;
+    color: #666666;
+}
+
+.gm-btn-purple:disabled {
+    background-color: #E9D7FF;
+    color: #666666;
+}
+
+.gm-btn-spinner {
+    float: right;
+    margin-left: 10px;
+}
