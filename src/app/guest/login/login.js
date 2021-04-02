@@ -5,6 +5,7 @@ import { useDispatch, } from 'react-redux';
 import * as GuestService from '../../../services/guest';
 import { addDataToStore } from '../../../store/actions/user-data';
 import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
+import InfoCard from '../info-card/info-card';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
@@ -44,9 +45,10 @@ const LoginForm = () => {
             dispatch(addDataToStore(payload));
         }).finally(() => setLoginLoading(false));
     }
-
-    return (
-        <div className="gm-column-flex-centered">
+ 
+    return <div>
+        <InfoCard bg_class="gm-bg-blue-5"/>
+        <div className="form-wrapper flex-col-center">
             <div className="form-switch-wrapper text-blue-4">
                 <div onClick={() => history.push("/register")}>Not yet a member? <b>Create Account</b></div>
             </div>
@@ -73,7 +75,7 @@ const LoginForm = () => {
 
                 </div>
                 <div className="col-6 text-right">
-                <span className="text-blue-4 is-clickable" onClick={() => history.push("/password/recovery")}> Recover Password ?</span>
+                    <span className="text-blue-4 is-clickable" onClick={() => history.push("/password/recovery")}> Recover Password ?</span>
                 </div>
             </div>
             <div className="form-row mt-2">
@@ -84,14 +86,8 @@ const LoginForm = () => {
                     </button>
                 </div>
             </div>
-            {/* <div className="text-center d-flex justify-content-center mb-3 form-extra-text">
-                Forgot password?
-                    <span className="pl-2">
-                    <b></b>
-                </span>
-            </div> */}
         </div>
-    )
+    </div>
 };
 
 export default LoginForm;

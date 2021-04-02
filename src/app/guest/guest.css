@@ -7,6 +7,8 @@
 .guest-form-wrap {
     width: 100%;
     padding: 20px;
+
+    background-color: #ffffff;
 }
 
 .info-card {
@@ -38,14 +40,41 @@
     margin-top: 0;
 }
 
-@media screen and (min-width:481px){
-    .guest-form-wrap {
-        width: 60%;
+@media screen and (min-width:480px){
+    .mobi-site-name {
+        display: none;
     }
-}
 
-@media screen and (min-width:481px){
     .guest-form-wrap {
-        width: 40%;
+        width: 90%;
+        border: 1px solid #D7EEFF;
+        border-radius: 5px;
+
+        padding: 10px;
+    }
+
+    .guest-form-wrap > div {
+        height: 450px;
+    }
+
+    .info-card {
+        display: block;
+    }
+
+    .form-wrapper {
+        width: 55%;
+        height: 100%;
+        padding: 0 30px;
+    }
+
+    .form-switch-wrapper {
+        position: relative;
+        bottom: 105px;
+        left: 0;
+        
+        border: none;
+    
+        line-height: 50px;
+        text-align: right;
     }
 }

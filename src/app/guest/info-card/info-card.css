@@ -1,0 +1,41 @@
+.info-card {
+    width: 45%;
+    height: 100%;
+
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.info-card > header {
+    float: right;
+
+    height: 40px;
+    width: 85%;
+
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    margin-top: 35px;
+    padding: 5px;
+    
+    background-color: #ffffff;
+}
+
+.info-card > header > .icon {
+    width: 30px;
+    margin-right: 5px;
+}
+
+.info-card > header > .name {
+    width: 130px;
+}
+
+.info-card > section {
+    position: relative;
+    bottom: -205px;
+
+    width: 85%;
+    float: right;
+
+    font-weight: bold;
+    font-size: 30px;
+}
