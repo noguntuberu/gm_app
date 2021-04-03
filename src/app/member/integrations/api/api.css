@@ -25,7 +25,11 @@ section.api-guide code {
     background-color: #F4F8FB;
 }
 
-.api-parameters > div > div {
+.api-parameter-list {
+    background: none !important;
+}
+
+.api-parameters > code > div {
     margin-bottom: 3.5px;
     font-size: 14px;
 }

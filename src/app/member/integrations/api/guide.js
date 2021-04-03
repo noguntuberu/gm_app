@@ -13,7 +13,7 @@ const APIGuide = props => {
             </code>
             <div className="api-parameters">
                 <span className="api-route-subheader">Request body:</span>
-                <div>
+                <code className="api-parameter-list">
                     <div>
                         <span className="parameter-title">email: string</span>
                         <span className="parameter-description"> <span className="mr-2">required</span> contact's email address</span>
@@ -38,7 +38,7 @@ const APIGuide = props => {
                         <span className="parameter-title">lists: Array</span>
                         <span className="parameter-description">List of audience IDs to add contact to.</span>
                     </div>
-                </div>
+                </code>
             </div>
         </div>
     </div >
