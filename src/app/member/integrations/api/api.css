@@ -3,15 +3,15 @@ section.api-guide span {
 }
 
 section.api-guide header {
-    font-size: 1.05em;
+    font-size: 16px;
     font-weight: bold;
 
-    color: rgba(32, 104, 171);
+    color: #19415E;
 }
 
 .api-route-subheader {
     font-weight: bold;
-    color: #444444;
+    color: #19415E;
 }
 
 section.api-guide code {
@@ -27,11 +27,13 @@ section.api-guide code {
 
 .api-parameter-list {
     background: none !important;
+    /* font-size: 14px; */
 }
 
 .api-parameters > code > div {
     margin-bottom: 3.5px;
     font-size: 14px;
+    font-family: 'Frank Ruhl Libre', serif;
 }
 
 .parameter-title {

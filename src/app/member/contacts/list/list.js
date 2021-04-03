@@ -33,7 +33,7 @@ const ListContacts = () => {
             if (!error) {
                 setItems(payload);
             }
-        });
+        }).catch(() => setItems([]));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -81,25 +81,33 @@ const ListContacts = () => {
     }
 
     const handleDataRequest = async (page) => {
-        const response = await ContactService.read({
-            token,
-            query_string: `sort_by=-created_on&page=${page}&population=50`
-        })
-        const { error, payload } = response;
-        if (error) return;
+        try {
+            const response = await ContactService.read({
+                token,
+                query_string: `sort_by=-created_on&page=${page}&population=50`
+            })
+            const { error, payload } = response;
+            if (error) return;
 
-        setItems(payload);
+            setItems(payload);
+        } catch (e) {
+            setItems([]);
+        }
     }
 
     const handleSearchRequest = async (keys, keyword, page) => {
-        const response = await ContactService.search(keys, keyword, {
-            token,
-            query_string: `sort_by=-created_on&page=${page}&population=50`,
-        });
-        const { error, payload } = response;
-        if (error) return;
+        try {
+            const response = await ContactService.search(keys, keyword, {
+                token,
+                query_string: `sort_by=-created_on&page=${page}&population=50`,
+            });
+            const { error, payload } = response;
+            if (error) return;
 
-        setItems(payload);
+            setItems(payload)
+        } catch (e) {
+            setItems([]);
+        };
     }
 
     return <div>

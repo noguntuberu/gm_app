@@ -16,7 +16,7 @@ import './guest.css';
 const GuestArea = () => {
     const history = useHistory();
     return (
-        <div className="flex-col-center h-100">
+        <div className="guest-area-wrapper flex-col-center h-100">
             <div className="mobi-site-name" onClick={() => history.push('/')}>
                 <img src={site_name} alt="Site Icon" />
             </div>

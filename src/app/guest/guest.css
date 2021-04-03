@@ -1,4 +1,14 @@
 /**/
+.guest-area-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+}
+
 .mobi-site-name {
     width: 135px;
     margin-bottom: 5px;
@@ -7,8 +17,6 @@
 .guest-form-wrap {
     width: 100%;
     padding: 20px;
-
-    background-color: #ffffff;
 }
 
 .info-card {
@@ -43,6 +51,10 @@
 }
 
 @media screen and (min-width:480px){
+    .guest-area-wrapper {
+        background: #F4F8FB;
+    }
+
     .mobi-site-name {
         display: none;
     }
@@ -53,6 +65,7 @@
         border-radius: 5px;
 
         padding: 10px;
+        background-color: #ffffff;
     }
 
     .guest-form-wrap > div {

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './item.css';
 
 const SideNavItem = props => {
-    let { icons, title, name, path, onClick, onItemClick } = props
+    let { title, name, path, onClick, onItemClick } = props
 
     let handleItemClick = () => {
         if (onClick) {
