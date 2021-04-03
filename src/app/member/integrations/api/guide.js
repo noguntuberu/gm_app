@@ -14,36 +14,34 @@ const APIGuide = props => {
             <div className="api-parameters">
                 <span className="api-route-subheader">Request body:</span>
                 <div>
-                    <ul>
-                        <li>
-                            <div className="parameter-title">email: string</div>
-                            <div className="parameter-description"> <span className="mr-2">required</span> contact's email address</div>
-                        </li>
-                        <li>
-                            <div className="parameter-title">firstname: string </div>
-                            <div className="parameter-description">contact's first name.</div>
-                        </li>
-                        <li>
-                            <div className="parameter-title">lastname: string </div>
-                            <div className="parameter-description">contact's last name.</div>
-                        </li>
-                        <li>
-                            <div className="parameter-title">address: string </div>
-                            <div className="parameter-description">contact's address.</div>
-                        </li>
-                        <li>
-                            <div className="parameter-title">date_of_birth: Date</div>
-                            <div className="parameter-description">contact's date of birth.</div>
-                        </li>
-                        <li>
-                            <div className="parameter-title">lists: Array</div>
-                            <div className="parameter-description">List of audience IDs to add contact to.</div>
-                        </li>
-                    </ul>
+                    <div>
+                        <span className="parameter-title">email: string</span>
+                        <span className="parameter-description"> <span className="mr-2">required</span> contact's email address</span>
+                    </div>
+                    <div>
+                        <span className="parameter-title">firstname: string </span>
+                        <span className="parameter-description">contact's first name.</span>
+                    </div>
+                    <div>
+                        <span className="parameter-title">lastname: string </span>
+                        <span className="parameter-description">contact's last name.</span>
+                    </div>
+                    <div>
+                        <span className="parameter-title">address: string </span>
+                        <span className="parameter-description">contact's address.</span>
+                    </div>
+                    <div>
+                        <span className="parameter-title">date_of_birth: Date</span>
+                        <span className="parameter-description">contact's date of birth.</span>
+                    </div>
+                    <div>
+                        <span className="parameter-title">lists: Array</span>
+                        <span className="parameter-description">List of audience IDs to add contact to.</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div >
 }
 
 export default APIGuide;

@@ -1,0 +1,20 @@
+.sliding-nav {
+    border-bottom: 1px solid #D7EEFF;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: 0;
+}
+
+.sliding-nav a {
+    display: inline-block;
+    padding: 0 20px;
+    line-height: 40px;
+    text-decoration: none;
+
+    color: #333333;
+}
+
+.sliding-nav > span >a.active {
+    border-bottom: 2px solid #3283BD;
+    color: #19415E;
+}

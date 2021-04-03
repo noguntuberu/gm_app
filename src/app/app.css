@@ -56,7 +56,7 @@
     padding-left: 0;
 }
 
-/**/
+/* 
 .settings-wrapper > header {    
     width: 100%;
     padding: 10px 20px;
@@ -77,7 +77,7 @@
 .settings-wrapper > section {
     padding: 20px;
     width: 100%;
-}
+} */
 
 @media screen and (min-width:481px) {
     .content-wrapper {
@@ -86,28 +86,6 @@
 
     .graph-wrapper {
         padding: 20px;
-    }
-
-    .settings-wrapper {
-        padding: 10px 25px;
-    }
-
-    .settings-wrapper > header {
-        margin-top: 10px;
-        border-bottom: none;
-    }
-
-    .settings-wrapper > header select {
-        float: right;
-        width: 25%;
-        border: 1px solid #aaaaaa;
-    }
-
-    .settings-content-wrapper > div {
-        border: 1px solid rgba(200, 200, 200, 0.85);
-        box-shadow: 0.5px 0.5px 5px rgba(200, 200, 200, 0.45);
-        padding: 15px;
-        background-color: #ffffff;
     }
 }
 

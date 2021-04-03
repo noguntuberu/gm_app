@@ -60,11 +60,14 @@ const APISetting = () => {
         <div>
             <small className="pt-2 text-secondary">**click on key to copy.</small>
         </div>
-        <div className="pt-3">
-            {!loading ?
-                <div className="gm-btn gm-btn-blue" onClick={e => submitForm()}> Regenerate </div> :
-                <div className="gm-btn gm-btn-blue"> Regenerating <span className="gm-btn-spinner"><Spinner /></span> </div>
-            }
+        <div className="mt-3 mb-3 form-row">
+            <div className="col-md-8"></div>
+            <div className="col-md-4 pr-md-0 px-sm-0">
+                {!loading ?
+                    <div className="gm-btn gm-btn-blue" onClick={e => submitForm()}> Regenerate </div> :
+                    <div className="gm-btn gm-btn-blue"> Regenerating <span className="gm-btn-spinner"><Spinner /></span> </div>
+                }
+            </div>
         </div>
     </div>
 }

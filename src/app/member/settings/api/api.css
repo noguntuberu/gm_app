@@ -1,5 +1,5 @@
 .api-key-wrapper {
-    border: 2px solid #666666;
+    border: 2px solid #C1E3FB;
     border-radius: 5px;
     /* margin-top: 20px; */
 }
@@ -8,7 +8,7 @@
     padding: 10px;
     font-weight: bold;
     font-size: 1.05em;
-    color: #666666;
+    color: #19415E;
 }
 
 .api-key-wrapper > div:first-child {

@@ -31,7 +31,7 @@ const WebsiteIntegration = () => {
     }
     let generateCode = () => {
         let audience_ids = selected_audiences.map(audience => audience.value).join();
-        let snippet = `fetch(https://users.go-mailer.com/api/contacts/${api_key}/${audience_ids}`
+        let snippet = `fetch(https://users.go-mailer.com/api/contacts/${api_key || ''}/${audience_ids}`
         // eslint-disable-next-line no-template-curly-in-string
         snippet += "?email=${email.value})";
         setSnippet(snippet);
@@ -49,8 +49,11 @@ const WebsiteIntegration = () => {
                 id="audience"
             />
         </div>
-        <div className="pt-3">
-            <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" onClick={e => generateCode()}> Generate Snippet </div>
+        <div className="mt-3 mb-3 form-row">
+            <div className="col-md-8"></div>
+            <div className="col-md-4 pr-md-0 px-sm-0">
+                <div className="gm-btn gm-btn-blue" onClick={e => generateCode()}> Generate Snippet </div>
+            </div>
         </div>
         {snippet ?
             <div className="code-wrapper">
