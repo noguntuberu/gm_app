@@ -15,6 +15,22 @@ const AudienceGraph = props => {
     const [period, setPeriod] = useState('week');
     const { is_mobile_view } = useSelector(state => state.metadata);
 
+    const bar_chart_options = {
+
+        scales: {
+            yAxes: [{
+                gridLines: {
+                    display: true,
+                },
+                ticks: {
+                    stepSize: 1,
+                    min: 0,
+                    suggestedMax: 7
+                }
+            }]
+        }
+    };
+
     useEffect(() => {
         if (!contacts) return;
         switch (period) {
@@ -57,7 +73,7 @@ const AudienceGraph = props => {
 
                     </LineChart>
                 </ResponsiveContainer> :
-                <Bar data={graph_data} />
+                <Bar data={graph_data} width={"100%"} height={100} options={bar_chart_options} />
         }
     </div>
 }

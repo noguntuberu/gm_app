@@ -22,12 +22,12 @@
 }
 
 .app-content {
-    height: 90%;
+    height: 100%;
     width: 100%;
     
     padding: 0px;
-    padding-bottom: 30px;
-    /* overflow-y: scroll; */
+    padding-bottom: 20px;
+    overflow-y: scroll;
 }
 
 .content-wrapper {
@@ -56,16 +56,6 @@
     padding-left: 0;
 }
 
-.graph-wrapper {
-    margin-top: 10px;
-    padding: 10px;
-}
-
-.graph-wrapper * {
-    width: auto;
-    float: unset;
-}
-
 /**/
 .settings-wrapper > header {    
     width: 100%;
@@ -90,11 +80,6 @@
 }
 
 @media screen and (min-width:481px) {
-    .app-content {
-        height: 100vh;
-        overflow-y: scroll;
-        background-color: #ededed;
-    }
     .content-wrapper {
         padding: 0 30px;
     }

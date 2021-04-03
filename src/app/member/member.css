@@ -4,3 +4,19 @@
 
     background-color: #ffffff;
 }
+
+.graph-wrapper {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.graph-wrapper * {
+    width: auto;
+    float: unset;
+}
+
+@media screen and (min-width:481px) {
+    .graph-wrapper {
+        height: auto;
+    }
+}

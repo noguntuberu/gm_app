@@ -45,18 +45,6 @@
 
 @media screen and (min-width: 1024px){
     .side-nav-item {
-        padding-left: 5px;
-    }
-
-    .side-nav-item > div{
-        width: 100%;
-    }
-
-    .nav-title {
-        font-size: 1.05em;
-    }
-    
-    .side-nav-item.active > div {
-        font-weight: bold;
+        padding-left: 12px;
     }
 }

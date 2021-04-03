@@ -8,14 +8,11 @@ const MemberAreaHeader = props => {
     let { page_title } = useSelector(state => state.header);
 
     return <header className="member-area-header">
-        <div className="">
-            <div className="header-body">
-                <div className="hamburger-icon text-blue-4" onClick={onHamburgerClick}>
-                    <span class="material-icons"> menu </span>
-                </div>
-                <div className="page-title text-blue-4">{page_title}</div>
+        <div className="header-body">
+            <div className="hamburger-icon text-blue-4" onClick={onHamburgerClick}>
+                <span class="material-icons"> menu </span>
             </div>
-            {/* <div className="page-title-underline"></div> */}
+            <div className="page-title text-blue-4">{page_title}</div>
         </div>
     </header>
 }

@@ -8,6 +8,7 @@ import * as ContactService from '../../../services/contact';
 import StatCard from '../../shared/cards/stat';
 import AudienceGraph from '../mailing-lists/view/dashboard/graph';
 
+import './dashboard.css';
 const GMDashboard = () => {
     let dispatch = useDispatch();
     let { token } = useSelector(state => state.user_data);
@@ -68,31 +69,47 @@ const GMDashboard = () => {
         }, 0);
 
         setNumberOfUnsubscribers(unsubscriber_count);
-    }, [audience_contacts]); 
+    }, [audience_contacts]);
 
 
-    return <div className="content-wrapper">
-        <div className="mt-3">
-            <div className="stat-card-pair-wrapper col-12 col-lg-6 p-0 pr-lg-2 p-sm-0">
-                <div className="col-6">
-                    <StatCard title='Campaigns' count={number_of_campaigns} base_color={205} path="/campaigns" />
+    return <div className="content-wrapper dashboard">
+        <section className="primary">
+            <div className="mt-3">
+                <div className="stat-card-pair-wrapper col-12 col-lg-6 p-0 pr-lg-2 p-sm-0">
+                    <div className="col-6">
+                        <StatCard title='Campaigns' count={number_of_campaigns} base_color={205} path="/campaigns" />
+                    </div>
+                    <div className="col-6">
+                        <StatCard title='Contacts' count={contacts.length} base_color={130} path="/contacts" />
+                    </div>
                 </div>
-                <div className="col-6">
-                    <StatCard title='Contacts' count={contacts.length} base_color={130} path="/contacts"/>
+                <div className="stat-card-pair-wrapper col-12 col-lg-6 p-0 p-sm-0">
+                    <div className="col-6">
+                        <StatCard title='Audiences' count={number_of_audiences} base_color={268} path="/audiences" />
+                    </div>
+                    <div className="col-6">
+                        <StatCard title='Unsubscribers' count={number_of_unsubscribers} base_color={342} />
+                    </div>
                 </div>
             </div>
-            <div className="stat-card-pair-wrapper col-12 col-lg-6 p-0 p-sm-0">
-                <div className="col-6">
-                    <StatCard title='Audiences' count={number_of_audiences} base_color={268} path="/audiences"/>
-                </div>
-                <div className="col-6">
-                    <StatCard title='Unsubscribers' count={number_of_unsubscribers} base_color={342} />
+            <div className="shadow-sm border graph-wrapper">
+                <AudienceGraph contacts={audience_contacts} />
+            </div>
+        </section>
+        <section className="secondary">
+            <div className="top-charts">
+                <div className="title gm-bg-black-11"> Top Campaigns </div>
+                <div>
+
                 </div>
             </div>
-        </div>
-        <div className="shadow-sm border graph-wrapper">
-            <AudienceGraph contacts={audience_contacts} />
-        </div>
+            <div className="top-charts">
+                <div className="title gm-bg-black-11"> Top Audiences </div>
+                <div>
+
+                </div>
+            </div>
+        </section>
     </div>
 }
 

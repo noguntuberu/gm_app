@@ -34,8 +34,8 @@
     
     border-radius: 50%;
     margin-left: 12.5px;
-    margin-top: 5px;
-    padding: 1.5px;
+    margin-top: 2.5px;
+    padding: 0.5px;
 
     background-color: #E8F5FF;
 }
@@ -45,7 +45,7 @@
     margin-left: 15px;
 
     color: #E8F5FF;
-    font-size: 1.75em;
+    font-size: 1.45rem;
     font-weight: bold;
 }
 
@@ -89,21 +89,17 @@
     }
 
     .app-side-nav header {
-        padding: 15px 25px;
+        height: 60px;
+        padding: 10px 25px;
     }
 
     .nav-site-icon {
         width: 30px;
+        height: 30px;
     }
 
     .nav-site-name {
-        font-size: 1.35em;
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    .side-nav-wrapper {
-        border-right: 1px solid rgba(245, 245, 245, 0.25);
+        font-size: 1.65rem;
     }
 }
 
