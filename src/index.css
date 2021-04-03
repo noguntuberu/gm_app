@@ -6,6 +6,11 @@ body {
   font-size: 14px;
 }
 
+
+div::-webkit-scrollbar {
+  width: 2px;
+}
+
 select:focus, input:focus, textarea:focus, button:focus {
   outline: none;
   border-bottom: 1px solid #C1E3FB;

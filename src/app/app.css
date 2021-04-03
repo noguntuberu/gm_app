@@ -16,20 +16,6 @@
     background-color: rgb(0, 195, 255);
 }
 
-.app-body {
-    height: 100vh;
-    width: 100%;
-}
-
-.app-content {
-    height: 100%;
-    width: 100%;
-    
-    padding: 0px;
-    padding-bottom: 20px;
-    overflow-y: scroll;
-}
-
 .content-wrapper {
     padding: 0 20px;
 }
@@ -56,29 +42,6 @@
     padding-left: 0;
 }
 
-/* 
-.settings-wrapper > header {    
-    width: 100%;
-    padding: 10px 20px;
-    border-bottom: 1px solid rgba(200, 200, 200, 0.2);
-}
-
-.settings-wrapper > header select {
-    float: right;
-    width: 100%;
-    
-    border-radius: 5px;
-    border: 1px solid #dddddd;
-    padding: 10px;
-
-    background: #ffffff;
-}
-
-.settings-wrapper > section {
-    padding: 20px;
-    width: 100%;
-} */
-
 @media screen and (min-width:481px) {
     .content-wrapper {
         padding: 0 30px;
@@ -90,10 +53,6 @@
 }
 
 @media screen and (min-width: 1278px) {
-    .app-content {
-        float: left;
-        width: 80%;
-    }
 
     .content-wrapper {
         padding-right: 150px;

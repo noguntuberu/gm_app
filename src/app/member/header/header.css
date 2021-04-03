@@ -60,12 +60,18 @@ header.member-area-header {
     }
 }
 
-@media screen and (min-width:1025px){
+@media screen and (min-width:1280px){
     .hamburger-icon {
         display: none;
     }
 
     header.member-area-header {
+        height: 80px;
         padding-left: 50px;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+        line-height: 3.4rem;
     }
 }

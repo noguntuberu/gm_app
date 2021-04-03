@@ -23,7 +23,7 @@ function App() {
   return <div className="app-wrapper">
     <BrowserRouter >
       <Switch>
-        <Route path='/' component={!userIsLoggedIn ? MemberArea : GuestArea} />
+        <Route path='/' component={userIsLoggedIn ? MemberArea : GuestArea} />
       </Switch>
     </BrowserRouter>
     <ToastContainer
