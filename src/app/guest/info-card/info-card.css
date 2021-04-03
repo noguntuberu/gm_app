@@ -1,5 +1,4 @@
 .info-card {
-    width: 45%;
     height: 100%;
 
     border-top-left-radius: 5px;
@@ -18,6 +17,8 @@
     padding: 5px;
     
     background-color: #ffffff;
+
+    cursor: pointer;
 }
 
 .info-card > header > .icon {

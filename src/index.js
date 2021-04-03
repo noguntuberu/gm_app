@@ -6,7 +6,17 @@ import App from './app/app';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
 
-window.app_root = __dirname;
+/** COLORS */
+import './assets/css/colors/black.css';
+import './assets/css/colors/blue.css';
+import './assets/css/colors/green.css';
+import './assets/css/colors/purple.css';
+import './assets/css/colors/wine.css';
+
+/** COMPONENTS **/
+import './assets/css/components/badge.css';
+import './assets/css/components/buttons.css';
+import './assets/css/components/input.css';
 
 ReactDOM.render(
   <React.StrictMode>

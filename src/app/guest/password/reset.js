@@ -1,7 +1,7 @@
 import React, { useState, } from 'react';
+import InfoCard from '../info-card/info-card';
 
 import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useParams } from 'react-router-dom';
@@ -48,31 +48,34 @@ const PasswordReset = () => {
 
     return (
         <div>
-            <div className="w-100 mt-1">
-                {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
-                    {form_message.text}
-                    <button type="button" className="close" onClick={() => applyFormMessage('', -1)}>
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div> : <div></div>}
-            </div>
-            <div className="form-row">
-                <div className="gm-input-group">
-                    <input type="password" className="gm-input" placeholder="Enter new password"
-                        onInput={event => setFormData({ ...form_data, password: event.target.value })} />
+            <InfoCard />
+            <div className="form-wrapper flex-col-center">
+                <div className="w-100 mt-1">
+                    {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
+                        {form_message.text}
+                        <button type="button" className="close" onClick={() => applyFormMessage('', -1)}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> : <div></div>}
                 </div>
-                <div className="gm-input-group">
-                    <input type="password" className="gm-input" placeholder="Confirm new password"
-                        onInput={event => setFormData({ ...form_data, confirm_password: event.target.value })} />
+                <div className="form-row">
+                    <div className="gm-input-group">
+                        <input type="password" className="gm-input" placeholder="Enter new password"
+                            onInput={event => setFormData({ ...form_data, password: event.target.value })} />
+                    </div>
+                    <div className="gm-input-group">
+                        <input type="password" className="gm-input" placeholder="Confirm new password"
+                            onInput={event => setFormData({ ...form_data, confirm_password: event.target.value })} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-row mt-2">
-                <div className="gm-input-group">
-                    <button type="button" className="gm-btn gm-btn-blue"
-                        onClick={() => submitForm()}>
-                        Reset Password
+                <div className="form-row mt-2">
+                    <div className="gm-input-group">
+                        <button type="button" className="gm-btn gm-btn-blue"
+                            onClick={() => submitForm()}>
+                            Reset Password
                     {is_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin" /> : <span></span>}
-                    </button>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

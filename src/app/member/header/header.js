@@ -2,7 +2,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './header.css';
-import hamburger_menu from '../../../assets/icons/hamburger.svg';
 
 const MemberAreaHeader = props => {
     let { onHamburgerClick } = props;
@@ -11,7 +10,9 @@ const MemberAreaHeader = props => {
     return <header className="member-area-header">
         <div className="">
             <div className="header-body">
-                <div className="hamburger-icon" onClick={onHamburgerClick}><img alt="Hamburger Menu" src={hamburger_menu} /></div>
+                <div className="hamburger-icon" onClick={onHamburgerClick}>
+                    <span class="material-icons"> menu </span>
+                </div>
                 <div className="page-title">{page_title}</div>
             </div>
             {/* <div className="page-title-underline"></div> */}

@@ -5,31 +5,36 @@
 }
 .side-nav-item > div {
     float: right;
-    width: 100%;
+    width: 95%;
 
     display: flex;
     flex-direction: row;
 
-    padding: 10px 20px 10px 25px;
-
-    color: #23608C;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    padding: 5px 5px 5px 10px;
 }
 
 .side-nav-item:hover > div, .side-nav-item.active > div {
     font-weight: bold;
     background-color: #E8F5FF;
+    color: #3283BD;
     cursor: pointer;
 }
 
 .nav-icon {
-    width: 25px;
+    width: 24px;
     height: 20px;
 
     margin-right: 20px;
 }
 
+.nav-icon > span {
+    font-size: 22px;
+}
+
 .nav-title {
-    font-size: 0.95em;
+    font-size: 1.25em;
 }
 
 @media screen and (min-width:481px){

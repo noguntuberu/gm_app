@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import InfoCard from '../info-card/info-card';
 
 import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
 
@@ -41,27 +42,30 @@ const PasswordRecovery = () => {
 
     return (
         <div>
-            <div className="w-100 mt-1">
-                {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
-                    {form_message.text}
-                    <button type="button" className="close" onClick={() => applyFormMessage('', -1)}>
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div> : <div></div>}
-            </div>
-            <div className="form-row">
-                <div className="gm-input-group">
-                    <input type="email" className="gm-input" placeholder="Email Address"
-                        onInput={event => setFormData({ ...form_data, email: event.target.value })} />
+            <InfoCard />
+            <div className="form-wrapper flex-col-center">
+                <div className="w-100 mt-1">
+                    {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
+                        {form_message.text}
+                        <button type="button" className="close" onClick={() => applyFormMessage('', -1)}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> : <div></div>}
                 </div>
-            </div>
-            <div className="form-row mt-2">
-                <div className="gm-input-group">
-                    <button className="gm-btn gm-btn-blue"
-                        onClick={() => submitForm()}>
-                        Recover Password
+                <div className="form-row">
+                    <div className="gm-input-group">
+                        <input type="email" className="gm-input" placeholder="Email Address"
+                            onInput={event => setFormData({ ...form_data, email: event.target.value })} />
+                    </div>
+                </div>
+                <div className="form-row mt-2">
+                    <div className="gm-input-group">
+                        <button className="gm-btn gm-btn-blue"
+                            onClick={() => submitForm()}>
+                            Recover Password
                     {is_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <span></span>}
-                    </button>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

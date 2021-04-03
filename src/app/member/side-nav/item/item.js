@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './item.css';
 
 const SideNavItem = props => {
-    let { icons, title, path, onClick, onItemClick } = props
+    let { icons, title, name, path, onClick, onItemClick } = props
 
     let handleItemClick = () => {
         if (onClick) {
@@ -15,18 +15,18 @@ const SideNavItem = props => {
 
     return <>{
         !path ?
-            <div className="side-nav-item" onClick={handleItemClick}>
+            <div className="side-nav-item text-blue-11" onClick={handleItemClick}>
                 <div>
                     <div className="nav-icon">
-                        <img alt={`${title} icon`} src={icons[0]} />
+                        <span class="material-icons"> {name} </span>
                     </div>
                     <div className="nav-title">{title}</div>
                 </div>
             </div> :
-            <NavLink to={path} exact={true} className="side-nav-item" onClick={handleItemClick}>
+            <NavLink to={path} exact={true} className="side-nav-item text-blue-11" onClick={handleItemClick}>
                 <div>
                     <div className="nav-icon">
-                        <img alt={`${title} icon`} src={icons[0]} />
+                        <span class="material-icons"> {name} </span>
                     </div>
                     <div className="nav-title">{title}</div>
                 </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import * as GuestService from '../../../services/guest';
+import InfoCard from '../info-card/info-card';
 
 const AccountActivation = () => {
     const { id } = useParams();
@@ -36,11 +37,14 @@ const AccountActivation = () => {
         return <div>Could not activate account. Please try again later.</div>;
     }
 
-    return (
-        <div className="py-3 text-center text-blue-4">
-            {is_activating ? <div> Activating your account. Please wait... </div> : displayActivationResult()}
+    return <div>
+        <InfoCard />
+        <div className="form-wrapper flex-col-center">
+            <div className="py-3 text-center text-blue-4">
+                {is_activating ? <div> Activating your account. Please wait... </div> : displayActivationResult()}
+            </div>
         </div>
-    );
+    </div>
 }
 
 export default AccountActivation;

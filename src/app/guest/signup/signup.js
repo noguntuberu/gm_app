@@ -1,5 +1,6 @@
 /** */
 import React, { useState, } from 'react';
+import InfoCard from '../info-card/info-card';
 import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,10 +48,8 @@ const SignupForm = () => {
  
     return (
         <div>
-            <div className="info-card">
-
-            </div>
-            <div className="form-wrapper">
+            <InfoCard bg_class="gm-bg-wine-5" />
+            <div className="form-wrapper flex-col-center">
                 <div className="w-100 mt-1">
                     {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
                         {form_message.text}

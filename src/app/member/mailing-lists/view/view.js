@@ -13,11 +13,6 @@ import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
 import * as ContactService from '../../../../services/contact';
 
-import icon_datatable from '../../../../assets/icons/table.svg';
-import icon_dashboard from '../../../../assets/icons/graph-white.svg';
-import icon_edit from '../../../../assets/icons/edit.svg';
-import icon_import_contacts from '../../../../assets/icons/upload.svg';
-
 
 const ViewMailingList = () => {
     let { id } = useParams();
@@ -45,7 +40,7 @@ const ViewMailingList = () => {
                 contact_ids.push(contact.id);
                 contact_map[contact.id] = contact;
             });
-            
+
             let {
                 error,
                 payload: audience_contacts
@@ -105,17 +100,17 @@ const ViewMailingList = () => {
                 {
                     is_dashboard_view ?
                         <div className="floating-action-btn" onClick={() => setIsDashboardView(false)}>
-                            <img alt="Show audience's contact" src={icon_datatable} />
+                            <span class="material-icons"> table_view</span>
                         </div> :
                         <div className="floating-action-btn" onClick={() => setIsDashboardView(true)}>
-                            <img alt="Show audience's dashboard" src={icon_dashboard} />
+                            <span class="material-icons"> dashboard </span>
                         </div>
                 }
                 <div className="floating-action-btn" onClick={() => setShowUpdationModal(true)}>
-                    <img alt="Show audience update form" src={icon_edit} />
+                    <span class="material-icons"> edit</span>
                 </div>
                 <div className="floating-action-btn" onClick={() => setShowUploadModal(true)}>
-                    <img alt="show contact upload modal" src={icon_import_contacts} />
+                    <span class="material-icons"> drive_folder_upload </span>
                 </div>
             </div>
         </div>
