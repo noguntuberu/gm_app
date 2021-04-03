@@ -6,6 +6,7 @@ input {
 input[type="date"] {
     width: 100%;
     background-color: transparent !important;
+    padding: 5.5px 10px;
 }
 
 .form-row {
@@ -41,7 +42,7 @@ label {
 }
 
 select.gm-input {
-    padding: 10px 0 10px 0;
+    padding: 15px 0;
 }
 
 /* 3rd party */

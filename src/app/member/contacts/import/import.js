@@ -80,12 +80,17 @@ const ImportContact = props => {
                     </select>
                 }
             </div>
-            <div className="mt-3">
-                {loading ?
-                    <div className="gm-btn gm-btn-blue">Importing <span className="gm-btn-spinner"><Spinner /></span></div> :
-                    <div onClick={submit} className="gm-btn gm-btn-blue">Import</div>
-                }
-                <span className="float-right mr-lg-3 text-center text-blue-4 py-2" onClick={() => downloadTemplate()}>Download Template</span>
+            <div className="mt-3 mb-3 form-row">
+                <div className="col-md-8">
+                    <span className="float-right mr-lg-3 text-center text-blue-4 py-2 pr-4" onClick={() => downloadTemplate()}>Download Template</span>
+                </div>
+                <div className="col-md-4 pr-md-0 px-sm-0">
+
+                    {loading ?
+                        <div className="gm-btn gm-btn-blue">Importing <span className="gm-btn-spinner"><Spinner /></span></div> :
+                        <div onClick={submit} className="gm-btn gm-btn-blue">Import</div>
+                    }
+                </div>
             </div>
         </div>
     )

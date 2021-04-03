@@ -40,12 +40,12 @@ const ContactUpdationForm = props => {
                 setStreet(street);
                 setCountry(country);
             }
-            
+
             setFirstname(firstname);
             setLastname(lastname);
             setEmail(email);
             setDateOfBirth(date_of_birth);
-            
+
             setContactData(payload);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,7 +79,7 @@ const ContactUpdationForm = props => {
                     <label htmlFor="firstname">First name</label>
                     <input
                         type="text"
-                        className="form-control"
+                        className="gm-input"
                         defaultValue={firstname}
                         id="firstname"
                         onInput={e => setFirstname(e.target.value)}
@@ -89,7 +89,7 @@ const ContactUpdationForm = props => {
                     <label htmlFor="lastname">Last name</label>
                     <input
                         type="text"
-                        className="form-control"
+                        className="gm-input"
                         id="lastname"
                         defaultValue={lastname}
                         onInput={e => setLastname(e.target.value)}
@@ -101,7 +101,7 @@ const ContactUpdationForm = props => {
                     <label htmlFor="email">Email address</label>
                     <input
                         type="email"
-                        className="form-control"
+                        className="gm-input"
                         id="email"
                         defaultValue={email}
                         onInput={e => setEmail(e.target.value)}
@@ -112,7 +112,7 @@ const ContactUpdationForm = props => {
                 <div className="form-group col">
                     <label htmlFor="street-address">Street address</label>
                     <textarea
-                        className="form-control"
+                        className="gm-input"
                         id="street-address"
                         defaultValue={street}
                         onInput={e => setStreet(e.target.value)}
@@ -126,7 +126,7 @@ const ContactUpdationForm = props => {
                         <div className="form-group col">
                             <label htmlFor="state">State</label>
                             <select
-                                className="form-control"
+                                className="gm-input"
                                 id="state"
                                 value={state}
                                 onChange={e => setState(e.target.value)}
@@ -138,7 +138,7 @@ const ContactUpdationForm = props => {
                         <div className="form-group col">
                             <label htmlFor="country">Country</label>
                             <select
-                                className="form-control"
+                                className="gm-input"
                                 id="country"
                                 value={country}
                                 onChange={e => setCountry(e.target.value)}
@@ -156,24 +156,27 @@ const ContactUpdationForm = props => {
                             {date_of_birth
                                 ? <input
                                     type="date"
-                                    className="form-control"
+                                    className="gm-input"
                                     max=""
                                     defaultValue={convertDateFromIsoToHTMLFormat(date_of_birth)}
                                     onChange={e => setDateOfBirth(e.target.value)}
                                 /> : <input
                                     type="date"
-                                    className="form-control" onChange={e => setDateOfBirth(e.target.value)}
+                                    className="gm-input" onChange={e => setDateOfBirth(e.target.value)}
                                 />
                             }
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="pr-3">
-                {loading ?
-                    <div className="gm-btn gm-btn-primary float-right w-25  shadow"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div> :
-                    <div className="gm-btn gm-btn-primary float-right w-25  shadow" onClick={e => submitForm()}> Save </div>
-                }
+            <div className="form-row">
+                <div className="col-md-8"></div>
+                <div className="col-md-4 pr-md-0 px-sm-0">
+                    {loading ?
+                        <div className="gm-btn gm-btn-blue"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div> :
+                        <div className="gm-btn gm-btn-blue" onClick={e => submitForm()}> Save </div>
+                    }
+                </div>
             </div>
         </div>
     )

@@ -36,18 +36,21 @@ const AudienceUpdationForm = ({ mailing_list }) => {
 
     return <div>
         <div className="form-group">
-            <input className="form-control" type="text" placeholder="Name" defaultValue={name} onInput={e => setName(e.target.value)} />
+            <input className="gm-input" type="text" placeholder="Name" defaultValue={name} onInput={e => setName(e.target.value)} />
         </div>
         <div className="form-group">
-            <textarea className="form-control" placeholder="Description" defaultValue={description} onInput={e => setDescription(e.target.value)}>
+            <textarea className="gm-input" placeholder="Description" defaultValue={description} onInput={e => setDescription(e.target.value)}>
 
             </textarea>
         </div>
-        <div className="form-group">
-            {!loading ?
-                <div className="gm-btn gm-btn-blue" onClick={submit}>Update</div> :
-                <div className="gm-btn gm-btn-blue">Updating<span className="gm-btn-spinner"><Spinner /></span></div>
-            }
+        <div className="mt-3 mb-3 form-row">
+            <div className="col-md-8"></div>
+            <div className="col-md-4 pr-md-0 px-sm-0">
+                {!loading ?
+                    <div className="gm-btn gm-btn-blue" onClick={submit}>Update</div> :
+                    <div className="gm-btn gm-btn-blue">Updating<span className="gm-btn-spinner"><Spinner /></span></div>
+                }
+            </div>
         </div>
     </div>
 }

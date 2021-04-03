@@ -156,7 +156,7 @@ const DataTable = props => {
                                 Show
                     </div>
                             <div className="gm-datatable-row-selector">
-                                <select onChange={e => setNumberOfRowsToDisplay(Number(e.target.value))}>
+                                <select className="text-blue-3" onChange={e => setNumberOfRowsToDisplay(Number(e.target.value))}>
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
@@ -174,7 +174,7 @@ const DataTable = props => {
                     </section>
                     <section className="gm-datatable-table">
                         <table>
-                            <thead>
+                            <thead className="gm-bg-blue-10 text-blue-2">
                                 <DataTableHeader
                                     actions={config.actions.bulk}
                                     action_callback={processAction}

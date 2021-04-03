@@ -160,16 +160,15 @@
     }
 
     .gm-datatable-row-selector select {
-        border: 1px solid #bcbcbc;
+        border: 1px solid #99CCF1;
         border-radius: 5px;
         padding: 5px;
 
         background: none;
-        color: #333333;
     }
 
     .gm-datatable-search{
-        width: 300px;
+        width: 350px;
     }
 
     .gm-datatable-search > input{
@@ -177,14 +176,9 @@
     }
 
     /**/
-    .gm-datatable-table table{
-        border: 1px solid rgb(0, 151, 197, 0.5);
-    }
 
     .gm-datatable thead {
-        border-bottom: 2px solid #ddd;
-        background: rgb(0, 151, 197, 0.95);
-        color:#fff;
+        border-bottom: 2px solid #FFFFFF;
     }
     
     .gm-datatable thead tr:hover{
@@ -192,11 +186,12 @@
     }
 
     .gm-datatable tbody tr:nth-child(odd) {
-        background-color: rgb(0, 117, 195, 0.15);
+        background-color: #F4F8FB;
     }
 
-    .gm-datatable tr {
-        border-bottom: 1px solid #ececec;
+    .gm-datatable tbody tr {
+        border-bottom: 2px solid #FFFFFF;
+        background-color: #F7F7F7;
     }
 
     .gm-datatable tr:hover, .gm-datatable tbody tr:nth-child(odd):hover {

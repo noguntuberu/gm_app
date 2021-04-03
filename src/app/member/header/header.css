@@ -41,7 +41,7 @@ header.member-area-header {
     font-size: 1.25rem;
     color: #f7f7f7;
 
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .page-title-underline {

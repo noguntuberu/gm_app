@@ -249,15 +249,18 @@ const CampaignCreationForm = props => {
                 />
             </div>
         </div>
-        <div className="form-group">
+        <div className="form-row">
             {/* <div className="custom-file col-3">
                     <input type="file" className="custom-file-input is-clickable" id="contact_file" onChange={e => importHTML(e.target.files[0])} />
                     <label className="custom-file-label" htmlFor="contact_file">{html_file ? html_file.name : 'Copy html from file'}</label>
                 </div> */}
-            {loading ?
-                <div className="gm-btn gm-btn-blue">Creating <span className="gm-btn-spinner"><Spinner /></span></div> :
-                <div className="gm-btn gm-btn-blue" onClick={() => sendCampaign()} >Create</div>
-            }
+            <div className="col-md-8"></div>
+            <div className="col-md-4 pr-md-0 px-sm-0">
+                {loading ?
+                    <div className="gm-btn gm-btn-blue">Creating <span className="gm-btn-spinner"><Spinner /></span></div> :
+                    <div className="gm-btn gm-btn-blue" onClick={() => sendCampaign()} >Create</div>
+                }
+            </div>
         </div>
         <GmModal title="Supported wildcards" show_title={true} show_modal={show_wildcard_modal} onClose={() => setShowWildcardModal(false)}>
             <div className="wildcard-list">

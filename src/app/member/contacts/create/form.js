@@ -168,11 +168,14 @@ const ContactCreationForm = props => {
                     />
                 </div>
             </div>
-            <div className="mt-3 mb-3">
-                {!loading ?
-                    <div className="gm-btn gm-btn-blue" onClick={e => submitForm()}> Save </div> :
-                    <div className="gm-btn gm-btn-blue"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div>
-                }
+            <div className="mt-3 mb-3 form-row">
+                <div className="col-md-8"></div>
+                <div className="col-md-4 pr-md-0 px-sm-0">
+                    {!loading ?
+                        <div className="gm-btn gm-btn-blue" onClick={e => submitForm()}> Save </div> :
+                        <div className="gm-btn gm-btn-blue"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div>
+                    }
+                </div>
             </div>
         </div >
     )

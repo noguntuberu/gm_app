@@ -54,11 +54,14 @@ const AddContactToAudience = props => {
                 {audiences.map(audience => <option key={audience.id} value={audience.id}>{audience.name}</option>)}
             </select>
         </div>
-        <div className="form-group">
-            {loading ?
-                <div className="flexible-save-btn gm-btn gm-btn-info float-right  shadow">Saving<span className="gm-btn-spinner"><Spinner /></span></div> :
-                <div onClick={submit} className="flexible-save-btn gm-btn gm-btn-primary float-right  shadow">Save</div>
-            }
+        <div className="mt-3 mb-3 form-row">
+            <div className="col-md-8"></div>
+            <div className="col-md-4 pr-md-0 px-sm-0">
+                {loading ?
+                    <div className="gm-btn gm-btn-blue">Saving<span className="gm-btn-spinner"><Spinner /></span></div> :
+                    <div onClick={submit} className="gm-btn gm-btn-blue">Save</div>
+                }
+            </div>
         </div>
     </div>
 }
