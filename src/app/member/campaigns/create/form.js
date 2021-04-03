@@ -43,13 +43,12 @@ const CampaignCreationForm = props => {
 
     const [loading, setLoading] = useState(false);
     const [draft_message, setDraftMessage] = useState('');
-    const [last_timeout_handle, setLastTimeoutHandle] = useState();
     const [show_draft_status, setShowDraftStatus] = useState(false);
     const [show_wildcard_modal, setShowWildcardModal] = useState(false);
 
     useEffect(() => {
         dispatch(setPageTitle(id ? 'Edit Campaign' : 'New Campaign'));
-        CampaignService.readById(id, { token }).then( response => {
+        CampaignService.readById(id, { token }).then(response => {
             const { error, payload } = response;
             if (error) return;
 
@@ -74,7 +73,7 @@ const CampaignCreationForm = props => {
         } else {
             response = await CampaignService.create({ data, token });
         }
-        const { error} = response;
+        const { error } = response;
         if (error) {
             toast.error(error);
             return;
@@ -125,15 +124,11 @@ const CampaignCreationForm = props => {
         setTimeout(() => setShowDraftStatus(false), 2000);
     }
 
-    const handleEditorChange = data => {
+    const handleEditorChange = async (data) => {
         setCampaignBody(data);
-        clearInterval(last_timeout_handle);
 
-        const timeout_handle = setTimeout(() => {
-            handleDraftSave(campaign_id);
-        }, 750);
-
-        setLastTimeoutHandle(timeout_handle);
+        await new Promise((resolve, reject) => setTimeout(resolve, 750));
+        handleDraftSave(campaign_id);
     }
 
     // const importHTML = async (file) => {
