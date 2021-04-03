@@ -62,8 +62,8 @@ const APISetting = () => {
         </div>
         <div className="pt-3">
             {!loading ?
-                <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow" onClick={e => submitForm()}> Regenerate </div> :
-                <div className="gm-btn gm-btn-primary float-right flexible-save-btn shadow"> Regenerating <span className="gm-btn-spinner"><Spinner /></span> </div>
+                <div className="gm-btn gm-btn-blue" onClick={e => submitForm()}> Regenerate </div> :
+                <div className="gm-btn gm-btn-blue"> Regenerating <span className="gm-btn-spinner"><Spinner /></span> </div>
             }
         </div>
     </div>
