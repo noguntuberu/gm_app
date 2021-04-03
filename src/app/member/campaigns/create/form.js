@@ -260,8 +260,8 @@ const CampaignCreationForm = props => {
                     <label className="custom-file-label" htmlFor="contact_file">{html_file ? html_file.name : 'Copy html from file'}</label>
                 </div> */}
             {loading ?
-                <div className="flexible-save-btn gm-btn gm-btn-primary">Creating <span className="gm-btn-spinner"><Spinner /></span></div> :
-                <div className="flexible-save-btn gm-btn gm-btn-primary shadow" onClick={() => sendCampaign()} >Create</div>
+                <div className="gm-btn gm-btn-blue">Creating <span className="gm-btn-spinner"><Spinner /></span></div> :
+                <div className="gm-btn gm-btn-blue" onClick={() => sendCampaign()} >Create</div>
             }
         </div>
         <GmModal title="Supported wildcards" show_title={true} show_modal={show_wildcard_modal} onClose={() => setShowWildcardModal(false)}>

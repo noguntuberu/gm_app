@@ -170,8 +170,8 @@ const ContactCreationForm = props => {
             </div>
             <div className="mt-3 mb-3">
                 {!loading ?
-                    <div className="gm-btn gm-btn-primary flexible-save-btn shadow" onClick={e => submitForm()}> Save </div> :
-                    <div className="gm-btn gm-btn-primary flexible-save-btn shadow"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div>
+                    <div className="gm-btn gm-btn-blue" onClick={e => submitForm()}> Save </div> :
+                    <div className="gm-btn gm-btn-blue"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div>
                 }
             </div>
         </div >

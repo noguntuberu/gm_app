@@ -96,7 +96,7 @@ const ViewMailingList = () => {
         }
 
         <div className="floating-btn-wrapper">
-            <div className="icon-tray" ref={icons_tray}>
+            <div className="icon-tray text-blue-4" ref={icons_tray}>
                 {
                     is_dashboard_view ?
                         <div className="floating-action-btn" onClick={() => setIsDashboardView(false)}>

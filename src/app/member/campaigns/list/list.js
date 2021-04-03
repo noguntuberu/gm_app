@@ -57,11 +57,11 @@ const ListCampaigns = () => {
                 formatter: value => {
                     switch (value) {
                         case 'sent':
-                            return <span className="gm-badge gm-bg-success">{value}</span>;
+                            return <span className="gm-badge gm-badge-green-light">{value}</span>;
                         case 'queued':
-                            return <span className="gm-badge gm-bg-warning">{value}</span>;
+                            return <span className="gm-badge gm-badge-blue-light">{value}</span>;
                         default:
-                            return <span className="gm-badge gm-bg-secondary">{value}</span>;
+                            return <span className="gm-badge gm-badge-wine-light">{value}</span>;
                     }
                 },
                 isBadge: true,

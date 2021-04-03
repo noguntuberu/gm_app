@@ -1,40 +1,41 @@
 .gm-badge {
+    border: 1px solid;
     border-radius: 2.5px;
-    padding: 0.5px 10px 2px 10px;
-    font-size: 0.85em;
+    padding: 0 10px 2.5px 10px;
+    font-size: 0.9rem;
 }
 
-.gm-bagde-blue-dark {
+.gm-badge-blue-dark {
     background-color: #62A8DB;
     border: none;
-    color: #F4F8FB;
+    color: #F4F8FB; 
 }
 
-.gm-bagde-blue-light {
+.gm-badge-blue-light {
     background-color: #D7EEFF;
     border-color: #99CCF1;
     color: #19415E;
 }
 
-.gm-bagde-green-dark {
+.gm-badge-green-dark {
     background-color: #238C35;
     border: none;
     color: #F4FBF6;
 }
 
-.gm-bagde-green-light {
+.gm-badge-green-light {
     background-color: #D7FFDD;
     border-color: #99F1A7;
     color: #195E24;
 }
 
-.gm-bagde-wine-dark {
+.gm-badge-wine-dark {
     background-color: #BD325B;
     border: none;
     color: #FBF4F6;
 }
 
-.gm-bagde-wine-light {
+.gm-badge-wine-light {
     background-color: #FFD7E3;
     border-color: #F199B3;
     color: #5E192E;

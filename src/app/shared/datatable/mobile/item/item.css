@@ -33,19 +33,19 @@
 }
 
 .gm-datatable-item-title {
-    font-size: 15.45px;
+    font-size: 16px;
     font-weight: bold;
     color: #19415E;
 }
 
 .gm-datatable-item-tagline {
-    font-size: 13px;
+    font-size: 14px;
     color: #19415E;
 }
 
 .gm-datatable-item-metadata {
     font-size: 13px;
-    color: #666666;
+    color: hsla(205, 58%, 23%, 0.7);
 }
 
 .gm-datatable-item-badge {
