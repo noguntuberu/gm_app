@@ -8,8 +8,10 @@ header.member-area-header {
     top: 0;
     left: 0;
 
-    background-color: #23608C;
     z-index: 2;
+    
+    background-color: #ffffff;
+    border-bottom: 1px solid #E1F2FF;
 }
 
 .header-body {
@@ -25,13 +27,19 @@ header.member-area-header {
     float: left;
 
     margin-right: 10px;
+    padding-top: 5px;
+}
+
+.hamburger-icon > span {
+    font-size: 22px;
 }
 
 .page-title {
     width: fit-content;
-    margin-top: 3px;
-    font-size: 18px;
+    font-size: 1.25rem;
     color: #f7f7f7;
+
+    text-transform: uppercase;
 }
 
 .page-title-underline {

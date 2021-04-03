@@ -12,6 +12,7 @@ const StatCard = props => {
         if (!base_color) return;
         setStyle({
             card: {
+                backgroundColor: `hsla(${base_color}, 100%, 95%, 0.25)`,
                 border: `1px solid hsl(${base_color}, 100%, 92%)`,
                 borderLeft: `4px solid hsl(${base_color}, 58%, 47%)`,
                 borderRadius: '5px',

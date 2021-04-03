@@ -13,6 +13,7 @@ import MemberAreaHeader from './header/header';
 import GMDashboard from './dashboard/dashboard';
 
 import { addMetadata } from '../../store/actions/metadata';
+import './member.css';
 
 const MemberArea = () => {
     let dispatch = useDispatch();
@@ -32,7 +33,7 @@ const MemberArea = () => {
         } else dispatch(addMetadata({ is_mobile_view: false }));
     }
     return (
-        <div>
+        <div className="member-area-wrapper">
             <section className="app-body">
                 <SideNav open_tray={open_menu_tray} onTrayClose={() => setOpenMenuTray(false)} />
                 <section className="app-content">
