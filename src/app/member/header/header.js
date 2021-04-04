@@ -10,7 +10,7 @@ const MemberAreaHeader = props => {
     return <header className="member-area-header">
         <div className="header-body">
             <div className="hamburger-icon text-blue-4" onClick={onHamburgerClick}>
-                <span class="material-icons"> menu </span>
+                <span className="material-icons"> menu </span>
             </div>
             <div className="page-title text-blue-4">{page_title}</div>
         </div>

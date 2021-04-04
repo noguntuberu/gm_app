@@ -100,10 +100,10 @@ const ViewMailingList = () => {
                 {
                     is_dashboard_view ?
                         <div className="floating-action-btn" onClick={() => setIsDashboardView(false)}>
-                            <span class="material-icons"> table_view</span>
+                            <span className="material-icons"> table_view</span>
                         </div> :
                         <div className="floating-action-btn" onClick={() => setIsDashboardView(true)}>
-                            <span class="material-icons"> dashboard </span>
+                            <span className="material-icons"> dashboard </span>
                         </div>
                 }
                 <div className="floating-action-btn" onClick={() => setShowUpdationModal(true)}>

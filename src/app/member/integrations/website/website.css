@@ -1,9 +1,5 @@
-.website-integration {
-    width: 500px;
-}
-
 .code-wrapper {
-    max-width: 500px;
+    max-width: 100%;
     overflow-x: scroll;
 
     border-radius: 5px;
@@ -12,4 +8,10 @@
     border: 1px solid #D7EEFF;
     
     background-color: #F4F8FB;
+}
+
+@media screen and (min-width: 1280px) {
+    .code-wrapper, .website-integration {
+        max-width: 900px;
+    }
 }

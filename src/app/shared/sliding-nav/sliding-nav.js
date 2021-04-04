@@ -11,7 +11,7 @@ const SlidingNav = props => {
     }, [nav_items]);
 
     return <div className={`sliding-nav ${className || ''}`}>
-        {items.map(item => <span>
+        {items.map(item => <span key={item.path}>
             <NavLink to={item.path}>{item.title || ''}</NavLink>
         </span>)}
     </div>

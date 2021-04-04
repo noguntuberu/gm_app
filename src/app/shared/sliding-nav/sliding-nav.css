@@ -1,8 +1,10 @@
 .sliding-nav {
     border-bottom: 1px solid #D7EEFF;
     overflow-x: scroll;
-    scroll-behavior: smooth;
-    scrollbar-width: 0;
+}
+
+.sliding-nav::-webkit-scrollbar {
+    height: 0;
 }
 
 .sliding-nav a {
@@ -21,7 +23,6 @@
 
 @media screen and (min-width: 1280px) {
     .sliding-nav{
-        overflow-x: unset;
         padding: 0 50px;
     }
     .sliding-nav a {
