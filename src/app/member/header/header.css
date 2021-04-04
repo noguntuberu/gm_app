@@ -66,6 +66,7 @@ header.member-area-header {
     }
 
     header.member-area-header {
+        border-top-right-radius: 10px;
         padding-left: 50px;
     }
 

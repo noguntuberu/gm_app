@@ -34,7 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && scp -r ./build sichet@162.0.238.43:/apps/gm/front-end/"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -55,6 +55,7 @@ span.material-icons {
 
         border: 1px solid #D7EEFF;
         border-bottom: none;
+        border-top-right-radius: 10px;
 
         background: #ffffff;
     }
