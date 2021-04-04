@@ -37,9 +37,9 @@ const WebsiteIntegration = () => {
         setSnippet(snippet);
     }
 
-    return <div>
-        <div className="form-group">
-            <label htmlFor="web-integration-audience-selector">Select audience(s):</label>
+    return <div className="website-integration">
+        <div className="form-group mobile">
+            <label >Select audience(s):</label>
             <MultiSelect
                 options={audiences.map(list => ({ label: list.name, value: list.id }))}
                 onChange={setSelectedAudiences}
@@ -50,9 +50,21 @@ const WebsiteIntegration = () => {
             />
         </div>
         <div className="mt-3 mb-3 form-row">
-            <div className="col-md-8"></div>
-            <div className="col-md-4 pr-md-0 px-sm-0">
-                <div className="gm-btn gm-btn-blue" onClick={e => generateCode()}> Generate Snippet </div>
+            <div className="col-md-7 pt-lg-1">
+                <div className="web">
+                    <label>Select audience(s):</label>
+                    <MultiSelect
+                        options={audiences.map(list => ({ label: list.name, value: list.id }))}
+                        onChange={setSelectedAudiences}
+                        value={selected_audiences}
+                        isMulti={false}
+                        labelledBy='Select Audience'
+                        id="audience"
+                    />
+                </div>
+            </div>
+            <div className="col-md-5 pr-md-0 px-sm-0 pt-lg-2">
+                <div className="gm-btn gm-btn-blue mt-lg-4" onClick={e => generateCode()}> Generate Snippet </div>
             </div>
         </div>
         {snippet ?

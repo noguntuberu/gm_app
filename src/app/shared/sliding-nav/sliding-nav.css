@@ -18,3 +18,18 @@
     border-bottom: 2px solid #3283BD;
     color: #19415E;
 }
+
+@media screen and (min-width: 1280px) {
+    .sliding-nav{
+        overflow-x: unset;
+        padding: 0 50px;
+    }
+    .sliding-nav a {
+        display: inline-block;
+        padding: 0 20px;
+        /* line-height: 40px; */
+        text-decoration: none;
+    
+        color: #333333;
+    }
+}

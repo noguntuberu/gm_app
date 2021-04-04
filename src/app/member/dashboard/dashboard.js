@@ -75,7 +75,7 @@ const GMDashboard = () => {
     return <div className="content-wrapper dashboard">
         <section className="primary">
             <div className="mt-3">
-                <div className="stat-card-pair-wrapper col-12 col-lg-6 p-0 pr-lg-2 p-sm-0">
+                <div className="stat-card-pair-wrapper col-12 p-0 p-sm-0">
                     <div className="col-6">
                         <StatCard title='Campaigns' count={number_of_campaigns} base_color={205} path="/campaigns" />
                     </div>
@@ -83,7 +83,7 @@ const GMDashboard = () => {
                         <StatCard title='Contacts' count={contacts.length} base_color={130} path="/contacts" />
                     </div>
                 </div>
-                <div className="stat-card-pair-wrapper col-12 col-lg-6 p-0 p-sm-0">
+                <div className="stat-card-pair-wrapper col-12 p-0 p-sm-0">
                     <div className="col-6">
                         <StatCard title='Audiences' count={number_of_audiences} base_color={268} path="/audiences" />
                     </div>

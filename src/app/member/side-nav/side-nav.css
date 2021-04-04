@@ -110,23 +110,10 @@
     }
 
     .app-side-nav section {
-        padding-left: 25px;
+        padding-left: 20px;
     }
 
     .app-side-nav header {
-        height: 80px;
-        padding: 20px;
-        padding-left: 22.5px;
-    }
-
-    .nav-site-icon {
-        width: 35px;
-        height: 35px;
-    }
-
-    .nav-site-name {
-        font-size: 1.95rem;
-        font-weight: 500;
-        line-height: 2.65rem;
+        padding: 15px;
     }
 }

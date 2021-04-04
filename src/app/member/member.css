@@ -60,7 +60,8 @@ span.material-icons {
     }
 
     .app-content {
-        overflow: hidden;
+        max-height: 90vh;
+        overflow-y: scroll;
     }
 
     .side-nav-wrapper {

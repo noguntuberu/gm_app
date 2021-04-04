@@ -1,5 +1,9 @@
+.website-integration {
+    width: 500px;
+}
+
 .code-wrapper {
-    width: 100%;
+    max-width: 500px;
     overflow-x: scroll;
 
     border-radius: 5px;

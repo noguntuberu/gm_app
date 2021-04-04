@@ -29,13 +29,24 @@
 }
 
 @media screen and (min-width:481px) {
+
     .dashboard .primary {
         width: 60%;
     }
 
     .dashboard .secondary {
         width: 40%;
-
         padding-left: 20px;
+    }
+
+    .dashboard .primary, .dashboard .secondary {
+        max-height: 77.50vh;
+        overflow-y: scroll;
+        padding-bottom: 50px;
+    }
+
+    .top-charts > .title {  
+        font-size: 1.25rem;
+        line-height: 50px;
     }
 }

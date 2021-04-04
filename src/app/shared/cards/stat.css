@@ -17,3 +17,16 @@
         font-weight: 700;
     }
 }
+
+@media screen and (min-width:1280px) {
+    .stat-card-title {
+        font-size: 1.05rem;
+        letter-spacing: 1px;
+    }
+
+    .stat-card-value {
+        font-size: 1.85em;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+}

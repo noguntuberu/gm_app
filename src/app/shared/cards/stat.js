@@ -24,7 +24,6 @@ const StatCard = props => {
             },
             value: {
                 fontWeight: 'bold',
-                fontSize: '20px',
                 color: `hsl(${base_color}, 61%, 29%)`,
             }
         })
@@ -48,10 +47,10 @@ const StatCard = props => {
     }
 
     return <div style={style.card} onClick={navigate}>
-        <div style={style.title}>
+        <div className="stat-card-title" style={style.title}>
             {`${title}`}
         </div>
-        <div style={style.value}>
+        <div className="stat-card-value" style={style.value}>
             {processCount(count) || 0}
         </div>
     </div>

@@ -52,14 +52,16 @@
     }
 }
 
-@media screen and (min-width: 1278px) {
-
+@media screen and (min-width: 1280px) {
     .content-wrapper {
-        padding-right: 150px;
+        padding-right: 50px;
         padding-left: 50px;
+
+        overflow-y: scroll;
     }
 
     .graph-wrapper {
+        height: fit-content;
         padding: 30px;
         border-radius: 7.5px;
         background-color: #ffffff;

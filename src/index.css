@@ -7,8 +7,8 @@ body {
 }
 
 
-div::-webkit-scrollbar {
-  width: 2px;
+div::-webkit-scrollbar, section::-webkit-scrollbar {
+    width: 2px;
 }
 
 select:focus, input:focus, textarea:focus, button:focus {
@@ -50,10 +50,28 @@ table {
   display: none !;
 }
 
+.mobile {
+  display: initial;
+}
+
+.web {
+  display: none;
+}
+
 /** LAYOUT **/
 .flex-col-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (min-width:1280px) {
+  .web {
+    display: initial;
+  }
+
+  .mobile {
+    display: none;
+  }
 }

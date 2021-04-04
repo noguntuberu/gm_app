@@ -191,7 +191,7 @@
 
     .gm-datatable tbody tr {
         border-bottom: 2px solid #FFFFFF;
-        background-color: #F7F7F7;
+        background-color: rgba(247, 247, 247, 0.5);
     }
 
     .gm-datatable tr:hover, .gm-datatable tbody tr:nth-child(odd):hover {
@@ -237,5 +237,15 @@
     }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1280px) {
+    .gm-datatable {
+        font-size: 1.05rem;
+        font-weight: 200;
+
+        padding: 20px 50px 20px 45px;
+    }
+    
+    .gm-datatable tbody tr {
+        border-bottom: 3px solid #FFFFFF;
+    }
 }
