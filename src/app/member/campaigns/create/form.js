@@ -2,7 +2,7 @@
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import GmModal from '../../../shared/modal/modal';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MultiSelect from 'react-multi-select-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmailValid } from '../../../shared/utils/input';
@@ -45,6 +45,7 @@ const CampaignCreationForm = props => {
     const [draft_message, setDraftMessage] = useState('');
     const [show_draft_status, setShowDraftStatus] = useState(false);
     const [show_wildcard_modal, setShowWildcardModal] = useState(false);
+    const [word_count, setWordCount] = useState(0);
 
     useEffect(() => {
         dispatch(setPageTitle(id ? 'Edit Campaign' : 'New Campaign'));
@@ -63,11 +64,13 @@ const CampaignCreationForm = props => {
                 setMailingLists(payload);
             }
         });
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleCampaignCreation = async (data) => {
         let response;
+
         if (campaign_id) {
             response = await DraftService.updateById(campaign_id, { data: { ...data, status: 'queued' }, token });
         } else {
@@ -98,7 +101,9 @@ const CampaignCreationForm = props => {
         }
     }
 
-    const handleDraftSave = async (id = 0) => {
+    const handleDraftSave = async () => {
+
+        let id = campaign_id;
         let response;
         let data = {
             ...formatDataForDatabase(),
@@ -107,28 +112,34 @@ const CampaignCreationForm = props => {
 
         setShowDraftStatus(true);
         setDraftMessage(`Saving draft...`);
-        if (id) {
-            response = await DraftService.updateById(id, { data, token });
-        } else {
+
+        if (word_count === 5) {
             response = await DraftService.create({ data, token });
         }
 
+        if (id) {
+            response = await DraftService.updateById(id, { data, token });
+        }
+
+        if(!response) return;
         const { error, payload } = response;
         if (error) {
             setDraftMessage(`Failed to save draft.`);
         } else {
-            setCampaignId(payload.id);
+            setCampaignId(payload.id || id);
             setDraftMessage('Draft saved.');
         };
 
         setTimeout(() => setShowDraftStatus(false), 2000);
     }
 
-    const handleEditorChange = async (data) => {
+    let handleEditorChange = async (data) => {
+        setWordCount((word_count + 1));
         setCampaignBody(data);
-
-        await new Promise((resolve, reject) => setTimeout(resolve, 750));
-        handleDraftSave(campaign_id);
+        
+        await new Promise((resolve, reject) => setTimeout(() => resolve(), 1000));
+        if (word_count < 5) return;
+        handleDraftSave();
     }
 
     // const importHTML = async (file) => {
