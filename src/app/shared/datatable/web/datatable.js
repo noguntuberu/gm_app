@@ -20,6 +20,8 @@ const DataTable = props => {
     const [table_items, setTableItems] = useState(items);
     const [items_to_display, setItemsToDisplay] = useState([]);
 
+    const [is_loading_data, setIsLoadingData] = useState(true);
+
     useEffect(() => {
         handleNumberOfItemsToDisplay();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,6 +38,7 @@ const DataTable = props => {
 
         setAllItems(processed_items);
         setTableItems(processed_items.slice());
+        setIsLoadingData(false);
     }, [items]);
 
     /** */
@@ -145,7 +148,7 @@ const DataTable = props => {
 
     return (
         <div className="gm-datatable">
-            {!items_to_display.length ?
+            {is_loading_data ?
                 <div className="gm-datatable-loader">
                     <Spinner />
                 </div> :
