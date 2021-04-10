@@ -11,6 +11,7 @@ import { generateHTMLFormDateTimeDefaults } from '../../../shared/utils/date';
 import { Editor } from '../../../../vendors/@tinymce/tinymce-react/lib/es2015/main/ts/index';
 
 import * as DraftService from '../../../../services/draft';
+import * as MailboxService from '../../../../services/mailbox';
 import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
 // import * as FileService from '../../../../services/file';
@@ -20,32 +21,34 @@ import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 import './form.css';
 
 const CampaignCreationForm = props => {
-    const { config } = props;
-    const { id } = useParams()
-    const dispatch = useDispatch();
-    const user_data = useSelector(state => state.user_data);
-    const { token } = user_data;
-    const tenant_id = user_data.id;
+    let { config } = props;
+    let { id } = useParams()
+    let dispatch = useDispatch();
+    let user_data = useSelector(state => state.user_data);
+    let { token } = user_data;
+    let tenant_id = user_data.id;
 
-    const [campaign, setCampaign] = useState({});
-    const [campaign_id, setCampaignId] = useState(id || 0);
-    const [campaign_body, setCampaignBody] = useState();
-    const [campaign_name, setCampaignName] = useState();
-    const [campaign_subject, setCampaignSubject] = useState();
-    const [mailing_lists, setMailingLists] = useState([]);
-    const [schedule, setCampaignSchedule] = useState(generateHTMLFormDateTimeDefaults());
-    const [selected_lists, setSelectedLists] = useState([]);
-    const [sender_email, setSenderEmail] = useState();
-    const [sender_name, setSenderName] = useState();
+    let [campaign, setCampaign] = useState({});
+    let [campaign_id, setCampaignId] = useState(id || 0);
+    let [campaign_body, setCampaignBody] = useState();
+    let [campaign_name, setCampaignName] = useState();
+    let [campaign_subject, setCampaignSubject] = useState();
+    let [mailing_lists, setMailingLists] = useState([]);
+    let [schedule, setCampaignSchedule] = useState(generateHTMLFormDateTimeDefaults());
+    let [selected_lists, setSelectedLists] = useState([]);
+    let [sender_email, setSenderEmail] = useState();
+    let [sender_name, setSenderName] = useState();
 
-    // const [extracting, setExtracting] = useState(false);
-    // const [html_file,] = useState(null);
+    let [mailbox, setMailbox] = useState({});
 
-    const [loading, setLoading] = useState(false);
-    const [draft_message, setDraftMessage] = useState('');
-    const [show_draft_status, setShowDraftStatus] = useState(false);
-    const [show_wildcard_modal, setShowWildcardModal] = useState(false);
-    const [word_count, setWordCount] = useState(0);
+    // let [extracting, setExtracting] = useState(false);
+    // let [html_file,] = useState(null);
+
+    let [loading, setLoading] = useState(false);
+    let [draft_message, setDraftMessage] = useState('');
+    let [show_draft_status, setShowDraftStatus] = useState(false);
+    let [show_wildcard_modal, setShowWildcardModal] = useState(false);
+    let [word_count, setWordCount] = useState(0);
 
     useEffect(() => {
         dispatch(setPageTitle(id ? 'Edit Campaign' : 'New Campaign'));
@@ -64,6 +67,13 @@ const CampaignCreationForm = props => {
                 setMailingLists(payload);
             }
         });
+
+        MailboxService.read({ token }).then(response => {
+            const { error, payload } = response;
+            if (error) return;
+
+            setMailbox(payload[0]);
+        }).catch(e => e);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -121,7 +131,7 @@ const CampaignCreationForm = props => {
             response = await DraftService.updateById(id, { data, token });
         }
 
-        if(!response) return;
+        if (!response) return;
         const { error, payload } = response;
         if (error) {
             setDraftMessage(`Failed to save draft.`);
@@ -136,12 +146,15 @@ const CampaignCreationForm = props => {
     let handleEditorChange = async (data) => {
         setWordCount((word_count + 1));
         setCampaignBody(data);
-        
+
         await new Promise((resolve, reject) => setTimeout(() => resolve(), 1000));
         if (word_count < 5) return;
         handleDraftSave();
     }
 
+    let processSenderEmail = () => {
+        
+    }
     // const importHTML = async (file) => {
     //     if (!file) {
     //         toast.error('no file selected');
@@ -218,7 +231,13 @@ const CampaignCreationForm = props => {
             </div>
             <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="sender_email">Sender's email</label>
-                <input className="gm-input" id="sender_email" type="text" defaultValue={campaign.sender_email} onInput={e => setSenderEmail(e.target.value)} />
+                <input
+                    className="gm-input"
+                    id="sender_email"
+                    type="text"
+                    defaultValue={campaign.sender_email}
+                    onInput={e => setSenderEmail(e.target.value)}
+                />
             </div>
         </div>
         <div className="form-row">
@@ -231,6 +250,7 @@ const CampaignCreationForm = props => {
                     name="campaign-schedule"
                     defaultValue={schedule}
                     onChange={e => setCampaignSchedule(e.target.value)}
+                    onFocus={processSenderEmail}
                 />
             </div>
             <div className="form-group col-sm-12  col-md-6">
