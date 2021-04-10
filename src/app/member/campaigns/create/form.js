@@ -2,7 +2,7 @@
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import GmModal from '../../../shared/modal/modal';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import MultiSelect from 'react-multi-select-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmailValid } from '../../../shared/utils/input';
@@ -14,8 +14,8 @@ import * as DraftService from '../../../../services/draft';
 import * as MailboxService from '../../../../services/mailbox';
 import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
-// import * as FileService from '../../../../services/file';
 
+import EmailVerificationForm from '../verify-email/verify-email';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 import './form.css';
@@ -39,10 +39,10 @@ const CampaignCreationForm = props => {
     let [sender_email, setSenderEmail] = useState();
     let [sender_name, setSenderName] = useState();
 
+    let [is_verifying, setIsVerifying] = useState(false);
     let [mailbox, setMailbox] = useState({});
-
-    // let [extracting, setExtracting] = useState(false);
-    // let [html_file,] = useState(null);
+    let [sender_eamil_is_verified, setSenderEmailVerificationStatus] = useState(true);
+    let [show_verification_modal, setShowVerificationModal] = useState(false);
 
     let [loading, setLoading] = useState(false);
     let [draft_message, setDraftMessage] = useState('');
@@ -57,7 +57,7 @@ const CampaignCreationForm = props => {
             if (error) return;
 
             setCampaign(payload);
-            setSelectedLists(payload.lists);
+            setSelectedLists(payload.mailing_lists);
             setCampaignSchedule(new Date(payload.schedule.date))
         });
 
@@ -78,6 +78,22 @@ const CampaignCreationForm = props => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const formatDataForDatabase = () => {
+        return {
+            body: campaign_body,
+            mailing_lists: selected_lists,
+            name: campaign_name,
+            schedule: {
+                exists: true,
+                date: Date.parse(schedule),
+            },
+            sender_email,
+            sender_name,
+            subject: campaign_subject,
+            tenant_id,
+        }
+    }
+
     const handleCampaignCreation = async (data) => {
         let response;
 
@@ -95,22 +111,6 @@ const CampaignCreationForm = props => {
         toast.success(`Campaign created successfully.`);
     }
 
-    const formatDataForDatabase = () => {
-        return {
-            body: campaign_body,
-            mailing_lists: selected_lists.map(list => list.value),
-            name: campaign_name,
-            schedule: {
-                exists: true,
-                date: Date.parse(schedule),
-            },
-            sender_email,
-            sender_name,
-            subject: campaign_subject,
-            tenant_id,
-        }
-    }
-
     const handleDraftSave = async () => {
 
         let id = campaign_id;
@@ -123,7 +123,7 @@ const CampaignCreationForm = props => {
         setShowDraftStatus(true);
         setDraftMessage(`Saving draft...`);
 
-        if (word_count === 5) {
+        if (word_count === 5 && !id) {
             response = await DraftService.create({ data, token });
         }
 
@@ -152,47 +152,37 @@ const CampaignCreationForm = props => {
         handleDraftSave();
     }
 
-    let processSenderEmail = () => {
-        
+    let handle_email_verification = async () => {
+        try {
+            setIsVerifying(true);
+            const response = await MailboxService.initiate_verification({ token, data: { email: sender_email } });
+            const { error, payload } = response;
+
+            if (error) {
+                toast.error('Unable to verify email. Try again later.');
+                return;
+            }
+
+            setMailbox(payload);
+            setShowVerificationModal(true);
+        } catch (e) {
+
+        } finally {
+            setIsVerifying(false);
+        }
     }
-    // const importHTML = async (file) => {
-    //     if (!file) {
-    //         toast.error('no file selected');
-    //         return;
-    //     }
 
-    //     if (!file.type.includes('html')) {
-    //         toast.error('invalid file type: must be html');
-    //         return;
-    //     }
+    let handleListSelection = (lists) => {
+        setSelectedLists(lists.map(list => list.value));
+    }
+    
+    let processSenderEmail = () => {
+        if (!isEmailValid(sender_email)) return;
 
-    //     const request_data = new FormData();
-    //     request_data.append('html_doc', file);
-
-    //     setLoading(true);
-    //     const { error, payload } = await FileService.extractHtmlContent({
-    //         data: request_data, token,
-    //         headers: {
-    //             'Content-Type': 'application/form-data'
-    //         }
-    //     });
-
-    //     setLoading(false);
-    //     if (error) {
-    //         toast.error(error);
-    //         return;
-    //     }
-
-    //     navigator.permissions.query({ name: "clipboard-write" }).then(result => {
-    //         if (result.state === "granted" || result.state === "prompt") {
-    //             navigator.clipboard.writeText(payload).then(function () {
-    //                 toast.success('file content copied.');
-    //             }, function () {
-    //                 toast.error('could not copy contents');
-    //             });
-    //         }
-    //     });
-    // }
+        if (!mailbox.emails.includes(sender_email)) {
+            setSenderEmailVerificationStatus(false);
+        }
+    }
 
     const sendCampaign = async () => {
         const data = formatDataForDatabase();
@@ -241,6 +231,22 @@ const CampaignCreationForm = props => {
             </div>
         </div>
         <div className="form-row">
+            <div className="form-group col-sm-12 col-md-6"></div>
+            <div className="form-group col-sm-12 col-md-6">
+                {sender_eamil_is_verified ?
+                    <></> :
+                    <div className="text-wine-6">
+                        {is_verifying ?
+                            <div> <i>Verifying...</i></div> :
+                            <p>
+                                E-mail address is not verified. <b className="is-clickable px-1" onClick={handle_email_verification}>Click here</b>to verify.
+                            </p>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div className="form-row">
             <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="campaign_schedule">Schedule</label>
                 <input
@@ -257,9 +263,11 @@ const CampaignCreationForm = props => {
                 <label htmlFor="campaign_list">Audiences</label>
                 <MultiSelect
                     options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
-                    onChange={setSelectedLists}
-                    value={selected_lists}
-                    // isMulti={true}
+                    onChange={handleListSelection}
+                    value={mailing_lists.filter(list => (selected_lists).includes(list.id))
+                        .map(list => ({ label: list.name, value: list.id }))
+                    }
+                    isMulti={true}
                     labelledBy='Select Audience'
                     id="campaign list"
                 />
@@ -275,16 +283,12 @@ const CampaignCreationForm = props => {
                     body_class="campaign_editor"
                     id="campaign_create"
                     init={config}
-                    initialValue={campaign.body}
+                    value={campaign.body}
                     onEditorChange={e => handleEditorChange(e)}
                 />
             </div>
         </div>
         <div className="form-row">
-            {/* <div className="custom-file col-3">
-                    <input type="file" className="custom-file-input is-clickable" id="contact_file" onChange={e => importHTML(e.target.files[0])} />
-                    <label className="custom-file-label" htmlFor="contact_file">{html_file ? html_file.name : 'Copy html from file'}</label>
-                </div> */}
             <div className="col-md-8"></div>
             <div className="col-md-4 pr-md-0 px-sm-0">
                 {loading ?
@@ -301,6 +305,14 @@ const CampaignCreationForm = props => {
                     <li>@date_of_birth - Contact's date_of_birth.</li>
                 </ol>
             </div>
+        </GmModal>
+        <GmModal
+            title="Verify e-mail address"
+            show_title={true}
+            show_modal={show_verification_modal}
+            onClose={() => setShowVerificationModal(false)}
+        >
+            <EmailVerificationForm email={sender_email} mailbox={mailbox} onClose={() => setShowVerificationModal(false)} />
         </GmModal>
     </div >
 }
