@@ -59,11 +59,13 @@ header.member-area-header {
         font-size: 1.25em;
     }
 }
-
-@media screen and (min-width:1280px){
+@media screen and (min-width:1024px){
     .hamburger-icon {
         display: none;
     }
+}
+
+@media screen and (min-width:1280px){
 
     header.member-area-header {
         border-top-right-radius: 10px;

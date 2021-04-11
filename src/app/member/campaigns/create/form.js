@@ -80,16 +80,16 @@ const CampaignCreationForm = props => {
 
     const formatDataForDatabase = () => {
         return {
-            body: campaign_body,
-            mailing_lists: selected_lists,
-            name: campaign_name,
+            body: campaign_body || campaign.body,
+            mailing_lists: selected_lists || campaign.mailing_lists,
+            name: campaign_name || campaign.name,
             schedule: {
                 exists: true,
-                date: Date.parse(schedule),
+                date: Date.parse(schedule || campaign.schedule.date),
             },
-            sender_email,
-            sender_name,
-            subject: campaign_subject,
+            sender_email: sender_email || campaign.sender_email,
+            sender_name: sender_name || campaign.sender_name,
+            subject: campaign_subject || campaign.subject,
             tenant_id,
         }
     }
@@ -187,12 +187,12 @@ const CampaignCreationForm = props => {
     const sendCampaign = async () => {
         const data = formatDataForDatabase();
 
-        if (!campaign_body || !campaign_name || !campaign_subject || !sender_email || !sender_name) {
+        if (!data.body || !data.name || !data.subject || !data.sender_email || !data.sender_name) {
             toast.error('please fill all fields');
             return;
         }
 
-        if (!isEmailValid(sender_email)) {
+        if (!isEmailValid(data.sender_email)) {
             toast.error('Invalid Sender Email');
             return;
         }

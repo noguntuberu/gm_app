@@ -91,7 +91,6 @@ const ListCampaigns = () => {
 
     const handleDatatableAction = payload => {
         const { name, type, data } = payload;
-        console.log(data);
         if (type === 'single') {
             switch (name) {
                 case 'Edit':
