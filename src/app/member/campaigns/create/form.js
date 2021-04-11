@@ -71,8 +71,8 @@ const CampaignCreationForm = props => {
         MailboxService.read({ token }).then(response => {
             const { error, payload } = response;
             if (error) return;
-
-            setMailbox(payload[0]);
+            
+            setMailbox(payload[0] || { emails: []});
         }).catch(e => e);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
