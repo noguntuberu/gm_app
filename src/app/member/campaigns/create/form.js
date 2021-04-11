@@ -163,7 +163,7 @@ const CampaignCreationForm = props => {
                 return;
             }
 
-            setMailbox(payload);
+            setMailbox(payload[0]);
             setShowVerificationModal(true);
         } catch (e) {
 
