@@ -106,23 +106,18 @@ const ListMailingLists = () => {
     }
 
     return (
-        <div>
-            {!loading ?
-                <>{
-                    is_mobile_view ?
-                        <MobileDatatable
-                            config={config}
-                            action={handleDatatableAction}
-                            onClick={handleItemClick}
-                            onListModeChange={setSearchMode}
-                            onDataRequest={handleDataRequest}
-                            onSearchRequest={handleSearchRequest}
-                        /> :
-                        <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
-                }</>
-                :
-                <></>
-            }
+        <div>{
+            is_mobile_view ?
+                <MobileDatatable
+                    config={config}
+                    action={handleDatatableAction}
+                    onClick={handleItemClick}
+                    onListModeChange={setSearchMode}
+                    onDataRequest={handleDataRequest}
+                    onSearchRequest={handleSearchRequest}
+                /> :
+                <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
+        }
         </div>
     )
 }
