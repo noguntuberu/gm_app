@@ -39,6 +39,20 @@ span.material-icons {
     }
 }
 
+@media screen and (min-width:1024px) {
+    .side-nav-wrapper {
+        float: left;
+        position: unset;
+        width: 25%;
+
+        margin: 0;
+    }
+
+    .app-content {
+        position: unset;
+        width: 75%;
+    }
+}
 
 @media screen and (min-width:1280px) {
     .member-area-wrapper {
