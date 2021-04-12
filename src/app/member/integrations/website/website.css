@@ -10,6 +10,10 @@
     background-color: #F4F8FB;
 }
 
+.website-integration {
+    min-height: 60vh;
+}
+
 @media screen and (min-width: 1280px) {
     .code-wrapper, .website-integration {
         max-width: 900px;

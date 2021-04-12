@@ -64,7 +64,7 @@ const WebsiteIntegration = () => {
                 </div>
             </div>
             <div className="col-md-5 pr-md-0 px-sm-0 pt-lg-2">
-                <div className="gm-btn gm-btn-blue mt-lg-4" onClick={e => generateCode()}> Generate Snippet </div>
+                <div className="gm-btn gm-btn-blue mt-lg-4 ml-lg-2 py-1" onClick={e => generateCode()}> Generate Snippet </div>
             </div>
         </div>
         {snippet ?

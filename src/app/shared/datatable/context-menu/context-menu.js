@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import './context-menu.css';
 
-const ContextMenu = props => {
-    const { actions, callback } = props;
+const ContextMenu = ({ actions, callback, text }) => {
     const [show_menu, setShowMenu] = useState(false);
     const [menu_clicked, setMenuClicked] = useState(false);
     const context_menu = useRef(null);
+    const menu_wrapper = useRef(null);
 
     useEffect(() => {
         window.addEventListener('click', () => {
@@ -17,9 +17,18 @@ const ContextMenu = props => {
         }, { once: true });
 
         if (context_menu.current) {
-            context_menu.current.addEventListener('click', () => {
+            let menu = context_menu.current;
+            let menu_tray = menu_wrapper.current; 
+            menu.addEventListener('click', () => {
                 setMenuClicked(true);
             }, { once: true });
+
+            /** alsways position menu tray in-view */
+            let menu_left = menu.offsetLeft;
+            let offset_limit = Math.floor(window.innerWidth / 2);
+            if (menu_left > 0 && menu_left < offset_limit) {
+                menu_tray.style.right = `-${menu_left}px`;
+            }
         }
     });
 
@@ -36,11 +45,11 @@ const ContextMenu = props => {
     }
     return (
         <div>
-            <div className="context-menu-label" onClick={e => toggleShowMenu(e)}> <span><b>...</b></span></div>
+            <div className="context-menu-label" onClick={e => toggleShowMenu(e)}> <span><b>{text || '...'}</b></span></div>
             { actions ? <div>
                 {show_menu ?
                     <div ref={context_menu} className="gm-action-wrap">
-                        <div className="gm-action-context-menu">
+                        <div ref={menu_wrapper} className="gm-action-context-menu">
                             <ul>
                                 {(actions || []).map((action, index) => <li key={index} onClick={e => selectAction(action, e)}>{action}</li>)}
                             </ul>
