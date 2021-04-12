@@ -164,7 +164,7 @@ const SideNav = props => {
                     <ImportContact />
                 </GmModal>
                 <GmModal title="Create Audience" show_title={true} show_modal={show_create_modal} onClose={() => setShowCreateModal(false)}>
-                    <ListCreationForm />
+                    <ListCreationForm closeModal={() => setShowCreateModal(false)}/>
                 </GmModal>
             </div>
         </nav >

@@ -8,16 +8,17 @@ import MobileDatatable from "../../../shared/datatable/mobile/datatable";
 import WebDataTable from '../../../shared/datatable/web/datatable';
 
 const AudienceContacts = ({ audience_contacts, list_id }) => {
-    const { token } = useSelector(state => state.user_data);
+    let { token } = useSelector(state => state.user_data);
     let { is_mobile_view } = useSelector(state => state.metadata);
 
 
-    const [contacts, setContacts] = useState(audience_contacts);
-    const [default_items, setDefaultItems] = useState([]);
-    const [items, setItems] = useState([]);
+    let [contacts, setContacts] = useState(audience_contacts);
+    let [default_items, setDefaultItems] = useState([]);
+    let [items, setItems] = useState([]);
     let [is_search_mode, setSearchMode] = useState(false);
+    let [loading_data, setLoadingData] = useState(true);
 
-    const config = {
+    let config = {
         actions: {
             bulk: ['Remove'],
             single: ['Remove'],
@@ -66,11 +67,12 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
             contact_ids_to_fetch.push(contact.id);
         });
 
+        setLoadingData(true);
         ContactService.read({
             token,
             query_string: `id=${contact_ids_to_fetch.join()}&page=0&population=50`
         }).then(data => {
-            const { payload, error } = data;
+            let { payload, error } = data;
 
             let contact_map = contacts.reduce((sack, contact) => {
                 return {
@@ -99,16 +101,16 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
                 setDefaultItems(merged_contacts);
                 setItems(merged_contacts);
             }
-        });
+        }).finally(() => setLoadingData(false));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [contacts]);
 
-    const deleteContacts = async (ids) => {
-        const data = {
+    let deleteContacts = async (ids) => {
+        let data = {
             contacts: [...ids],
         }
 
-        const { error } = await AudienceService.deleteContact(list_id, { data, token })
+        let { error } = await AudienceService.deleteContact(list_id, { data, token })
         if (error) {
             toast.error(error);
             return;
@@ -118,8 +120,8 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
         setContacts(audience_contacts.filter(id => !ids.includes(id)));
     }
 
-    const handleDatatableAction = action => {
-        const { name, type, data } = action;
+    let handleDatatableAction = action => {
+        let { name, type, data } = action;
 
         if (type.toLowerCase() === 'bulk') {
             switch (name.toLowerCase()) {
@@ -140,15 +142,15 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
         }
     }
 
-    const handleItemClick = data => {
+    let handleItemClick = data => {
         // console.log(data);
     }
 
-    const handleDataRequest = async (page) => {
+    let handleDataRequest = async (page) => {
         setItems(default_items);
     }
 
-    const handleSearchRequest = async (keys, keyword, page) => {
+    let handleSearchRequest = async (keys, keyword, page) => {
         let results = {};
         items.forEach(item => {
             let split_keys = keys.split(',');
@@ -181,6 +183,7 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
                 action={handleDatatableAction}
                 onClick={handleItemClick}
                 checkbox
+                request_complete={!loading_data}
             />
     }
     </div>

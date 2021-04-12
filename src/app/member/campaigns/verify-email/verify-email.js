@@ -30,6 +30,7 @@ const VerifySenderEmail = props => {
 
         } finally {
             setLoading(false);
+            setCode('');
         }
     }
 
@@ -38,7 +39,7 @@ const VerifySenderEmail = props => {
             <div className="alert alert-info">Enter verification code sent to {email}</div>
             <div className="form-row">
                 <label htmlFor="verification_code">Verification Code:</label>
-                <input type="text" className="gm-input" id="verification_code" defaultValue={code} onInput={e => setCode(e.target.value)} />
+                <input type="text" className="gm-input" id="verification_code" value={code} onInput={e => setCode(e.target.value)} />
             </div>
             <div className="mt-3 mb-3 form-row">
                 <div className="col-md-8"></div>

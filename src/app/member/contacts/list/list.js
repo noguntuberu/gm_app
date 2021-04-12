@@ -11,16 +11,17 @@ import MobileDatatable from "../../../shared/datatable/mobile/datatable";
 import WebDataTable from '../../../shared/datatable/web/datatable';
 
 const ListContacts = () => {
-    const { token } = useSelector(state => state.user_data);
+    let { token } = useSelector(state => state.user_data);
     let { is_mobile_view } = useSelector(state => state.metadata);
 
-    const dispatch = useDispatch();
-    const history = useHistory();
+    let dispatch = useDispatch();
+    let history = useHistory();
 
-    const [items, setItems] = useState([]);
-    const [selected_contacts, setSelectedContacts] = useState([]);
-    const [show_contact_link_modal, setShowContactLinkModal] = useState(false);
+    let [items, setItems] = useState([]);
+    let [selected_contacts, setSelectedContacts] = useState([]);
+    let [show_contact_link_modal, setShowContactLinkModal] = useState(false);
     let [is_search_mode, setSearchMode] = useState(false);
+    let [loading_data, setLoadingData] = useState(true);
 
     useEffect(() => {
         dispatch(setPageTitle('My Contacts'));
@@ -28,17 +29,19 @@ const ListContacts = () => {
             token,
             query_string: `sort_by=-created_on&page=0&population=50`
         }).then(data => {
-            const { payload, error } = data;
+            let { payload, error } = data;
 
             if (!error) {
                 setItems(payload);
             }
-        }).catch(() => setItems([]));
+        }).catch(() => {
+            setItems([])
+        }).finally(() => setLoadingData(false));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const deleteContact = async (id) => {
-        const { error } = await ContactService.deleteById(id, { token })
+    let deleteContact = async (id) => {
+        let { error } = await ContactService.deleteById(id, { token })
         if (error) {
             toast.error(`could not delete contact.`);
             return;
@@ -47,8 +50,8 @@ const ListContacts = () => {
         toast.success(`contact deleted successfully.`);
     }
 
-    const handleDatatableAction = action => {
-        const { name, type, data } = action;
+    let handleDatatableAction = action => {
+        let { name, type, data } = action;
         if (type.toLowerCase() === 'bulk') {
             switch (name.toLowerCase()) {
                 case 'add to audience':
@@ -76,37 +79,43 @@ const ListContacts = () => {
         }
     }
 
-    const handleItemClick = data => {
+    let handleItemClick = data => {
         history.push(`/contacts/${data.id}`);
     }
 
-    const handleDataRequest = async (page) => {
+    let handleDataRequest = async (page) => {
         try {
-            const response = await ContactService.read({
+            setLoadingData(true);
+            let response = await ContactService.read({
                 token,
                 query_string: `sort_by=-created_on&page=${page}&population=50`
             })
-            const { error, payload } = response;
+            let { error, payload } = response;
             if (error) return;
 
             setItems(payload);
         } catch (e) {
             setItems([]);
+        } finally {
+            setLoadingData(false);
         }
     }
 
-    const handleSearchRequest = async (keys, keyword, page) => {
+    let handleSearchRequest = async (keys, keyword, page) => {
         try {
-            const response = await ContactService.search(keys, keyword, {
+            setLoadingData(true);
+            let response = await ContactService.search(keys, keyword, {
                 token,
                 query_string: `sort_by=-created_on&page=${page}&population=50`,
             });
-            const { error, payload } = response;
+            let { error, payload } = response;
             if (error) return;
 
             setItems(payload)
         } catch (e) {
             setItems([]);
+        } finally {
+            setLoadingData(false);
         };
     }
 
@@ -134,6 +143,7 @@ const ListContacts = () => {
                     action={handleDatatableAction}
                     onClick={handleItemClick}
                     checkbox
+                    request_complete={!loading_data}
                 />
         }
         <GmModal show_title={true} title="Add Contacts to Audience" show_modal={show_contact_link_modal} onClose={() => setShowContactLinkModal(false)}>

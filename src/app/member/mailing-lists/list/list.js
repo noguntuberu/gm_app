@@ -17,7 +17,7 @@ const ListMailingLists = () => {
     const { token } = useSelector(state => state.user_data);
     let { is_mobile_view } = useSelector(state => state.metadata);
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [mailing_lists, setMailingLists] = useState([]);
     let [is_search_mode, setSearchMode] = useState(false);
 
@@ -84,10 +84,12 @@ const ListMailingLists = () => {
     }
 
     const handleDataRequest = async (page) => {
+        setLoading(true);
         const response = await AudienceService.read({
             token,
             query_string: `page=${page}&population=50`
         })
+        setLoading(false);
         const { error, payload } = response;
         if (error) return;
 
@@ -95,10 +97,12 @@ const ListMailingLists = () => {
     }
 
     const handleSearchRequest = async (keys, keyword, page) => {
+        setLoading(true);
         const response = await AudienceService.search(keys, keyword, {
             token,
             query_string: `page=${page}&population=50`,
         });
+        setLoading(false);
         const { error, payload } = response;
         if (error) return;
 
@@ -116,7 +120,13 @@ const ListMailingLists = () => {
                     onDataRequest={handleDataRequest}
                     onSearchRequest={handleSearchRequest}
                 /> :
-                <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
+                <WebDatatable
+                    action={handleDatatableAction}
+                    checkbox
+                    config={config}
+                    onClick={handleItemClick}
+                    request_complete={!loading}
+                />
         }
         </div>
     )

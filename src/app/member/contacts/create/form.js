@@ -44,6 +44,17 @@ const ContactCreationForm = props => {
     }, []);
 
     /** */
+    const clearForm = () => {
+        setFirstname('');
+        setLastname('');
+        setEmail('');
+        setStreet('');
+        setState('');
+        setCountry('')
+        setDateOfBirth(undefined);
+        setSelectedLists([]);
+    }
+
     const submitForm = async () => {
         if (!firstname || !email) {
             toast.error('Please fill compulsory fields.');
@@ -70,7 +81,7 @@ const ContactCreationForm = props => {
         }
 
         toast.success(`contact created.`);
-
+        clearForm();
         // add contact to list
         if (!selected_lists[0]) return;
         await AudienceService.addContact(selected_lists[0].value, {

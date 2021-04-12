@@ -52,6 +52,17 @@ const ContactUpdationForm = props => {
     }, []);
 
     /** */
+
+    const clearForm = () => {
+        setFirstname('');
+        setLastname('');
+        setEmail('');
+        setStreet('');
+        setState('');
+        setCountry('')
+        setDateOfBirth(undefined);
+    }
+
     const submitForm = async () => {
         const form_data = {
             ...contact_data,
@@ -70,6 +81,7 @@ const ContactUpdationForm = props => {
         }
 
         toast.success('Contact updated.');
+        clearForm();
     }
 
     return (

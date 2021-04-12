@@ -17,15 +17,19 @@ const ListCampaigns = () => {
 
     let [campaigns, setCampaigns] = useState([]);
     let [is_search_mode, setSearchMode] = useState(false);
+    let [loading_data, setLoadingData] = useState(true);
 
     useEffect(() => {
         dispatch(setPageTitle('My Campaigns'));
-        CampaignService.read({ token, query_string: 'page=0&population=50,sort_by=-created_on' }).then(response => {
+        CampaignService.read({
+            token,
+            query_string: 'page=0&population=50,sort_by=-created_on'
+        }).then(response => {
             const { error, payload } = response;
             if (error) return;
 
             setCampaigns(payload);
-        });
+        }).finally(() => setLoadingData(false));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -121,27 +125,40 @@ const ListCampaigns = () => {
     }
 
     const handleDataRequest = async (page) => {
-        const response = await CampaignService.read({
-            token,
-            query_string: `page=${page}&population=50,sort_by=-created_on`
-        })
+        try {
+            setLoadingData(true);
+            const response = await CampaignService.read({
+                token,
+                query_string: `page=${page}&population=50,sort_by=-created_on`
+            })
 
-        const { error, payload } = response;
-        if (error) return;
+            const { error, payload } = response;
+            if (error) return;
 
-        setCampaigns(payload);
+            setCampaigns(payload);
+        } catch (e) {
+            setCampaigns([]);
+        } finally {
+            setLoadingData(false);
+        }
     }
 
     const handleSearchRequest = async (keys, keyword, page) => {
-        const response = await CampaignService.search(keys, keyword, {
-            token,
-            query_string: `page=${page}&population=50,sort_by=-created_on`,
-        });
+        try {
+            const response = await CampaignService.search(keys, keyword, {
+                token,
+                query_string: `page=${page}&population=50,sort_by=-created_on`,
+            });
 
-        const { error, payload } = response;
-        if (error) return;
+            const { error, payload } = response;
+            if (error) return;
 
-        setCampaigns(payload);
+            setCampaigns(payload);
+        } catch (e) {
+            setCampaigns([]);
+        } finally {
+            setLoadingData(false);
+        }
     }
 
     return <div> {
@@ -154,7 +171,13 @@ const ListCampaigns = () => {
                 onDataRequest={handleDataRequest}
                 onSearchRequest={handleSearchRequest}
             /> :
-            <WebDatatable config={config} action={handleDatatableAction} onClick={handleItemClick} checkbox />
+            <WebDatatable
+                config={config}
+                action={handleDatatableAction}
+                onClick={handleItemClick}
+                checkbox
+                request_complete={!loading_data}
+            />
     }</div>
 }
 

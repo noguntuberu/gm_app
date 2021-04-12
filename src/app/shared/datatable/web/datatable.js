@@ -7,7 +7,7 @@ import Spinner from '../../spinners/spinner-50/spinner-50';
 import '../datatable.css';
 
 const DataTable = props => {
-    const { action, checkbox, config, onClick } = props;
+    const { action, checkbox, config, onClick, request_complete } = props;
     const { fields, items, search_text, } = config;
 
     const [number_of_rows_to_display, setNumberOfRowsToDisplay] = useState(10);
@@ -20,11 +20,9 @@ const DataTable = props => {
     const [table_items, setTableItems] = useState(items);
     const [items_to_display, setItemsToDisplay] = useState([]);
 
-    const [is_loading_data, setIsLoadingData] = useState(true);
-
     useEffect(() => {
         handleNumberOfItemsToDisplay();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page_number, table_items]);
 
     useEffect(() => {
@@ -38,7 +36,6 @@ const DataTable = props => {
 
         setAllItems(processed_items);
         setTableItems(processed_items.slice());
-        setIsLoadingData(false);
     }, [items]);
 
     /** */
@@ -134,7 +131,7 @@ const DataTable = props => {
 
         setIsBulkSelection(true);
         await new Promise((r, e) => setTimeout(r, 500));
-        
+
         let source = items_to_display;
         let selections = source.reduce((sack, result) => {
             if (!result.is_active) return sack;
@@ -148,7 +145,7 @@ const DataTable = props => {
 
     return (
         <div className="gm-datatable">
-            {is_loading_data ?
+            {!request_complete ?
                 <div className="gm-datatable-loader">
                     <Spinner />
                 </div> :

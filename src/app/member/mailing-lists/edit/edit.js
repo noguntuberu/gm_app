@@ -7,9 +7,14 @@ import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 const AudienceUpdationForm = ({ mailing_list }) => {
     const { token, id } = useSelector(state => state.user_data);
 
-    const [description, setDescription] = useState(mailing_list.description || '');
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState(mailing_list.name || '');
+    const [description, setDescription] = useState(mailing_list.description || '');
+
+    const clearForm = () => {
+        setDescription('');
+        setName('');
+    }
 
     const submit = async () => {
         const data = {
@@ -30,16 +35,17 @@ const AudienceUpdationForm = ({ mailing_list }) => {
             return;
         }
 
-        setLoading(false)
-        toast.success(`Audience updated.`)
+        setLoading(false);
+        toast.success(`Audience updated.`);
+        clearForm();
     }
 
     return <div>
         <div className="form-group">
-            <input className="gm-input" type="text" placeholder="Name" defaultValue={name} onInput={e => setName(e.target.value)} />
+            <input className="gm-input" type="text" placeholder="Name" value={name} onInput={e => setName(e.target.value)} />
         </div>
         <div className="form-group">
-            <textarea className="gm-input" placeholder="Description" defaultValue={description} onInput={e => setDescription(e.target.value)}>
+            <textarea className="gm-input" placeholder="Description" value={description} onInput={e => setDescription(e.target.value)}>
 
             </textarea>
         </div>
