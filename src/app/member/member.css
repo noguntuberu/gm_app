@@ -56,25 +56,28 @@ span.material-icons {
 
 @media screen and (min-width:1280px) {
     .member-area-wrapper {
-        background-color: #F4F8FB;
+        background: linear-gradient(#D7EEFF, #FBF4F6);
     }
 
     .app-body {
         position: fixed;
-        height: 85vh;
+        height: 90vh;
         width: 80%;
 
         bottom: 0;
         left: 10%;
 
-        border: 1px solid #D7EEFF;
+        /* border: 1px solid #D7EEFF; */
         border-bottom: none;
         border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
 
         background: #ffffff;
     }
 
     .app-content {
+        position: unset;
+        width: 85%;
         max-height: 90vh;
         overflow-y: scroll;
     }
@@ -85,11 +88,6 @@ span.material-icons {
         width: 15%;
 
         margin: 0;
-    }
-
-    .app-content {
-        position: unset;
-        width: 85%;
     }
 
     .graph-wrapper {

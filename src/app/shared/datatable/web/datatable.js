@@ -174,7 +174,7 @@ const DataTable = props => {
                     </section>
                     <section className="gm-datatable-table">
                         <table>
-                            <thead className="gm-bg-blue-10 text-blue-2">
+                            <thead className="gm-bg-blue-6 text-blue-11">
                                 <DataTableHeader
                                     actions={config.actions.bulk}
                                     action_callback={processAction}

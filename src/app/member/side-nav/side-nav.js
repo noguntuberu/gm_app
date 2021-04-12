@@ -88,7 +88,7 @@ const SideNav = props => {
 
     return (
         <nav className="side-nav-wrapper" ref={veil} onClick={() => closeMenuTray()}>
-            <div className="app-side-nav gm-bg-blue-5" onClick={e => e.stopPropagation()}>
+            <div className="app-side-nav gm-bg-blue-4" onClick={e => e.stopPropagation()}>
                 <header>
                     <div className="nav-site-icon">
                         <img alt="Site Icon" src={icon_site} />
