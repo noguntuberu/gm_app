@@ -20,9 +20,11 @@ header.member-area-header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 
     width: 100%;
-    height: fit-content;
+    height: 100%;
+    padding-top: 5px;
 }
 
 .hamburger-icon {
@@ -38,11 +40,33 @@ header.member-area-header {
 }
 
 .page-title {
+    
     width: fit-content;
-    font-size: 1.25rem;
+    padding-top: 2.5px;
+
     color: #f7f7f7;
+    font-size: 1.15rem;
 
     /* text-transform: uppercase; */
+}
+
+.header-actions {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+}
+
+.header-actions .icon {
+    width: 25px;
+    height: 25px;
+
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.header-actions .icon span {
+    padding: 1.5px;
 }
 
 .page-title-underline {

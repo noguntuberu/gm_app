@@ -2,6 +2,7 @@
 .dashboard {
     height: auto;
     overflow-y: scroll;
+    padding: 0 20px;
 }
 .dashboard .primary {
     width: 100%;
@@ -15,7 +16,7 @@
     width: 100%;
     min-height: 250px;
 
-    border: 1px solid #E5E5E5;
+    border: 1px solid #D7EEFF;
     border-radius: 5px;
 
     margin-top: 20px;
@@ -23,6 +24,8 @@
 
 .top-charts > .title {
     border-bottom: 1px solid #E5E5E5;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     padding-left: 10px;
 
     line-height: 35px;
@@ -34,11 +37,11 @@
     }
 
     .dashboard .primary {
-        width: 60%;
+        width: 70%;
     }
 
     .dashboard .secondary {
-        width: 40%;
+        width: 30%;
         padding-left: 20px;
     }
 
