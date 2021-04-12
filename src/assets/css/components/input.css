@@ -41,8 +41,31 @@ label {
     background-color: #F4F8FB;
 }
 
+.go2646822163 {
+    border-bottom: 1px solid #99CCF1;
+    background-color: #F4F8FB;
+}
+
 select.gm-input {
     padding: 15px 0;
+}
+
+@media screen and (min-width: 480px) {
+    .gm-input {
+        line-height: 40px;
+    }
+    
+    .go2646822163 {
+        padding: 3px 0;
+    }
+
+    input[type="date"] {
+        padding: 1.5px 0;
+    }
+
+    select.gm-input {
+        padding: 10.5px 5px;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -60,7 +83,5 @@ select.gm-input {
 
     .go2646822163 {
         padding: 6px 0;
-        border-bottom: 1px solid #99CCF1;
-        background-color: #F4F8FB;
     }
 }
