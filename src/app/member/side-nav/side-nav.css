@@ -8,6 +8,8 @@
     width: 100%;
 
     z-index: 99;
+
+    font-family: 'Frank Ruhl Libre';
 }
 
 .app-side-nav {
@@ -35,7 +37,7 @@
     border-radius: 50%;
     margin-left: 12.5px;
     margin-top: 2.5px;
-    padding: 0.5px;
+    /* padding: 0.5px; */
 
     background-color: #E8F5FF;
 }
@@ -45,8 +47,9 @@
     margin-left: 15px;
 
     color: #E8F5FF;
-    font-size: 1.45rem;
+    font-size: 1.25rem;
     font-weight: bold;
+    line-height: 35px;
 }
 
 .app-side-nav section {
@@ -73,7 +76,7 @@
 }
 
 .logout-button {
-    border: 2px solid rgb(235, 78, 78);
+    border: 2px solid rgb(235, 78, 78); 
     padding: 8px;
     width: 100%;
 
@@ -110,7 +113,7 @@
 
 @media screen and (min-width: 1280px) {
     .app-side-nav {
-        border-top-left-radius: 10px;
+        /* border-top-left-radius: 10px; */
     }
 
     .app-side-nav section {

@@ -150,7 +150,7 @@ const ContactCreationForm = props => {
                 <div className="form-group col-12 col-md-6">
                     <label htmlFor="country">Country</label>
                     <select
-                        className="mt-md-1 gm-input"
+                        className="mt-md-3 gm-input"
                         id="country"
                         onChange={e => setCountry(e.target.value)}
                     >

@@ -61,16 +61,16 @@ span.material-icons {
 
     .app-body {
         position: fixed;
-        height: 90vh;
-        width: 80%;
+        height: 100vh;
+        width: 100%;
 
         bottom: 0;
-        left: 10%;
-
+        left: 0%;
+ 
         /* border: 1px solid #D7EEFF; */
         border-bottom: none;
-        border-top-right-radius: 10px;
-        border-top-left-radius: 10px;
+        /* border-top-right-radius: 10px; */
+        /* border-top-left-radius: 10px; */
 
         background: #ffffff;
     }
@@ -78,7 +78,7 @@ span.material-icons {
     .app-content {
         position: unset;
         width: 85%;
-        max-height: 90vh;
+        min-height: 100vh;
         overflow-y: scroll;
     }
 

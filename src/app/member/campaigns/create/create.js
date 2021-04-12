@@ -43,7 +43,7 @@ const CreateCampaign = () => {
 
     }
 
-    return <div className="content-wrapper mt-3">
+    return <div className="content-wrapper form-area mt-3">
         <CampaignCreationForm config={tinymce_config} />
     </div>
 }

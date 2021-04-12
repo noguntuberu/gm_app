@@ -40,9 +40,8 @@
     }
 
     .dashboard .primary, .dashboard .secondary {
-        max-height: 77.50vh;
+        height: 90vh;
         overflow-y: scroll;
-        padding-bottom: 50px;
     }
 
     .top-charts > .title {  

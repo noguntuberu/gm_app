@@ -18,12 +18,12 @@
 .side-nav-item:hover > div, .side-nav-item.active > div {
     font-weight: bold;
     background-color: #E8F5FF;
-    color: #3283BD;
+    color: #19415E;
     cursor: pointer;
 }
 
 .nav-icon {
-    width: 24px;
+    width: 20px;
     height: 20px;
 
     margin-right: 20px;
@@ -34,7 +34,7 @@
 }
 
 .nav-title {
-    font-size: 1.0rem;
+    font-size: 0.85rem;
 }
 
 @media screen and (min-width:481px){

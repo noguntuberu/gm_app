@@ -22,7 +22,7 @@ label {
     margin-bottom: 5px;
 }
 
-.gm-input, select.gm-input {
+.gm-input, select.gm-input, .go2646822163 {
     border: none;
     border-bottom: 1px solid #CCCCCC;
     margin-bottom: 5px;
@@ -45,8 +45,22 @@ select.gm-input {
     padding: 15px 0;
 }
 
-/* 3rd party */
-.go2646822163, .gm-input[type="date"]{
-    border-radius: 5px;
-    margin: 0;
+@media screen and (min-width: 1024px) {
+    .gm-input {
+        line-height: 45px;
+    }
+
+    select.gm-input {
+        padding: 12.5px 0;
+    }
+
+    input[type="date"] {
+        padding: 2.0px 0;
+    }
+
+    .go2646822163 {
+        padding: 6px 0;
+        border-bottom: 1px solid #99CCF1;
+        background-color: #F4F8FB;
+    }
 }

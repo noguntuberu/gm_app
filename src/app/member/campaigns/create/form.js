@@ -250,7 +250,7 @@ const CampaignCreationForm = props => {
             <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="campaign_schedule">Schedule</label>
                 <input
-                    className="pt-md-2 gm-input"
+                    className="pt-md-0 gm-input"
                     id="campaign_schedule"
                     type="date"
                     name="campaign-schedule"
