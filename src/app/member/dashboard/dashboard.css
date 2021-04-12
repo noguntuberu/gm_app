@@ -29,6 +29,9 @@
 }
 
 @media screen and (min-width:481px) {
+    .dashboard {
+        padding: 0 25px;
+    }
 
     .dashboard .primary {
         width: 60%;
@@ -47,5 +50,11 @@
     .top-charts > .title {  
         font-size: 1.25rem;
         line-height: 50px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .dashboard {
+        padding: 0 150px 0 50px;
     }
 }

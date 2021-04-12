@@ -72,7 +72,7 @@ const GMDashboard = () => {
     }, [audience_contacts]);
 
 
-    return <div className="content-wrapper dashboard">
+    return <div className="dashboard">
         <section className="primary">
             <div className="mt-3">
                 <div className="stat-card-pair-wrapper col-12 p-0 p-sm-0">

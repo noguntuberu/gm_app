@@ -15,7 +15,7 @@ const SideNavItem = props => {
 
     return <>{
         !path ?
-            <div className="side-nav-item text-blue-11" onClick={handleItemClick}>
+            <div className="side-nav-item text-blue-8" onClick={handleItemClick}>
                 <div>
                     <div className="nav-icon">
                         <span className="material-icons"> {name} </span>
@@ -23,7 +23,7 @@ const SideNavItem = props => {
                     <div className="nav-title">{title}</div>
                 </div>
             </div> :
-            <NavLink to={path} exact={true} className="side-nav-item text-blue-11" onClick={handleItemClick}>
+            <NavLink to={path} exact={true} className="side-nav-item text-blue-8" onClick={handleItemClick}>
                 <div>
                     <div className="nav-icon">
                         <span className="material-icons"> {name} </span>

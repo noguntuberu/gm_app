@@ -12,19 +12,20 @@ const StatCard = props => {
         if (!base_color) return;
         setStyle({
             card: {
-                backgroundColor: `hsla(${base_color}, 100%, 95%, 0.35)`,
-                border: `1px solid hsl(${base_color}, 100%, 92%)`,
-                borderLeft: `4px solid hsl(${base_color}, 58%, 47%)`,
+                backgroundColor: `hsla(${base_color}, 58%, 47%)`,
+                // border: `1px solid hsl(${base_color}, 100%, 92%)`,
+                // borderLeft: `4px solid hsl(${base_color}, 58%, 47%)`,
                 borderRadius: '5px',
-                padding: '10px'
+                boxShadow: '0px 5px 7.5px  #e5e5e5',
+                padding: '15px',
             },
             title: {
                 fontWeight: 'bold',
-                color: `hsl(${base_color}, 89%, 15%)`,
+                color: `hsl(${base_color}, 100%, 92%)`,
             },
             value: {
                 fontWeight: 'bold',
-                color: `hsl(${base_color}, 61%, 29%)`,
+                color: `hsl(${base_color}, 100%, 92%)`,
             }
         })
     }, [base_color]);

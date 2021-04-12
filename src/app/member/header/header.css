@@ -64,6 +64,10 @@ header.member-area-header {
     .hamburger-icon {
         display: none;
     }
+
+    .page-title {
+        padding-top: 5px;
+    }
 }
 
 @media screen and (min-width:1280px){
@@ -75,6 +79,6 @@ header.member-area-header {
 
     .page-title {
         font-size: 1.5rem;
-        line-height: 2.5rem;
+        line-height: 2.50rem;
     }
 }

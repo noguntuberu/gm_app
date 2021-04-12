@@ -71,13 +71,13 @@ export const processDataByWeekForChartsJS = (data) => {
         datasets: [
             {
                 data: subscribers.reverse(),
-                backgroundColor: 'green',
+                backgroundColor: 'hsl(130, 58%, 47%)',
                 label: 'subscribers',
                 fill: false,
             },
             {
                 data: unsubscribers.reverse(),
-                backgroundColor: 'red',
+                backgroundColor: 'hsl(342, 58%, 47%)',
                 label: 'unsubscribers',
                 fill: false,
             }
