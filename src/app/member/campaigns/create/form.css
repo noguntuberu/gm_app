@@ -16,11 +16,27 @@
     width: 6.5%;
 }
 
-div.tox-editor-header {
+.tox.tox-tinymce {
+    border: 1px solid #D7EEFF !important;
+    border-bottom: 2px solid #99CCF1 !important;
+}
+
+.tox-editor-header .tox-toolbar__primary {
+    background-color: #F4F8FB !important;
+    border: none !important;
     z-index: 0 !important;
 }
 
 .tox-pop__dialog {
+    display: none !important;
+}
+
+.tox-statusbar {
+    background-color: #F4F8FB !important;
+    border: none !important;
+}
+
+.tox-statusbar__branding {
     display: none !important;
 }
 

@@ -28,7 +28,7 @@ const CreateCampaign = () => {
         file_picker_types: 'file',
         fullpage_default_doctype: "<!DOCTYPE html>",
         fullpage_default_encoding: "UTF-8",
-        height: 500,
+        height: 700,
         images_reuse_filename: true,
         images_upload_handler: uploadImage,
         image_uploadtab: true,
@@ -43,7 +43,7 @@ const CreateCampaign = () => {
 
     }
 
-    return <div className="content-wrapper form-area mt-3">
+    return <div className="dashboard mt-3 h-100">
         <CampaignCreationForm config={tinymce_config} />
     </div>
 }

@@ -71,8 +71,8 @@ const CampaignCreationForm = props => {
         MailboxService.read({ token }).then(response => {
             const { error, payload } = response;
             if (error) return;
-            
-            setMailbox(payload[0] || { emails: []});
+
+            setMailbox(payload[0] || { emails: [] });
         }).catch(e => e);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -175,7 +175,7 @@ const CampaignCreationForm = props => {
     let handleListSelection = (lists) => {
         setSelectedLists(lists.map(list => list.value));
     }
-    
+
     let processSenderEmail = () => {
         if (!isEmailValid(sender_email)) return;
 
@@ -204,97 +204,103 @@ const CampaignCreationForm = props => {
     }
 
     return <div className="mt-2">
-        <div className="form-row">
-            <div className="form-group col-sm-12 col-md-6">
-                <label htmlFor="campaign_title">Name</label>
-                <input className="gm-input" id="campaign_title" type="text" defaultValue={campaign.name} onInput={e => setCampaignName(e.target.value)} />
-            </div>
-            <div className="form-group col-sm-12 col-md-6">
-                <label htmlFor="campaign_subject">Subject</label>
-                <input className="gm-input" id="campaign_subject" type="text" defaultValue={campaign.subject} onInput={e => setCampaignSubject(e.target.value)} />
-            </div>
-        </div>
-        <div className="form-row">
-            <div className="form-group col-sm-12 col-md-6">
-                <label htmlFor="sender_name">Sender's name</label>
-                <input className="gm-input" id="sender_name" type="text" defaultValue={campaign.sender_name} onInput={e => setSenderName(e.target.value)} />
-            </div>
-            <div className="form-group col-sm-12 col-md-6">
-                <label htmlFor="sender_email">Sender's email</label>
-                <input
-                    className="gm-input"
-                    id="sender_email"
-                    type="text"
-                    defaultValue={campaign.sender_email}
-                    onInput={e => setSenderEmail(e.target.value)}
-                />
-            </div>
-        </div>
-        <div className="form-row">
-            <div className="form-group col-sm-12 col-md-6"></div>
-            <div className="form-group col-sm-12 col-md-6">
-                {sender_eamil_is_verified ?
-                    <></> :
-                    <div className="text-wine-6">
-                        {is_verifying ?
-                            <div> <i>Verifying...</i></div> :
-                            <p>
-                                E-mail address is not verified. <b className="is-clickable px-1" onClick={handle_email_verification}>Click here</b>to verify.
+        <div className="row mx-0 pr-xl-3">
+            <div className="col-12 col-xl-4 p-0  pr-xl-2">
+                <div className="form-row">
+                    <div className="form-group col-sm-12 col-md-6 col-xl-12">
+                        <label htmlFor="campaign_title">Name</label>
+                        <input className="gm-input" id="campaign_title" type="text" defaultValue={campaign.name} onInput={e => setCampaignName(e.target.value)} />
+                    </div>
+                    <div className="form-group col-sm-12 col-md-6 col-xl-12">
+                        <label htmlFor="campaign_subject">Subject</label>
+                        <input className="gm-input" id="campaign_subject" type="text" defaultValue={campaign.subject} onInput={e => setCampaignSubject(e.target.value)} />
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-sm-12 col-md-6 col-xl-12">
+                        <label htmlFor="sender_name">Sender's name</label>
+                        <input className="gm-input" id="sender_name" type="text" defaultValue={campaign.sender_name} onInput={e => setSenderName(e.target.value)} />
+                    </div>
+                    <div className="form-group col-sm-12 col-md-6 col-xl-12">
+                        <label htmlFor="sender_email">Sender's email</label>
+                        <input
+                            className="gm-input"
+                            id="sender_email"
+                            type="text"
+                            defaultValue={campaign.sender_email}
+                            onInput={e => setSenderEmail(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-sm-12 col-md-6 col-xl-12"></div>
+                    <div className="form-group col-sm-12 col-md-6 col-xl-12">
+                        {sender_eamil_is_verified ?
+                            <></> :
+                            <div className="text-wine-6">
+                                {is_verifying ?
+                                    <div> <i>Verifying...</i></div> :
+                                    <p>
+                                        E-mail address is not verified. <b className="is-clickable px-1" onClick={handle_email_verification}>Click here</b>to verify.
                             </p>
+                                }
+                            </div>
                         }
                     </div>
-                }
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-sm-12 col-md-6">
+                        <label htmlFor="campaign_schedule">Schedule</label>
+                        <input
+                            className="pt-md-0 gm-input"
+                            id="campaign_schedule"
+                            type="date"
+                            name="campaign-schedule"
+                            defaultValue={schedule}
+                            onChange={e => setCampaignSchedule(e.target.value)}
+                            onFocus={processSenderEmail}
+                        />
+                    </div>
+                    <div className="form-group col-sm-12  col-md-6">
+                        <label htmlFor="campaign_list">Audiences</label>
+                        <MultiSelect
+                            options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
+                            onChange={handleListSelection}
+                            value={mailing_lists.filter(list => (selected_lists).includes(list.id))
+                                .map(list => ({ label: list.name, value: list.id }))
+                            }
+                            isMulti={true}
+                            labelledBy='Select Audience'
+                            id="campaign list"
+                        />
+                    </div>
+                </div>
             </div>
-        </div>
-        <div className="form-row">
-            <div className="form-group col-sm-12 col-md-6">
-                <label htmlFor="campaign_schedule">Schedule</label>
-                <input
-                    className="pt-md-0 gm-input"
-                    id="campaign_schedule"
-                    type="date"
-                    name="campaign-schedule"
-                    defaultValue={schedule}
-                    onChange={e => setCampaignSchedule(e.target.value)}
-                    onFocus={processSenderEmail}
-                />
-            </div>
-            <div className="form-group col-sm-12  col-md-6">
-                <label htmlFor="campaign_list">Audiences</label>
-                <MultiSelect
-                    options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
-                    onChange={handleListSelection}
-                    value={mailing_lists.filter(list => (selected_lists).includes(list.id))
-                        .map(list => ({ label: list.name, value: list.id }))
-                    }
-                    isMulti={true}
-                    labelledBy='Select Audience'
-                    id="campaign list"
-                />
-            </div>
-        </div>
-        <div className="w-100 p-2">
-            <span className="text-info is-clickable" onClick={() => setShowWildcardModal(true)}>** <b>Click Here </b> to see supported @ wildcards.</span>
-            {show_draft_status ? <span className="gm-text-grey float-right"><i>{draft_message}</i></span> : <></>}
-        </div>
-        <div className="form-row">
-            <div className="form-group col-12">
-                <Editor
-                    body_class="campaign_editor"
-                    id="campaign_create"
-                    init={config}
-                    value={campaign.body}
-                    onEditorChange={e => handleEditorChange(e)}
-                />
-            </div>
-        </div>
-        <div className="form-row">
-            <div className="col-md-8"></div>
-            <div className="col-md-4 pr-md-0 px-sm-0">
-                {loading ?
-                    <div className="gm-btn gm-btn-blue">Creating <span className="gm-btn-spinner"><Spinner /></span></div> :
-                    <div className="gm-btn gm-btn-blue" onClick={() => sendCampaign()} >Create</div>
-                }
+            <div className="col-12 col-xl-8 p-0 pl-xl-2 pr-xl-0">
+                <div className="w-100 p-2">
+                    <span className="text-info is-clickable" onClick={() => setShowWildcardModal(true)}>** <b>Click Here </b> to see supported @ wildcards.</span>
+                    {show_draft_status ? <span className="gm-text-grey float-right"><i>{draft_message}</i></span> : <></>}
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-12 p-xl-0">
+                        <Editor
+                            body_class="campaign_editor"
+                            id="campaign_create"
+                            init={config}
+                            value={campaign.body}
+                            onEditorChange={e => handleEditorChange(e)}
+                        />
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="col-md-8 col-xl-10"></div>
+                    <div className="col-md-4 col-xl-2 pr-md-0 px-sm-0">
+                        {loading ?
+                            <div className="gm-btn gm-btn-blue">Creating <span className="gm-btn-spinner"><Spinner /></span></div> :
+                            <div className="gm-btn gm-btn-blue" onClick={() => sendCampaign()} >Create</div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
         <GmModal title="Supported wildcards" show_title={true} show_modal={show_wildcard_modal} onClose={() => setShowWildcardModal(false)}>
