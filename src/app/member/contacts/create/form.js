@@ -11,6 +11,8 @@ import { countries } from '../../../data/countries';
 import { isEmailValid } from '../../../shared/utils/input';
 import { setPageTitle } from '../../../../store/actions/header';
 
+import './form.css';
+
 const ContactCreationForm = props => {
     // const [form_message, setFormMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -94,7 +96,7 @@ const ContactCreationForm = props => {
     return (
         <div className="mt-3">
             <div className="form-row">
-                <div className="form-group col-12 col-md-6">
+                <div className="form-group col-12 col-md-4">
                     <label htmlFor="firstname">First name *</label>
                     <input
                         type="text"
@@ -103,7 +105,7 @@ const ContactCreationForm = props => {
                         onInput={e => setFirstname(e.target.value)}
                     />
                 </div>
-                <div className="form-group col-12 col-md-6">
+                <div className="form-group col-12 col-md-4">
                     <label htmlFor="lastname">Last name</label>
                     <input
                         type="text"
@@ -112,74 +114,78 @@ const ContactCreationForm = props => {
                         onInput={e => setLastname(e.target.value)}
                     />
                 </div>
-            </div>
-            <div className="form-row">
-                <div className="form-group col-12 col-md-6">
+                <div className="form-group col-12 col-md-4">
                     <label htmlFor="email">Email address *</label>
                     <input
                         type="email"
-                        className="mt-md-1 gm-input"
+                        className="gm-input"
                         id="email"
                         onInput={e => setEmail(e.target.value)}
                     />
                 </div>
-                <div className="form-group col-12 col-md-6">
-                    <label htmlFor="email">Audience</label>
-                    <MultiSelect
-                        options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
-                        onChange={setSelectedLists}
-                        value={selected_lists}
-                        isMulti={false}
-                        labelledBy='Select Audience'
-                        id="audience"
-                    />
+            </div>
+            <div className="row mx-0 mb-4 mb-md-1">
+                <div className="col-12 col-md-6 px-0">
+                    <div className="form-row">
+                        <div className="form-group col-12 col-md-12">
+                            <label htmlFor="email">Audience</label>
+                            <MultiSelect
+                                options={mailing_lists.map(list => ({ label: list.name, value: list.id }))}
+                                onChange={setSelectedLists}
+                                value={selected_lists}
+                                isMulti={false}
+                                labelledBy='Select Audience'
+                                id="audience"
+                            />
+                        </div>
+                        <div className="form-group col-12 pr-0">
+                            <label htmlFor="date-of-birth">Date of birth</label>
+                            <input
+                                type="date"
+                                className="gm-input"
+                                min="0"
+                                max="31"
+                                onChange={e => setDateOfBirth(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group col-12">
+                            <label htmlFor="country">Country</label>
+                            <select
+                                className="mt-md-3 gm-input px-2"
+                                id="country"
+                                onChange={e => setCountry(e.target.value)}
+                            >
+                                <option value="">Select country</option>
+                                {countries.map((country, index) => <option key={country.code} value={country.code}>
+                                    {country.name}
+                                </option>)}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-12 col-md-6 px-0 pl-xl-3">
+                    <div className="form-row">
+                        <div className="form-group col-12">
+                            <label htmlFor="state">State</label>
+                            <input
+                                className="mt-md-1 gm-input"
+                                id="state"
+                                onInput={e => setState(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group col-12">
+                            <label htmlFor="street-address">Street address</label>
+                            <textarea
+                                className="gm-input h-100"
+                                id="street-address"
+                                onInput={e => setStreet(e.target.value)}
+                            >
+                            </textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="form-row">
-                <div className="form-group col">
-                    <label htmlFor="street-address">Street address</label>
-                    <textarea
-                        className="gm-input"
-                        id="street-address"
-                        onInput={e => setStreet(e.target.value)}
-                    >
-                    </textarea>
-                </div>
-            </div>
-            <div className="form-row">
-                <div className="form-group col-12 col-md-6">
-                    <label htmlFor="country">Country</label>
-                    <select
-                        className="mt-md-3 gm-input"
-                        id="country"
-                        onChange={e => setCountry(e.target.value)}
-                    >
-                        <option value="">Select country</option>
-                        {countries.map((country, index) => <option key={country.code} value={country.code}>
-                            {country.name}
-                        </option>)}
-                    </select>
-                </div>
-                <div className="form-group col-12 col-md-6">
-                    <label htmlFor="state">State</label>
-                    <input
-                        className="mt-md-3 gm-input"
-                        id="state"
-                        onInput={e => setState(e.target.value)}
-                    />
-                </div>
-                <div className="form-group col-12 pr-0">
-                    <label htmlFor="date-of-birth">Date of birth</label>
-                    <input
-                        type="date"
-                        className="gm-input"
-                        min="0"
-                        max="31"
-                        onChange={e => setDateOfBirth(e.target.value)}
-                    />
-                </div>
-            </div>
-            <div className="mt-3 mb-3 form-row">
+            <div className="mb-3 form-row">
                 <div className="col-md-8"></div>
                 <div className="col-md-4 pr-md-0 px-sm-0">
                     {!loading ?

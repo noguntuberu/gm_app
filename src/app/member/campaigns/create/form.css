@@ -21,10 +21,21 @@
     border-bottom: 2px solid #99CCF1 !important;
 }
 
-.tox-editor-header .tox-toolbar__primary {
+.tox-toolbar__primary {
+    background: none !important;
     background-color: #F4F8FB !important;
     border: none !important;
+    border-bottom: 1px solid #D7EEFF !important;
+
     z-index: 0 !important;
+}
+
+.tox-toolbar__overflow.tox-toolbar__overflow--open {
+    background: none !important;
+}
+
+.tox-toolbar__group {
+    border: 1px solid #E8F5FF !important;
 }
 
 .tox-pop__dialog {

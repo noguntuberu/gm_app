@@ -1,0 +1,11 @@
+@media screen and (min-width: 481px) {
+    #street-address {
+        min-height: 120px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    #street-address {
+        min-height: 130px;
+    }
+}
