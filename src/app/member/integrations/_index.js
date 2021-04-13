@@ -26,7 +26,7 @@ const SettingsModule = props => {
         <header>
             <SlidingNav nav_items={nav_items} />
         </header>
-        <section className="content-wrapper mt-3">
+        <section className="dashboard mt-3">
             <Switch>
                 <Route path="/integrations/api" component={APIIntegration} />
                 <Route path="/integrations/web" component={WebsiteIntegration} />

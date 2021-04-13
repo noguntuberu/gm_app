@@ -121,8 +121,6 @@
 @media screen and (min-width:481px) {
     .gm-datatable {
         position: unset;
-
-        padding: 20px;
     }
     
     .gm-datatable > section {
@@ -241,8 +239,6 @@
     .gm-datatable {
         font-size: 1.05rem;
         font-weight: 200;
-
-        padding: 20px 50px 20px 45px;
     }
     
     .gm-datatable tbody tr {

@@ -68,7 +68,7 @@ const MemberAreaHeader = ({ onHamburgerClick }) => {
             </div>
 
             <div className="header-actions">
-                <div className="icon create gm-bg-green-5 text-blue-11 mr-2">
+                <div className="shadow-sm icon create gm-bg-green-5 text-blue-11 mr-2 mr-md-3">
                     <ContextMenu
                         actions={icon_new_actions}
                         callback={handleUserAction}
@@ -78,7 +78,7 @@ const MemberAreaHeader = ({ onHamburgerClick }) => {
                         </div>}
                     />
                 </div>
-                <div className="icon user gm-bg-blue-5 text-blue-11">
+                <div className=" shadow-sm icon user gm-bg-wine-4 text-blue-11">
                     <ContextMenu
                         actions={icon_user_actions}
                         callback={handleUserAction}

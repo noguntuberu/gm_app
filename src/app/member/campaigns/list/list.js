@@ -171,13 +171,15 @@ const ListCampaigns = () => {
                 onDataRequest={handleDataRequest}
                 onSearchRequest={handleSearchRequest}
             /> :
-            <WebDatatable
-                config={config}
-                action={handleDatatableAction}
-                onClick={handleItemClick}
-                checkbox
-                request_complete={!loading_data}
-            />
+            <div className="dashboard">
+                <WebDatatable
+                    config={config}
+                    action={handleDatatableAction}
+                    onClick={handleItemClick}
+                    checkbox
+                    request_complete={!loading_data}
+                />
+            </div>
     }</div>
 }
 

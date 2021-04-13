@@ -98,6 +98,35 @@ header.member-area-header {
     .page-title {
         font-size: 1.25em;
     }
+
+    .header-actions {
+        padding-right: 10px;
+    }
+
+    .header-actions .icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .header-actions .icon:first-child {
+        width: auto;
+        height: auto;
+        border-radius: 50px;
+        padding: 2.5px 5px 5px 5px;
+        white-space: nowrap;
+    }
+
+    .icon-create > span:last-child {
+        display: inline-block;
+        padding-right: 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .icon-user {
+        font-size: 18px;
+        line-height: 35px;
+    }
 }
 @media screen and (min-width:1024px){
     .hamburger-icon {
@@ -114,10 +143,11 @@ header.member-area-header {
     header.member-area-header {
         border-top-right-radius: 10px;
         padding-left: 50px;
+        padding-right: 150px;
     }
 
     .page-title {
-        font-size: 1.5rem;
+        font-size: 1.35rem;
         line-height: 2.50rem;
     }
 }

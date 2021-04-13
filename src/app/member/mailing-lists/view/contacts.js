@@ -178,13 +178,15 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
                 onDataRequest={handleDataRequest}
                 onSearchRequest={handleSearchRequest}
             /> :
-            <WebDataTable
-                config={config}
-                action={handleDatatableAction}
-                onClick={handleItemClick}
-                checkbox
-                request_complete={!loading_data}
-            />
+            <div className="dashboard">
+                <WebDataTable
+                    config={config}
+                    action={handleDatatableAction}
+                    onClick={handleItemClick}
+                    checkbox
+                    request_complete={!loading_data}
+                />
+            </div>
     }
     </div>
 }

@@ -134,17 +134,19 @@ const ListContacts = () => {
                     onDataRequest={handleDataRequest}
                     onSearchRequest={handleSearchRequest}
                 /> :
-                < WebDataTable
-                    config={{
-                        ...table_config,
-                        is_search_mode: is_search_mode,
-                        items: items.sort((a, b) => b.id - a.id)
-                    }}
-                    action={handleDatatableAction}
-                    onClick={handleItemClick}
-                    checkbox
-                    request_complete={!loading_data}
-                />
+                <div className="dashboard">
+                    < WebDataTable
+                        config={{
+                            ...table_config,
+                            is_search_mode: is_search_mode,
+                            items: items.sort((a, b) => b.id - a.id)
+                        }}
+                        action={handleDatatableAction}
+                        onClick={handleItemClick}
+                        checkbox
+                        request_complete={!loading_data}
+                    />
+                </div>
         }
         <GmModal show_title={true} title="Add Contacts to Audience" show_modal={show_contact_link_modal} onClose={() => setShowContactLinkModal(false)}>
             <AddContactToAudience selected_contacts={selected_contacts} />

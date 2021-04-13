@@ -120,13 +120,15 @@ const ListMailingLists = () => {
                     onDataRequest={handleDataRequest}
                     onSearchRequest={handleSearchRequest}
                 /> :
-                <WebDatatable
-                    action={handleDatatableAction}
-                    checkbox
-                    config={config}
-                    onClick={handleItemClick}
-                    request_complete={!loading}
-                />
+                <div className="dashboard">
+                    <WebDatatable
+                        action={handleDatatableAction}
+                        checkbox
+                        config={config}
+                        onClick={handleItemClick}
+                        request_complete={!loading}
+                    />
+                </div>
         }
         </div>
     )
