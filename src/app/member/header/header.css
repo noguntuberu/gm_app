@@ -67,11 +67,11 @@ header.member-area-header {
 }
 
 .header-actions .icon span {
-    padding: 2.5px;
+    padding: 2.5px 1.5px;
 }
 
 .header-actions .icon.user {
-    padding: 5px;
+    padding: 3.0px;
     font-weight: bold;
 }
 

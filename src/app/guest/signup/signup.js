@@ -97,7 +97,7 @@ const SignupForm = () => {
                 </div>
                 <div className="form-row mt-3">
                     <div className="gm-input-group text-center px-2 word-wrap">
-                        <span class="text-blue-5" >By continuing, you agree to our <b>terms</b> and <b>policies</b>.</span>
+                        <span className="text-blue-5" >By continuing, you agree to our <b>terms</b> and <b>policies</b>.</span>
                     </div>
                 </div>
             </div >
