@@ -1,3 +1,30 @@
+.campaign-view-wrapper > section:last-child {
+    width: 100%;
+}
+
 .campaign-view-wrapper iframe {
+    width: 100%;
     border: none;
+}
+
+@media screen and (min-width: 480px) {
+    .campaign-view-wrapper > section:first-child {
+        float: right;
+        width: 30%;
+    }
+
+    .campaign-view-wrapper > section:last-child {
+        float: left;
+        width: 70%;
+        padding-right: 20px;
+    }
+
+    .campaign-view-wrapper iframe {
+        height:80vh;
+        /* border: none; */
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    
 }

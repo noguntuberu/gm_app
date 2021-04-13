@@ -20,6 +20,10 @@
 }
 
 @media screen and (min-width:1280px) {
+    .stat-card:hover {
+        opacity: 0.8;
+    }
+
     .stat-card-title {
         letter-spacing: 1px;
     }

@@ -87,7 +87,7 @@ const ViewMailingList = () => {
             </div>
         </div> */}
         {is_dashboard_view ?
-            <div className="content-wrapper audience-dashboard mt-3">
+            <div className="dashboard audience-dashboard mt-3">
                 <Dashboard contacts={list_contacts} campaigns={list_campaigns} />
             </div> :
             <div className="">

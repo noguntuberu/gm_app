@@ -31,27 +31,31 @@ const ViewCampaign = () => {
         })
     }, [dispatch, id, token]);
 
-    return <div className="content-wrapper mt-3">
+    return <div className="dashboard mt-3">
         <div className="campaign-view-wrapper">
-            <div className="stat-card-pair-wrapper col-lg-6 p-0 p-lg-0 pr-lg-2">
-                <div className="col-6">
-                    <StatCard title='Sends' count={campaign_stat.failed_sends + campaign_stat.successful_sends} base_color={205} />
+            <section className="">
+                <div className="stat-card-pair-wrapper row mx-0 my-md-0">
+                    <div className="col-6 col-md-12 mx-0 px-md-0">
+                        <StatCard title='Sends' count={campaign_stat.failed_sends + campaign_stat.successful_sends} base_color={205} />
+                    </div>
+                    <div className="col-6 col-md-12 mx-0 px-md-0">
+                        <StatCard title='Sent' count={campaign_stat.successful_sends} base_color={130} />
+                    </div>
                 </div>
-                <div className="col-6">
-                    <StatCard title='Sent' count={campaign_stat.successful_sends} base_color={130} />
+                <div className="stat-card-pair-wrapper row mx-0 my-md-0">
+                    <div className="col-6 col-md-12  px-md-0">
+                        <StatCard title='Failed' count={campaign_stat.failed_sends} base_color={342} />
+                    </div>
+                    <div className="col-6 col-md-12 px-md-0">
+                        <StatCard title='Opened' count={campaign_stat.total_opened} base_color={268} />
+                    </div>
                 </div>
-            </div>
-            <div className="stat-card-pair-wrapper p-0 col-lg-6 p-lg-0">
-                <div className="col-6">
-                    <StatCard title='Failed' count={campaign_stat.failed_sends} base_color={342} />
+            </section>
+            <section>
+                <div className="card shadow-sm mt-2">
+                    <iframe title="Campaign Preview" height="550" srcDoc={campaign.body}></iframe>
                 </div>
-                <div className="col-6">
-                    <StatCard title='Opened' count={campaign_stat.total_opened} base_color={268} />
-                </div>
-            </div>
-            <div className="card shadow-sm mt-2">
-                <iframe title="Campaign Preview" height="550" srcDoc={campaign.body}></iframe>
-            </div>
+            </section>
         </div>
     </div>
 }

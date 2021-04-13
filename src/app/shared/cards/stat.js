@@ -47,7 +47,7 @@ const StatCard = props => {
         return integer_value;
     }
 
-    return <div style={style.card} onClick={navigate}>
+    return <div className="stat-card" style={style.card} onClick={navigate}>
         <div className="stat-card-title" style={style.title}>
             {`${title}`}
         </div>
