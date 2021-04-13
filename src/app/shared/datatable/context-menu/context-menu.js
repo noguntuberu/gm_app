@@ -43,9 +43,8 @@ const ContextMenu = ({ actions, callback, text }) => {
         e.stopPropagation();
         toggleShowMenu(e);
     }
-    return (
-        <div>
-            <div className="context-menu-label" onClick={e => toggleShowMenu(e)}> <span><b>{text || '...'}</b></span></div>
+    return <>
+            <div className="context-menu-label" onClick={e => toggleShowMenu(e)}> {text || '...'}</div>
             { actions ? <div>
                 {show_menu ?
                     <div ref={context_menu} className="gm-action-wrap">
@@ -59,8 +58,7 @@ const ContextMenu = ({ actions, callback, text }) => {
                     <div></div>
                 }
             </div> : <></>}
-        </div>
-    )
+        </>
 }
 
 export default ContextMenu;

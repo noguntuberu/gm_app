@@ -6,15 +6,12 @@ import icon_site from '../../../assets/icons/site-icon-color.svg';
 
 import GmModal from '../../shared/modal/modal';
 import ImportContact from '../../member/contacts/import/import';
-import ListCreationForm from '../../member/mailing-lists/create/create';
-
 
 const SideNav = props => {
     let { open_tray, onTrayClose } = props;
     let veil = useRef();
 
     const [show_upload_modal, setShowUploadModal] = useState(false);
-    const [show_create_modal, setShowCreateModal] = useState(false);
 
     useEffect(() => {
         if (open_tray) {
@@ -104,25 +101,20 @@ const SideNav = props => {
                         onItemClick={closeMenuTray}
                     />
                     <div className="nav-divider"></div>
-                    <SideNavItem title="All campaigns"
+                    <SideNavItem title="Campaigns"
                         name="description"
                         path="/campaigns"
                         onItemClick={closeMenuTray}
                     />
-                    <SideNavItem title="Create campaign"
-                        name="note_add"
-                        path="/campaigns/new"
+                    <SideNavItem title="Audiences"
+                        name='group'
+                        path="/audiences"
                         onItemClick={closeMenuTray}
                     />
-                    <div className="nav-divider"></div>
-                    <SideNavItem title="All contacts"
+                    {/* <div className="nav-divider"></div> */}
+                    <SideNavItem title="Contacts"
                         name="person"
                         path="/contacts"
-                        onItemClick={closeMenuTray}
-                    />
-                    <SideNavItem title="Create contact"
-                        name="person_add"
-                        path="/contacts/new/single"
                         onItemClick={closeMenuTray}
                     />
                     <SideNavItem title="Import contacts"
@@ -130,17 +122,7 @@ const SideNav = props => {
                         onClick={() => setShowUploadModal(true)}
                         onItemClick={closeMenuTray}
                     />
-                    <div className="nav-divider"></div>
-                    <SideNavItem title="All audiences"
-                        name='group'
-                        path="/audiences"
-                        onItemClick={closeMenuTray}
-                    />
-                    <SideNavItem title="Create audience"
-                        name="group_add"
-                        onClick={() => setShowCreateModal(true)}
-                        onItemClick={closeMenuTray}
-                    />
+                    {/* <div className="nav-divider"></div> */}
                     <div className="nav-divider"></div>
                     <SideNavItem title="Integrations"
                         name="power"
@@ -162,9 +144,6 @@ const SideNav = props => {
             <div>
                 <GmModal title="Import Contacts" show_title={true} show_modal={show_upload_modal} onClose={() => setShowUploadModal(false)}>
                     <ImportContact />
-                </GmModal>
-                <GmModal title="Create Audience" show_title={true} show_modal={show_create_modal} onClose={() => setShowCreateModal(false)}>
-                    <ListCreationForm closeModal={() => setShowCreateModal(false)}/>
                 </GmModal>
             </div>
         </nav >

@@ -4,7 +4,7 @@ import InfoCard from '../info-card/info-card';
 import { determineFormAlertClass, formIsEmpty } from '../../../utilities/form';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
 
 import * as GuestService from '../../../services/guest';

@@ -42,10 +42,12 @@ header.member-area-header {
 .page-title {
     
     width: fit-content;
+    min-width: 50%;
     padding-top: 2.5px;
 
     color: #f7f7f7;
     font-size: 1.15rem;
+    text-overflow: ellipsis;
 
     /* text-transform: uppercase; */
 }
@@ -53,7 +55,8 @@ header.member-area-header {
 .header-actions {
     display: flex;
     flex-direction: row;
-    width: auto;
+    justify-content: space-between;
+    width: fit-content;
 
     font-family: 'Arsenal';
 }
@@ -64,15 +67,21 @@ header.member-area-header {
 
     border-radius: 50%;
     text-align: center;
+
+    padding-top: 0.5px;
 }
 
-.header-actions .icon span {
-    padding: 2.5px 1.5px;
-}
-
-.header-actions .icon.user {
-    padding: 3.0px;
+.icon-user, .icon-create {
+    font-size: 16px;
     font-weight: bold;
+}
+
+.icon-create > span:first-child {
+    padding: 6.5px 0 0 6.5px;
+}
+
+.icon-create > span:last-child {
+    display: none;
 }
 
 .page-title-underline {
