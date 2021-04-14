@@ -16,6 +16,10 @@
     width: 6.5%;
 }
 
+.tox-editor-header {
+    z-index: 0 !important;
+}
+
 .tox.tox-tinymce {
     border: 1px solid #D7EEFF !important;
     border-bottom: 2px solid #99CCF1 !important;
