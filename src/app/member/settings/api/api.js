@@ -52,7 +52,7 @@ const APISetting = () => {
         }).catch(e => e).finally(() => setLoading(false));
     }
 
-    return <div>
+    return <div className="pt-md-3">
         <div className="api-key-wrapper">
             <div>api key</div>
             <div onClick={copyAPIKey}>{api_key.substr(0, 25)}...</div>
