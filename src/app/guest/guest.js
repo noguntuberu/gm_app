@@ -1,7 +1,7 @@
 /** */
 import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import site_name from '../../assets/icons/site-name/site-name-color.svg';
+import site_name from '../../assets/icons/site-name/site-name-bg-white.svg';
 
 /** */
 import AccountActivation from './activation/activation';
@@ -17,8 +17,10 @@ const GuestArea = () => {
     const history = useHistory();
     return (
         <div className="guest-area-wrapper flex-col-center h-100">
-            <div className="mobi-site-name" onClick={() => history.push('/')}>
-                <img src={site_name} alt="Site Icon" />
+            <div className="flex-row-center">
+                <div className="mobi-site-name" onClick={() => history.push('/')}>
+                    <img src={site_name} alt="Site Name" />
+                </div>
             </div>
             <div className="guest-form-wrap">
                 <Switch>

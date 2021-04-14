@@ -8,6 +8,10 @@
     height: 100vh;
     background-color: #ffffff;
 }
+.mobi-site-icon {
+    width: 30px;
+    margin-right: 5px;
+}
 
 .mobi-site-name {
     width: 135px;

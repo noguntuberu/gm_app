@@ -9,6 +9,11 @@
     color: #FF8F26;
 }
 
+.text-orange-light{
+    /* color: #FF7F08;FF8F26 */
+    color: hsla(29, 100%, 85%, 1);
+}
+
 /** BORDER **/
 
 .border-orange {

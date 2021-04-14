@@ -47,7 +47,7 @@ const LoginForm = () => {
     }
  
     return <div>
-        <InfoCard bg_class="gm-bg-blue-5"/>
+        <InfoCard bg_class="gm-bg-blue-2"/>
         <div className="form-wrapper flex-col-center">
             <div className="form-switch-wrapper text-blue-4">
                 <div onClick={() => history.push("/register")}>Not yet a member? <b>Create Account</b></div>
