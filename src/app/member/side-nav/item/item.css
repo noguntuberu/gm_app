@@ -18,7 +18,7 @@
 
 .side-nav-item:hover > div, .side-nav-item.active > div {
     font-weight: bold;
-    border-right: 4px solid #F4F8FB;
+    border-right: 4px solid #FF7F08;
     background-color: hsla(205, 58%, 47%, 0.20);
     color: #F4F8FB;
     cursor: pointer;

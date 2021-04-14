@@ -17,7 +17,7 @@
 }
 
 .sliding-nav > span >a.active, .sliding-nav > span >a:hover {
-    border-bottom: 2px solid #3283BD;
+    border-bottom: 2px solid #FF7F08;
     color: #19415E;
 }
 
