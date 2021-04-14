@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,6 +8,7 @@ import Dashboard from './dashboard/dashboard';
 import AudienceUpdationForm from '../edit/edit';
 import GmModal from '../../../shared/modal/modal';
 import ImportContacts from '../../contacts/import/import';
+import FloatingNav from '../../../shared/nav/floating/floating';
 import { setPageTitle } from '../../../../store/actions/header';
 import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
@@ -18,15 +19,16 @@ const ViewMailingList = () => {
     let { id } = useParams();
     let dispatch = useDispatch();
     let { token } = useSelector(state => state.user_data);
-    let icons_tray = useRef();
 
     let [is_dashboard_view, setIsDashboardView] = useState(true);
 
     let [list_campaigns, setListCampaigns] = useState([]);
     let [list_contacts, setListContacts] = useState([]);
     let [mailing_list, setMailingList] = useState({});
+
     let [show_updation_modal, setShowUpdationModal] = useState(false);
     let [show_upload_modal, setShowUploadModal] = useState(false);
+    let [show_floating_nav, setShowFloatingNav] = useState(true);
 
     useEffect(() => {
         AudienceService.readById(id, { token }).then(async response => {
@@ -73,30 +75,9 @@ const ViewMailingList = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
-    return <div >
-        {/* <div>
-            <div className="content-header-wrapper">
-                <div className="content-header-actions">
-                    <button className="gm-btn gm-btn-info btn-sm  shadow" onClick={() => setShowUpdationModal(true)}>Edit</button>
-                    <button className="gm-btn gm-btn-primary ml-3  btn-sm  shadow" onClick={() => setShowUploadModal(true)}>Import Contacts</button>
-                    {is_dashboard_view ?
-                        <button className="gm-btn gm-btn-secondary btn-sm  ml-3  shadow" onClick={() => setIsDashboardView(false)}>View Contacts</button> :
-                        <button className="gm-btn gm-btn-secondary btn-sm  ml-3  shadow" onClick={() => setIsDashboardView(true)}>View Dashboard</button>
-                    }
-                </div>
-            </div>
-        </div> */}
-        {is_dashboard_view ?
-            <div className="dashboard audience-dashboard mt-3">
-                <Dashboard contacts={list_contacts} campaigns={list_campaigns} />
-            </div> :
-            <div className="">
-                <AudienceContacts audience_contacts={list_contacts} list_id={id} />
-            </div>
-        }
-
-        <div className="floating-btn-wrapper">
-            <div className="icon-tray text-blue-4" ref={icons_tray}>
+    return <div>
+        <FloatingNav is_open={show_floating_nav}>
+            <div className="icon-tray text-blue-4">
                 {
                     is_dashboard_view ?
                         <div className="floating-action-btn" onClick={() => setIsDashboardView(false)}>
@@ -107,12 +88,29 @@ const ViewMailingList = () => {
                         </div>
                 }
                 <div className="floating-action-btn" onClick={() => setShowUpdationModal(true)}>
-                    <span class="material-icons"> edit</span>
+                    <span className="material-icons"> edit</span>
                 </div>
                 <div className="floating-action-btn" onClick={() => setShowUploadModal(true)}>
-                    <span class="material-icons"> drive_folder_upload </span>
+                    <span className="material-icons"> drive_folder_upload </span>
+                </div>
+                <div
+                    className="floating-action-btn mobile"
+                    onClick={() => setShowFloatingNav(false)}
+                >
+                    <span className="material-icons">visibility_off</span>
                 </div>
             </div>
+        </FloatingNav>
+
+        <div className="dashboard">
+            {is_dashboard_view ?
+                <div className="mt-3">
+                    <Dashboard contacts={list_contacts} campaigns={list_campaigns} />
+                </div> :
+                <div className="mt-4">
+                    <AudienceContacts audience_contacts={list_contacts} list_id={id} />
+                </div>
+            }
         </div>
 
         <GmModal title="Edit Audience" show_title={true} show_modal={show_updation_modal} onClose={() => setShowUpdationModal(false)}>

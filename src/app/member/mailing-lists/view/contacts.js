@@ -178,7 +178,7 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
                 onDataRequest={handleDataRequest}
                 onSearchRequest={handleSearchRequest}
             /> :
-            <div className="dashboard">
+            <div>
                 <WebDataTable
                     config={config}
                     action={handleDatatableAction}

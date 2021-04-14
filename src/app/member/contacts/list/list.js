@@ -134,7 +134,7 @@ const ListContacts = () => {
                     onDataRequest={handleDataRequest}
                     onSearchRequest={handleSearchRequest}
                 /> :
-                <div className="dashboard">
+                <div className="dashboard mt-3">
                     < WebDataTable
                         config={{
                             ...table_config,

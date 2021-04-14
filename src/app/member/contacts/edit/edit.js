@@ -8,7 +8,7 @@ const EditContact = props => {
     const { id } = useParams();
     const contact_data = useSelector(state => state.contacts[id]);
 
-    return <div className="content-wrapper mt-3">
+    return <div className="dashboard mt-3">
         <ContactUpdationForm contact_data={contact_data} />
     </div>
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+// import { useHistory } from 'react-router-dom';
 import SideNavItem from './item/item';
 import './side-nav.css';
 
@@ -10,6 +11,7 @@ import ImportContact from '../../member/contacts/import/import';
 const SideNav = props => {
     let { open_tray, onTrayClose } = props;
     let veil = useRef();
+    // let history = useHistory();
 
     const [show_upload_modal, setShowUploadModal] = useState(false);
 
@@ -135,10 +137,8 @@ const SideNav = props => {
                         path="/settings"
                     />
                     {/* <div className="side-sub-nav pl-5 pr-5 mt-4">
-                    <div className="gm-btn btn-block gm-btn-secondary" onClick={() => history.push('/plans/choose')}>
-                    Upgrade Plan
-                    </div>
-                </div> */}
+                        <div className="gm-btn btn-block gm-btn-secondary" onClick={() => history.push('/plans/choose')}> Upgrade Plan </div>
+                    </div> */}
                 </section>
             </div >
             <div>

@@ -78,7 +78,7 @@ const MemberAreaHeader = ({ onHamburgerClick }) => {
                         </div>}
                     />
                 </div>
-                <div className=" shadow-sm icon user gm-bg-wine-4 text-blue-11">
+                <div className=" shadow-sm icon user gm-bg-blue-4 text-blue-11">
                     <ContextMenu
                         actions={icon_user_actions}
                         callback={handleUserAction}

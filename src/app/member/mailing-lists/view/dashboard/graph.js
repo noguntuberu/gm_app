@@ -73,7 +73,7 @@ const AudienceGraph = props => {
 
                     </LineChart>
                 </ResponsiveContainer> :
-                <Bar data={graph_data} width={"100%"} height={60} options={bar_chart_options} />
+                <Bar data={graph_data} width={100} height={60} options={bar_chart_options} />
         }
     </div>
 }

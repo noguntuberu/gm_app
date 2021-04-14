@@ -42,10 +42,10 @@ const CreateMailingList = ({ closeModal }) => {
 
     return <div>
         <div className="form-group">
-            <input className="gm-input" type="text" placeholder="Name" value={name} onInput={e => setName(e.target.value)} />
+            <input className="gm-input" type="text" placeholder="Name" value={name} onChange={e => e} onInput={e => setName(e.target.value)} />
         </div>
         <div className="form-group">
-            <textarea className="gm-input" placeholder="Description" value={description} onInput={e => setDescription(e.target.value)}>
+            <textarea className="gm-input" placeholder="Description" value={description} onChange={e=>e} onInput={e => setDescription(e.target.value)}>
 
             </textarea>
         </div>

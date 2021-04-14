@@ -8,6 +8,7 @@ import { convertDateFromIsoToHTMLFormat } from '../../../shared/utils/date';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 import { useParams } from 'react-router-dom';
 
+import './form.css';
 const ContactUpdationForm = props => {
     const { id } = useParams()
     const [loading, setLoading] = useState(false);
@@ -85,9 +86,9 @@ const ContactUpdationForm = props => {
     }
 
     return (
-        <div>
+        <div className="updation-form">
             <div className="form-row">
-                <div className="form-group col">
+                <div className="form-group col-12 col-md-4">
                     <label htmlFor="firstname">First name</label>
                     <input
                         type="text"
@@ -97,7 +98,7 @@ const ContactUpdationForm = props => {
                         onInput={e => setFirstname(e.target.value)}
                     />
                 </div>
-                <div className="form-group col">
+                <div className="form-group col-12 col-md-4">
                     <label htmlFor="lastname">Last name</label>
                     <input
                         type="text"
@@ -107,9 +108,7 @@ const ContactUpdationForm = props => {
                         onInput={e => setLastname(e.target.value)}
                     />
                 </div>
-            </div>
-            <div className="form-row">
-                <div className="form-group col">
+                <div className="form-group col-12 col-md-4">
                     <label htmlFor="email">Email address</label>
                     <input
                         type="email"
@@ -120,22 +119,25 @@ const ContactUpdationForm = props => {
                     />
                 </div>
             </div>
-            <div className="form-row">
-                <div className="form-group col">
-                    <label htmlFor="street-address">Street address</label>
-                    <textarea
-                        className="gm-input"
-                        id="street-address"
-                        defaultValue={street}
-                        onInput={e => setStreet(e.target.value)}
-                    >
-                    </textarea>
-                </div>
-            </div>
-            <div className="form-row">
-                <div className="form-group col">
+            <div className="row mx-0 mb-2 mb-md-1">
+                <div className="col-12 col-md-6 px-0">
                     <div className="form-row">
-                        <div className="form-group col">
+                        <div className="form-group col-12 pr-0">
+                            <label htmlFor="date-of-birth">Date of birth</label>
+                            {date_of_birth ? <input
+                                type="date"
+                                className="gm-input mt-0"
+                                max=""
+                                defaultValue={convertDateFromIsoToHTMLFormat(date_of_birth)}
+                                onChange={e => setDateOfBirth(e.target.value)}
+                            /> : <input
+                                    type="date"
+                                    className="gm-input mt-0"
+                                    onChange={e => setDateOfBirth(e.target.value)}
+                                />
+                            }
+                        </div>
+                        <div className="form-group col-12 px-0">
                             <label htmlFor="state">State</label>
                             <select
                                 className="gm-input"
@@ -147,7 +149,7 @@ const ContactUpdationForm = props => {
                                 <option value="lagos">Lagos</option>
                             </select>
                         </div>
-                        <div className="form-group col">
+                        <div className="form-group col-12 px-0">
                             <label htmlFor="country">Country</label>
                             <select
                                 className="gm-input"
@@ -161,29 +163,24 @@ const ContactUpdationForm = props => {
                         </div>
                     </div>
                 </div>
-                <div className="form-group col pr-0">
-                    <label htmlFor="date-of-birth">Date of birth</label>
+                <div className="col-12 col-md-6 px-0 pl-md-3">
                     <div className="form-row">
-                        <div className="form-group col">
-                            {date_of_birth
-                                ? <input
-                                    type="date"
-                                    className="gm-input"
-                                    max=""
-                                    defaultValue={convertDateFromIsoToHTMLFormat(date_of_birth)}
-                                    onChange={e => setDateOfBirth(e.target.value)}
-                                /> : <input
-                                    type="date"
-                                    className="gm-input" onChange={e => setDateOfBirth(e.target.value)}
-                                />
-                            }
+                        <div className="form-group col-12 px-0">
+                            <label htmlFor="street-address">Street address</label>
+                            <textarea
+                                className="gm-input"
+                                id="street-address"
+                                defaultValue={street}
+                                onInput={e => setStreet(e.target.value)}
+                            >
+                            </textarea>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="form-row">
                 <div className="col-md-8"></div>
-                <div className="col-md-4 pr-md-0 px-sm-0">
+                <div className="col-md-4 px-0">
                     {loading ?
                         <div className="gm-btn gm-btn-blue"> Saving <span className="gm-btn-spinner"><Spinner /></span> </div> :
                         <div className="gm-btn gm-btn-blue" onClick={e => submitForm()}> Save </div>

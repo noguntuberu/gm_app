@@ -1,0 +1,12 @@
+
+@media screen and (min-width: 481px) {
+    .updation-form #street-address {
+        min-height: 230px;
+    }   
+}
+
+@media screen and (min-width: 1024px) {
+    .updation-form #street-address {
+        min-height: 244px;
+    }   
+}

@@ -33,8 +33,6 @@ export const processDataByWeek = (data) => {
         days_config[day_string][config_key] += 1;
     });
     
-    console.log(data)
-    console.log(days_config);
     return Object.values(days_config);
 }
 
