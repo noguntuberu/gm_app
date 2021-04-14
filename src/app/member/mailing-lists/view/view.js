@@ -28,7 +28,6 @@ const ViewMailingList = () => {
 
     let [show_updation_modal, setShowUpdationModal] = useState(false);
     let [show_upload_modal, setShowUploadModal] = useState(false);
-    let [show_floating_nav, setShowFloatingNav] = useState(true);
 
     useEffect(() => {
         AudienceService.readById(id, { token }).then(async response => {
@@ -76,29 +75,21 @@ const ViewMailingList = () => {
     }, [id]);
 
     return <div>
-        <FloatingNav is_open={show_floating_nav}>
-            <div className="icon-tray text-blue-4">
-                {
-                    is_dashboard_view ?
-                        <div className="floating-action-btn" onClick={() => setIsDashboardView(false)}>
-                            <span className="material-icons"> table_view</span>
-                        </div> :
-                        <div className="floating-action-btn" onClick={() => setIsDashboardView(true)}>
-                            <span className="material-icons"> dashboard </span>
-                        </div>
-                }
-                <div className="floating-action-btn" onClick={() => setShowUpdationModal(true)}>
-                    <span className="material-icons"> edit</span>
-                </div>
-                <div className="floating-action-btn" onClick={() => setShowUploadModal(true)}>
-                    <span className="material-icons"> drive_folder_upload </span>
-                </div>
-                <div
-                    className="floating-action-btn mobile"
-                    onClick={() => setShowFloatingNav(false)}
-                >
-                    <span className="material-icons">visibility_off</span>
-                </div>
+        <FloatingNav>
+            {
+                is_dashboard_view ?
+                    <div className="floating-action-btn" onClick={() => setIsDashboardView(false)}>
+                        <span className="material-icons"> table_view</span>
+                    </div> :
+                    <div className="floating-action-btn" onClick={() => setIsDashboardView(true)}>
+                        <span className="material-icons"> dashboard </span>
+                    </div>
+            }
+            <div className="floating-action-btn" onClick={() => setShowUpdationModal(true)}>
+                <span className="material-icons"> edit</span>
+            </div>
+            <div className="floating-action-btn" onClick={() => setShowUploadModal(true)}>
+                <span className="material-icons"> drive_folder_upload </span>
             </div>
         </FloatingNav>
 

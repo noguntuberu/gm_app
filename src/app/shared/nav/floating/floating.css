@@ -1,0 +1,67 @@
+.floating-btn-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+
+    width: auto;
+    height: auto;
+
+    border-radius: 50px;
+    
+    z-index: 5;
+    padding: 15px 10px 7px 10px;
+    background-color: hsla(342, 58%, 47%, 0.85);
+
+    z-index: 9;
+}
+
+.tray-opener {
+    display: none;
+
+    position: absolute;
+    top: 0;
+    left: -17px;
+
+    width: 15px;
+    height: 100%;
+
+    background-color: hsla(342, 58%, 47%, 0.85);
+}
+
+.icon-tray {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.floating-action-btn {
+    /* margin-right: 15px; */
+    /* border-radius: 50%; */
+    width: 20px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    .floating-btn-wrapper {
+        bottom: 45%;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .floating-btn-wrapper {
+        position: absolute;
+        bottom: unset;
+        right: unset;
+        top: 80px;
+        right: 100px;
+
+        border-radius: 5px;
+        background-color: hsla(342, 58%, 47%, 1);
+    }
+
+    .floating-action-btn.visibility {
+        display: none;
+    }
+}
