@@ -14,6 +14,7 @@ import * as DraftService from '../../../../services/draft';
 import * as MailboxService from '../../../../services/mailbox';
 import * as AudienceService from '../../../../services/audience';
 import * as CampaignService from '../../../../services/campaign';
+import { set_process } from '../../../../store/actions/process';
 
 import EmailVerificationForm from '../verify-email/verify-email';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
@@ -25,6 +26,7 @@ const CampaignCreationForm = props => {
     let { id } = useParams()
     let dispatch = useDispatch();
     let user_data = useSelector(state => state.user_data);
+    let { email_verification } = useSelector(state => state.processes);
     let { token } = user_data;
     let tenant_id = user_data.id;
 
@@ -49,6 +51,13 @@ const CampaignCreationForm = props => {
     let [show_draft_status, setShowDraftStatus] = useState(false);
     let [show_wildcard_modal, setShowWildcardModal] = useState(false);
     let [word_count, setWordCount] = useState(0);
+
+    useEffect(() => {
+        if (email_verification) {
+            setSenderEmailVerificationStatus(true);
+            dispatch(set_process('email_verification', false));
+        }
+    }, [email_verification, dispatch]);
 
     useEffect(() => {
         dispatch(setPageTitle(id ? 'Edit Campaign' : 'New Campaign'));
@@ -163,7 +172,7 @@ const CampaignCreationForm = props => {
                 return;
             }
 
-            setMailbox(payload[0]);
+            setMailbox(payload);
             setShowVerificationModal(true);
         } catch (e) {
 
@@ -229,15 +238,16 @@ const CampaignCreationForm = props => {
                             type="text"
                             defaultValue={campaign.sender_email}
                             onInput={e => setSenderEmail(e.target.value)}
+                            onBlur={processSenderEmail}
                         />
                     </div>
                 </div>
-                <div className="form-row">
-                    <div className="form-group col-sm-12 col-md-6 col-xl-12"></div>
-                    <div className="form-group col-sm-12 col-md-6 col-xl-12">
+                <div className="form-row p-0">
+                    <div className="form-group col-sm-12 col-md-6 col-xl-12 py-0 my-0"></div>
+                    <div className="form-group col-sm-12 col-md-6 col-xl-12 py-0 my-0">
                         {sender_eamil_is_verified ?
                             <></> :
-                            <div className="text-wine-6">
+                            <div className="text-wine-6 text-right">
                                 {is_verifying ?
                                     <div> <i>Verifying...</i></div> :
                                     <p>
@@ -258,7 +268,6 @@ const CampaignCreationForm = props => {
                             name="campaign-schedule"
                             defaultValue={schedule}
                             onChange={e => setCampaignSchedule(e.target.value)}
-                            onFocus={processSenderEmail}
                         />
                     </div>
                     <div className="form-group col-sm-12  col-md-6">

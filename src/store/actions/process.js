@@ -4,7 +4,7 @@ export const SET_PROCESS = 'SET PROCESS VALUE IN STORE';
 export const set_process = (name, payload) => ({
     type: SET_PROCESS,
     payload: {
-        [name]: { ...payload },
+        [name]: payload,
     },
 });
 
