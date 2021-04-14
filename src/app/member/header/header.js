@@ -73,7 +73,7 @@ const MemberAreaHeader = ({ onHamburgerClick }) => {
                         actions={icon_new_actions}
                         callback={handleUserAction}
                         text={<div className="icon-create">
-                            <span className=""><FontAwesomeIcon icon={faPlus} /> </span>
+                            <span className="mr-md-1"><FontAwesomeIcon icon={faPlus} /> </span>
                             <span className="text">Create</span>
                         </div>}
                     />
