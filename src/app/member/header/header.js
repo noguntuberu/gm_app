@@ -82,8 +82,7 @@ const MemberAreaHeader = ({ onHamburgerClick }) => {
                     <ContextMenu
                         actions={icon_user_actions}
                         callback={handleUserAction}
-                        // text={<span className="icon-user">{firstname[0]}</span>} />
-                        text={<span className="icon-user">N</span>} />
+                        text={<span className="icon-user">{firstname[0]}</span>} />
                 </div>
             </div>
         </div>
