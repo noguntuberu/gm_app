@@ -24,7 +24,7 @@ const MemberAreaHeader = ({ onHamburgerClick }) => {
     const [show_create_modal, setShowCreateModal] = useState(false);
 
     let icon_user_actions = [
-        <span className="text-blue-5">{`${firstname} ${lastname}`} </span>,
+        <span className="text-blue-4">{`${firstname} ${lastname}`} </span>,
         'Log Out',
     ];
 
@@ -68,17 +68,17 @@ const MemberAreaHeader = ({ onHamburgerClick }) => {
             </div>
 
             <div className="header-actions">
-                <div className="shadow-sm icon create gm-bg-green-5 text-blue-11 mr-2 mr-md-3">
+                <div className="shadow-sm icon create gm-bg-orange text-blue-11 mr-2 mr-md-3">
                     <ContextMenu
                         actions={icon_new_actions}
                         callback={handleUserAction}
                         text={<div className="icon-create">
                             <span className=""><FontAwesomeIcon icon={faPlus} /> </span>
-                            <span className="text">create</span>
+                            <span className="text">Create</span>
                         </div>}
                     />
                 </div>
-                <div className=" shadow-sm icon user gm-bg-blue-5 text-blue-11">
+                <div className=" shadow-sm icon user gm-bg-blue-4 text-blue-11">
                     <ContextMenu
                         actions={icon_user_actions}
                         callback={handleUserAction}

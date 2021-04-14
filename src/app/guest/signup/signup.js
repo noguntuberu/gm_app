@@ -48,7 +48,7 @@ const SignupForm = () => {
  
     return (
         <div>
-            <InfoCard bg_class="gm-bg-wine-5" />
+            <InfoCard bg_class="gm-bg-orange" />
             <div className="form-wrapper flex-col-center">
                 <div className="w-100 mt-1">
                     {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>

@@ -1,0 +1,16 @@
+/** BACKGROUND  **/
+.gm-bg-orange{
+    background-color: #FF7F08;
+}
+
+/** TEXT **/
+.text-orange{
+    /* color: #FF7F08;FF8F26 */
+    color: #FF8F26;
+}
+
+/** BORDER **/
+
+.border-orange {
+    border-color: #FF7F08;
+}

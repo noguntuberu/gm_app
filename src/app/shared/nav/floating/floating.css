@@ -10,7 +10,7 @@
     
     z-index: 5;
     padding: 15px 10px 7px 10px;
-    background-color: hsla(342, 58%, 47%, 0.85);
+    background-color: hsla(29, 100%, 52%, 0.9);
 
     z-index: 9;
 }
@@ -25,7 +25,7 @@
     width: 15px;
     height: 100%;
 
-    background-color: hsla(342, 58%, 47%, 0.85);
+    background-color: hsla(29, 100%, 52%, 0.9);
 }
 
 .icon-tray {
@@ -57,8 +57,6 @@
         top: 80px;
         right: 100px;
 
-        border-radius: 5px;
-        background-color: hsla(342, 58%, 47%, 1);
     }
 
     .floating-action-btn.visibility {

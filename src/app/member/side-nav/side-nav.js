@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import SideNavItem from './item/item';
 import './side-nav.css';
 
-import icon_site from '../../../assets/icons/site-icon-color.svg';
+// import icon_site from '../../../assets/icons/site-icon-color.svg';
+import icon_site from '../../../assets/icons/logo.svg';
 
 import GmModal from '../../shared/modal/modal';
 import ImportContact from '../../member/contacts/import/import';
@@ -93,7 +94,7 @@ const SideNav = props => {
                         <img alt="Site Icon" src={icon_site} />
                     </div>
                     <div className="nav-site-name">
-                        Go-Mailer
+                        Go-<span class="text-orange">Mailer</span>
                     </div>
                 </header>
                 <section>

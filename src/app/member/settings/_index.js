@@ -4,7 +4,7 @@ import { setPageTitle } from '../../../store/actions/header';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import APIIntegration from './api/api';
-import SlidingNav from '../../shared/sliding-nav/sliding-nav';
+import SlidingNav from '../../shared/nav/sliding/sliding';
 
 const SettingsModule = () => {
     let dispatch = useDispatch();

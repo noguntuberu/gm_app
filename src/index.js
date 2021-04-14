@@ -10,6 +10,7 @@ import './index.css';
 import './assets/css/colors/black.css';
 import './assets/css/colors/blue.css';
 import './assets/css/colors/green.css';
+import './assets/css/colors/orange.css';
 import './assets/css/colors/purple.css';
 import './assets/css/colors/wine.css';
 
