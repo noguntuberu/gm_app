@@ -43,10 +43,10 @@ const AudienceDashboard = props => {
     return <div className="audience-dashboard row m-0">
         <div className="col-12 col-xl-4 px-0 pr-md-2">
             <div className="stat-card-pair-wrapper row mx-0 pr-md-0 pr-xl-2">
-                <div className="col-12 col-md-4 col-xl-12 px-0">
+                <div className="col-6 col-md-4 col-xl-12 px-0">
                     <StatCard title='Campaigns' count={stats.campaigns} base_color={205} />
                 </div>
-                <div className="col-12 col-md-4 col-xl-12  px-0 pl-md-2 pl-xl-0">
+                <div className="col-6 col-md-4 col-xl-12 pl-2 px-0 pl-md-2 pl-xl-0">
                     <StatCard title='Contacts' count={stats.total} base_color={130} />
                 </div>
                 <div className="col-12 col-md-4 col-xl-12 px-0 pl-md-2 pl-xl-0">

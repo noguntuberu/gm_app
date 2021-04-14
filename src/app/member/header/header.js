@@ -73,7 +73,7 @@ const MemberAreaHeader = ({ onHamburgerClick }) => {
                         actions={icon_new_actions}
                         callback={handleUserAction}
                         text={<div className="icon-create">
-                            <span className="mr-2"><FontAwesomeIcon icon={faPlus} /> </span>
+                            <span className=""><FontAwesomeIcon icon={faPlus} /> </span>
                             <span className="text">create</span>
                         </div>}
                     />
@@ -82,7 +82,8 @@ const MemberAreaHeader = ({ onHamburgerClick }) => {
                     <ContextMenu
                         actions={icon_user_actions}
                         callback={handleUserAction}
-                        text={<span className="icon-user">{firstname[0]}</span>} />
+                        // text={<span className="icon-user">{firstname[0]}</span>} />
+                        text={<span className="icon-user">N</span>} />
                 </div>
             </div>
         </div>
