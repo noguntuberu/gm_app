@@ -52,7 +52,7 @@ const DataTableItem = props => {
     }
 
     return (
-        <tr className="text-blue-2">
+        <tr className="text-blue-2 is-clickable">
             {checkbox ?
                 <td key={`checkbox-${index}`}>
                     <input ref={checkbox_ref} type='checkbox' value={is_selected} onChange={handleItemSelection} />

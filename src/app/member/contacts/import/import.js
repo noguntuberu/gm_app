@@ -82,7 +82,7 @@ const ImportContact = props => {
             </div>
             <div className="mt-3 mb-3 form-row">
                 <div className="col-md-8">
-                    <span className="float-right mr-lg-3 text-center text-blue-4 py-2 pr-4" onClick={() => downloadTemplate()}>Download Template</span>
+                    <span className="float-right mr-lg-3 text-center text-blue-4 py-2 pr-4 is-clickable" onClick={() => downloadTemplate()}>Download Template</span>
                 </div>
                 <div className="col-md-4 pr-md-0 px-sm-0">
 

@@ -62,7 +62,7 @@ const GmModal = ({ children, title, show_title, show_modal, onClose }) => {
                 <div className="gm-modal-body" ref={modal_body} onClick={e => e.stopPropagation()}>
                     <div className="gm-modal-header">
                         {show_title ? <div className="gm-modal-title"> <h5>{title}</h5></div> : <div></div>}
-                        <div className="gm-modal-close-icon" onClick={() => fadeOut()}>&times;</div>
+                        <div className="gm-modal-close-icon is-clickable" onClick={() => fadeOut()}>&times;</div>
                     </div>
                     <div className="gm-modal-content">
                         {children}
