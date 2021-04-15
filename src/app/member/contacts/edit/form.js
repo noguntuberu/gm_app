@@ -89,7 +89,7 @@ const ContactUpdationForm = props => {
         <div className="updation-form">
             <div className="form-row">
                 <div className="form-group col-12 col-md-4">
-                    <label htmlFor="firstname">First name</label>
+                    <label htmlFor="firstname">First name *</label>
                     <input
                         type="text"
                         className="gm-input"
@@ -109,7 +109,7 @@ const ContactUpdationForm = props => {
                     />
                 </div>
                 <div className="form-group col-12 col-md-4">
-                    <label htmlFor="email">Email address</label>
+                    <label htmlFor="email">Email address *</label>
                     <input
                         type="email"
                         className="gm-input"

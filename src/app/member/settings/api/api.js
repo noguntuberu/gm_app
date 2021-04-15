@@ -55,10 +55,10 @@ const APISetting = () => {
     return <div className="pt-md-3">
         <div className="api-key-wrapper">
             <div>api key</div>
-            <div onClick={copyAPIKey}>{api_key.substr(0, 25)}...</div>
+            <div className="is-clickable" onClick={copyAPIKey}>{api_key.substr(0, 25)}...</div>
         </div>
         <div>
-            <small className="pt-2 text-secondary">**click on key to copy.</small>
+            <small className="pt-2 text-blue-5">**click on key to copy.</small>
         </div>
         <div className="mt-3 mb-3 form-row">
             <div className="col-md-8"></div>

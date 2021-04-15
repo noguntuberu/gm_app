@@ -217,21 +217,21 @@ const CampaignCreationForm = props => {
             <div className="col-12 col-xl-4 p-0  pr-xl-2">
                 <div className="form-row">
                     <div className="form-group col-sm-12 col-md-6 col-xl-12">
-                        <label htmlFor="campaign_title">Name</label>
+                        <label htmlFor="campaign_title">Name *</label>
                         <input className="gm-input" id="campaign_title" type="text" defaultValue={campaign.name} onInput={e => setCampaignName(e.target.value)} />
                     </div>
                     <div className="form-group col-sm-12 col-md-6 col-xl-12">
-                        <label htmlFor="campaign_subject">Subject</label>
+                        <label htmlFor="campaign_subject">Subject *</label>
                         <input className="gm-input" id="campaign_subject" type="text" defaultValue={campaign.subject} onInput={e => setCampaignSubject(e.target.value)} />
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-sm-12 col-md-6 col-xl-12">
-                        <label htmlFor="sender_name">Sender's name</label>
+                        <label htmlFor="sender_name">Sender's name *</label>
                         <input className="gm-input" id="sender_name" type="text" defaultValue={campaign.sender_name} onInput={e => setSenderName(e.target.value)} />
                     </div>
                     <div className="form-group col-sm-12 col-md-6 col-xl-12">
-                        <label htmlFor="sender_email">Sender's email</label>
+                        <label htmlFor="sender_email">Sender's email *</label>
                         <input
                             className="gm-input"
                             id="sender_email"

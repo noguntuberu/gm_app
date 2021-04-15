@@ -68,7 +68,7 @@ const WebsiteIntegration = () => {
             </div>
         </div>
         {snippet ?
-            <div className="code-wrapper">
+            <div className="code-wrapper is-clickable">
                 <code onClick={e => copySnippet(e.target.innerHTML)}>
                     {`
                         <script type="text/javascript">
