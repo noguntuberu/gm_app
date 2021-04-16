@@ -206,6 +206,11 @@ const CampaignCreationForm = props => {
             return;
         }
 
+        if (!mailbox.emails || !mailbox.emails.includes(sender_email)) {
+            toast.error('Sender Email not verified.');
+            return;
+        }
+
         setLoading(true);
         await handleCampaignCreation(data);
         setCampaign({});

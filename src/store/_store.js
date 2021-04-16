@@ -8,8 +8,8 @@ const store = createStore( reducer, initial_store_state);
 
 store.subscribe(() => {
     const state = store.getState();
-    persister.saveStoreState(state);
-    console.log(state);
+    const keys = ['metadata', 'user_data', 'header'];
+    persister.saveStoreState(state, keys);
 });
 
 export default store;

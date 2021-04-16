@@ -17,8 +17,13 @@ const store_persister = {
         return {};
     },
 
-    saveStoreState: (store) => {
-        localStorage.setItem(store_name, JSON.stringify(store));
+    saveStoreState: (store, keys = []) => {
+        let portion_of_state_to_store = keys.reduce((sac, key) => ({
+            ...sac,
+            [key] : store[key],
+        }), {});
+
+        localStorage.setItem(store_name, JSON.stringify(portion_of_state_to_store));
     }
 };
 
