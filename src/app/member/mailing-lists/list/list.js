@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** */
-import * as AudienceService from '../../../../services/audience';
 import { setPageTitle } from '../../../../store/actions/header';
+import * as AudienceService from '../../../../services/audience';
+import { addManyAudiencesToStore } from '../../../../store/actions/audience';
 
 /** */
 import MobileDatatable from "../../../shared/datatable/mobile/datatable";
@@ -16,10 +17,15 @@ const ListMailingLists = () => {
     const history = useHistory()
     const { token } = useSelector(state => state.user_data);
     let { is_mobile_view } = useSelector(state => state.metadata);
+    let audiences_in_store = useSelector(state => state.audiences);
 
     const [loading, setLoading] = useState(true);
     const [mailing_lists, setMailingLists] = useState([]);
     let [is_search_mode, setSearchMode] = useState(false);
+
+    useEffect(() => {
+        setMailingLists(Object.values(audiences_in_store));
+    }, [audiences_in_store]);
 
     useEffect(() => {
         dispatch(setPageTitle('My Audiences'));
@@ -28,7 +34,7 @@ const ListMailingLists = () => {
             const { error, payload } = response;
             if (error) return;
 
-            setMailingLists(payload);
+            dispatch(addManyAudiencesToStore(payload));
         }).finally(() => setLoading(false));
     }, [dispatch, token]);
 
@@ -93,7 +99,7 @@ const ListMailingLists = () => {
         const { error, payload } = response;
         if (error) return;
 
-        setMailingLists(payload);
+        dispatch(addManyAudiencesToStore(payload));
     }
 
     const handleSearchRequest = async (keys, keyword, page) => {
@@ -106,7 +112,7 @@ const ListMailingLists = () => {
         const { error, payload } = response;
         if (error) return;
 
-        setMailingLists(payload);
+        dispatch(addManyAudiencesToStore(payload));
     }
 
     return (

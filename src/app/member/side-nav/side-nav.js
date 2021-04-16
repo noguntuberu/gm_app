@@ -94,7 +94,7 @@ const SideNav = props => {
                         <img alt="Site Icon" src={icon_site} />
                     </div>
                     <div className="nav-site-name">
-                        Go-<span class="text-orange">Mailer</span>
+                        Go-<span className="text-orange">Mailer</span>
                     </div>
                 </header>
                 <section>

@@ -4,7 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import WebDatatable from "../../../shared/datatable/web/datatable";
 import MobileDatatable from "../../../shared/datatable/mobile/datatable";
+
 import { setPageTitle } from '../../../../store/actions/header';
+import { addManyCampaignsToStore, removeOneCampaignFromStore } from '../../../../store/actions/campaign';
 import * as DraftService from '../../../../services/draft';
 import * as CampaignService from '../../../../services/campaign';
 
@@ -14,10 +16,15 @@ const ListCampaigns = () => {
     let dispatch = useDispatch();
     let { token } = useSelector(state => state.user_data);
     let { is_mobile_view } = useSelector(state => state.metadata);
+    let campaigns_in_store = useSelector(state => state.campaigns);
 
     let [campaigns, setCampaigns] = useState([]);
     let [is_search_mode, setSearchMode] = useState(false);
     let [loading_data, setLoadingData] = useState(true);
+
+    useEffect(() => {
+        setCampaigns(Object.values(campaigns_in_store));
+    }, [campaigns_in_store]);
 
     useEffect(() => {
         dispatch(setPageTitle('My Campaigns'));
@@ -28,7 +35,7 @@ const ListCampaigns = () => {
             const { error, payload } = response;
             if (error) return;
 
-            setCampaigns(payload);
+            dispatch(addManyCampaignsToStore(payload));
         }).finally(() => setLoadingData(false));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -84,6 +91,7 @@ const ListCampaigns = () => {
     }
 
     const deleteDraft = async (id) => {
+        console.log('deleting');
         const { error } = await DraftService.deleteById(id, { token });
         if (error) {
             toast.error(`Could not delete draft.`);
@@ -91,6 +99,7 @@ const ListCampaigns = () => {
         }
 
         toast.success(`Draft deleted successfully.`);
+        dispatch(removeOneCampaignFromStore(id));
     }
 
     const handleDatatableAction = payload => {
@@ -135,9 +144,9 @@ const ListCampaigns = () => {
             const { error, payload } = response;
             if (error) return;
 
-            setCampaigns(payload);
+            dispatch(addManyCampaignsToStore(payload));
         } catch (e) {
-            setCampaigns([]);
+            dispatch(addManyCampaignsToStore([]));
         } finally {
             setLoadingData(false);
         }
@@ -153,9 +162,9 @@ const ListCampaigns = () => {
             const { error, payload } = response;
             if (error) return;
 
-            setCampaigns(payload);
+            dispatch(addManyCampaignsToStore(payload));
         } catch (e) {
-            setCampaigns([]);
+            dispatch(addManyCampaignsToStore([]));
         } finally {
             setLoadingData(false);
         }

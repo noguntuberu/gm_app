@@ -1,16 +1,26 @@
 import { toast } from 'react-toastify';
-import React, { useState, } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setPageTitle } from '../../../../store/actions/header';
 import * as AudienceService from '../../../../services/audience';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 const AudienceUpdationForm = ({ mailing_list }) => {
+    let dispatch = useDispatch();
     const { token, id } = useSelector(state => state.user_data);
 
     const [loading, setLoading] = useState(false);
-    const [name, setName] = useState(mailing_list.name || '');
-    const [description, setDescription] = useState(mailing_list.description || '');
+    const [audience_id, setAudienceId] = useState(0);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
 
+    useEffect(() => {
+        setAudienceId(mailing_list.id);
+        setName(mailing_list.name);
+        setDescription(mailing_list.description);
+    }, [mailing_list]);
+    
     const clearForm = () => {
         setDescription('');
         setName('');
@@ -29,7 +39,7 @@ const AudienceUpdationForm = ({ mailing_list }) => {
         }
 
         setLoading(true);
-        const { error } = await AudienceService.updateById(mailing_list.id, { data, token, })
+        const { error } = await AudienceService.updateById(audience_id, { data, token, })
         if (error) {
             toast.error(error);
             return;
@@ -37,15 +47,16 @@ const AudienceUpdationForm = ({ mailing_list }) => {
 
         setLoading(false);
         toast.success(`Audience updated.`);
+        dispatch(setPageTitle(name));
         clearForm();
     }
 
     return <div>
         <div className="form-group">
-            <input className="gm-input" type="text" placeholder="Name" value={name} onInput={e => setName(e.target.value)} />
+            <input className="gm-input" type="text" placeholder="Name" defaultValue={name} onInput={e => setName(e.target.value)} />
         </div>
         <div className="form-group">
-            <textarea className="gm-input" placeholder="Description" value={description} onInput={e => setDescription(e.target.value)}>
+            <textarea className="gm-input" placeholder="Description" defaultValue={description} onInput={e => setDescription(e.target.value)}>
 
             </textarea>
         </div>

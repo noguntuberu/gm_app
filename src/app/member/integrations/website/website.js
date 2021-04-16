@@ -5,6 +5,7 @@ import MultiSelect from 'react-multi-select-component';
 import * as AudienceService from '../../../../services/audience';
 
 import './website.css';
+import { NavLink } from 'react-router-dom';
 
 const WebsiteIntegration = () => {
     let { metadata, user_data } = useSelector(state => state);
@@ -38,6 +39,12 @@ const WebsiteIntegration = () => {
     }
 
     return <div className="website-integration">
+        <div>
+            <p>
+                The website integration allows you to create contacts, and,
+                optionally, add them to one or more audiences directly from your webforms.
+            </p>
+        </div>
         <div className="form-group mobile">
             <label >Select audience(s):</label>
             <MultiSelect
@@ -90,6 +97,17 @@ const WebsiteIntegration = () => {
         }
         <div>
             <small className="pt-2 text-info">**click on snippet to copy.</small>
+        </div>
+        <div className="mt-4">
+            <h6><b>Guide:</b></h6>
+            <ol className="m-0 pl-3">
+                <li>To get started, <NavLink to="/settings/api" >generate</NavLink> your API key.</li>
+                <li>[optional]</li> Select one or more audiences that you want to add contacts to.
+                <li>Click "Generate Snippet" button above.</li>
+                <li>Copy the generated snippet. You can click on the snippet to copy.</li>
+                <li>Paste the snippet in your existing HTML document (on the same page as the target form).</li>
+                <li>That's it. Congratulations!</li>
+            </ol>
         </div>
     </div>
 }

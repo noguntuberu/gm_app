@@ -5,14 +5,17 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as ContactService from '../../../../services/contact';
 import GmModal from '../../../shared/modal/modal';
-import AddContactToAudience from '../add-to-audience/add-to-audience';
-import { setPageTitle } from '../../../../store/actions/header';
 import MobileDatatable from "../../../shared/datatable/mobile/datatable";
 import WebDataTable from '../../../shared/datatable/web/datatable';
+
+import { addManyContactsToStore, removeOneContactFromStore } from '../../../../store/actions/contact';
+import { setPageTitle } from '../../../../store/actions/header';
+import AddContactToAudience from '../add-to-audience/add-to-audience';
 
 const ListContacts = () => {
     let { token } = useSelector(state => state.user_data);
     let { is_mobile_view } = useSelector(state => state.metadata);
+    let contacts_in_store = useSelector(state => state.contacts);
 
     let dispatch = useDispatch();
     let history = useHistory();
@@ -24,6 +27,10 @@ const ListContacts = () => {
     let [loading_data, setLoadingData] = useState(true);
 
     useEffect(() => {
+        setItems(Object.values(contacts_in_store));
+    }, [contacts_in_store]);
+
+    useEffect(() => {
         dispatch(setPageTitle('My Contacts'));
         ContactService.read({
             token,
@@ -31,11 +38,11 @@ const ListContacts = () => {
         }).then(data => {
             let { payload, error } = data;
 
-            if (!error) {
-                setItems(payload);
-            }
+            if (error) return;
+
+            dispatch(addManyContactsToStore(payload));
         }).catch(() => {
-            setItems([])
+            dispatch(addManyContactsToStore([]));
         }).finally(() => setLoadingData(false));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -47,6 +54,7 @@ const ListContacts = () => {
             return;
         }
 
+        dispatch(removeOneContactFromStore(id));
         toast.success(`contact deleted successfully.`);
     }
 
@@ -93,9 +101,9 @@ const ListContacts = () => {
             let { error, payload } = response;
             if (error) return;
 
-            setItems(payload);
+            dispatch(addManyContactsToStore(payload));
         } catch (e) {
-            setItems([]);
+            dispatch(addManyContactsToStore([]));
         } finally {
             setLoadingData(false);
         }
@@ -111,12 +119,12 @@ const ListContacts = () => {
             let { error, payload } = response;
             if (error) return;
 
-            setItems(payload)
+            dispatch(addManyContactsToStore(payload));
         } catch (e) {
-            setItems([]);
+            dispatch(addManyContactsToStore([]));
         } finally {
             setLoadingData(false);
-        };
+        }
     }
 
     return <div>

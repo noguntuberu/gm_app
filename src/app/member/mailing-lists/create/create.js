@@ -1,10 +1,14 @@
 import { toast } from 'react-toastify';
 import React, { useState, } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import * as AudienceService from '../../../../services/audience';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
+import { addOneAudienceToStore } from '../../../../store/actions/audience';
+
 const CreateMailingList = ({ closeModal }) => {
+    let dispatch = useDispatch();
     const { token, id } = useSelector(state => state.user_data);
 
     const [description, setDescription] = useState('');
@@ -29,7 +33,7 @@ const CreateMailingList = ({ closeModal }) => {
         }
 
         setLoading(true);
-        const { error } = await AudienceService.create({ data, token, });
+        const { error, payload } = await AudienceService.create({ data, token, });
         if (error) {
             toast.error(error);
             return;
@@ -37,6 +41,7 @@ const CreateMailingList = ({ closeModal }) => {
 
         setLoading(false);
         toast.success(`Audience created.`);
+        dispatch(addOneAudienceToStore(payload));
         clearForm();
     }
 

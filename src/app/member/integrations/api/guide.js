@@ -3,6 +3,9 @@ import React from 'react';
 const APIGuide = props => {
     return <div>
         <header>Create a contact</header>
+        <p>
+            Create contacts and, optionally, add them to audiences from your own application or custom sources.
+        </p>
         <div className="mt-2 api-route">
             <code>
                 POST https://users.go-mailer.com/api/contacts

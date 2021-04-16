@@ -53,6 +53,10 @@ const APISetting = () => {
     }
 
     return <div className="pt-md-3">
+        <div className="mb-4">
+            Your API key allows you to programmatically integrate with and perform actions
+            from your own applications. Your key should be kept privately and securely.
+        </div>
         <div className="api-key-wrapper">
             <div>api key</div>
             <div className="is-clickable" onClick={copyAPIKey}>{api_key.substr(0, 25)}...</div>
