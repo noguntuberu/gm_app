@@ -55,8 +55,10 @@ const CampaignCreationForm = props => {
     useEffect(() => {
         if (email_verification) {
             setSenderEmailVerificationStatus(true);
+            mailbox.emails.push(sender_email);
             dispatch(set_process('email_verification', false));
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [email_verification, dispatch]);
 
     useEffect(() => {
