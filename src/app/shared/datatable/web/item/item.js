@@ -42,7 +42,6 @@ const DataTableItem = props => {
 
     const processAction = action => {
         action_callback(action, data);
-        setIsSelected(true);
     }
 
     const handleItemSelection = () => {
