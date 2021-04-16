@@ -18,7 +18,7 @@ const ContextMenu = ({ actions, callback, text }) => {
 
         if (context_menu.current) {
             let menu = context_menu.current;
-            let menu_tray = menu_wrapper.current; 
+            let menu_tray = menu_wrapper.current;
             menu.addEventListener('click', () => {
                 setMenuClicked(true);
             }, { once: true });
@@ -44,21 +44,21 @@ const ContextMenu = ({ actions, callback, text }) => {
         toggleShowMenu(e);
     }
     return <>
-            <div className="context-menu-label" onClick={e => toggleShowMenu(e)}> {text || '...'}</div>
-            { actions ? <div>
-                {show_menu ?
-                    <div ref={context_menu} className="gm-action-wrap">
-                        <div ref={menu_wrapper} className="gm-action-context-menu">
-                            <ul>
-                                {(actions || []).map((action, index) => <li key={index} onClick={e => selectAction(action, e)}>{action}</li>)}
-                            </ul>
-                        </div>
+        <div className="context-menu-label" onClick={e => toggleShowMenu(e)}> {text || '...'}</div>
+        {actions ? <div>
+            {show_menu ?
+                <div ref={context_menu} className="gm-action-wrap">
+                    <div ref={menu_wrapper} className="gm-action-context-menu">
+                        <ul>
+                            {(actions || []).map((action, index) => <li key={index} onClick={e => selectAction(action, e)}>{action}</li>)}
+                        </ul>
                     </div>
-                    :
-                    <div></div>
-                }
-            </div> : <></>}
-        </>
+                </div>
+                :
+                <div></div>
+            }
+        </div> : <></>}
+    </>
 }
 
 export default ContextMenu;

@@ -7,19 +7,23 @@ import Spinner from '../../spinners/spinner-50/spinner-50';
 import '../datatable.css';
 
 const DataTable = props => {
-    const { action, checkbox, config, onClick, request_complete } = props;
-    const { fields, items, search_text, } = config;
+    let { action, checkbox, config, onClick, request_complete } = props;
+    let { fields, items, search_text, } = config;
 
-    const [number_of_rows_to_display, setNumberOfRowsToDisplay] = useState(10);
-    const [page_number, setPageNumber] = useState(0);
+    let [number_of_rows_to_display, setNumberOfRowsToDisplay] = useState(10);
+    let [page_number, setPageNumber] = useState(0);
 
     let [is_bulk_selection, setIsBulkSelection] = useState(false);
-    const [selected_items, setSelectedItems] = useState({});
+    let [selected_items, setSelectedItems] = useState({});
 
-    const [all_items, setAllItems] = useState(items);
-    const [table_items, setTableItems] = useState(items);
-    const [items_to_display, setItemsToDisplay] = useState([]);
+    let [all_items, setAllItems] = useState(items);
+    let [table_items, setTableItems] = useState(items);
+    let [items_to_display, setItemsToDisplay] = useState([]);
 
+    useEffect(() => {
+        console.log(selected_items);
+    }, [selected_items]);
+    
     useEffect(() => {
         handleNumberOfItemsToDisplay();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -112,14 +116,22 @@ const DataTable = props => {
         setTableItems([...sorted_items]);
     }
 
-    const processAction = (name) => {
+    let processAction = async (name, data) => {
+        if (data.id) { // it is a single action
+            action({
+                name,
+                type: 'single',
+                data,
+            });
+            return;
+        }
+
         if (!Object.keys(selected_items).length) return;
 
-        const is_single = Object.keys(selected_items).length === 1;
         action({
             name,
-            type: is_single ? 'single' : 'bulk',
-            data: is_single ? Object.values(selected_items)[0] : Object.values(selected_items),
+            type: 'bulk',
+            data: Object.values(selected_items),
         });
     }
 
