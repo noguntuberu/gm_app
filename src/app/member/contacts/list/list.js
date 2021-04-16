@@ -7,6 +7,7 @@ import * as ContactService from '../../../../services/contact';
 import GmModal from '../../../shared/modal/modal';
 import MobileDatatable from "../../../shared/datatable/mobile/datatable";
 import WebDataTable from '../../../shared/datatable/web/datatable';
+import ConfirmationDialog from '../../../shared/dialogs/confirmation';
 
 import { addManyContactsToStore, removeOneContactFromStore } from '../../../../store/actions/contact';
 import { setPageTitle } from '../../../../store/actions/header';
@@ -16,7 +17,7 @@ const ListContacts = () => {
     let { token } = useSelector(state => state.user_data);
     let { is_mobile_view } = useSelector(state => state.metadata);
     let contacts_in_store = useSelector(state => state.contacts);
-
+ 
     let dispatch = useDispatch();
     let history = useHistory();
 
@@ -25,6 +26,9 @@ const ListContacts = () => {
     let [show_contact_link_modal, setShowContactLinkModal] = useState(false);
     let [is_search_mode, setSearchMode] = useState(false);
     let [loading_data, setLoadingData] = useState(true);
+
+    let [show_confirmation, setShowConfirmation] = useState(false);
+    let [contact_to_delete, setContactToDelete] = useState(0);
 
     useEffect(() => {
         setItems(Object.values(contacts_in_store));
@@ -56,6 +60,16 @@ const ListContacts = () => {
 
         dispatch(removeOneContactFromStore(id));
         toast.success(`contact deleted successfully.`);
+        if (is_mobile_view) setTimeout(() => window.location.reload(), 500);
+    }
+    
+    let handleConfirmation = (permitted) => {
+        if (permitted) {
+            deleteContact(contact_to_delete);
+        }
+
+        setContactToDelete(0);
+        setShowConfirmation(false);
     }
 
     let handleDatatableAction = action => {
@@ -80,7 +94,8 @@ const ListContacts = () => {
                     history.push(`/contacts/${data.id}`);
                     break;
                 case 'delete':
-                    deleteContact(data.id);
+                    setContactToDelete(data.id);
+                    setShowConfirmation(true);
                     break;
                 default:
             }
@@ -159,6 +174,13 @@ const ListContacts = () => {
         <GmModal show_title={true} title="Add Contacts to Audience" show_modal={show_contact_link_modal} onClose={() => setShowContactLinkModal(false)}>
             <AddContactToAudience selected_contacts={selected_contacts} />
         </GmModal>
+
+        <ConfirmationDialog
+            title="Delete Campaign"
+            message="Are you sure you want to delete this contact?"
+            callback={handleConfirmation}
+            is_open={show_confirmation}
+        />
     </div>
 }
 

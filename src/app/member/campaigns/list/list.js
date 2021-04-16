@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import WebDatatable from "../../../shared/datatable/web/datatable";
 import MobileDatatable from "../../../shared/datatable/mobile/datatable";
+import ConfirmationDialog from '../../../shared/dialogs/confirmation';
 
 import { setPageTitle } from '../../../../store/actions/header';
 import { addManyCampaignsToStore, removeOneCampaignFromStore } from '../../../../store/actions/campaign';
@@ -21,6 +22,9 @@ const ListCampaigns = () => {
     let [campaigns, setCampaigns] = useState([]);
     let [is_search_mode, setSearchMode] = useState(false);
     let [loading_data, setLoadingData] = useState(true);
+
+    let [show_confirmation, setShowConfirmation] = useState(false);
+    let [campaign_to_delete, setCampaignToDelete] = useState(0);
 
     useEffect(() => {
         setCampaigns(Object.values(campaigns_in_store));
@@ -91,15 +95,25 @@ const ListCampaigns = () => {
     }
 
     const deleteDraft = async (id) => {
-        console.log('deleting');
+
         const { error } = await DraftService.deleteById(id, { token });
         if (error) {
             toast.error(`Could not delete draft.`);
             return
         }
 
-        toast.success(`Draft deleted successfully.`);
         dispatch(removeOneCampaignFromStore(id));
+        if (is_mobile_view) setTimeout(() => window.location.reload(), 500);
+        toast.success(`Draft deleted successfully.`);
+    }
+
+    const handleConfirmation = (permitted) => {
+        if (permitted) {
+            deleteDraft(campaign_to_delete);
+        }
+
+        setCampaignToDelete(0);
+        setShowConfirmation(false);
     }
 
     const handleDatatableAction = payload => {
@@ -120,7 +134,8 @@ const ListCampaigns = () => {
                         break;
                     };
 
-                    deleteDraft(data.id);
+                    setCampaignToDelete(data.id);
+                    setShowConfirmation(true);
                     break;
                 default:
                     history.push(`/campaigns/${data.id}/view`);
@@ -170,8 +185,8 @@ const ListCampaigns = () => {
         }
     }
 
-    return <div> {
-        is_mobile_view ?
+    return <div>
+        {is_mobile_view ?
             <MobileDatatable
                 config={config}
                 action={handleDatatableAction}
@@ -189,7 +204,14 @@ const ListCampaigns = () => {
                     request_complete={!loading_data}
                 />
             </div>
-    }</div>
+        }
+        <ConfirmationDialog
+            title="Delete Campaign"
+            message="Are you sure you want to delete this campaign?"
+            callback={handleConfirmation}
+            is_open={show_confirmation}
+        />
+    </div>
 }
 
 export default ListCampaigns;
