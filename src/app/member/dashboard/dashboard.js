@@ -26,7 +26,7 @@ const GMDashboard = () => {
             let { error, payload } = response;
 
             if (error) {
-                alert(error);
+                // alert(error);
                 return;
             }
 
@@ -39,7 +39,7 @@ const GMDashboard = () => {
             let { error, payload } = response;
 
             if (error) {
-                alert(error);
+                // alert(error);
                 return;
             }
 
@@ -50,7 +50,7 @@ const GMDashboard = () => {
             let { error, payload } = response;
 
             if (error) {
-                alert(error);
+                // alert(error);
                 return;
             }
 
