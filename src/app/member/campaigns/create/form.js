@@ -62,6 +62,10 @@ const CampaignCreationForm = props => {
     }, [email_verification, dispatch]);
 
     useEffect(() => {
+        if(!sender_email) setSenderEmailVerificationStatus(true);
+    }, [sender_email]); 
+
+    useEffect(() => {
         dispatch(setPageTitle(id ? 'Edit Campaign' : 'New Campaign'));
         CampaignService.readById(id, { token }).then(response => {
             const { error, payload } = response;
@@ -192,6 +196,7 @@ const CampaignCreationForm = props => {
 
         if (!mailbox.emails.includes(sender_email)) {
             setSenderEmailVerificationStatus(false);
+            return;
         }
     }
 
