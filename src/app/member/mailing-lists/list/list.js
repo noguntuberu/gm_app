@@ -70,7 +70,7 @@ const ListMailingLists = () => {
             },
         ],
         is_search_mode: is_search_mode,
-        items: mailing_lists.sort((a, b) => b.id - a.id),
+        items: mailing_lists,
         search_key: 'name',
         search_text: '',
     }

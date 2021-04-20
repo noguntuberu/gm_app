@@ -61,6 +61,8 @@ const DataTable = props => {
             [item.id]: item,
         }), {});;
 
+        console.log(Object.values(results));
+
         if (is_loading_more) setIsLoadingMore(!is_loading_more);
 
         //
@@ -74,7 +76,7 @@ const DataTable = props => {
             setTableItems(Object.values(results));
         }
 
-        setItemsToDisplay(Object.values(results));
+        setItemsToDisplay(Object.values(results).sort((a, b) => b.id - a.id));
         if (is_loading) setIsLoading(!is_loading);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [items]);

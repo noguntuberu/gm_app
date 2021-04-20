@@ -149,7 +149,7 @@ const ListContacts = () => {
                     config={{
                         ...table_config,
                         is_search_mode: is_search_mode,
-                        items: items.sort((a, b) => b.id - a.id)
+                        items: items,
                     }}
                     action={handleDatatableAction}
                     onClick={handleItemClick}
@@ -162,7 +162,7 @@ const ListContacts = () => {
                         config={{
                             ...table_config,
                             is_search_mode: is_search_mode,
-                            items: items.sort((a, b) => b.id - a.id)
+                            items: items,
                         }}
                         action={handleDatatableAction}
                         onClick={handleItemClick}

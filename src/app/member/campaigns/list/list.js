@@ -89,7 +89,7 @@ const ListCampaigns = () => {
             },
         ],
         is_search_mode: is_search_mode,
-        items: campaigns.sort((a, b) => b.id - a.id),
+        items: campaigns,
         search_key: 'name',
         search_text: '',
     }
