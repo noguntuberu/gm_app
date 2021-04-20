@@ -70,7 +70,7 @@ const AudienceContacts = ({ audience_contacts, list_id }) => {
         setLoadingData(true);
         ContactService.read({
             token,
-            query_string: `id=${contact_ids_to_fetch.join()}&page=0&population=50`
+            query_string: `id=${contact_ids_to_fetch.join()}&page=0&population=50&sort_by=-created_on`
         }).then(data => {
             let { payload, error } = data;
 

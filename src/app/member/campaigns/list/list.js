@@ -34,7 +34,7 @@ const ListCampaigns = () => {
         dispatch(setPageTitle('My Campaigns'));
         CampaignService.read({
             token,
-            query_string: 'page=0&population=50,sort_by=-created_on'
+            query_string: 'page=0&population=50&sort_by=-created_on'
         }).then(response => {
             const { error, payload } = response;
             if (error) return;
@@ -153,7 +153,7 @@ const ListCampaigns = () => {
             setLoadingData(true);
             const response = await CampaignService.read({
                 token,
-                query_string: `page=${page}&population=50,sort_by=-created_on`
+                query_string: `page=${page}&population=50&sort_by=-created_on`
             })
 
             const { error, payload } = response;
@@ -171,7 +171,7 @@ const ListCampaigns = () => {
         try {
             const response = await CampaignService.search(keys, keyword, {
                 token,
-                query_string: `page=${page}&population=50,sort_by=-created_on`,
+                query_string: `page=${page}&population=50&sort_by=-created_on`,
             });
 
             const { error, payload } = response;

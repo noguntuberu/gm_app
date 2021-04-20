@@ -29,7 +29,7 @@ const StatCard = props => {
                 color: `hsl(${base_color}, 100%, 92%)`,
             }
         })
-    }, [base_color]);
+    }, [base_color, path]);
 
     const navigate = () => {
         history.push(path);

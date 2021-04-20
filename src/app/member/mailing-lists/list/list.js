@@ -30,7 +30,7 @@ const ListMailingLists = () => {
     useEffect(() => {
         dispatch(setPageTitle('My Audiences'));
         setLoading(true);
-        AudienceService.read({ token, query_string: 'page=0&population=50' }).then(response => {
+        AudienceService.read({ token, query_string: 'page=0&population=50&sort_by=-created_on' }).then(response => {
             const { error, payload } = response;
             if (error) return;
 
@@ -93,7 +93,7 @@ const ListMailingLists = () => {
         setLoading(true);
         const response = await AudienceService.read({
             token,
-            query_string: `page=${page}&population=50`
+            query_string: `page=${page}&population=50&sort_by=-created_on`
         })
         setLoading(false);
         const { error, payload } = response;
@@ -106,7 +106,7 @@ const ListMailingLists = () => {
         setLoading(true);
         const response = await AudienceService.search(keys, keyword, {
             token,
-            query_string: `page=${page}&population=50`,
+            query_string: `page=${page}&population=50&sort_by=-created_on`,
         });
         setLoading(false);
         const { error, payload } = response;
