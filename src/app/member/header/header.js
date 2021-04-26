@@ -61,7 +61,7 @@ const MemberAreaHeader = ({ onHamburgerClick }) => {
     return <header className="member-area-header shadow-sm">
         <div className="header-body">
             <div>
-                <div className="hamburger-icon text-blue-4" onClick={onHamburgerClick}>
+                <div className="hamburger-icon text-blue-4 is-clickable" onClick={onHamburgerClick}>
                     <span className="material-icons"> menu </span>
                 </div>
                 <div className="page-title text-blue-4">{page_title}</div>

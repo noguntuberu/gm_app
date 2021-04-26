@@ -7,6 +7,7 @@ import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 import { addOneAudienceToStore } from '../../../../store/actions/audience';
 
+// const CreateMailingList = ({ closeModal }) => {
 const CreateMailingList = ({ closeModal }) => {
     let dispatch = useDispatch();
     const { token, id } = useSelector(state => state.user_data);
@@ -43,6 +44,7 @@ const CreateMailingList = ({ closeModal }) => {
         toast.success(`Audience created.`);
         dispatch(addOneAudienceToStore(payload));
         clearForm();
+        closeModal();
     }
 
     return <div>
@@ -50,7 +52,7 @@ const CreateMailingList = ({ closeModal }) => {
             <input className="gm-input" type="text" placeholder="Name" value={name} onChange={e => e} onInput={e => setName(e.target.value)} />
         </div>
         <div className="form-group">
-            <textarea className="gm-input" placeholder="Description" value={description} onChange={e=>e} onInput={e => setDescription(e.target.value)}>
+            <textarea className="gm-input" placeholder="Description" value={description} onChange={e => e} onInput={e => setDescription(e.target.value)}>
 
             </textarea>
         </div>

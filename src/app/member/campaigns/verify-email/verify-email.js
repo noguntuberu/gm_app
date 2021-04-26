@@ -7,7 +7,7 @@ import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 import { set_process } from '../../../../store/actions/process';
 
 const VerifySenderEmail = props => {
-    let { email, mailbox, onClose } = props;
+    let { email, mailbox, closeModal } = props;
 
     let [code, setCode] = useState('');
     let [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ const VerifySenderEmail = props => {
             toast.success('Verification successful.');
             dispatch(set_process('email_verification', true));
             setCode('');
-            onClose();
+            closeModal();
         } catch (e) {
             // console.log(e);
             // console.log('error verification');

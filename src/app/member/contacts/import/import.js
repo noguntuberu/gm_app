@@ -9,7 +9,7 @@ import * as TemplateService from '../../../../services/template';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
 const ImportContact = props => {
-    const { mailing_list } = props;
+    const { closeModal, mailing_list } = props;
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [mailing_lists, setMailingLists] = useState([]);
@@ -60,6 +60,7 @@ const ImportContact = props => {
         }).finally(() => {
             setLoading(false);
             toast.success(`Contacts uploaded successfully.`);
+            closeModal();
         });
     }
 

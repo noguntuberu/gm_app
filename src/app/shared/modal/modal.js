@@ -13,8 +13,12 @@ const GmModal = ({ children, title, show_title, show_modal, onClose }) => {
         if (show_modal) {
             fadeIn();
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [show_modal]);
+
+    const closeModal = () => {
+        modal_veil.current.click();
+    }
 
     const fadeIn = () => {
         if (!modal_veil || !modal_veil.current) return;
@@ -65,7 +69,12 @@ const GmModal = ({ children, title, show_title, show_modal, onClose }) => {
                         <div className="gm-modal-close-icon is-clickable" onClick={() => fadeOut()}>&times;</div>
                     </div>
                     <div className="gm-modal-content">
-                        {children}
+                        {React.Children.map(children, (child) => {
+                            if (typeof child.type === 'string') return child;
+                            return React.cloneElement(child, {
+                                closeModal,
+                            });
+                        })}
                     </div>
                 </div>
             </div>}

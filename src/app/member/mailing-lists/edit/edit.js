@@ -6,7 +6,7 @@ import { setPageTitle } from '../../../../store/actions/header';
 import * as AudienceService from '../../../../services/audience';
 import Spinner from '../../../shared/spinners/spinner-15/spinner-15';
 
-const AudienceUpdationForm = ({ mailing_list }) => {
+const AudienceUpdationForm = ({ mailing_list, closeModal }) => {
     let dispatch = useDispatch();
     const { token, id } = useSelector(state => state.user_data);
 
@@ -46,9 +46,10 @@ const AudienceUpdationForm = ({ mailing_list }) => {
         }
 
         setLoading(false);
-        toast.success(`Audience updated.`);
         dispatch(setPageTitle(name));
+        toast.success(`Audience updated.`);
         clearForm();
+        closeModal();
     }
 
     return <div>
