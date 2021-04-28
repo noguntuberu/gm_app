@@ -40,7 +40,7 @@ const FloatingNav = ({ children }) => {
         className="floating-btn-wrapper shadow"
         ref={icons_tray}
     >
-        <div className="tray-opener" ref={tray_opener} onClick={openTray}></div>
+        <div className="tray-opener is-clickable" ref={tray_opener} onClick={openTray}></div>
         <div className="icon-tray text-blue-11">
             {children}
             <div className="floating-action-btn visibility" onClick={closeTray}>

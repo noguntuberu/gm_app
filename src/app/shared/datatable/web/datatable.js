@@ -19,10 +19,6 @@ const DataTable = props => {
     let [all_items, setAllItems] = useState(items);
     let [table_items, setTableItems] = useState(items);
     let [items_to_display, setItemsToDisplay] = useState([]);
-
-    useEffect(() => {
-        console.log(selected_items);
-    }, [selected_items]);
     
     useEffect(() => {
         handleNumberOfItemsToDisplay();
@@ -38,13 +34,13 @@ const DataTable = props => {
             },
         }));
 
-        setAllItems(processed_items);
-        setTableItems(processed_items.slice());
+        setAllItems(all_items => processed_items);
+        setTableItems(table_items => processed_items.slice());
     }, [items]);
 
     /** */
     const closeActionMode = () => {
-        setSelectedItems({});
+        setSelectedItems( selected_items => ({}));
         setIsBulkSelection(false);
     }
 
@@ -75,28 +71,26 @@ const DataTable = props => {
         const start = page_number * number_of_rows_to_display;
         const end = start + number_of_rows_to_display;
 
-        setItemsToDisplay([...table_items].slice(start, end));
+        setItemsToDisplay( () => [...table_items].slice(start, end));
     }
 
     const handlePageChange = (value) => {
-        const new_page_number = page_number + value;
-        setPageNumber(new_page_number);
+        setPageNumber(page_number => page_number + value);
     }
 
     const handleSearch = (needle) => {
         const results = all_items.filter(item => item.metadata.haystack.includes(needle.toLowerCase()));
-        setTableItems(results);
+        setTableItems(table_items => results);
     }
 
     const handleSelection = (selected_item) => {
-        let selections = { ...selected_items, [selected_item.id]: selected_item };
-        setSelectedItems(selections);
+        setSelectedItems(selected_items =>  ({ ...selected_items, [selected_item.id]: selected_item }));
     }
 
     const handleUnselection = (id) => {
         let selections = { ...selected_items };
         delete selections[id];
-        setSelectedItems(selections);
+        setSelectedItems(selected_items => selections);
     }
 
     const handleSort = (field, is_ascending) => {
@@ -113,7 +107,7 @@ const DataTable = props => {
             });
         }
 
-        setTableItems([...sorted_items]);
+        setTableItems( table_items => [...sorted_items]);
     }
 
     let processAction = async (name, data) => {
@@ -152,7 +146,7 @@ const DataTable = props => {
                 [result.id]: result
             }
         }, {});
-        setSelectedItems(selections);
+        setSelectedItems( selected_items => selections);
     }
 
     return (
