@@ -317,8 +317,8 @@ const CampaignCreationForm = props => {
                     <div className="col-md-8 col-xl-10"></div>
                     <div className="col-md-4 col-xl-2 pr-md-0 px-sm-0">
                         {loading ?
-                            <div className="gm-btn gm-btn-blue">Creating <span className="gm-btn-spinner"><Spinner /></span></div> :
-                            <div className="gm-btn gm-btn-blue" onClick={() => sendCampaign()} >Create</div>
+                            <div className="gm-btn gm-btn-orange">Creating <span className="gm-btn-spinner"><Spinner /></span></div> :
+                            <div className="gm-btn gm-btn-orange" onClick={() => sendCampaign()} >Create</div>
                         }
                     </div>
                 </div>

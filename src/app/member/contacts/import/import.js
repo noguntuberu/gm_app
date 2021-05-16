@@ -88,8 +88,8 @@ const ImportContact = props => {
                 <div className="col-md-4 pr-md-0 px-sm-0">
 
                     {loading ?
-                        <div className="gm-btn gm-btn-blue">Importing <span className="gm-btn-spinner"><Spinner /></span></div> :
-                        <div onClick={submit} className="gm-btn gm-btn-blue">Import</div>
+                        <div className="gm-btn gm-btn-orange">Importing <span className="gm-btn-spinner"><Spinner /></span></div> :
+                        <div onClick={submit} className="gm-btn gm-btn-orange">Import</div>
                     }
                 </div>
             </div>

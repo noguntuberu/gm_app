@@ -58,18 +58,18 @@ const APISetting = () => {
             from your own applications. Your key should be kept privately and securely.
         </div>
         <div className="api-key-wrapper">
-            <div>api key</div>
-            <div className="is-clickable" onClick={copyAPIKey}>{api_key.substr(0, 25)}...</div>
+            <div className="text-orange">api key</div>
+            <div className="is-clickable text-blue-3" onClick={copyAPIKey}>{api_key.substr(0, 25)}...</div>
         </div>
-        <div>
-            <small className="pt-2 text-blue-5">**click on key to copy.</small>
+        <div className="pt-1">
+            <small className="text-blue-4">**click on key to copy.</small>
         </div>
         <div className="mt-3 mb-3 form-row">
             <div className="col-md-8"></div>
             <div className="col-md-4 pr-md-0 px-sm-0">
                 {!loading ?
-                    <div className="gm-btn gm-btn-blue" onClick={e => submitForm()}> Regenerate </div> :
-                    <div className="gm-btn gm-btn-blue"> Regenerating <span className="gm-btn-spinner"><Spinner /></span> </div>
+                    <div className="gm-btn gm-btn-orange" onClick={e => submitForm()}> Regenerate </div> :
+                    <div className="gm-btn gm-btn-orange"> Regenerating <span className="gm-btn-spinner"><Spinner /></span> </div>
                 }
             </div>
         </div>

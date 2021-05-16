@@ -15,7 +15,7 @@ button:disabled {
     border-radius: 5px;
     padding: 0 25px;
 
-    line-height: 45px;
+    line-height: 40px;
     width: 100%;
     
     font-weight: bold;
@@ -60,7 +60,7 @@ button:disabled {
 }
 
 .gm-btn-wine:disabled {
-    background-color: rgb(255, 166, 71, 0.5);
+    background-color: #F199B3;
     color: #666666;
 }
 
@@ -75,7 +75,7 @@ button:disabled {
 }
 
 .gm-btn-orange:disabled {
-    background-color: #FF9B3185;
+    background-color: #FFE1C1;
     color: #ffffff;
 }
 

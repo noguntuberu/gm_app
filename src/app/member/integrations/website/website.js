@@ -56,7 +56,7 @@ const WebsiteIntegration = () => {
                 id="audience"
             />
         </div>
-        <div className="mt-3 mb-3 form-row">
+        <div className="mt-0 form-row">
             <div className="col-md-7 pt-lg-1">
                 <div className="web">
                     <label>Select audience(s):</label>
@@ -70,8 +70,8 @@ const WebsiteIntegration = () => {
                     />
                 </div>
             </div>
-            <div className="col-md-5 pr-md-0 px-sm-0 pt-lg-2">
-                <div className="gm-btn gm-btn-blue mt-lg-4 ml-lg-2 py-1" onClick={e => generateCode()}> Generate Snippet </div>
+            <div className="col-md-5 pr-md-0 p-0 pr-lg-2">
+                <div className="gm-btn gm-btn-orange mt-lg-0 ml-lg-2" onClick={e => generateCode()}> Generate Snippet </div>
             </div>
         </div>
         {snippet ?

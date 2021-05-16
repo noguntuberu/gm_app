@@ -4,7 +4,7 @@ import SideNavItem from './item/item';
 import './side-nav.css';
 
 // import icon_site from '../../../assets/icons/site-icon-color.svg';
-import icon_site from '../../../assets/icons/logo.svg';
+import icon_site from '../../../assets/icons/logo-orange.svg';
 
 import GmModal from '../../shared/modal/modal';
 import ImportContact from '../../member/contacts/import/import';
