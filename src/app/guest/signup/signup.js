@@ -59,7 +59,7 @@ const SignupForm = () => {
                     </div> : <div></div>}
                 </div>
                 <div className="form-switch-wrapper text-blue-4">
-                    <div onClick={() => history.push("/login")}>Already a member? <b>Log In</b></div>
+                    <div onClick={() => history.push("/login")}>Already a member? <b className="text-orange">Log In</b></div>
                 </div>
                 <div className="form-row">
                     <div className="gm-input-group">
@@ -88,16 +88,16 @@ const SignupForm = () => {
                     </div>
                 </div>
                 <div className="form-row mt-2">
+                    <div className="gm-input-group text-right word-wrap">
+                        <span className="text-blue-5" >By continuing, you agree to our <b>terms</b> and <b>policies</b>.</span>
+                    </div>
+                </div>
+                <div className="form-row mt-2">
                     <div className="gm-input-group">
-                        <button type="button" className="gm-btn gm-btn-blue"
+                        <button type="button" className="gm-btn gm-btn-orange"
                             onClick={() => submitForm()}>
                             Create Account {show_spinner ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <></>}
                         </button>
-                    </div>
-                </div>
-                <div className="form-row mt-3">
-                    <div className="gm-input-group text-center px-2 word-wrap">
-                        <span className="text-blue-5" >By continuing, you agree to our <b>terms</b> and <b>policies</b>.</span>
                     </div>
                 </div>
             </div >

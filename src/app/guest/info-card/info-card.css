@@ -8,44 +8,45 @@
 .info-card > header {
     float: right;
 
-    /* height: 40px; */
-    width: 85%;
-
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    width: 90%;
     margin-top: 35px;
-    padding: 5px;
-    
-    background-color: #F4F8FB;
 
     cursor: pointer;
 }
 
 .info-card > header > .icon {
-    width: 50px;
+    width: 32px;
     margin-right: 10px;
-}
-
-.info-card > header > .name {
-    width: 210px;
-    line-height: 40px;
 }
 
 .info-card > section {
     position: relative;
-    bottom: -165px;
+    bottom: -248px;
 
-    width: 85%;
-    float: right;
+    width: 90%;
+    padding-left: 10%;
 
     font-family: 'Frank Ruhl Libre';
-    font-size: 48px;
-    letter-spacing: 3px;
-    line-height: 48px;
+    font-size: 38px;
+    line-height: 36px;
 }
 
 .info-card > section > div:last-child {
     font-weight: normal;
-    font-size: 18px;
-    letter-spacing: 1.6px;
+    font-size: 14px;
+    letter-spacing: 0.75px;
+}
+
+@media screen and (min-width: 1024px) {
+    .info-card > section {
+        bottom: -238px;
+        font-size: 50px;
+        line-height: 44px;
+    }
+    
+    .info-card > section > div:last-child {
+        font-weight: normal;
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
 }

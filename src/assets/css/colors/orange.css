@@ -1,17 +1,17 @@
 /** BACKGROUND  **/
 .gm-bg-orange{
-    background-color: #FF7F08;
+    background-color: #FF9B31;
 }
 
 /** TEXT **/
 .text-orange{
     /* color: #FF7F08;FF8F26 */
-    color: #FF8F26;
+    color: #FF9B31;
 }
 
 .text-orange-light{
     /* color: #FF7F08;FF8F26 */
-    color: hsla(29, 100%, 85%, 1);
+    color: #FFBC75;
 }
 
 /** BORDER **/

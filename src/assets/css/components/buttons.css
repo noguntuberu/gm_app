@@ -49,13 +49,18 @@ button:disabled {
     color: #7332BD;
 }
 
+.gm-btn-orange {
+    background-color: rgb(255, 166, 71);
+    color: #ffffff;
+}
+
 .gm-btn-blue:disabled {
     background-color: #99CCF1;
     color: #666666;
 }
 
 .gm-btn-wine:disabled {
-    background-color: #F199B3;
+    background-color: rgb(255, 166, 71, 0.5);
     color: #666666;
 }
 
@@ -67,6 +72,11 @@ button:disabled {
 .gm-btn-purple:disabled {
     background-color: #E9D7FF;
     color: #666666;
+}
+
+.gm-btn-orange:disabled {
+    background-color: #FF9B3185;
+    color: #ffffff;
 }
 
 .gm-btn-spinner {

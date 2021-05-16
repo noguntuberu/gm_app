@@ -60,7 +60,7 @@ const PasswordRecovery = () => {
                 </div>
                 <div className="form-row mt-2">
                     <div className="gm-input-group">
-                        <button className="gm-btn gm-btn-blue"
+                        <button className="gm-btn gm-btn-orange"
                             onClick={() => submitForm()}>
                             Recover Password
                     {is_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <span></span>}

@@ -50,7 +50,7 @@ const LoginForm = () => {
         <InfoCard bg_class="gm-bg-blue-2"/>
         <div className="form-wrapper flex-col-center">
             <div className="form-switch-wrapper text-blue-4">
-                <div onClick={() => history.push("/register")}>Not yet a member? <b>Create Account</b></div>
+                <div onClick={() => history.push("/register")}>Not yet a member? <b className="text-orange">Create Account</b></div>
             </div>
             <div className="w-100 mt-1">
                 {form_message.code > -1 ? <div className={`alert ${determineFormAlertClass(form_message.code)}`}>
@@ -80,7 +80,7 @@ const LoginForm = () => {
             </div>
             <div className="form-row mt-2">
                 <div className="gm-input-group">
-                    <button className="gm-btn gm-btn-blue" onClick={() => submitForm()}>
+                    <button className="gm-btn gm-btn-orange" onClick={() => submitForm()}>
                         Log In
                     {is_login_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin float-none" /> : <span></span>}
                     </button>

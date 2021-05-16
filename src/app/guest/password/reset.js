@@ -70,7 +70,7 @@ const PasswordReset = () => {
                 </div>
                 <div className="form-row mt-2">
                     <div className="gm-input-group">
-                        <button type="button" className="gm-btn gm-btn-blue"
+                        <button type="button" className="gm-btn gm-btn-orange"
                             onClick={() => submitForm()}>
                             Reset Password
                     {is_loading ? <FontAwesomeIcon icon={faSpinner} className="ml-2 fa-spin" /> : <span></span>}
