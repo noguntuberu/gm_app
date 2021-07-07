@@ -57,7 +57,7 @@ const WebsiteIntegration = () => {
             />
         </div>
         <div className="mt-0 form-row">
-            <div className="col-md-7 pt-lg-1">
+            <div className="col-md-5">
                 <div className="web">
                     <label>Select audience(s):</label>
                     <MultiSelect
@@ -70,7 +70,7 @@ const WebsiteIntegration = () => {
                     />
                 </div>
             </div>
-            <div className="col-md-5 pr-md-0 p-0 pr-lg-2">
+            <div className="col-md-3 pr-md-0 p-0 pr-lg-2 pt-md-4">
                 <div className="gm-btn gm-btn-orange mt-lg-0 ml-lg-2" onClick={e => generateCode()}> Generate Snippet </div>
             </div>
         </div>
